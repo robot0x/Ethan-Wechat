@@ -18,23 +18,13 @@
 
   <!-- your app's js -->
   <script src="__JS__/app.js"></script>
-  <script src="__JS__/controllers.js"></script>
-  <script src="__JS__/services.js"></script>
 
 </head>
 <body ng-controller="MyCtrl">
 
-
-  <script id="my-modal.html" type="text/ng-template">
-  <ion-modal-view>
-    <ion-header-bar class="bar-positive">
-      <h1 class="title">Modal</h1>
-    </ion-header-bar>
-    <ion-content>
-      contentcontent
-    </ion-content>
-  </ion-modal-vew>
-  </script>
+<div class="bar bar-header bar-positive">
+  <h1 class="title">居中标题</h1>
+</div>
 
 
 </body>
