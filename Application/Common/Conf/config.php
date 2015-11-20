@@ -1,8 +1,8 @@
 <?php
 //防入侵。
-( defined("_YUNZHI_HOME") 
-    || defined("_YUNZHI_ADMIN") 
-    || defined("_YUNZHI_API") 
+( defined("_YUNZHI_HOME")
+    || defined("_YUNZHI_ADMIN")
+    || defined("_YUNZHI_API")
 ) or die("access not allowed");
 
 return array(
@@ -20,4 +20,10 @@ return array(
     'DB_PORT'               =>  '3306',        // 端口
 
     'URL_MODEL'             =>  1, // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
+
+    'TMPL_PARSE_STRING'  =>array(
+         '__PUBLIC__' => __ROOT__ , // 更改默认的/Public 替换规则
+         '__JS__'     => __ROOT__ . '/Admin/js', // 增加新的JS类库路径替换规则
+         '__CSS__'     => __ROOT__ .'/Admin/css', // 增加新的css类库路径替换规则
+         '__IMG__'     => __ROOT__ .'/Admin/img', // 增加新的img类库路径替换规则
 );
