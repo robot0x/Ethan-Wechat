@@ -27,11 +27,31 @@
 <div></div>
 <!-- 酒店介绍 -->
 <div class="list">
-    <a class="item item-body" href="#">
+    <a class="item item-thumbnail-left" href="#">
       <img src="cover.jpg">
       <h2>酒店介绍</h2>
       <p>洛克公寓，本来生活。洛克高级酒店公寓位于天津市和平区南京路凯德国贸C座，紧邻小白楼地铁站C口及CBD核心商圈，是您旅游度假和商旅的优质选择。</p>
     </a>
+</div>
+<!-- 查看评论 -->
+<div><button class="button button-full button-positive">查看评论</button></div>
+<!-- 选择房型 -->
+<div class="row">
+  <a class="button button-stable button-full col">全日房</a>
+  <div class="line"></div>
+  <a href="" class="button button-stable button-full col">小时房</a>
+</div>
+<!-- 日期 -->
+<div class="row">
+      <div class="col">
+        <h3>日</h3>
+        <h3>期</h3>
+      </div>
+      <div class="col">
+      <h6>2015年11月23日入住</h6>
+      <h6>2015年11月24日离店</h6>
+      </div>
+      <a class="col button button-icon icon ion-chevron-right"></a>
 </div>
   <div class="bar bar-footer bar-stable row">
     <div class="col">酒店预订</div>
@@ -41,3 +61,8 @@
   </div>
 </body>
 </html>
+<style type="text/css">
+  .line{
+    border: 1px solid #B2B2B2;height: 51px;margin-top: 11px;
+  }
+</style>
