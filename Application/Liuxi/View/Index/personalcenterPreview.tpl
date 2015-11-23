@@ -21,21 +21,41 @@
 
 </head>
 <body ng-controller="MyCtrl">
-  <div class="bar bar-header bar-dark">
-    <a href="" class="button button-icon icon ion-close-round"></a>
-    <h1 class="title">洛克酒店个人中心</h1>
-  </div>
 
-  <div class="bar bar-subheader bar">
-   <a class="button icon-left ion-chevron-left button-clear button-dark"></a>
-  <h1 class="title">手机号</h1>
-    <a href="#/app/capture" class="button button-icon icon ion-gear-a"></a>
-  </div>
- 
-  <div class="bar bar-footer bar-stable row">
-    <div class="col">预订酒店</div>
-    <div class="col">搜周边</div>
-    <div class="col">活动</div>
+<div class="bar bar-header bar-positive">
+  <a class="button icon-left ion-chevron-left button-clear button-white"></a>
+  <h1 class="title">个人中心</h1>
+  <a href="#/app/capture" class="button button-icon icon ion-gear-a"></a>
+</div>
+<ion-content class="no-header">
+<div class="list">
+  <a class="item item-avatar" href="#">
+      <img src="1024.jpg">
+      <h3>用户名</h3>
+      <p>手机号</p>
+  </a>
+
+    <div class="button-bar">
+    <a class="button button-light" href="#"><h8>待支付</h8><span class="badge badge-assertive">0</span></a>
+    <a class="button button-light" href="#">待评价<span class="badge badge-assertive">0</span></a>
+    <a class="button button-light" href="#">待入住<span class="badge badge-assertive">0</span></a>
+    </div>
+    <div class="item" href="#">
+    <h5>全部订单</h5>
+    </div>
+    <a class="item" href="#">
+    <h5>查看积分</h5>
+    </a>
+    <a class="item" href="#">
+    <h5>客服  ********</h5>
+    </a>
+</div>
+</ion-content>
+
+  <div class="bar bar-footer bar-positive bar-stable row">
+    <div class="col"><h6>预订酒店</h6></div>
+    <div class="col"><h6>搜周边</h6></div>
+    <div class="col"><h6>活动</h6></div>
   </div>
 </body>
 </html>
