@@ -21,10 +21,21 @@
 
 </head>
 <body ng-controller="MyCtrl">
+  <div class="bar bar-header bar-dark">
+    <a href="" class="button button-icon icon ion-close-round"></a>
+    <h1 class="title">洛克酒店个人中心</h1>
+  </div>
 
-</div>
-
-
-
+  <div class="bar bar-subheader bar">
+   <a class="button icon-left ion-chevron-left button-clear button-dark"></a>
+  <h1 class="title">手机号</h1>
+    <a href="#/app/capture" class="button button-icon icon ion-gear-a"></a>
+  </div>
+ 
+  <div class="bar bar-footer bar-stable row">
+    <div class="col">预订酒店</div>
+    <div class="col">搜周边</div>
+    <div class="col">活动</div>
+  </div>
 </body>
 </html>
