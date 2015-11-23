@@ -36,7 +36,7 @@
 
         <div class="list">
           <div class="item item-thumbnail-left" href="#">
-            <img src="img/big.jpg">
+            <img src="__IMG__/big.jpg">
             <h2>房型：大床房</h2>
             <p>价格：365.00</p>
             <p>介绍：有窗/空调/电视/wifi</p>
@@ -45,7 +45,7 @@
           </div>
 
           <div class="item item-thumbnail-left" href="#">
-            <img src="img/big.jpg">
+            <img src="__IMG__/big.jpg">
             <h2>房型：大床房</h2>
             <p>价格：365.00</p>
             <p>介绍：有窗/空调/电视/wifi</p>
@@ -54,7 +54,7 @@
           </div>
 
           <div class="item item-thumbnail-left" href="#">
-            <img src="img/big.jpg">
+            <img src="__IMG__/big.jpg">
             <h2>房型：大床房</h2>
             <p>价格：365.00</p>
             <p>介绍：有窗/空调/电视/wifi</p>
