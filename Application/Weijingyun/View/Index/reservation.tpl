@@ -17,7 +17,7 @@
   <script src="__LIB__/ionic/js/ionic.bundle.js"></script>
 
   <!-- your app's js -->
-  <script src="__JS__/app.js"></script>
+   <script src="__JS__/app.js"></script>
 
 </head>
 <body ng-controller="MyCtrl">

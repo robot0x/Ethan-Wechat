@@ -29,7 +29,7 @@
     <a href="" class="button button-icon icon ion-chevron-left"></a>
     <h1 class="title">南京路</h1>
   </div>
-  <div><img class="full-image" src="nanjing.jpg"></div>
+  <div><img class="full-image" src="__IMG__/nanjing.jpg"></div>
   <div class="bar bar-footer bar-stable row">  
     <button class="button button-outline button-positive">MAP</button> 
   </div>
