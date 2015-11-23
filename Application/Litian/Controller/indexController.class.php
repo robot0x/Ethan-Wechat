@@ -1,5 +1,5 @@
 <?php
-namespace Home\Controller;
+namespace Litian\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function indexAction(){
