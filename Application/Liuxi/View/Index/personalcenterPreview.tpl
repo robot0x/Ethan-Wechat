@@ -24,30 +24,31 @@
 
 <div class="bar bar-header bar-positive">
   <a class="button icon-left ion-chevron-left button-clear button-white"></a>
+
   <h1 class="title">个人中心</h1>
   <a href="#/app/capture" class="button button-icon icon ion-gear-a"></a>
 </div>
 <ion-content class="no-header">
 <div class="list">
   <a class="item item-avatar" href="#">
-      <img src="1024.jpg">
-      <h3>用户名</h3>
-      <p>手机号</p>
+    <img src="__IMG__/1024.jpg">
+    <h5>用户名</h5>
+    <p><h5>手机号</h5></p>
   </a>
 
-    <div class="button-bar">
-    <a class="button button-light" href="#"><h8>待支付</h8><span class="badge badge-assertive">0</span></a>
-    <a class="button button-light" href="#">待评价<span class="badge badge-assertive">0</span></a>
-    <a class="button button-light" href="#">待入住<span class="badge badge-assertive">0</span></a>
-    </div>
-    <div class="item" href="#">
+  <div class="button-bar">
+    <a class="button button-light" href="#"><span class="stress1">待支付</span><span class="badge badge-assertive">0</span></a>
+    <a class="button button-light" href="#"><span class="stress2">待评价</span><span class="badge badge-assertive">0</span></a>
+    <a class="button button-light" href="#"><span class="stress3">待入住</span><span class="badge badge-assertive">0</span></a>
+  </div>
+  <div class="item" href="#">
     <h5>全部订单</h5>
-    </div>
+  </div>
     <a class="item" href="#">
-    <h5>查看积分</h5>
+      <h5>查看积分</h5>
     </a>
     <a class="item" href="#">
-    <h5>客服  ********</h5>
+      <h5>客服  ********</h5>
     </a>
 </div>
 </ion-content>
@@ -59,3 +60,18 @@
   </div>
 </body>
 </html>
+
+<style type="text/css">
+.list{
+  margin-top:30px;
+}
+.stress1{
+  font-size:10px;
+}
+.stress2{
+  font-size:10px;
+}
+.stress3{
+  font-size:10px;
+}
+</style>
