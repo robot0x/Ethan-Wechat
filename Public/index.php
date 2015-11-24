@@ -26,6 +26,9 @@ define('RUNTIME_PATH','./../Runtime/');
 //场景设置
 define('APP_STATUS','home');
 
+//定义入口模块
+// define('BIND_MODULE','Xulinjie');
+
 // 定义应用目录
 define('APP_PATH','./../Application/');
 
