@@ -25,13 +25,13 @@
     <ion-pane>
       <!-- header -->
       <ion-header-bar class="bar-stable">
-        <div class="bar bar-header bar-calm">
+        <div class="bar bar-header bar-positive">
           <a href="" class="button button-icon icon ion-chevron-left"></a>
             <h4 class="tittle">待支付订单</h4>
         </div>
       </ion-header-bar>
       <!-- content -->
-      <ion-content class="bar-content">
+      <ion-content class="bar-content ">
         <div class="button button-clear button-positive button-right">编辑</div>
 
         <div class="list">
@@ -39,27 +39,27 @@
             <img src="__IMG__/big.jpg">
             <h2>房型：大床房</h2>
             <p>价格：365.00</p>
-            <p>介绍：有窗/空调/电视/wifi</p>
+            <p>介绍：空调/电视/wifi</p>
             <p>入住时间：2015.11.25</p>
-            <div class="button button-small button-positive pull-right">立即支付</div>
+            <div class="button button-small button-positive pull-right" style="margin: -61px 0px 0px 142px;">立即支付</div>
           </div>
 
           <div class="item item-thumbnail-left" href="#">
             <img src="__IMG__/big.jpg">
             <h2>房型：大床房</h2>
             <p>价格：365.00</p>
-            <p>介绍：有窗/空调/电视/wifi</p>
+            <p>介绍：空调/电视/wifi</p>
             <p>入住时间：2015.11.25</p>
-            <div class="button button-small button-positive pull-right">立即支付</div>
+            <div class="button button-small button-positive pull-right" style="margin: -61px 0px 0px 142px;">立即支付</div>
           </div>
 
           <div class="item item-thumbnail-left" href="#">
             <img src="__IMG__/big.jpg">
             <h2>房型：大床房</h2>
             <p>价格：365.00</p>
-            <p>介绍：有窗/空调/电视/wifi</p>
+            <p>介绍：空调/电视/wifi</p>
             <p>入住时间：2015.11.25</p>
-            <div class="button button-small button-positive pull-right">立即支付</div>
+            <div style="margin: -61px 0px 0px 142px;" class="button button-small button-positive pull-right">立即支付</div>
           </div>
 
         </div>
