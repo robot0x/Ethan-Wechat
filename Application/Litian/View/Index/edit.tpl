@@ -25,7 +25,7 @@
     <ion-pane>
       <!-- header -->
       <ion-header-bar class="bar-stable">
-        <div class="bar bar-header bar-calm">
+        <div class="bar bar-header bar-positive">
           <a href="" class="button button-icon icon ion-chevron-left"></a>
             <h4 class="tittle">待支付订单</h4>
         </div>
@@ -39,40 +39,43 @@
              <label class="checkbox">
                <input type="checkbox">
              </label>
-             <div class="item item-thumbnail-left" href="#">
-                <img src="img/big.jpg">
+             <div class="item item-thumbnail-left" style="margin-right: 30px;" href="#">
+                <img src="__IMG__/big.jpg">
                 <h2>房型：大床房</h2>
                 <p>价格：365.00</p>
                 <p>介绍：有窗/空调/电视/wifi</p>
                 <p>入住时间：2015.11.25</p>
-                <div class="button button-small button-assertive">删除</div>
+                
               </div>
+              <div class="button button-small button-assertive" style="margin-left: 214px; margin-top: -72px;">删除</div>
           </li>
           <li class="item item-checkbox">
              <label class="checkbox">
                <input type="checkbox">
              </label>
-             <div class="item item-thumbnail-left" href="#">
-                <img src="img/big.jpg">
+             <div class="item item-thumbnail-left" style="margin-right: 30px;" href="#">
+                <img src="__IMG__/big.jpg">
                 <h2>房型：大床房</h2>
                 <p>价格：365.00</p>
                 <p>介绍：有窗/空调/电视/wifi</p>
                 <p>入住时间：2015.11.25</p>
-                <div class="button button-small button-assertive">删除</div>
+                
               </div>
+              <div class="button button-small button-assertive" style="margin-left: 214px; margin-top: -72px;">删除</div>
           </li>
           <li class="item item-checkbox">
              <label class="checkbox">
                <input type="checkbox">
              </label>
-             <div class="item item-thumbnail-left" href="#">
-                <img src="img/big.jpg">
+             <div class="item item-thumbnail-left" style="margin-right: 30px;" href="#">
+                <img src="__IMG__/big.jpg">
                 <h2>房型：大床房</h2>
                 <p>价格：365.00</p>
                 <p>介绍：有窗/空调/电视/wifi</p>
                 <p>入住时间：2015.11.25</p>
-                <div class="button button-small button-assertive">删除</div>
+                
               </div>
+              <div class="button button-small button-assertive" style="margin-left: 214px; margin-top: -72px;">删除</div>
           </li>
         </ul>
       </ion-content>
