@@ -30,7 +30,7 @@
     <a href="" class="button button-icon icon ion-chevron-left"></a>
     <h1 class="title">城市观景房</h1>
   </div>
-  <div class="list"><img src="__IMG__/tupian.png"></div>
+  <div class="tupian"><img src="__IMG__/tupian.png"></div>
   <div class="bar bar-footer bar-stable row">
     <div class="col">观景房</div>
     <div class="col">大床房</div>    
@@ -39,3 +39,8 @@
   </div>
 </body>
 </html>
+<style type="text/css">
+  .tupian{
+    margin-top: 88px;
+  }
+</style>

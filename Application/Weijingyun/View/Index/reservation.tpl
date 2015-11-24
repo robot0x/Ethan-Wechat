@@ -22,21 +22,21 @@
 </head>
 <body ng-controller="MyCtrl">
 <!-- 图片轮播 -->
-<div></div>
+<div><img src="__IMG__/gundong.jpg"></div>
 <!-- 各大网站好评 -->
-<div></div>
+<div><img src="__IMG__/dianping.png"></div>
 <!-- 酒店介绍 -->
-<div class="list">
+<div class="list introduction">
     <a class="item item-thumbnail-left" href="#">
       <img src="cover.jpg">
       <h2>酒店介绍</h2>
-      <p>洛克公寓，本来生活。洛克高级酒店公寓位于天津市和平区南京路凯德国贸C座，紧邻小白楼地铁站C口及CBD核心商圈，是您旅游度假和商旅的优质选择。</p>
+      <h4>洛克公寓，本来生活。</h4>
     </a>
 </div>
 <!-- 查看评论 -->
 <div><button class="button button-full button-positive">查看评论</button></div>
 <!-- 选择房型 -->
-<div class="row">
+<div class="row fangxing">
   <a class="button button-stable button-full col">全日房</a>
   <div class="line"></div>
   <a href="" class="button button-stable button-full col">小时房</a>
@@ -64,5 +64,11 @@
 <style type="text/css">
   .line{
     border: 1px solid #B2B2B2;height: 51px;margin-top: 11px;
+  }
+  .introduction{
+    margin-bottom: 5px;
+  }
+  .fangxing{
+    padding-top: 0px;padding-bottom: 0px;
   }
 </style>
