@@ -21,16 +21,24 @@
 
 </head>
 <body ng-controller="MyCtrl">
+<div class="bar bar-header bar-dark">
+    <a href="" class="button button-icon icon ion-close-round"></a>
+    <h1 class="title">洛克酒店预订</h1>
+  </div>
 <!-- 图片轮播 -->
-<div><img src="__IMG__/gundong.jpg"></div>
+<div class="gundong"><img src="__IMG__/gundong.jpg"></div>
 <!-- 各大网站好评 -->
 <div><img src="__IMG__/dianping.png"></div>
 <!-- 酒店介绍 -->
 <div class="list introduction">
     <a class="item item-thumbnail-left" href="#">
-      <img src="cover.jpg">
+      <img src="__IMG__/logo.jpg">
       <h2>酒店介绍</h2>
       <h4>洛克公寓，本来生活。</h4>
+      <div><button class="button button-small button-clear button-icon icon ion-wifi">WIFI</button>
+      <button class="button button-small button-clear button-icon icon ion-plane">接机服务</button></div>
+      <div><button class="button button-small button-clear button-icon icon ion-no-smoking">无烟房</button>
+      <button class="button button-small button-clear button-icon icon ion-android-car">免费停车</button></div>
     </a>
 </div>
 <!-- 查看评论 -->
@@ -53,7 +61,7 @@
       </div>
       <a class="col button button-icon icon ion-chevron-right"></a>
 </div>
-  <div class="bar bar-footer bar-stable row">
+  <div class="bar bar-footer bar-positive row">
     <div class="col">酒店预订</div>
     <div class="col">搜周边</div>    
     <div class="col">活动</div>
@@ -70,5 +78,8 @@
   }
   .fangxing{
     padding-top: 0px;padding-bottom: 0px;
+  }
+  .gundong{
+    margin-top: 45px;
   }
 </style>
