@@ -36,56 +36,45 @@
     <p><h6>手机号</h6></p>
   </a>
 
-  <div class="button-bar" style="height: 45px;">
+  <div class="button-bar" style="height:42px;">
     <a class="button button-light" href="#" style="padding-bottom: 35px;"><span class="stress1">待支付</span> <span class="badge badge-assertive" style="padding: 1px 2px;">0</span> </a>
     <a class="button button-light" href="#" style="padding-bottom: 35px;"><span class="stress2">待评价</span> <span class="badge badge-assertive" style="padding: 1px 2px;">0</span> </a>
     <a class="button button-light" href="#" style="padding-bottom: 35px;"><span class="stress3">待入住</span> <span class="badge badge-assertive" style="padding: 1px 2px;">0</span> </a>
   </div>
-    <!-- <div class="item" href="#">
-    <h6>全部订单</h6>
-      <a class="button icon-right ion-ios-arrow-right button-clear button-dark"></a>
-    </div>
-    <div class="item" href="#">
-      <h6>查看积分</h6>
-      <a class="button icon-right ion-ios-arrow-right button-clear button-dark"></a>
-    </div>
-    <div class="item" href="#">
-      <h6>客服  ********</h6>
-      <a class="button icon-right ion-ios-arrow-right button-clear button-dark"></a>
-    </div> -->
-    <a class="item item-icon-right" href="#">
-      <h6>全部订单</h6>
-      <i class="icon ion-ios-arrow-right"></i>
-    </a>
-    <a class="item item-icon-right" href="#">
-      <h6>查看积分</h6>
-      <i class="icon ion-ios-arrow-right"></i>
-    </a>
-    <a class="item item-icon-right" href="#">
-      <h6>客服  ********</h6>
-      <i class="icon ion-ios-arrow-right"></i>
-    </a>
+
+  <a class="item item-icon-right" href="#"  style="padding-top: 10px; padding-bottom: 10px;">
+    <span class="stress4">全部订单</span>
+    <i class="icon ion-ios-arrow-right"  style="font-size:18px; height: 46px;"></i>
+  </a>
+  <a class="item item-icon-right" href="#"  style="padding-top: 10px; padding-bottom: 10px;">
+    <span class="stress5">查看积分</span>
+    <i class="icon ion-ios-arrow-right"  style="font-size:18px; height: 46px;"></i>
+  </a>
+  <a class="item item-icon-right" href="#"  style="padding-top: 10px; padding-bottom: 10px;">
+    <span class="stress6">客服  ********</span>
+    <i class="icon ion-ios-arrow-right"  style="font-size:18px; height: 46px;"></i>
+  </a>
 </div>
 </ion-content>
 
-  <div class="tabs tabs-icon-top tabs-positive">
-    <a class="tab-item">
-      <i class="icon ion-home"></i>
+<div class="tabs tabs-icon-top tabs-positive">
+  <a class="tab-item">
+    <i class="icon ion-home"></i>
       首页
-    </a>
-    <a class="tab-item">
-      <i class="icon ion-location"></i>
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-location"></i>
       搜周边
-    </a>
-    <a class="tab-item">
-      <i class="icon ion-ios-list"></i>
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-ios-list"></i>
       活动
-    </a>
-    <a class="tab-item">
-      <i class="icon ion-person"></i>
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-person"></i>
       个人中心
-    </a>
-  </div>
+  </a>
+</div>
 </body>
 </html>
 
@@ -93,15 +82,16 @@
 .list{
   margin-top:43px;
 }
-.stress1{
+.stress1, .stress4{
   font-size:10px;
 }
-.stress2{
+.stress2, .stress5{
   font-size:10px;
 }
-.stress3{
+.stress3, .stress6{
   font-size:10px;
 }
+
 .tabs .tab-item .badge.badge-assertive, .badge.badge-assertive
 {
     font-size: 5px;
