@@ -35,17 +35,17 @@
       <img src="__IMG__/logo.jpg">
       <h2>酒店介绍</h2>
       <h4>洛克公寓，本来生活。</h4>
-      <div><button class="button button-small button-clear button-icon icon ion-wifi">WIFI</button>
-      <button class="button button-small button-clear button-icon icon ion-plane">接机服务</button></div>
-      <div><button class="button button-small button-clear button-icon icon ion-no-smoking">无烟房</button>
-      <button class="button button-small button-clear button-icon icon ion-android-car">免费停车</button></div>
+      <div><button class="button button-small button-clear button-icon icon ion-wifi"></button>
+      <button class="button button-small button-clear button-icon icon ion-plane"></button>
+      <button class="button button-small button-clear button-icon icon ion-no-smoking"></button>
+      <button class="button button-small button-clear button-icon icon ion-android-car"></button></div>
     </a>
 </div>
 <!-- 查看评论 -->
-<div><button class="button button-full button-positive">查看评论</button></div>
+<div style="margin-bottom: 0px; margin-top: -9px;"><button class="button button-full">查看评论</button></div>
 <!-- 选择房型 -->
-<div class="row fangxing">
-  <a class="button button-stable button-full col">全日房</a>
+<div class="row" style="margin-top: -25px;">
+  <a class="button button-stable button-full button-positive col">全日房</a>
   <div class="line"></div>
   <a href="" class="button button-stable button-full col">小时房</a>
 </div>
@@ -61,12 +61,24 @@
       </div>
       <a class="col button button-icon icon ion-chevron-right"></a>
 </div>
-  <div class="bar bar-footer bar-positive row">
-    <div class="col">酒店预订</div>
-    <div class="col">搜周边</div>    
-    <div class="col">活动</div>
-    <div class="col">个人中心</div>  
-  </div>
+  <div class="tabs tabs-icon-top tabs-positive">
+  <a class="tab-item">
+    <i class="icon ion-home"></i>
+      首页
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-location"></i>
+      搜周边
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-ios-list"></i>
+      活动
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-person"></i>
+      个人中心
+  </a>
+</div>
 </body>
 </html>
 <style type="text/css">
