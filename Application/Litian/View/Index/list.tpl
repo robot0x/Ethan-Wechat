@@ -21,7 +21,7 @@
 
 </head>
 
-  <body ng-app="starter">
+  <body ng-controller="MyCtrl">
 
   <ion-pane>
     <ion-header-bar class="bar-stable">
@@ -88,7 +88,7 @@
       </div>
 
     </ion-content>
-    <div class="bar bar-footer">
+    <div class="bar bar-footer bar-positive">
       <div class="tittle"><h4>在线支付：￥365.00</h4></div>
       <div class="button button-large button-positive pull-right">提交订单</div>
     </div>
