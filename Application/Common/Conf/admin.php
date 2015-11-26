@@ -4,9 +4,9 @@ return array(
 
        /* 模板相关配置 */
     'TMPL_PARSE_STRING' => array(
-        '__IMG__'    => __ROOT__ . '/Public/Admin/img',
-        '__CSS__'    => __ROOT__ . '/Public/Admin/css',
-        '__JS__'     => __ROOT__ . '/Public/Admin/js',
+        '__IMG__'    => __ROOT__ . '/Admin/img',
+        '__CSS__'    => __ROOT__ . '/Admin/css',
+        '__JS__'     => __ROOT__ . '/Admin/js',
     ),
 
     /* SESSION 和 COOKIE 配置 */
