@@ -27,7 +27,7 @@
       <ion-header-bar class="bar-stable">
         <div class="bar bar-header bar-positive">
           <a href="" class="button button-icon icon ion-chevron-left"></a>
-            <h4 class="tittle">待支付订单</h4>
+            <h4 class="tittle">确认订单</h4>
         </div>
       </ion-header-bar>
       <!-- content -->
@@ -45,7 +45,7 @@
                 <p>价格：365.00</p>
                 <p>介绍：有窗/空调/电视/wifi</p>
                 <p>入住时间：2015.11.25</p>
-                
+
               </div>
               <div class="button button-small button-assertive" style="margin-left: 214px; margin-top: -72px;">删除</div>
           </li>
@@ -59,7 +59,7 @@
                 <p>价格：365.00</p>
                 <p>介绍：有窗/空调/电视/wifi</p>
                 <p>入住时间：2015.11.25</p>
-                
+
               </div>
               <div class="button button-small button-assertive" style="margin-left: 214px; margin-top: -72px;">删除</div>
           </li>
@@ -73,7 +73,7 @@
                 <p>价格：365.00</p>
                 <p>介绍：有窗/空调/电视/wifi</p>
                 <p>入住时间：2015.11.25</p>
-                
+
               </div>
               <div class="button button-small button-assertive" style="margin-left: 214px; margin-top: -72px;">删除</div>
           </li>
