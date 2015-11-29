@@ -40,17 +40,29 @@
 
     <div class="button-bar">
       <a class="button button-light">
-      <i class="icon  ion-ios-calculator-outline"></i>
-      <p>待支付</p>
+        <i class="icon  ion-ios-folder-outline"></i>
+        <p>待支付</p>
       </a>
       <a class="button button-light">
-      <i class="icon ion-ios-rose-outline"></i>
-      <h5>待评价</h5>
+        <i class="icon ion-ios-rose-outline"></i>
+        <p>待评价</p>
       </a>
       <a class="button button-light">
-      <i class="icon ion-ios-briefcase-outline"></i>
-      <h5>待入住</h5>
+        <i class="icon ion-ios-browsers-outline"></i>
+        <p>待入住</p>
       </a>
+    <!--   <a class="tab-item">
+        <i class="icon ion-ios-folder-outline"></i>
+          待支付
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-ios-rose-outline"></i>
+          待评价
+      </a>
+      <a class="tab-item">
+        <i class="icon ion-ios-browsers-outline"></i>
+          待入住
+      </a> -->
     </div>
 
     <div class="item item-divider">
@@ -63,7 +75,7 @@
     <i class="icon ion-ios-arrow-right"></i>
     </a>
     <a class="item item-icon-left item-icon-right" href="#">
-    <i class="icon ion-ios-color-wand-outline"></i>
+    <i class="icon ion-ios-pricetags-outline"></i>
       查看积分
     <i class="icon ion-ios-arrow-right"></i>
     </a>
@@ -77,19 +89,19 @@
  
 <div class="tabs tabs-icon-top tabs-positive">
   <a class="tab-item">
-    <i class="icon ion-home"></i>
+    <i class="icon ion-ios-home-outline"></i>
       首页
   </a>
   <a class="tab-item">
-    <i class="icon ion-location"></i>
+    <i class="icon ion-ios-paperplane-outline"></i>
       搜周边
   </a>
   <a class="tab-item">
-    <i class="icon ion-ios-book"></i>
+    <i class="icon ion-ios-bookmarks-outline"></i>
       活动
   </a>
   <a class="tab-item">
-    <i class="icon ion-person"></i>
+    <i class="icon ion-ios-person-outline"></i>
       个人中心
   </a>
 </div>
