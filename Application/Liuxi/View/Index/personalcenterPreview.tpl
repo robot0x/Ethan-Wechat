@@ -29,30 +29,29 @@
 </div>
 
 <ion-content class="no-header">
-<div class="list">
+<div class="list ">
   <a class="item item-avatar" href="#">
     <img src="__IMG__/1024.jpg">
-    <h6>用户名</h6>
-    <p><h6>手机号</h6></p>
+   昵称
   </a>
 
-  <div class="button-bar" style="height:42px;">
-    <a class="button button-light" href="#" style="padding-bottom: 35px;"><span class="stress1">待支付</span> <span class="badge badge-assertive" style="padding: 1px 2px;">0</span> </a>
-    <a class="button button-light" href="#" style="padding-bottom: 35px;"><span class="stress2">待评价</span> <span class="badge badge-assertive" style="padding: 1px 2px;">0</span> </a>
-    <a class="button button-light" href="#" style="padding-bottom: 35px;"><span class="stress3">待入住</span> <span class="badge badge-assertive" style="padding: 1px 2px;">0</span> </a>
+  <div class="button-bar">
+    <a class="button button-light">待支付</a>
+    <a class="button button-light">待评价</a>
+    <a class="button button-light">待入住</a>
   </div>
 
-  <a class="item item-icon-right" href="#"  style="padding-top: 10px; padding-bottom: 10px;">
-    <span class="stress4">全部订单</span>
-    <i class="icon ion-ios-arrow-right"  style="font-size:18px; height: 46px;"></i>
+  <a class="item item-icon-right" href="#">
+    全部订单
+  <i class="icon ion-ios-arrow-right"></i>
   </a>
-  <a class="item item-icon-right" href="#"  style="padding-top: 10px; padding-bottom: 10px;">
-    <span class="stress5">查看积分</span>
-    <i class="icon ion-ios-arrow-right"  style="font-size:18px; height: 46px;"></i>
+  <a class="item item-icon-right" href="#">
+    查看积分
+    <i class="icon ion-ios-arrow-right"></i>
   </a>
-  <a class="item item-icon-right" href="#"  style="padding-top: 10px; padding-bottom: 10px;">
-    <span class="stress6">客服  ********</span>
-    <i class="icon ion-ios-arrow-right"  style="font-size:18px; height: 46px;"></i>
+  <a class="item item-icon-right" href="#">
+   客服  ********
+  <i class="icon ion-ios-arrow-right"></i>
   </a>
 </div>
 </ion-content>
@@ -78,25 +77,3 @@
 </body>
 </html>
 
-<style type="text/css">
-.list{
-  margin-top:43px;
-}
-.stress1, .stress4{
-  font-size:10px;
-}
-.stress2, .stress5{
-  font-size:10px;
-}
-.stress3, .stress6{
-  font-size:10px;
-}
-
-.tabs .tab-item .badge.badge-assertive, .badge.badge-assertive
-{
-    font-size: 5px;
-    font-weight: ;
-    line-height: 5px;
-    min-width: 5px;
-}
-</style>
