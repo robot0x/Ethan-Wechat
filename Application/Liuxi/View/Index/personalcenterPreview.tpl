@@ -11,8 +11,6 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
   -->
-
-
   <!-- ionic/angularjs js -->
   <script src="__LIB__/ionic/js/ionic.bundle.js"></script>
 
@@ -28,34 +26,55 @@
   <a href="#/app/capture" class="button button-icon icon ion-gear-a"></a>
 </div>
 
-<ion-content class="no-header">
-<div class="list ">
-  <a class="item item-avatar" href="#">
+<ion-content class="bar-content">
+  <div class="list has-header">
+    <a class="item item-avatar" href="#">
     <img src="__IMG__/1024.jpg">
-   昵称
-  </a>
+    <h2>昵称</h2>
+    <p>手机号</p>
+    </a>
 
-  <div class="button-bar">
-    <a class="button button-light">待支付</a>
-    <a class="button button-light">待评价</a>
-    <a class="button button-light">待入住</a>
-  </div>
+    <div class="item item-divider">
 
-  <a class="item item-icon-right" href="#">
-    全部订单
-  <i class="icon ion-ios-arrow-right"></i>
-  </a>
-  <a class="item item-icon-right" href="#">
-    查看积分
+    </div>
+
+    <div class="button-bar">
+      <a class="button button-light">
+      <i class="icon  ion-ios-calculator-outline"></i>
+      <p>待支付</p>
+      </a>
+      <a class="button button-light">
+      <i class="icon ion-ios-rose-outline"></i>
+      <h5>待评价</h5>
+      </a>
+      <a class="button button-light">
+      <i class="icon ion-ios-briefcase-outline"></i>
+      <h5>待入住</h5>
+      </a>
+    </div>
+
+    <div class="item item-divider">
+
+    </div>
+
+    <a class="item item-icon-left item-icon-right" href="#">
+    <i class="icon ion-ios-list-outline"></i>
+      全部订单
     <i class="icon ion-ios-arrow-right"></i>
-  </a>
-  <a class="item item-icon-right" href="#">
-   客服  ********
-  <i class="icon ion-ios-arrow-right"></i>
-  </a>
-</div>
+    </a>
+    <a class="item item-icon-left item-icon-right" href="#">
+    <i class="icon ion-ios-color-wand-outline"></i>
+      查看积分
+    <i class="icon ion-ios-arrow-right"></i>
+    </a>
+    <a class="item item-icon-left item-icon-right" href="#">
+    <i class="icon ion-ios-telephone-outline"></i>
+      客服  ********
+    <i class="icon ion-ios-arrow-right"></i>
+    </a>
+  </div>
 </ion-content>
-
+ 
 <div class="tabs tabs-icon-top tabs-positive">
   <a class="tab-item">
     <i class="icon ion-home"></i>
@@ -66,7 +85,7 @@
       搜周边
   </a>
   <a class="tab-item">
-    <i class="icon ion-ios-list"></i>
+    <i class="icon ion-ios-book"></i>
       活动
   </a>
   <a class="tab-item">
