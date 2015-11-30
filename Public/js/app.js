@@ -20,3 +20,13 @@ app.controller('MyCtrl' , function($scope, $ionicModal){
         $scope.modal.hide();
     };
 });
+app.controller('HideShowController' , function($scope){
+    $scope.menuState = false;
+    $scope.name = { text: '编辑',color:'positive' };
+
+    $scope.toggleMenu = function(){
+      $scope.menuState = !$scope.menuState;
+      $scope.name = {text:'删除',color:'assertive',col:'col-90'};
+    };
+    
+});
