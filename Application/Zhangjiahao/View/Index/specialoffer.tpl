@@ -1,13 +1,15 @@
-<!DOCTYPE HTML>
-<html>
-<link rel="stylesheet" type="text/css" href="css/ionic.min.css">
+<!DOCTYPE html>
+<html ng-app="yunzhiclub">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	 <style type="text/css">
-     p{font-size:25px}
-     </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>最新活动</title>
+  <link href="__LIB__/ionic/css/ionic.css" rel="stylesheet">
+  <link href="__CSS__/style.css" rel="stylesheet">
 </head>
-<body class="bar-content" style="padding-bottom: 60px;">
+
+<body>
+
 	<div class="bar bar-header  bar-positive">  
 	   <a href="" class="button button-icon icon ion-chevron-left"></a>     
 
@@ -17,27 +19,27 @@
 		<div class="list">
 		    <div class="list card">
 
-		        <div class="item item-avatar">
-    <img src="img/jian.jpg">
+  <div class="item item-avatar">
+    <img src="__IMG__/jian.jpg">
     <h2>首单立减</h2>
     <p>截止到2015年11月24日</p>
   </div>
 
   <div class="item item-avatar">
-    <img src="img/niunai.jpg">
+    <img src="__IMG__/niunai.jpg">
     <h2>住店送牛奶</h2>
     <p>截止到2015年11月24日</p>
   </div>
 
   <div class="item item-avatar">
-    <img src="img/niunai2.jpg">
+    <img src="__IMG__/niunai2.jpg">
     <h2>积分兑好礼</h2>
     <p>截止到2015年11月24日</p>
   </div>
 
 
   <div class="item item-avatar">
-    <img src="img/jiudian/jiudian.jpg">
+    <img src="__IMG__/jiudian.jpg">
     <h2>积分兑好礼</h2>
     <p>截止到2015年11月24日</p>
   </div>
