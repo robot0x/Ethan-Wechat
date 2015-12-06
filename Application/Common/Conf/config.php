@@ -6,6 +6,8 @@
 ) or die("access not allowed");
 
 return array(
+    'YUNZHI_PAGE_SIZE'      => 2,          //默认分页大小
+
     'TMPL_TEMPLATE_SUFFIX'  =>  '.tpl',     // 默认模板文件后缀
     'ACTION_SUFFIX'         => 'Action',//设置ACTION前缀为action
     'TAGLIB_PRE_LOAD'       =>  'Yunzhi',   // 需要额外加载的标签库(须指定标签库名称)，多个以逗号分隔 
