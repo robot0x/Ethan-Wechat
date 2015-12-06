@@ -1,8 +1,8 @@
 <?php
 //防入侵。
-( defined("_YUNZHI_HOME")
-    || defined("_YUNZHI_ADMIN")
-    || defined("_YUNZHI_API")
+( defined("YUNZHI_HOME")
+    || defined("YUNZHI_ADMIN")
+    || defined("YUNZHI_API")
 ) or die("access not allowed");
 
 return array(
