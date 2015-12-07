@@ -1,9 +1,9 @@
 <?php
 namespace CustomMenu\Model;
 
-use Home\Model\HomeModel;
+use Yunzhi\Model\YunzhiModel;
 
-class CustomMenuModel extends HomeModel
+class CustomMenuModel extends YunzhiModel
 {
 
 
