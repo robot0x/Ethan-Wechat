@@ -5,6 +5,7 @@ Class GitController
 {
 	public function indexAction()
 	{
+		echo "hello git";
 		$path = "/mengyunzhi/www/Ethan-Wechat";
 		chdir($path);
 		passthru("pwd");
