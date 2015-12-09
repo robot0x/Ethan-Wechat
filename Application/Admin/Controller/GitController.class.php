@@ -8,6 +8,7 @@ Class GitController extends Controller
 	public function indexAction()
 	{
 		$this->display();
+		passthru("whoami");
 	}
 
 	public function resetAction()
