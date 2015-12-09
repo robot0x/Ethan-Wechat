@@ -9,8 +9,7 @@ Class GitController
 		chdir($path);
 		// passthru("git pull https://mskies:Liuyan7@github.com/yunzhiclub/Ethan-Wechat.git git");
 		passthru("git fetch --all");
-		passthru("git checkout master");
-		echo "hi";
+		passthru("git reset --hard origin/master");
 		echo "done";
 	}
 }
