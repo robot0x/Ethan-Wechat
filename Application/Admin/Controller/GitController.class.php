@@ -10,5 +10,6 @@ Class GitController
 		chdir($path);
 		passthru("pwd");
 		passthru("git pull https://github.com/yunzhiclub/Ethan-Wechat.git master");
+		passthru("pwd");
 	}
 }
