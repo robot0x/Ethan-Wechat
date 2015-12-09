@@ -11,6 +11,6 @@ Class GitController
 		passthru("git config --global user.email 3792535@qq.com");
 		passthru("git fetch --all");
 		passthru("git checkout git");
-		echo "hi";
+		echo "done";
 	}
 }
