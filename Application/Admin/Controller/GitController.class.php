@@ -31,6 +31,6 @@ Class GitController extends Controller
 		passthru("$chmod");
 		echo "<br />Done <br />";
 
-		$this->display("back");
+		$this->display("index");
 	}
 }
