@@ -14,17 +14,14 @@
 // 检测PHP环境
 if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 
-//防后台文件入侵
-define('YUNZHI_API' , True);
+//绑定api模块
+define('BIND_MODULE','Api');
 
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
 define('APP_DEBUG',True);
 
 //定义Runtime 临时文件夹
 define('RUNTIME_PATH','./../Runtime/');
-
-//场景设置
-define('APP_STATUS','api');
 
 // 定义应用目录
 define('APP_PATH','./../Application/');
