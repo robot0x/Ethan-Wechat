@@ -9,6 +9,6 @@ Class GitController
 		$path = "/mengyunzhi/www/Ethan-Wechat";
 		chdir($path);
 		passthru("pwd");
-		passthru("git pull");
+		passthru("git pull https://github.com/yunzhiclub/Ethan-Wechat.git git");
 	}
 }
