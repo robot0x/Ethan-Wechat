@@ -1,15 +1,26 @@
 <?php
 namespace Admin\Controller;
 
-Class GitController
+use Think\Controller;
+
+Class GitController extends Controller
 {
 	public function indexAction()
 	{
+		$this->display();
+	}
+
+	public function resetAction()
+	{
 		$path = "/mengyunzhi/www/Ethan-Wechat";
+		$branch = I("get.branch");
+		$remote = I("get.remote") === "" ? "origin" : I("get.remote");
+		$resetCommand = "git reset --hard $remote/$branch";
+
 		chdir($path);
 		passthru("git fetch --all");
 		echo "<br />";
-		passthru("git reset --hard origin/git");
+		passthru("$resetCommand");
 		echo "<br />";
 		echo "Done";
 	}
