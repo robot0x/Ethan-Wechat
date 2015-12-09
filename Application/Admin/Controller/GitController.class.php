@@ -23,5 +23,7 @@ Class GitController extends Controller
 		passthru("$resetCommand");
 		echo "<br />";
 		echo "Done";
+
+		$this->display();
 	}
 }
