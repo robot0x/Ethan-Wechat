@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Git;
+namespace Admin\Controller;
 
 Class GitController
 {
