@@ -10,6 +10,6 @@ Class GitController
 		// passthru("git pull https://mskies:Liuyan7@github.com/yunzhiclub/Ethan-Wechat.git git");
 		passthru("git fetch --all");
 		passthru("git reset --hard origin/git");
-		echo "done";
+		echo "well done";
 	}
 }
