@@ -13,6 +13,6 @@ Class GitController
 		passthru("git config --global user.email 3792535@qq.com");
 		passthru("git config --list");
 		passthru("git fetch https://github.com/yunzhiclub/Ethan-Wechat.git git");
-		passthru("pwd");
+		passthru("git checkout git");
 	}
 }
