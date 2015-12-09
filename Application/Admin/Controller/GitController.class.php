@@ -13,7 +13,6 @@ Class GitController extends Controller
 
 	public function resetAction()
 	{
-		$this->display("index");
 		$path = "/mengyunzhi/www/Ethan-Wechat";
 		$branch = I("get.branch");
 		$remote = I("get.remote") === "" ? "origin" : I("get.remote");
@@ -32,6 +31,6 @@ Class GitController extends Controller
 		passthru("$chmod");
 		echo "<br />Done <br />";
 
-		
+		echo "<a href='{:U('index')}'>返回...</a>";
 	}
 }
