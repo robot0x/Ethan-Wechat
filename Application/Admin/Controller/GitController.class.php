@@ -18,11 +18,11 @@ Class GitController extends Controller
 		$resetCommand = "git reset --hard $remote/$branch";
 
 		chdir($path);
+		echo "git fetch --all <br />";
 		passthru("git fetch --all");
 		echo "<br />";
 		passthru("$resetCommand");
-		echo "<br />";
-		echo "Done";
+		echo "<br />Done <br />";
 
 		$this->display();
 	}
