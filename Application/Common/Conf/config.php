@@ -8,16 +8,18 @@
 return array(
     'TMPL_TEMPLATE_SUFFIX'  =>  '.tpl',     // 默认模板文件后缀
     'ACTION_SUFFIX'         => 'Action',//设置ACTION前缀为action
+    
     /* 数据缓存设置 */
     'DATA_CACHE_PREFIX' => 'yunzhi_ethan_', // 缓存前缀
     'DATA_CACHE_TYPE'   => 'File', // 数据缓存类型
 
-	'DB_TYPE'               =>  'mysqli',     // 数据库类型
-    'DB_HOST'               =>  '127.0.0.1',    // 服务器地址
-    'DB_NAME'               =>  'Ethan-Wechat',          // 数据库名
-    'DB_USER'               =>  'root',      // 用户名
-    'DB_PWD'                =>  '',          // 密码
-    'DB_PORT'               =>  '3306',        // 端口
+    'DB_TYPE'               =>  'mysqli',     // 数据库类型
+    'DB_HOST'               =>  'callme119.mysql.rds.aliyuncs.com',    // 服务器地址
+    'DB_NAME'               =>  'ethan_wechat',          // 数据库名
+    'DB_USER'               =>  'ethan_wechat',      // 用户名
+    'DB_PWD'                =>  'Q25jV6UiCOJAg584VvQllRrvWh0ALDyF',          // 密码
+    'DB_PORT'               =>  '3633',             // 端口
+    'DB_PREFIX'             =>  'ethan_',           // 数据库表前缀
 
     'URL_MODEL'             =>  1, // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
 
