@@ -7,7 +7,10 @@ Class GitController
 	{
 		$path = "/mengyunzhi/www/Ethan-Wechat";
 		chdir($path);
-		passthru("git pull https://mskies:Liuyan7@github.com/yunzhiclub/Ethan-Wechat.git git");
+		// passthru("git pull https://mskies:Liuyan7@github.com/yunzhiclub/Ethan-Wechat.git git");
+		passthru("git fetch --all");
+		passthru("git checkout git");
+		echo "hi";
 		echo "done";
 	}
 }
