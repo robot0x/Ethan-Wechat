@@ -31,6 +31,6 @@ Class GitController extends Controller
 		passthru("$chmod");
 		echo "<br />Done <br />";
 
-		echo "<a href='{:U('index')}'> <<Back </a>";
+		echo "<a href=" . U('index') . "><<Back</a>";
 	}
 }
