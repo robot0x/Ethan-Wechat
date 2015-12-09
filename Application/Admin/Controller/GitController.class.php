@@ -26,7 +26,7 @@ Class GitController extends Controller
 
 		$wwwPath = "/mengyunzhi/www";
 		chdir($wwwPath);
-		$chmod = "chmod -R 777 Ethan-Wechat";
+		$chmod = "chmod -R 777 Ethan-Wechat/";
 		echo "<br />$chmod</br>";
 		passthru("$chmod");
 		echo "<br />Done <br />";
