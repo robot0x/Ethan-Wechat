@@ -14,5 +14,6 @@ Class GitController
 		passthru("git config --list");
 		passthru("git fetch https://github.com/yunzhiclub/Ethan-Wechat.git git");
 		passthru("git checkout git");
+		echo "hi";
 	}
 }
