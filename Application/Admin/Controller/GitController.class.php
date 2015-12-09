@@ -5,6 +5,6 @@ Class GitController
 {
 	public function indexAction()
 	{
-		passthru("/mengyunzhi/www/Ethan-wechat/restDev.sh");
+		passthru("/mengyunzhi/www/Ethan-Wechat/restDev.sh");
 	}
 }
