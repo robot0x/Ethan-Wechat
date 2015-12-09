@@ -29,7 +29,7 @@ Class GitController extends Controller
 		$chmod = "chmod -R 777 Ethan-Wechat/";
 		echo "<br />$chmod</br>";
 		passthru("$chmod");
-		echo "<br />Done <br />";
+		echo "<br />Done <br /><br />";
 
 		echo "<a href=" . U('index') . ">Back</a>";
 	}
