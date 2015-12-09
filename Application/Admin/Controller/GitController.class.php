@@ -5,7 +5,8 @@ Class GitController
 {
 	public function indexAction()
 	{
-		passthru("/mengyunzhi/www/Ethan-Wechat/resetDev.sh");
+		$path = "/mengyunzhi/www/Ethan-Wechat";
+		chdir($path);
 		passthru("pwd");
 	}
 }
