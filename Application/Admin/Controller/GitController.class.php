@@ -20,7 +20,7 @@ Class GitController extends Controller
 		chdir($path);
 		echo "git fetch --all <br />";
 		passthru("git fetch --all");
-		echo "<br />";
+		echo "<br />$resetCommand";
 		passthru("$resetCommand");
 		echo "<br />Done <br />";
 
