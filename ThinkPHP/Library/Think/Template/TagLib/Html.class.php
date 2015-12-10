@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 namespace Think\Template\TagLib;
 use Think\Template\TagLib;
+use Think\Page;
 /**
  * Html标签库驱动
  */
@@ -17,13 +18,14 @@ class Html extends TagLib{
     // 标签定义
     protected $tags   =  array(
         // 标签定义： attr 属性列表 close 是否闭合（0 或者1 默认1） alias 标签别名 level 嵌套层次
-        'editor'    => array('attr'=>'id,name,style,width,height,type','close'=>1),
+        'editor'    => array('attr'=>'id,name,style,class,width,height,type','close'=>1),
         'select'    => array('attr'=>'name,options,values,output,multiple,id,size,first,change,selected,dblclick','close'=>0),
         'grid'      => array('attr'=>'id,pk,style,action,actionlist,show,datasource','close'=>0),
         'list'      => array('attr'=>'id,pk,style,action,actionlist,show,datasource,checkbox','close'=>0),
         'imagebtn'  => array('attr'=>'id,name,value,type,style,click','close'=>0),
         'checkbox'  => array('attr'=>'name,checkboxes,checked,separator','close'=>0),
-        'radio'     => array('attr'=>'name,radios,checked,separator','close'=>0)
+        'radio'     => array('attr'=>'name,radios,checked,separator','close'=>0),
+        'page'      => array('attr'=>'style, totalCount, class, id', 'close'=>0),
         );
 
     /**
@@ -34,9 +36,10 @@ class Html extends TagLib{
      * @return string|void
      */
     public function _editor($tag,$content) {
-        $id			=	!empty($tag['id'])?$tag['id']: '_editor';
+        $id		=	!empty($tag['id'])?$tag['id']: '_editor';
         $name   	=	$tag['name'];
-        $style   	    =	!empty($tag['style'])?$tag['style']:'';
+        $style      =   !empty($tag['style'])?$tag['style']:'';
+        $class      =	!empty($tag['class'])?$tag['class']:'';
         $width		=	!empty($tag['width'])?$tag['width']: '100%';
         $height     =	!empty($tag['height'])?$tag['height'] :'320px';
      //   $content    =   $tag['content'];
@@ -60,11 +63,34 @@ class Html extends TagLib{
             case 'KINDEDITOR':
                 $parseStr   =  '<script type="text/javascript" src="__ROOT__/Public/Js/KindEditor/kindeditor.js"></script><script type="text/javascript"> KE.show({ id : \''.$id.'\'  ,urlType : "absolute"});</script><textarea id="'.$id.'" style="'.$style.'" name="'.$name.'" >'.$content.'</textarea>';
                 break;
+            case 'UEDITOR' :
+                $parseStr   = '<js href="__ROOT__/lib/ueditor/ueditor.config.js" /><js href="__ROOT__/lib/ueditor/ueditor.all.min.js" /><script>$(function(){var ue = UE.getEditor("'.$id.'",{serverUrl :"__ROOT__/yunzhi.php/Ueditor/index.html"});})</script><script id="'. $id .'" name="'.$name.'" style="'. $style .'" class="'. $class .'" type="text/plain">'  . $content .'</script>';
+                break;
             default :
                 $parseStr  =  '<textarea id="'.$id.'" style="'.$style.'" name="'.$name.'" >'.$content.'</textarea>';
         }
 
         return $parseStr;
+    }
+    /**
+     * page标签解析
+     * 格式： <html:page id="" class="" totalnumber=""/>
+     * @access public
+     * @param array $tag 标签属性
+     * @return string|void
+     */
+    public function _page($tag){
+        $id         =   !empty($tag['id']) ? $tag['id'] : '_page';
+        $class      =   !empty($tag['class']) ? $tag['class'] : '';
+        $totalCount =   !empty($tag['totalcount']) ? '$' . $tag['totalcount'] : 
+                        (C("YUNZHI_TOTAL_COUNT") ? C("YUNZHI_TOTAL_COUNT") : 0);
+        $pageSize   =   C('YUNZHI_PAGE_SIZE') ? C('YUNZHI_PAGE_SIZE') : 20;
+
+        $parseStr   =   "<?php ";
+        $parseStr   .=  '$page = new Think\Page('. $totalCount .',' . $pageSize . ');';
+        $parseStr   .=  'echo $page->show();';
+        $parseStr   .=  " ?>";
+        return  $parseStr;
     }
 
     /**

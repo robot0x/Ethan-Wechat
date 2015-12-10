@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<include file="Admin@Base/head"/>
+<include file="Base/head"/>
 </head>
 <body>
     <div>
-        <include file="Admin@Base/header"/>
-        <include file="Admin@Base/body"/>
+        <include file="Base/header"/>
+        <include file="Base/body"/>
     </div><!--#wrapper-->
-    <include file="Admin@Base/footer"/>
+    <include file="Base/footer"/>
 </body>
 </html>

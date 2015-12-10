@@ -30,7 +30,8 @@ class Yunzhi extends TagLib {
     public function _page($tag){
         $id         =   !empty($tag['id']) ? $tag['id'] : '_page';
         $class      =   !empty($tag['class']) ? $tag['class'] : '';
-        $totalCount =   !empty($tag['totalcount']) ? '$' . $tag['totalcount'] : C("YUNZHI_TOTAL_COUNT");
+        $totalCount =   !empty($tag['totalcount']) ? '$' . $tag['totalcount'] :
+                        (C("YUNZHI_TOTAL_COUNT") ? C("YUNZHI_TOTAL_COUNT") : 0);
         $pageSize   =   C('YUNZHI_PAGE_SIZE') ? C('YUNZHI_PAGE_SIZE') : 20;
 
         $parseStr   =   "<?php ";

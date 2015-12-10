@@ -8,7 +8,7 @@ return array(
     ),
 
 	'DATA_CACHE_PREFIX'    => 	'yunzhi_ethan_Api', 	// 缓存前缀
-	'MODULE_ALLOW_LIST'    =>  	array('Api'),			//允许访问模块
+	'MODULE_ALLOW_LIST'    =>  	array('Api', 'Yunzhi'),			//允许访问模块
 	'DEFAULT_MODULE'       =>   'Api',  				// 默认模块
 	'SESSION_PREFIX'       =>  	'yunzhi_ethan_Api', 	// session 前缀
 	'COOKIE_PREFIX'        =>  	'yunzhi_ethan_Api', 	// Cookie前缀 避免冲突

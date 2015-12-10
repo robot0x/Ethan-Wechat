@@ -18,7 +18,7 @@
     <link id="base-style" href="__CSS__/style.css" rel="stylesheet">
 
     <link id="base-style-responsive" href="__CSS__/style-responsive.css" rel="stylesheet">
-
+    <script src="__JS__/jquery-1.9.1.min.js"></script>
     <!-- end: CSS -->
 
 
