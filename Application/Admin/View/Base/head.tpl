@@ -20,7 +20,7 @@
     <link id="base-style-responsive" href="__CSS__/style-responsive.css" rel="stylesheet">
     <script src="__JS__/jquery-1.9.1.min.js"></script>
     <!-- end: CSS -->
-
+    <js href="__ROOT__/lib/ueditor/ueditor.config.js" /><js href="__ROOT__/lib/ueditor/ueditor.all.min.js" />
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

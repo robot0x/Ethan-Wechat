@@ -17,7 +17,7 @@ class Ueditor{
 	private $rootpath = '/Uploads';
         //private $confPath = ;
 	
-	public function __construct($uid = '', $CONFIG){
+	public function __construct($uid = '', $CONFIG = array()){
 		//uid 为空则导入当前会话uid
 		//if(''===$uid) $this->uid = session('uid');
 		
@@ -27,7 +27,7 @@ class Ueditor{
 		//导入设置
 		//由导入改为直接传值，解决了不同的URL的路径问题。
 		//$CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents(CONF_PATH."ueditor.json")), true);
-		// $CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents(APP_PATH . "Yunzhi/Conf/ueditor.json")), true);
+		$CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents(APP_PATH . "Yunzhi/Conf/ueditor.json")), true);
 		$action = htmlspecialchars($_GET['action']);
 		
 		switch($action){
