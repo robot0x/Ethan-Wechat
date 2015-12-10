@@ -3,8 +3,4 @@ Runtime/
 *.log
 .phpintel/
 Application/Common/Conf/config.php
-<<<<<<< HEAD
 Public/uploads/
-=======
-Public/uploads
->>>>>>> development
