@@ -1,7 +1,7 @@
 <block name="footer">
     <!-- start: JavaScript-->
 
-        <script src="__JS__/jquery-1.9.1.min.js"></script>
+       
 
         <script src="__JS__/jquery-migrate-1.0.0.min.js"></script>
 
