@@ -5,11 +5,10 @@ return array(
 
     'TMPL_TEMPLATE_SUFFIX'  => '.tpl',     // 默认模板文件后缀
     'ACTION_SUFFIX'         => 'Action',//设置ACTION前缀为action
-    'TAGLIB_PRE_LOAD'       => 'Yunzhi',   // 需要额外加载的标签库(须指定标签库名称)，多个以逗号分隔 
+    'TAGLIB_PRE_LOAD'       => 'Yunzhi,Html',   // 需要额外加载的标签库(须指定标签库名称)，多个以逗号分隔 
 
     /* 数据缓存设置 */
-    'DATA_CACHE_PREFIX'     => 'yunzhi_ethan_', // 缓存前缀
-    'DATA_CACHE_TYPE'       => 'File', // 数据缓存类型
+    'DATA_CACHE_TYPE'       =>  'File', // 数据缓存类型
 
     'DB_TYPE'               =>  'mysqli',     // 数据库类型
     'DB_HOST'               =>  'callme119.mysql.rds.aliyuncs.com',    // 服务器地址

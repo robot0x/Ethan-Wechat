@@ -1,15 +1,16 @@
 <?php
 return array(
-    'DEFAULT_MODULE'        =>  'Admin',  // 默认模块
-
-       /* 模板相关配置 */
+	/* 模板相关配置 */
     'TMPL_PARSE_STRING' => array(
-        '__IMG__'    => __ROOT__ . '/Admin/img',
-        '__CSS__'    => __ROOT__ . '/Admin/css',
-        '__JS__'     => __ROOT__ . '/Admin/js',
+        '__IMG__'    	=> __ROOT__ . '/Admin/img',
+        '__CSS__'    	=> __ROOT__ . '/Admin/css',
+        '__JS__'     	=> __ROOT__ . '/Admin/js',
     ),
 
-    /* SESSION 和 COOKIE 配置 */
-    'SESSION_PREFIX' => 'yunzhi_admin', //session前缀
-    'COOKIE_PREFIX'  => 'yunzhi_admin_', //Cookie前缀 避免冲突
-    );
+	'DATA_CACHE_PREFIX'    => 	'yunzhi_ethan_admin', 	// 缓存前缀
+	'MODULE_ALLOW_LIST'    =>  	array('Admin'),			//允许访问模块
+	'DEFAULT_MODULE'       =>   'Admin',  				// 默认模块
+	'SESSION_PREFIX'       =>  	'yunzhi_ethan_admin', 	// session 前缀
+	'COOKIE_PREFIX'        =>  	'yunzhi_ethan_admin', 	// Cookie前缀 避免冲突
+);
+    

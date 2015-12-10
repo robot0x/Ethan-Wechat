@@ -8,7 +8,6 @@ Class GitController extends Controller
 	public function indexAction()
 	{
 		$this->display();
-		passthru("whoami");
 	}
 
 	public function resetAction()
@@ -31,6 +30,15 @@ Class GitController extends Controller
 		passthru("$chmod");
 		echo "<br />Done <br /><br />";
 
+		echo "<a href=" . U('index') . ">Back</a>";
+	}
+
+	public function statusAction()
+	{
+		$cmd = "git status";
+		echo $cmd;
+		passthru($cmd);
+		echo "<p>Done</p><br />";
 		echo "<a href=" . U('index') . ">Back</a>";
 	}
 }
