@@ -8,7 +8,6 @@ return array(
     'TAGLIB_PRE_LOAD'       => 'Yunzhi',   // 需要额外加载的标签库(须指定标签库名称)，多个以逗号分隔 
 
     /* 数据缓存设置 */
-    'DATA_CACHE_PREFIX'     => 'yunzhi_ethan_', // 缓存前缀
     'DATA_CACHE_TYPE'       => 'File', // 数据缓存类型
 
     'DB_TYPE'               =>  'mysqli',     // 数据库类型
