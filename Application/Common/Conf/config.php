@@ -19,5 +19,4 @@ return array(
     'DB_PREFIX'             =>  'ethan_',           // 数据库表前缀
 
     'URL_MODEL'             =>  1, // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
-
 );

@@ -151,7 +151,7 @@
             swf: '__ROOT__/lib/webuploader/swf/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '__ROOT__/yunzhi.php/Webuploader/fileupload.html',
+            server: '__ROOT__/yunzhi.php/webuploader/upload.html?action=uploadimage',
             // runtimeOrder: 'flash',
 
             // accept: {
@@ -189,7 +189,6 @@
         uploader.on('dialogOpen', function() {
             console.log('here');
         });
-
         // uploader.on('filesQueued', function() {
         //     uploader.sort(function( a, b ) {
         //         if ( a.name < b.name )
@@ -426,6 +425,7 @@
         }
 
         function setState( val ) {
+            console.log("start");
             var file, stats;
 
             if ( val === state ) {
@@ -435,7 +435,7 @@
             $upload.removeClass( 'state-' + state );
             $upload.addClass( 'state-' + val );
             state = val;
-
+            console.log("state is "+state);
             switch ( state ) {
                 case 'pedding':
                     $placeHolder.removeClass( 'element-invisible' );
@@ -476,6 +476,7 @@
                     break;
                 case 'finish':
                     stats = uploader.getStats();
+                    console.log(stats);
                     if ( stats.successNum ) {
                         alert( '上传成功' );
                     } else {
