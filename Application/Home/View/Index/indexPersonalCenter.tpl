@@ -33,7 +33,7 @@
 		查看积分
 		<i class="icon ion-iconfontunie61f"></i>
 	</a>
-	<a class="item item-icon-left" href="#">
+	<a href="tel:13920156607" class="item item-icon-left">
 		<i class="icon ion-kefu"></i>
 		客服  15302056835
 	</a>

@@ -54,10 +54,19 @@
       </label>
     </div>
 
-    <div class="bar bar-footer bar-stable">
-      <h4 class="dollar pull-right">在线支付：￥365.00</h4>
-      <a href="#/tab/paySuccess1">
-      <div class="button button-large button-positive pull-right">提交订单</div></a>
+    <div class="bar bar-footer">
+      <div class="row">
+        <div class="col-75">
+          <h4 class="dollar pull-right">在线支付：￥365.00</h4>
+        </div>
+        <div class="col-25 col-demo">
+          <a href="#/tab/paySuccess1">
+            <div class="button button-large button-positive">
+              提交订单
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
 	</ion-content>
 </ion-view>
