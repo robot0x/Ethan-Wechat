@@ -47,7 +47,7 @@
     <p>55平米大床1.8m有wifi</p>
     <span class="item-note energized">
       ￥212起<i class="ion-down"></i>
-    </span>  
+    </span>
   </a>
   <div class="item">
       面积-55㎡<br>
@@ -85,7 +85,7 @@
   </div>
 </div>
 <div class="list">
-<a class="item" href="#/tab/confirmOrder">
+<a class="item" href="tel:13920156607">
     <i class="ion-zhongdianfangbeijing"></i>
     钟点房
     <span class="item-note energized">
