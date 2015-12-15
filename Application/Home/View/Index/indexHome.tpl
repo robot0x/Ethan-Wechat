@@ -12,7 +12,7 @@
 <!-- 酒店介绍 -->
 <div class="list">
     <div class="item item-thumbnail row">
-        <div class="col-40">
+        <div class="col-33">
           <a href="#/tab/evaluation">
             <h1 class="energized">4.9分</h1>
             <h2 class="energized">棒极了</h2>
@@ -20,8 +20,8 @@
             <p>84条评论></p>
           </a>
         </div>
-        <div class="col-60">
-          <img src="__IMG__/home-ditu.jpg">
+        <div class="col-67">
+            <img class="full-image" src="__IMG__/ditu.jpg">
         </div>
     </div>
 
