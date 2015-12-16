@@ -27,7 +27,11 @@
   		<option name="type" value="view">view</option>
 	</select>
 	</br>
-	<label>内容：</label><input type = "text" name="content" value="{:$M->getMenu()['content']}"/></br>
+	<label>标题：</label><input type = "text" name="title" value="{:$M->getMenu()['title']}"/></br>
+	<label>文章内容：</label><input type = "text" name="content" value="{:$M->getMenu()['content']}"/></br>
+	<label>图片链接：</label><input type = "text" name="imgurl" value="{:$M->getMenu()['imgurl']}"/></br>
+	<label>跳转链接：</label><input type = "text" name="url" value="{:$M->getMenu()['url']}"/></br>
+	<label>回复类型：</label><input type = "text" name="form_type" value="{:$M->getMenu()['form_type']}"/></br>
 	<button type="submit">保存</button
 	</form>
 	</body>
