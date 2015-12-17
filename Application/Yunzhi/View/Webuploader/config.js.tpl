@@ -139,14 +139,14 @@
 
         // 实例化
         uploader = WebUploader.create({
-            auto: true,
+            auto: false,
             pick: {
                 id: '#filePicker',
                 label: '点击选择图片'
             },
-            formData: {
-                uid: 123
-            },
+            // formData: {
+            //     uid: 123
+            // },
             dnd: '#dndArea',
             paste: '#uploader',
             swf: '__ROOT__/lib/webuploader/swf/Uploader.swf',
@@ -155,17 +155,18 @@
             server: '__ROOT__/yunzhi.php/webuploader/upload.html?action=uploadimage',
             // runtimeOrder: 'flash',
 
-            // accept: {
-            //     title: 'Images',
-            //     extensions: 'gif,jpg,jpeg,bmp,png',
-            //     mimeTypes: 'image/*'
-            // },
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            },
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
-            fileNumLimit: 300,
-            fileSizeLimit: 200 * 1024 * 1024,    // 200 M
-            fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
+            fileNumLimit: 5,
+            fileSizeLimit: 2 * 1024 * 1024,    // 200 M
+            fileSingleSizeLimit: 10 * 1024 * 1024,    // 50 M
+            fileVal:'yunzhifile', //[可选] [默认值：'file']设置文件上传域的name。 
         });
 
         // 拖拽时不接受 js, txt 文件。
@@ -477,9 +478,9 @@
                     break;
                 case 'finish':
                     stats = uploader.getStats();
-                    console.log(stats);
                     if ( stats.successNum ) {
-                        alert( '上传成功' );
+                        //alert( '上传成功' );
+                        console.log("上传成功，状态："+stats);
                     } else {
                         // 没有成功的图片，重设
                         state = 'done';
@@ -499,6 +500,21 @@
             percentages[ file.id ][ 1 ] = percentage;
             updateTotalProgress();
         };
+
+        var yunzhifiles = new Array();
+        uploader.onUploadSuccess = function(file, response)
+        {
+            console.log(response);
+            if(response.state !== "SUCCESS")
+            {
+                alert("上传失败，原因："+response.state);
+            }
+            else
+            {
+                yunzhifiles.push(response.url);
+                $("#yunzhifiles").val(yunzhifiles.join(","));
+            }
+        }
 
         uploader.onFileQueued = function( file ) {
             fileCount++;
