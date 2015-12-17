@@ -14,6 +14,7 @@
     <link id="bootstrap-style" href="__CSS__/bootstrap.min.css" rel="stylesheet">
 
     <link href="__CSS__/bootstrap-responsive.min.css" rel="stylesheet">
+    
 
     <link id="base-style" href="__CSS__/style.css" rel="stylesheet">
 
@@ -25,6 +26,9 @@
     <js href="__ROOT__/lib/ueditor/ueditor.all.min.js" />
     <js href="__ROOT__/lib/ueditor/lang/zh-cn/zh-cn.js" />
 
+    <!--webuploader-->
+    <link href="__ROOT__/lib/webuploader/css/webuploader.css" rel="stylesheet" />
+    
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

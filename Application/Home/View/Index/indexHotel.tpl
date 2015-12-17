@@ -44,7 +44,7 @@
         </div>
         <div class="padding">
             <p>
-                <button class="button button-block button-outline button-positive">酒店电话：13665656666</button>
+                <a href="tel:18920909195" class="button button-block button-outline button-positive">酒店电话：13665656666</a>
             </p>
         </div>
         <div class="padding">

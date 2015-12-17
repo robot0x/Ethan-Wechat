@@ -7,7 +7,7 @@
 
   <div class="padding">
   <a href="#/tab/integral1"><button class="button button-positive button-block">我的积分</button></a>
-  <button class="button button-positive button-block">确定</button>
+  <a href="#/tab/evaluation"><button class="button button-positive button-block">确定</button></a>
   </div>
 </div>
 </ion-content>
