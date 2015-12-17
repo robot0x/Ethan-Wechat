@@ -18,7 +18,7 @@
 	{:$M->getMenu()['pid']}
 	</eq>
 	</br>
-	<label>标题：</label><input type ="text" name="title" value="{:$M->getMenu()['name']}" /></br>
+	<label>标题：</label><input type ="text" name="name" value="{:$M->getMenu()['name']}" /></br>
 	<label>排序：</label><input type ="text" name="sort" value="{:$M->getMenu()['sort']}" /></br>
 	<label>关键字：</label><input type = "text" name="keyword" value="{:$M->getMenu()['keyword']}"/></br>
 	<label>类型：</label>

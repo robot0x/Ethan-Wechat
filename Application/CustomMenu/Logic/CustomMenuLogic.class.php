@@ -35,7 +35,7 @@ class CustomMenuLogic extends CustomMenuModel
 		$name=trim((string)$name, " ");
 
 		
-		$map['title'] = $name;
+		$map['name'] = $name;
 		$data = $this->where($map)->find();
 		return $data;
 	}
