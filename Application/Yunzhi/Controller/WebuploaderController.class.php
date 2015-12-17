@@ -14,9 +14,7 @@ class WebuploaderController extends Controller
 		$userId 	= I('session.userId');
 		$configFile = APP_PATH . "Yunzhi/Conf/ueditor.json";
 		$data 		= new \Org\Util\Ueditor($userId, $configFile);
-		$return 	= $data->outputArray();
-		// dump($return);
-        // Return Success JSON-RPC response
-        die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
+		echo $data->output();
     }
+        
 }
