@@ -12,22 +12,24 @@ class Ueditor{
 	
 	private $output;//要输出的数据
 	
+	private $outputArray; //要输出的数组数据 
 	private $st;
 	
 	private $rootpath = '/Uploads';
         //private $confPath = ;
 	
-	public function __construct($uid = '', $CONFIG = array()){
+	public function __construct($uid = '', $configFile = ''){
 		//uid 为空则导入当前会话uid
 		//if(''===$uid) $this->uid = session('uid');
-		
+		    	/* 检查是否合法上传 */
+
 		//手动半闭trace防止json数据返回错误。
 		C('SHOW_PAGE_TRACE',false);
 		\Vin\FileStorage::connect(STORAGE_TYPE);
 		//导入设置
 		//由导入改为直接传值，解决了不同的URL的路径问题。
 		//$CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents(CONF_PATH."ueditor.json")), true);
-		$CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents(APP_PATH . "Yunzhi/Conf/ueditor.json")), true);
+		$CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents($configFile)), true);
 		$action = htmlspecialchars($_GET['action']);
 		
 		switch($action){
@@ -136,15 +138,30 @@ class Ueditor{
 	 * @return 组合后json格式的结果
 	 */
 	public function output(){
+		// Make sure file is not cached (as it happens for example on iOS devices)
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
 		return $this->output;
 	}
-	
+
+	public function outputArray(){
+		// Make sure file is not cached (as it happens for example on iOS devices)
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+		return $this->outputArray;
+	}
+
 	/**
 	 * 上传文件方法
 	 * 
 	 */
 	private function uploadFile($config,$fieldName){
-		
 		
 		$upload = new \Think\Upload();
 		$upload->maxSize   =     $config['maxSize'] ;// 设置附件上传大小
@@ -152,7 +169,7 @@ class Ueditor{
 		$upload->rootPath  =     '.'.$this->rootpath; // 设置附件上传根目录
 		$upload->autoSub   = false;
 		$upload->savePath  =     $this->getFullPath($config['pathFormat']); // 设置附件上传（子）目录
-		$info=$upload->uploadOne($_FILES[$fieldName]);
+		$info = $upload->uploadOne($_FILES[$fieldName]);
 		$rootpath = $this->rootpath;
 		
 		if(!$info){
@@ -169,6 +186,7 @@ class Ueditor{
 				'size'=>$info['size'],
 			);
 		}
+		$this->outputArray = $data;
 		return json_encode($data);
 	}
 	

@@ -60,6 +60,12 @@
         <script src="__JS__/retina.js"></script>
 
         <script src="__JS__/custom.js"></script>
+    
+        <!--webuploader-->
+        <js href="__ROOT__/lib/webuploader/webuploader.min.js" />
+
+        <js href="__ROOT__/yunzhi.php/Webuploader/config.html" />
+
     <!-- end: JavaScript-->
 </block>
 <div class="col-md-12"></div>
