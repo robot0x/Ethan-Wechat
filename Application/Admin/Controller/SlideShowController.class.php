@@ -1,8 +1,7 @@
 <?php
 namespace Admin\Controller;
 
-use SlideShow\Logic\SlideShowLogic;
-//use Think\Controller;
+use SlideShow\Logic\SlideShowLogic;//SlideShow
   
 class SlideShowController extends AdminController
 
