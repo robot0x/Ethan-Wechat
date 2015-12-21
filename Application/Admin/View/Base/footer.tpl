@@ -1,7 +1,31 @@
 <block name="footer">
+<div class="modal hide fade" id="myModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Settings</h3>
+        </div>
+        <div class="modal-body">
+            <p>Here settings can be configured...</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+            <a href="#" class="btn btn-primary">Save changes</a>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <footer>
+
+        <p>
+            <span style="text-align:left;float:left">&copy; 2013 <a href="http://www.mengyunzhi.com" alt="Bootstrap_Metro_Dashboard">梦云智</a></span>
+
+        </p>
+
+    </footer>
     <!-- start: JavaScript-->
 
-       
+
 
         <script src="__JS__/jquery-migrate-1.0.0.min.js"></script>
 
@@ -60,7 +84,7 @@
         <script src="__JS__/retina.js"></script>
 
         <script src="__JS__/custom.js"></script>
-    
+
         <!--webuploader-->
         <js href="__ROOT__/lib/webuploader/webuploader.min.js" />
 
@@ -68,10 +92,3 @@
 
     <!-- end: JavaScript-->
 </block>
-<div class="col-md-12"></div>
- <div class="col-md-12">
-    <p class="text-center">
-        Powered By
-        <a href="http://www.callme119.com">梦云智</a>
-    </p>
- </div>
