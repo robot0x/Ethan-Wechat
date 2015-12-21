@@ -1,7 +1,6 @@
 <script id="templates/indexEvaluationing.html" type="text/ng-template">
 	<ion-view view-title="评论">
-		
-	<ion-content>
+	<ion-content ng-controller='EvaluationingCtrl'>
 		<div class="item item-thumbnail-left">
 			<img src="__IMG__/rujia.jpg">
 			<h2><i class="icon ion-social-yen"></i>120</h2>
@@ -26,7 +25,7 @@
 				
 				<div class="row">
 					<div class="col col-33-center">
-						<button class="button button-small button-outline ">
+						<button ng-click='upload()' class="button button-small button-outline ">
 							<i class="icon ion-image"></i>
 							上传图片
 						</button>
@@ -53,3 +52,4 @@
 	</ion-content>
 	</ion-view>
 	</script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
