@@ -4,8 +4,10 @@
         <div class="list">
             <div class="item item-avatar">
               <img src="__IMG__/success.png">
-              <h2 class="success">恭喜您，支付成功！</h2>
-              <p>您可以参与评价赢积分活动哦</p>
+              <h2 class="success">支付成功！</h2>
+              <p>恭喜您！！获得5积分！！</p>
+              <a href="">查看积分>></a>
+              
             </div>
             <a class="item item-thumbnail-left" href="#">
                 <img src="__IMG__/big.jpg">
