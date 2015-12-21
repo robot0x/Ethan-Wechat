@@ -34,7 +34,7 @@ class ActivityLogic extends ActivityModel
 	public function saveList($list)
 	{
 		try{
-			if(this->create($list))
+			if($this->create($list))
 			{
 				$id=$this->save();
 				return $id;

@@ -9,6 +9,7 @@ class ActivityController extends AdminController
 	{
 		$ActivityL = new ActivityLogic();
 		$activities = $ActivityL->getLists();
+		
 
 		$this->assign('activities',$activities);
 		$this->display();
