@@ -9,8 +9,6 @@
         <html:webuploader name="hi" class="ourClass">
 
         </html:webuploader>
-
-
         <button type="submit">submit</button>
     </form>
 </block>
