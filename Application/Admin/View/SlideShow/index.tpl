@@ -1,3 +1,5 @@
+
+<block name="body">
 <div>
         <a class="button"  href="{:U('add')}" >添加</a>
     </div>
@@ -36,3 +38,4 @@
 		height: 50px;
 	}
 	</style>
+	</block>
