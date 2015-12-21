@@ -9,7 +9,7 @@ class YunzhiModel extends Model
     protected $pageSize     = 20;                   //每页多少条记录
     protected $totalCount   = 0;                    //总条数
     protected $errors       = array();              //错误信息
-    protected $orderBys     = array("id", "desc");      //排序字段方式
+    protected $orderBys     = array("id"=>"desc");      //排序字段方式
     protected $maps         = array();              //查询条件
     protected $keywords     = "";                   //查询关键字
     protected $field        = "title";              //查询字段
