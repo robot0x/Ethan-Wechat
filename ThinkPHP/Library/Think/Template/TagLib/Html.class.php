@@ -101,7 +101,7 @@ class Html extends TagLib{
      */
     public function _webuploader($tag, $content = "")
     {
-        $name       = !empty($tag['name']) ? $tag['name'] : 'yunzhifiles';
+        $name       = isset($tag['name']) ? $tag['name'] : 'yunzhifiles';
         $class      = $tag['class'];
 
         $content    = $content !=="" ? $content : "<p>或将照片拖到这里,单次最多可选5张,每张图片不超过2M</p>";
