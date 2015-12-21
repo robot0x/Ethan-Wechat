@@ -1,4 +1,4 @@
-
+<extend name="Base:index" />
 <block name="body">
 <div>
         <a class="button"  href="{:U('add')}" >添加</a>
