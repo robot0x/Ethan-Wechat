@@ -1,24 +1,16 @@
 <?php
 namespace Admin\Controller;
 
-use SlideShow\Logic\SlideShowLogic;
-use Think\Controller;
-use Yunzhi\Model\UserModel;
-use SlideShow\Model\SlideShowModel;  
+use SlideShow\Logic\SlideShowLogic;//SlideShow
+  
+class SlideShowController extends AdminController
 
-
-class SlideShowController extends Controller
 {
 	public function indexAction(){
 		 //获取列表
         $SlideShowL = new SlideShowLogic();
         $slideshows = $SlideShowL->getLists();
-        echo $SlideShowL->getLastSql();
-        
-        //dump($slideshows);
-        // $SlideShowM = new SlideShowModel();
-        // echo $SlideShowM->getLastSql();
-		//dump($slideshows);
+        //echo $SlideShowL->getLastSql();
 
 		$this->assign('slideshows',$slideshows);
         $this->display();
@@ -51,7 +43,7 @@ class SlideShowController extends Controller
     public function editAction(){
         //获取用户ID
         $slideshowId = I('get.id');
-        dump($slideshowId);
+        //dump($slideshowId);
         //取用户信息 getListById()
  
         $SlideShowL = new SlideShowLogic();
@@ -60,7 +52,7 @@ class SlideShowController extends Controller
         //传给前台
         $this->assign('slideshow',$slideshow);
         
-        $this->display(); 
+        $this->display('edit'); 
     }
     public function updateAction(){
         //取用户信息
