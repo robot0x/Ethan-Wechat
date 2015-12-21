@@ -18,14 +18,15 @@ class Html extends TagLib{
     // 标签定义
     protected $tags   =  array(
         // 标签定义： attr 属性列表 close 是否闭合（0 或者1 默认1） alias 标签别名 level 嵌套层次
-        'editor'    => array('attr'=>'id,name,style,class,width,height,type','close'=>1),
-        'select'    => array('attr'=>'name,options,values,output,multiple,id,size,first,change,selected,dblclick','close'=>0),
-        'grid'      => array('attr'=>'id,pk,style,action,actionlist,show,datasource','close'=>0),
-        'list'      => array('attr'=>'id,pk,style,action,actionlist,show,datasource,checkbox','close'=>0),
-        'imagebtn'  => array('attr'=>'id,name,value,type,style,click','close'=>0),
-        'checkbox'  => array('attr'=>'name,checkboxes,checked,separator','close'=>0),
-        'radio'     => array('attr'=>'name,radios,checked,separator','close'=>0),
-        'page'      => array('attr'=>'style, totalCount, class, id', 'close'=>0),
+        'editor'        => array('attr'=>'id,name,style,class,width,height,type','close'=>1),
+        'select'        => array('attr'=>'name,options,values,output,multiple,id,size,first,change,selected,dblclick','close'=>0),
+        'grid'          => array('attr'=>'id,pk,style,action,actionlist,show,datasource','close'=>0),
+        'list'          => array('attr'=>'id,pk,style,action,actionlist,show,datasource,checkbox','close'=>0),
+        'imagebtn'      => array('attr'=>'id,name,value,type,style,click','close'=>0),
+        'checkbox'      => array('attr'=>'name,checkboxes,checked,separator','close'=>0),
+        'radio'         => array('attr'=>'name,radios,checked,separator','close'=>0),
+        'page'          => array('attr'=>'style, totalCount, class, id', 'close'=>0),
+        'webuploader'   => array('attr'=>'name, class','close'=>1),
         );
 
     /**
@@ -90,6 +91,39 @@ class Html extends TagLib{
         $parseStr   .=  '$page = new Think\Page('. $totalCount .',' . $pageSize . ');';
         $parseStr   .=  'echo $page->show();';
         $parseStr   .=  " ?>";
+        return  $parseStr;
+    }
+
+    /**
+     * webuploader上传插件
+     * @param  [type] $tag [description]
+     * @return [type]      [description]
+     */
+    public function _webuploader($tag, $content = "")
+    {
+        $name       = !empty($tag['name']) ? $tag['name'] : 'yunzhifiles';
+        $class      = $tag['class'];
+
+        $content    = !empty(trim($content)) ? $content : "<p>或将照片拖到这里,单次最多可选5张,每张图片不超过2M</p>";
+
+        $parseStr = '<div id="uploader" class="' . $class . '">
+            <input type="hidden" id="yunzhifiles" name="' . $name . '" />
+            <div class="queueList">
+                <div id="dndArea" class="placeholder">
+                    <div id="filePicker"></div>
+                    ' . $content . '
+                </div>
+            </div>
+            <div class="statusBar" style="display:none;">
+                <div class="progress">
+                    <span class="text">0%</span>
+                    <span class="percentage"></span>
+                </div><div class="info"></div>
+                <div class="btns">
+                    <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+                </div>
+            </div>
+        </div>';
         return  $parseStr;
     }
 

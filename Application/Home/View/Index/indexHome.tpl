@@ -12,7 +12,7 @@
 <!-- 酒店介绍 -->
 <div class="list">
     <div class="item item-thumbnail row">
-        <div class="col">
+        <div class="col-33">
           <a href="#/tab/evaluation">
             <h1 class="energized">4.9分</h1>
             <h2 class="energized">棒极了</h2>
@@ -20,8 +20,8 @@
             <p>84条评论></p>
           </a>
         </div>
-        <div class="col">
-          <img src="__IMG__/home-ditu.jpg">
+        <div class="col-67">
+            <img class="full-image" src="__IMG__/ditu.jpg">
         </div>
     </div>
 
@@ -33,7 +33,7 @@
         <i class="ion-feng col"></i>
         <i class="ion-24xiaoshireshui col"></i>
         <i class="ion-feiji2 col"></i>
-        <i class="ion-jinzhixiyan col"></i>
+        <i class="ion-right col"></i>
       </a>
     <a class="item item-button-right" href="#/tab/date">
     <i class="ion-rili"></i>
@@ -42,7 +42,7 @@
       <h3 class="positive">共1晚><h3>
     </button>
   </a>
-  <a class="item" href="#/tab/confirmOrder">
+  <a class="item item-button-right" href="#/tab/confirmOrder">
     <h2>景观大床房</h2>
     <p>55平米大床1.8m有wifi</p>
     <span class="item-note energized">
@@ -85,7 +85,7 @@
   </div>
 </div>
 <div class="list">
-<a class="item" href="#/tab/confirmOrder">
+<a class="item" href="tel:13920156607">
     <i class="ion-zhongdianfangbeijing"></i>
     钟点房
     <span class="item-note energized">

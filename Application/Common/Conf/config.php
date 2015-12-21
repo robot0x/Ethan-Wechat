@@ -20,4 +20,9 @@ return array(
 
     'URL_MODEL'             =>  1, // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
 
+    'TOKEN'   => 'yunzhi', // TOKEN
+    'APPID'   => 'wxc92a0067c6338cbf', //应用ID
+    'APPSECRET'   => 'bb721eba1ceb506c78f46aa9451e2104', // APPSECRET
+
+
 );
