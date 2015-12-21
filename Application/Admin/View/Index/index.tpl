@@ -5,11 +5,11 @@
         <html:editor id="ueditor" type="Ueditor">
             <H1>HEELO</H1>
         </html:editor>
-    
+
         <html:webuploader name="hi" class="ourClass">
-            
+
         </html:webuploader>
-        
+
 
         <button type="submit">submit</button>
     </form>
