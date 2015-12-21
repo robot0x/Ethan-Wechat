@@ -7,7 +7,7 @@
 			<th>序号</th>
 			<th>ID</th>	
 			<th>title</th>
-			<th>URL</th>
+			<th>缩略图</th>
 			<?php $order = I('get.order') ?>
 			<th><a href="<eq name='order' value="desc"> {:U('index?by=weight&order=asc', I('get.'))}  
 			<else/> {:U('index?by=weight&order=desc', I('get.'))} </eq>">权重</a></th>	
@@ -19,7 +19,7 @@
 				<td>{$k+1}</td>
 				<td>{$slideshow[id]}</td>
 				<td>{$slideshow[title]}</td>
-				<td>{$slideshow[url]}</td>
+				<td><img class="suoluetu" src="{$slideshow[url]}" /></td>
 				<td>{$slideshow[weight]}</td>
 				<td>{$slideshow[status]?'正常':'冻结'}</td>
 				<td></td>
@@ -31,3 +31,8 @@
 	</table>
 	</form>
 	<Yunzhi:page />
+	<style type="text/css">
+	.suoluetu{
+		height: 50px;
+	}
+	</style>
