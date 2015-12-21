@@ -13,9 +13,11 @@ class SlideShowController extends Controller
 		 //获取列表
         $SlideShowL = new SlideShowLogic();
         $slideshows = $SlideShowL->getLists();
-
-        $SlideShowM = new SlideShowModel();
-        echo $SlideShowM->getLastSql();
+        echo $SlideShowL->getLastSql();
+        
+        //dump($slideshows);
+        // $SlideShowM = new SlideShowModel();
+        // echo $SlideShowM->getLastSql();
 		//dump($slideshows);
 
 		$this->assign('slideshows',$slideshows);
