@@ -20,9 +20,10 @@ class SlideShowController extends AdminController
         $this->display('edit');
     }
     public function saveAction(){
+
         //取用户信息
         $slideshow = I('post.');
-
+       
         //添加 add()
         $SlideShowL = new SlideShowLogic();
         $SlideShowL->addList($slideshow);
