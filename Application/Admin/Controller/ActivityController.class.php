@@ -51,6 +51,7 @@ class ActivityController extends AdminController
 	public function updateAction()
 	{
 		$activity = I('post.');
+		dump($activity);
 
 		$ActivityL = new ActivityLogic();
 		$ActivityL->saveList($activity);
@@ -67,7 +68,7 @@ class ActivityController extends AdminController
              return false;
             
         }
-            $this->success("操作成功" , U('Activity/Index/index?p='.I('get.p')));
+            $this->success("操作成功" , U('Activity/Index/index?p='.I('get.p')),20);
 	}
 	public function deleteAction()
 	{

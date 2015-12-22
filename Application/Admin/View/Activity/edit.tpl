@@ -7,7 +7,7 @@
 	<eq name="Think.ACTION_NAME" value="edit"><img class="thumbnail"   src="{$activity[thumbnails_url]}"  /></br>
 	<label>上传新图片：</label></eq>
 	
-	<html:webuploader name="hi" class="ourClass">    
+	<html:webuploader name="thumbnails_url" class="ourClass">    
     </html:webuploader>
 
 	<label>活动详情：</label><textarea type="text" placeholder="请输入本活动的详情"></textarea>
@@ -16,7 +16,7 @@
 	<button type="submit">保存</button>
 	</form>
 	<style type="text/css">
-	.thumbnails{
+	.thumbnail{
 		height: 50px;
 	}
 	</style>
