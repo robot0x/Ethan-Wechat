@@ -15,10 +15,12 @@ class SlideShowController extends AdminController
 		$this->assign('slideshows',$slideshows);
         $this->display();
     }
+
     public function addAction(){
         //显示 display
         $this->display('edit');
     }
+
     public function saveAction(){
 
         //取用户信息
@@ -33,29 +35,30 @@ class SlideShowController extends AdminController
         {
             //数组变字符串
             $error =implode('<br/>', $errors);
-            
-            
             //显示错误
-             $this->error("添加失败，原因：".$error,U('SlideShow/Index/index?p='.I('get.p')));
+            $this->error("添加失败，原因：".$error,U('SlideShow/Index/index?id='.I('get.'),I('get.p')));
             
         }
-        $this->success("操作成功" , U('SlideShow/Index/index?p='.I('get.p')));    
+        $this->success("操作成功" , U('SlideShow/Index/index?id='.I('get.'),I('get.p')));    
     }
+
     public function editAction(){
         //获取用户ID
         $slideshowId = I('get.id');
-        //dump($slideshowId);
+
         //取用户信息 getListById()
- 
         $SlideShowL = new SlideShowLogic();
         $slideshow = $SlideShowL->getListbyId($slideshowId);
-        //dump($slideshow);
+
         //传给前台
         $this->assign('slideshow',$slideshow);
         
         $this->display('edit'); 
     }
+
     public function updateAction(){
+        dump(I('get.p'));
+        exit();
         //取用户信息
         $data = I('post.');
 
@@ -68,16 +71,15 @@ class SlideShowController extends AdminController
         {
             //数组变字符串
             $error =implode('<br/>', $errors);
-            
-            
             //显示错误
-             $this->error("添加失败，原因：".$error,U('SlideShow/Index/index?p='.I('get.p')));
+            $this->error("添加失败，原因：".$error,U('SlideShow/Index/index?id='.I('get.'),'&p='.I('get.p')));
 
              return false;
             
         }
-            $this->success("操作成功" , U('SlideShow/Index/index?p='.I('get.p')));
+            $this->success("操作成功" , U('SlideShow/Index/index?id='.I('get.'),'&p='.I('get.p')));
     }
+
     public function deleteAction(){
 
         $userId = I('get.id');
@@ -86,12 +88,13 @@ class SlideShowController extends AdminController
         $status = $SlideShowL->deleteInfo($userId);
 
         if($status！==false){
-           $this->success("删除成功", U('SlideShow/Index/index?p='.I('get.p'))); 
+           $this->success("删除成功", U('SlideShow/Index/index?id='.I('get.'))); 
         }
         else{
-            $this->error("删除失败" , U('SlideShow/Index/index?p='.I('get.p')));
+            $this->error("删除失败" , U('SlideShow/Index/index?id='.I('get.')));
         }
     }
+
     public function detailAction(){
     	//取用户ID
     	$slideshowId = I('get.id');
