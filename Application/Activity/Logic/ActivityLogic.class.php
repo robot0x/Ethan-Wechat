@@ -11,13 +11,13 @@ class ActivityLogic extends ActivityModel
 	{
 		return $this->errors;
 	}
-	public function addList($activity)
+	public function addList($activity)			//添加活动
 	{
 		try{
-			if($this->creat($activity))
+			if($this->create($activity))
 			{
 				$id=$this->add();
-				return $id;
+				return $id; 
 			}
 			else
 			{
@@ -31,10 +31,10 @@ class ActivityLogic extends ActivityModel
 			return false;
 		}
 	}
-	public function saveList($list)
+	public function saveList($activity)          //编辑后的保存活动
 	{
 		try{
-			if($this->create($list))
+			if($this->create($activity))
 			{
 				$id=$this->save();
 				return $id;
@@ -51,10 +51,11 @@ class ActivityLogic extends ActivityModel
 			return false;
 		}
 	}
-	public function deleteInfo($id)
+	public function deleteInfo($id)       //删除活动
 	{
 		$map['id']=$id;
 		$datas=$this->where($map)->delete();
+		dump($datas);
 		return $datas;
 	}
 

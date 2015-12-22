@@ -11,7 +11,7 @@
     </html:webuploader>
 
 	<label>活动详情：</label><textarea type="text" placeholder="请输入本活动的详情"></textarea>
-	<label>截止時間：</label><input type = "text" name="end_time" value="{$activity.end_time}"/></br>
+	<label>截止时间：</label><input type = "text" name="end_time" value="{$activity.end_time}"/></br>
 	<label>状态：</label><input type ="text" name="status" value="{$activity.status}" /></br>
 	<button type="submit">保存</button>
 	</form>
