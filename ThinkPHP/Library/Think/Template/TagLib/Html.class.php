@@ -99,12 +99,12 @@ class Html extends TagLib{
      * @param  [type] $tag [description]
      * @return [type]      [description]
      */
-    public function _webuploader($tag, $content = "")
+    public function _webuploader($tag, $content = null)
     {
         $name       = isset($tag['name']) ? $tag['name'] : 'yunzhifiles';
         $class      = $tag['class'];
 
-        $content    = $content !=="" ? $content : "<p>或将照片拖到这里,单次最多可选5张,每张图片不超过2M</p>";
+        $content    = isset($content) ? $content : "<p>或将照片拖到这里,单次最多可选5张,每张图片不超过2M</p>";
 
         $parseStr = '<div id="uploader" class="' . $class . '">
             <input type="hidden" id="yunzhifiles" name="' . $name . '" />
