@@ -1,18 +1,19 @@
 <extend name="Base:index" />
     <block name="body">
         <div class="row-fluid">
-            <div class="box span12">
-                <div class="box-header">
-                    <h2><i class="halflings-icon picture"></i><span class="break"></span>Glyphicons PRO - Halflings (SVG, PNG, Font)</h2>
-                    <div class="box-icon">
-                        <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-                        <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                        <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                <div class="box span12">
+                    <div class="box-header">
+                        <h2><i class="halflings-icon picture"></i><span class="break"></span>Glyphicons PRO - Halflings (SVG, PNG, Font)</h2>
+                        <div class="box-icon">
+                            <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                            <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                            <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                        </div>
                     </div>
-                </div>
-                <div class="box-content">
-                    <section id="icons1">
-                        <div class="row-fluid bs-icons">
+                    <div class="box-content">
+                        <section id="icons1">
+
+                          <div class="row-fluid bs-icons">
                             <div class="span3">
                               <ul class="the-icons">
                                 <li><i class="halflings-icon glass"></i> halflings-icon glass</li>
@@ -947,6 +948,5 @@
     </div><!--/.fluid-container-->
 
             <!-- end: Content -->
-            </div><!--/#content.span10-->
 </block>
 </extend>
