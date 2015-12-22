@@ -1,3 +1,4 @@
+
 <extend name="Base:index" />
 <block name="body">
 <label>标题</label>:{$SlideShow[title]}</br>
