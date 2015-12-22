@@ -24,8 +24,6 @@
             <img class="full-image" src="__IMG__/ditu.jpg">
         </div>
     </div>
-
-    <div class="list">
       <a class="item row" href="#/tab/hotel">
         <i class="ion-shineiwifi col"></i>
         <i class="ion-wifi col"></i>
@@ -39,23 +37,23 @@
     <i class="ion-rili"></i>
       12月01日-12月02日
     <button class="button button-clear">
-      <h3 class="positive">共1晚><h3>
+      <h3 class="positive">共1晚></h3>
     </button>
-  </a>
+    </a>
   <a class="item item-button-right" href="#/tab/confirmOrder">
     <h2>景观大床房</h2>
     <p>55平米大床1.8m有wifi</p>
-    <span class="item-note energized">
+    <span ng-click='toggleDetail()' class="item-note energized">
       ￥212起<i class="ion-down"></i>
     </span>
   </a>
-  <div class="item">
+  <div ng-show='detail' class="item">
       面积-55㎡<br>
       位于6-24层<br>
       大床<br>
       独立卫浴<br>
       有窗
-  </div>
+      </div>
 
   <a class="item" href="#/tab/confirmOrder">
     <h2>豪华家庭套房</h2>
@@ -83,8 +81,6 @@
       独立卫浴<br>
       有窗
   </div>
-</div>
-<div class="list">
 <a class="item" href="tel:13920156607">
     <i class="ion-zhongdianfangbeijing"></i>
     钟点房
@@ -93,7 +89,7 @@
     </span>
   </a>
 </div>
-
-</ion-view>
 </ion-content>
+</ion-view>
+
 </script>

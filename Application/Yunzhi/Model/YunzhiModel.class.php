@@ -9,8 +9,7 @@ class YunzhiModel extends Model
     protected $pageSize     = 20;                   //每页多少条记录
     protected $totalCount   = 0;                    //总条数
     protected $errors       = array();              //错误信息
-    protected $orders       = array("desc");        //排序方式
-    protected $bys          = array("id");          //排序字段
+    protected $orderBys     = array("id"=>"desc");      //排序字段方式
     protected $maps         = array();              //查询条件
     protected $keywords     = "";                   //查询关键字
     protected $field        = "title";              //查询字段
@@ -28,12 +27,23 @@ class YunzhiModel extends Model
         {
             $filed = trim(I('get.field'));
         }
-        $this->maps[$this->field] = array("like", "%" . $this->keywords . "%");
 
+        if($this->keywords !== "")
+        {
+            $this->maps[$this->field] = array("like", "%" . $this->keywords . "%");
+        }
+        
         if (I("get.by") !== "")
         {
-            $this->setBy(I("get.by"));
-            $this->setOrder(I("get.order"));
+            $by = I("get.by");
+            $order = I("get.order");
+            $this->setOrderBys(array($by=>$order));
+        }
+        else if(I("get.order") !== "")
+        {
+            $by = "id";
+            $order = I("get.order");
+            $this->setOrderBys(array("$by"=>$order));
         }
         
         parent::__construct();
@@ -72,29 +82,27 @@ class YunzhiModel extends Model
         return $this->totalCount;
     }
 
-    public function setOrder($order)
+    public function addOrderBy($by, $order)
     {
         $order = ($order == "desc") ? "desc" : "asc";
-        $this->orders[] = $order;
+        $this->orderBys["$by"] = $order;
         return $this;
     }
 
-    public function setBy($by)
+    public function subOrderBy($by)
     {
-        $this->bys[] = $by;
+        unset($this->orderBys["$by"]);
         return $this;
     }
 
-    public function subBy($by)
+    public function setOrderBys($orderBys)
     {
-        foreach($this->bys as $key => $value)
+        if(!is_array($orderBys))
         {
-            if ($value = $by)
-            {
-                unset($this->bys[$key]);
-                unset($this->orders[$key]);
-            }
+            $this->setError("yunzhimodel->setorderbys errors: orderbys must be array");
+            return false;
         }
+        $this->orderBys = $orderBys;
         return $this;
     }
 
@@ -212,19 +220,19 @@ class YunzhiModel extends Model
             $maps = $this->maps;
         }
 
-        $orderBys = array();
-        foreach ($this->bys as $k => $by)
-        {
-            $order = ($this->orders[$k] == "asc") ? "asc" : "desc";
-            $orderBys[$by] = $order;
-        }
+        // $orderBys = array();
+        // foreach ($this->bys as $k => $by)
+        // {
+        //     $order = ($this->orders[$k] == "asc") ? "asc" : "desc";
+        //     $orderBys[$by] = $order;
+        // }
 
         $this->_getCounts($maps);
         
         return  $this->
                 field($fields)->
                 where($maps)->
-                order($orderBys);
+                order($this->orderBys);
     }
 
 
