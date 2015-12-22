@@ -85,12 +85,12 @@ class ActivityController extends AdminController
 	}
 	public function detailAction()
 	{
-		$activityId = I('get,id');
+		$activityId = I('get.id');
 
 		$ActivityL = new ActivityLogic();
-		$ActivityL->getListById($activityId);
+		$activity=$ActivityL->getListById($activityId);
 
-		$this->assign('activity',$Activity);
+		$this->assign('activity',$activity);
 
 		$this->display();
 	}
