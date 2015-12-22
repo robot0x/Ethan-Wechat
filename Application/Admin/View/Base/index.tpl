@@ -4,13 +4,13 @@
 <include file="Base/head"/>
 </head>
 <body>
-        <include file="Base/header"/>
-            <div class="container-fluid-full">
-                <div class="row-fluid">
-                    {$YZ_TEMPLATE_LEFT}
-                    <include file="Base/body" />
-                </div><!--/#content.span10-->
-        </div><!--/fluid-row-->
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <include file="Base/header"/>
+            {$YZ_TEMPLATE_LEFT}
+        </nav>
+        <include file="Base/body" />
         <include file="Base/footer"/>
+    </div>
 </body>
 </html>
