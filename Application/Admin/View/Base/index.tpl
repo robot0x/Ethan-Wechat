@@ -6,20 +6,20 @@
 </head>
 
 <body>
-	<block name="wrapper">
-	    <div id="wrapper">
-
-	    	{$YZ_TEMPLATE_NAV}
-	    	<include file="Base/body" />
-		<div style="clear:both;display:block">footer</div>
-	    </div>
-	    <!--/#wrapper-->
-	    <block name="footer">
-			<p>
-	            <span style="text-align:left;float:left">&copy; 2014 <a href="http://www.mengyunzhi.com" alt="Bootstrap_Metro_Dashboard">梦云智</a></span>
-	        </p>
-        </block>
-		<include file="Base/footer" />
+    <block name="wrapper">
+        <div id="wrapper">
+            {$YZ_TEMPLATE_NAV}
+            <include file="Base/body" />
+            <div id="footer" style="clear:both;display:block">
+                <block name="footer">
+                    <p>
+                        <span style="text-align:left;float:left">&copy;<?php echo date("Y"); ?> <a href="http://www.mengyunzhi.com" alt="www.mengyunzhi.club">梦云智</a></span>
+                    </p>
+                </block>
+            </div>
+        </div>
+        <!--/#wrapper-->
+        <include file="Base/footer" />
 </body>
 
 </html>

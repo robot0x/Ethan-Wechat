@@ -1,7 +1,6 @@
 <block name="footer">
     <!-- start: JavaScript-->
-    <!-- jQuery -->
-    <script src="__BOW__/jquery/dist/jquery.min.js"></script>
+
 
     <!-- Bootstrap Core JavaScript -->
     <script src="__BOW__/bootstrap/dist/js/bootstrap.min.js"></script>

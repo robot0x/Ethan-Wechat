@@ -22,5 +22,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<!-- jQuery -->
+<script src="__BOW__/jquery/dist/jquery.min.js"></script>
+<!--ueditor-->
+<js href="__ROOT__/lib/ueditor/ueditor.config.js" />
+<js href="__ROOT__/lib/ueditor/ueditor.all.min.js" />
+<js href="__ROOT__/lib/ueditor/lang/zh-cn/zh-cn.js" />
+<!--webuploader-->
+<link href="__ROOT__/lib/webuploader/css/webuploader.css" rel="stylesheet" />
 <block name="headCssJs">
 </block>
