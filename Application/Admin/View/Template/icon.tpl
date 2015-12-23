@@ -1,5 +1,5 @@
 <extend name="Base:index" />
-    <block name="body">
+<block name="body">
         <div class="row-fluid">
                 <div class="box span12">
                     <div class="box-header">

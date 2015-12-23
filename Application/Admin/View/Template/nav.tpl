@@ -41,16 +41,16 @@
                                     <a href="panels-wells.html">Panels and Wells</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Buttons</a>
+                                    <a href="{:U('Template/forms')}">Buttons</a>
                                 </li>
                                 <li>
                                     <a href="notifications.html">Notifications</a>
                                 </li>
                                 <li>
-                                    <a href="typography.html">Typography</a>
+                                    <a href="{:U('Template/typography')}">Typography</a>
                                 </li>
                                 <li>
-                                    <a href="icons.html"> Icons</a>
+                                    <a href="{:U('Template/icon')}"> Icons</a>
                                 </li>
                                 <li>
                                     <a href="grid.html">Grid</a>
