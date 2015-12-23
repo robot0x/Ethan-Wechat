@@ -7,6 +7,7 @@
         </div>
         <block name="body">
         </block>
+        <div style="clear:both;display:block;width:100%;height:0px"></div>
     </div>
     <!--/#page-wrapper-->
 </block>

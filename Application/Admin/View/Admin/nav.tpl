@@ -233,9 +233,11 @@
                     </div>
                     <!-- /input-group -->
                 </li>
-                <li>
-                    <a href="{:U('template/index')}"><i class="fa fa-dashboard fa-fw"></i> 项目模板</a>
-                </li>
+                <foreach name="M:getMenuLists()" item="list">
+                    <li>
+                        <a href="{:U($list['module'] . '/' . $list['controller'] . '/' . $list['action'])}"><i class="{$list['icon']}"></i> {$list['title']}</a>
+                    </li>
+                </foreach>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
