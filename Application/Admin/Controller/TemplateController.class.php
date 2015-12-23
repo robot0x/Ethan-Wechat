@@ -12,7 +12,7 @@ class TemplateController extends Controller{
 		parent::__construct();
 
 		//取左侧菜单
-		$tpl = T("Admin@Admin/nav");
+		$tpl = T("Admin@Template/nav");
 		$YZ_TEMPLATE_NAV = $this->fetch($tpl);
 		$this->assign("YZ_TEMPLATE_NAV", $YZ_TEMPLATE_NAV);
 	}
