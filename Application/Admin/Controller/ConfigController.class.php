@@ -13,5 +13,11 @@ class ConfigController extends Controller
     public function indexAction()
     {
         //获取列表
+        $ConfigL = new ConfigLogic;
+        $config = $ConfigL->getLists();
+        //sq语句
+        // echo $SlideShowL->getLastSql();
+        $this->assign('config',$config);
+        $this->display();
     }
 }
