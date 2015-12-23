@@ -1,5 +1,4 @@
 <?php
-
 /*
  * 菜单的Model类
  *
@@ -106,7 +105,7 @@ class MenuModel extends YunzhiModel{
      * @return [type] 带有数据信息的数组
      */
     private function _getMenuList($where,$layer){
-        $menuList = $this->where($where)->order(array('order'=>'desc'))->select();
+        $menuList = $this->where($where)->order(array('order'=>'desc','id'=>"desc"))->select();
         //如果结果为空,则返回false
         if( $menuList == null)
             return false;

@@ -53,8 +53,7 @@
                         </table>
                     </div>
                     <nav>
-                        <Yunzhi:page totalCount="totalCount">
-                        </Yunzhi:page>
+                        <Yunzhi:page totalcount="totalCount" />
                     </nav>
                 </div>
             </div>

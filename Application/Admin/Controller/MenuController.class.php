@@ -62,8 +62,8 @@ class MenuController extends AdminController
         $this->assign('menuList',$this->_fetchMenuList());
         $this->assign('data',$data);
         $this->assign('title',$title);
-        $this->assign('YZBODY',$this->fetch('add'));
-        $this->display(YZTemplate);
+        $this->display('add');
+
     }
     /**
      * 编辑菜单，调用的是添加根菜单的界面
@@ -77,8 +77,7 @@ class MenuController extends AdminController
         $this->assign('menuList',$this->_fetchMenuList());        
         $this->assign('data',$data);
         $this->assign('title',$title);
-        $this->assign('YZBODY',$this->fetch('add'));
-        $this->display(YZTemplate);
+        $this->display('add');
     }
     /***
      * 保存，添加或修改之后，提交到该方法
@@ -98,7 +97,7 @@ class MenuController extends AdminController
         $menuModel = new MenuModel();
         $state = $menuModel->deleteMenu($id);
         if($state){
-           $this->success('删除成功', U("Menu/Index/index",I('get.'))); 
+           $this->success('删除成功', U("index",I('get.'))); 
         }
     }
     /**
