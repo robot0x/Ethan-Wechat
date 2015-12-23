@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<include file="Base/head"/>
+    <include file="Base/head" />
 </head>
+
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <include file="Base/header"/>
-            {$YZ_TEMPLATE_LEFT}
-        </nav>
-        <include file="Base/body" />
-        <include file="Base/footer"/>
-    </div>
+	<block name="wrapper">
+	    <div id="wrapper">
+
+	    	{$YZ_TEMPLATE_NAV}
+	    	<include file="Base/body" />
+		<div style="clear:both;display:block">footer</div>
+	    </div>
+	    <!--/#wrapper-->
+	    <block name="footer">
+			<p>
+	            <span style="text-align:left;float:left">&copy; 2014 <a href="http://www.mengyunzhi.com" alt="Bootstrap_Metro_Dashboard">梦云智</a></span>
+	        </p>
+        </block>
+		<include file="Base/footer" />
 </body>
+
 </html>
