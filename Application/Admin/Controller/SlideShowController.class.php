@@ -1,4 +1,8 @@
 <?php
+/**
+ *幻灯片后台管理模块
+ * 完成人：魏静云
+ */
 namespace Admin\Controller;
 
 use SlideShow\Logic\SlideShowLogic;//SlideShow
@@ -25,7 +29,7 @@ class SlideShowController extends AdminController
 
         //取用户信息
         $slideshow = I('post.');
-       
+       //dump(I('get.'));
         //添加 add()
         $SlideShowL = new SlideShowLogic();
         $SlideShowL->addList($slideshow);
@@ -36,16 +40,16 @@ class SlideShowController extends AdminController
             //数组变字符串
             $error =implode('<br/>', $errors);
             //显示错误
-            $this->error("添加失败，原因：".$error,U('SlideShow/Index/index?id='.I('get.'),I('get.p')));
+            $this->error("添加失败，原因：".$error,U('SlideShow/Index/index?id=',I('get.p')));
             
         }
-        $this->success("操作成功" , U('SlideShow/Index/index?id='.I('get.'),I('get.p')));    
+        $this->success("操作成功" , U('SlideShow/Index/index?id=',I('get.p')));    
     }
 
     public function editAction(){
         //获取用户ID
         $slideshowId = I('get.id');
-
+        // dump(I('get.'));
         //取用户信息 getListById()
         $SlideShowL = new SlideShowLogic();
         $slideshow = $SlideShowL->getListbyId($slideshowId);
@@ -57,11 +61,10 @@ class SlideShowController extends AdminController
     }
 
     public function updateAction(){
-        dump(I('get.p'));
-        exit();
         //取用户信息
         $data = I('post.');
-
+        dump(I('get.'));
+        //exit();
         //传给M层
         $SlideShowL = new SlideShowLogic();
         $SlideShowL->saveList($data);
@@ -72,12 +75,12 @@ class SlideShowController extends AdminController
             //数组变字符串
             $error =implode('<br/>', $errors);
             //显示错误
-            $this->error("添加失败，原因：".$error,U('SlideShow/Index/index?id='.I('get.'),'&p='.I('get.p')));
+            $this->error("添加失败，原因：".$error,U('SlideShow/Index/index',I('get.')));
 
              return false;
             
         }
-            $this->success("操作成功" , U('SlideShow/Index/index?id='.I('get.'),'&p='.I('get.p')));
+            $this->success("操作成功" , U('SlideShow/Index/index',I('get.')));
     }
 
     public function deleteAction(){
@@ -88,7 +91,7 @@ class SlideShowController extends AdminController
         $status = $SlideShowL->deleteInfo($userId);
 
         if($status！==false){
-           $this->success("删除成功", U('SlideShow/Index/index?id='.I('get.'))); 
+           $this->success("删除成功", U('SlideShow/Index/index'.I('get.'))); 
         }
         else{
             $this->error("删除失败" , U('SlideShow/Index/index?id='.I('get.')));

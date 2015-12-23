@@ -1,6 +1,6 @@
 <extend name="Base:index" />
 <block name="body">
-	<form <eq name="Think.ACTION_NAME" value="add"> action="{:U('save')}"<else />action="{:U('update')}"</eq> method="post">
+	<form <eq name="Think.ACTION_NAME" value="add"> action="{:U('save',I('get.'))}"<else />action="{:U('update',I('get.'))}"</eq> method="post">
 		<input type="hidden" name="id" value="{$slideshow.id}">
 		</input>
 		<label>
