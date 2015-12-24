@@ -115,18 +115,22 @@ class Page{
 
         //上一页
         $up_row  = $this->nowPage - 1;
-        $up_page = '<li class="paginate_button previous';
-        $up_page .= $up_row > 0 ? '"' : ' disabled"'; 
-        $up_page .= ' aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous"><a href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a></li>';
-        // $up_page = $up_row > 0 ? '<a class="prev" href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a>' : '';
+        if($this->totalPage >= 1)
+        {
+            $up_page = '<li class="paginate_button previous';
+            $up_page .= $up_row > 0 ? '"' : ' disabled"'; 
+            $up_page .= ' aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous"><a href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a></li>';
+            // $up_page = $up_row > 0 ? '<a class="prev" href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a>' : '';
+                 //下一页
+            $down_row  = $this->nowPage + 1;
+            $down_page = '<li class="paginate_button next';
+            $down_page .= ($down_row <= $this->totalPages) ? '"' : ' disabled"';
+            $down_page .= ' aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a></li>';
+            //$down_page = ($down_row <= $this->totalPages) ? '<a class="next" href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a>' : '';
 
-        //下一页
-        $down_row  = $this->nowPage + 1;
-        $down_page = '<li class="paginate_button next';
-        $down_page .= ($down_row <= $this->totalPages) ? '"' : ' disabled"';
-        $down_page .= ' aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a></li>';
-        //$down_page = ($down_row <= $this->totalPages) ? '<a class="next" href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a>' : '';
-
+        }
+       
+       
         //第一页
         $the_first = '';
         if($this->totalPages > $this->rollPage && ($this->nowPage - $now_cool_page) >= 1){

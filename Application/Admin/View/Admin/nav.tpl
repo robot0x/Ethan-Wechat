@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+        <a class="navbar-brand" href="http://www.yunzhiclub.com">洛克酒店后台管理系统</a>
     </div>
     <!-- /.navbar-header -->
     <ul class="nav navbar-top-links navbar-right">
@@ -222,20 +222,9 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                    </div>
-                    <!-- /input-group -->
-                </li>
                 <foreach name="M:getMenuLists()" item="list">
                     <li>
-                        <a href="{:U($list['module'] . '/' . $list['controller'] . '/' . $list['action'])}"><i class="{$list['icon']}"></i> {$list['title']}</a>
+                        <a href="{:U($list['module'] . '/' . $list['controller'] . '/' . $list['action'] . '?id=' . $list['id'])}"><i class="{$list['icon']}"></i> {$list['title']}</a>
                     </li>
                 </foreach>
             </ul>
