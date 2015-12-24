@@ -30,8 +30,8 @@
                 <td>{$conf[status]}</td>
                 <td>{$conf[value]}</td>
                 <td>
-                <a class="button" href="{:U('edit?id='.$config['id'],I('get.'))}">编辑</a>
-                <a class="button" href="{:U('delete?id='.$config['id'],I('get.'))}">删除</a>
+                <a class="button" href="{:U('edit?id='.$conf['id'],I('get.'))}">编辑</a>
+                <a class="button" href="{:U('delete?id='.$conf['id'],I('get.'))}">删除</a>
                 </td>
             </tr>
             </foreach>

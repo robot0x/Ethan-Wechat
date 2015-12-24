@@ -15,6 +15,7 @@ class ConfigController extends Controller
         //获取列表
         $ConfigL = new ConfigLogic;
         $config = $ConfigL->getLists();
+        dump($config);
         //sq语句
         // echo $SlideShowL->getLastSql();
         $this->assign('config',$config);
