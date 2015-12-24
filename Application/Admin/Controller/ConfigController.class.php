@@ -15,7 +15,7 @@ class ConfigController extends Controller
         //获取列表
         $ConfigL = new ConfigLogic;
         $config = $ConfigL->getLists();
-        dump($config);
+        // dump($config);
         //sq语句
         // echo $SlideShowL->getLastSql();
         $this->assign('config',$config);
@@ -29,11 +29,11 @@ class ConfigController extends Controller
     {
         //取用户ID
         $configId=I('get.id');
-        dump($configId);
+        // dump($configId);
         //取用户信息
         $ConfigL = new ConfigLogic();
         $config = $ConfigL->getListById($configId);
-        dump($config);
+        // dump($config);
         //传值
         $this->assign('config',$config);
 
