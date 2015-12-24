@@ -14,16 +14,16 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="{:U('Template/index')}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="{:U('Template/index')}"><i class="fa fa-dashboard fa-fw"></i> 首页</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="{:U('Template/flot')}">Flot Charts</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="{:U('Template/morris')}">Morris.js Charts</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -38,22 +38,22 @@
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
+                                    <a href="{:U('Template/panels')}">Panels and Wells</a>
                                 </li>
                                 <li>
-                                    <a href="{:U('Template/forms')}">Buttons</a>
+                                    <a href="{:U('Template/buttons')}">Buttons</a>
                                 </li>
                                 <li>
-                                    <a href="notifications.html">Notifications</a>
+                                    <a href="{:U('Template/notifications')}">Notifications</a>
                                 </li>
                                 <li>
                                     <a href="{:U('Template/typography')}">Typography</a>
                                 </li>
                                 <li>
-                                    <a href="{:U('Template/icon')}"> Icons</a>
+                                    <a href="{:U('Template/icons')}"> Icons</a>
                                 </li>
                                 <li>
-                                    <a href="grid.html">Grid</a>
+                                    <a href="{:U('Template/grid')}">Grid</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
