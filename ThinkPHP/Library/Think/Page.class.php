@@ -179,7 +179,7 @@ class Page{
             array('%HEADER%', '%NOW_PAGE%', '%UP_PAGE%', '%DOWN_PAGE%', '%FIRST%', '%LINK_PAGE%', '%END%', '%TOTAL_ROW%', '%TOTAL_PAGE%'),
             array($this->config['header'], $this->nowPage, $up_page, $down_page, $the_first, $link_page, $the_end, $this->totalRows, $this->totalPages),
             $this->config['theme']);
-        $page_str = '<div class="row"><div class="col-sm-3"><div class="dataTables_info pagination" id="dataTables-example_info" role="status" aria-live="polite">第'. $this->nowPage . '页/共' . $this->totalPages . '页</div></div><div class="col-sm-6"><div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate"><ul class="pagination">'.$page_str.'</ul></div></div></div>';
+        $page_str = '<div class="row"><div class="col-sm-2"><div class="dataTables_info pagination" id="dataTables-example_info" role="status" aria-live="polite">第'. $this->nowPage . '页/共' . $this->totalPages . '页</div></div><div class="col-sm-10"><div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate"><ul class="pagination">'.$page_str.'</ul></div></div></div>';
         return "<div class='row'>{$page_str}</div>";
     }
 
