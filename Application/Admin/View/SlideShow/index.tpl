@@ -7,6 +7,11 @@
                         <div class="panel-body">
                         	<a class="button btn btn-info"  href="{:U('add')}" >添加</a>
                         </div>
+                        <div class="panel-body">
+				    	   <input type="text" placeholder="search" name="keywords" value ="{:I('get.keywords')}">
+				    	   </input>
+				    	   <button id="search" type="submit">搜索</button>
+    					</div>
                         <!-- Table -->
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
