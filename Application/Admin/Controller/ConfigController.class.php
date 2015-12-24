@@ -80,4 +80,18 @@ class ConfigController extends Controller
         }
             $this->success("操作成功" , U('Config/Index/index',I('get.')));
     }
+    public function deleteAction(){
+
+        $configId = I('get.id');
+
+        $ConfigL = new ConfigLogic();
+        $status = $ConfigL->deleteInfo($configId);
+
+        if($status！==false){
+           $this->success("删除成功", U('Config/Index/index'.I('get.')));
+        }
+        else{
+            $this->error("删除失败" , U('Config/Index/index?id='.I('get.')));
+        }
+    }
 }
