@@ -24,7 +24,7 @@ class ConfigLogic extends ConfigModel
                 }
                 else
                 {
-                    $this->errors[]=$this->getError();
+                    $this->errors[]=$this->getErrors();
                     return false;
                 }
             }

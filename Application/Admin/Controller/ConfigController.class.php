@@ -40,4 +40,44 @@ class ConfigController extends Controller
         //显示页面
         $this->display('add');
     }
+    public function saveAction()
+    {
+        //取用户信息
+        $config = I('post.');
+       //dump(I('get.'));
+        //添加 add()
+        $ConfigL = new ConfigLogic();
+        $ConfigL->addList($config);
+
+        //判断异常
+        if(count($errors=$ConfigL->getErrors())!==0)
+        {
+            //数组变字符串
+            $error =implode('<br/>', $errors);
+            //显示错误
+            $this->error("添加失败，原因：".$error,U('Config/Index/index?id=',I('get.p')));
+
+        }
+        $this->success("操作成功" , U('Config/Index/index?id=',I('get.p')));
+    }
+    public function updateAction(){
+        //取用户信息
+        $data = I('post.');
+        // dump(I('get.'));
+        $ConfigL = new ConfigLogic();
+        $ConfigL->saveList($data);
+
+        //判断异常
+        if(count($errors=$ConfigL->getErrors())!==0)
+        {
+            //数组变字符串
+            $error =implode('<br/>', $errors);
+            //显示错误
+            $this->error("添加失败，原因：".$error,U('Config/Index/index',I('get.')));
+
+             return false;
+
+        }
+            $this->success("操作成功" , U('Config/Index/index',I('get.')));
+    }
 }
