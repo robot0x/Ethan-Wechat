@@ -8,7 +8,7 @@ use Config\Logic\ConfigLogic;
 *模块：系统配置
 * @author litian
 */
-class ConfigController extends Controller
+class ConfigController extends AdminController
 {
 
     public function indexAction()
