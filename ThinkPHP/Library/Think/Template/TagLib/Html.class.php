@@ -141,7 +141,7 @@ class Html extends TagLib{
         $parseStr = '<input type="hidden" id="' . $name . '" name="' . $name . '" value="<?php echo $' . $value . '; ?>" />';
         $parseStr .= '<div class="' . $class . '" id="' . $name .'_img"><ul>';
 
-        $parseStr .= '<?php if($value !== "") : $lists = explode(",", $' . $value . '); foreach($lists as $key =>$value) : ?>' ;
+        $parseStr .= '<?php if($value !== "" && isset($value)) : $lists = explode(",", $' . $value . '); foreach($lists as $key =>$value) : ?>' ;
         $parseStr .=  "<li>";          
         $parseStr .=  '<a href="<?php echo $value; ?>" target="_blank"><img src="<?php echo $value; ?>" class="img-rounded" /></a>';
         $parseStr .=  '<button type="button" data-url="<?php echo $value; ?>" data-file="'. $name .'" class="uploaderDelete btn btn-danger btn-xs"><i class="fa fa-times"></i></button>';
