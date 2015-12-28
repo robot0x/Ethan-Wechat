@@ -20,6 +20,7 @@
         </div>
         <!--/#wrapper-->
         <include file="Base/footer" />
+    </block>
 </body>
 
 </html>

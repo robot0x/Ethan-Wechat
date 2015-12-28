@@ -1,8 +1,6 @@
 <extend name="Base:index" />
-
 <block name="body">
 <div class="row-fluid">
-
                 <div class="box">
                     <div class="box-header">
                         <h2><i class="halflings-icon list-alt"></i><span class="break"></span>Chart with points</h2>

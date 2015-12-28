@@ -13,6 +13,15 @@
     <!--webuploader-->
     <js href="__ROOT__/lib/webuploader/webuploader.min.js" />
     <js href="__ROOT__/yunzhi.php/Webuploader/config.html" />
+    
+    <!--ueditor-->
+    <js href="__ROOT__/lib/ueditor/ueditor.config.js" />
+    <js href="__ROOT__/lib/ueditor/ueditor.all.min.js" />
+    <js href="__ROOT__/lib/ueditor/lang/zh-cn/zh-cn.js" />
+
+    <!--uploadify-->
+    <js href="__ROOT__/lib/uploadify/jquery.uploadify.min.js" />
+    <js href="__ROOT__/js/js.js" />
 
     <block name="footerCssJs">
     </block>
