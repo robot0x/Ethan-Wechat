@@ -1,7 +1,7 @@
 <?php
 return array(
 
-    'YUNZHI_PAGE_SIZE'      => 2,          //默认分页大小
+    'YUNZHI_PAGE_SIZE'      => 10,          //默认分页大小
 
     'TMPL_TEMPLATE_SUFFIX'  => '.tpl',     // 默认模板文件后缀
     'ACTION_SUFFIX'         => 'Action',//设置ACTION前缀为action

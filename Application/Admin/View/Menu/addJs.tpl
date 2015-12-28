@@ -1,0 +1,20 @@
+<script>
+	$(document).ready(function(){
+		$("#demoForm").validate({
+			rules:{
+				title:{
+					required:true,
+				},
+				module:{
+					required:true,
+				},
+				controller:{
+					required:true,
+				},
+				action:{
+					required:true,
+				},
+			},
+		})
+	});
+</script>

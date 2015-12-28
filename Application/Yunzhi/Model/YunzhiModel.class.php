@@ -120,7 +120,7 @@ class YunzhiModel extends Model
 
     public function getErrors()
     {
-        return $this->errors();
+        return $this->errors;
     }
 
     /**

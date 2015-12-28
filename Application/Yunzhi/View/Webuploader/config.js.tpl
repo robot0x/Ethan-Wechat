@@ -1,4 +1,4 @@
-(function( $ ){
+var webuploader = function( $ ){
     // 当domReady的时候开始初始化
     $(function() {
         var $wrap = $('#uploader'),
@@ -139,7 +139,7 @@
 
         // 实例化
         uploader = WebUploader.create({
-            auto: false,
+            auto: true,    //自动上传
             pick: {
                 id: '#filePicker',
                 label: '点击选择图片'
@@ -204,7 +204,7 @@
         // 添加“添加文件”的按钮，
         uploader.addButton({
             id: '#filePicker2',
-            label: '继续添加'
+            label: '选择图片'
         });
 
         uploader.on('ready', function() {
@@ -436,6 +436,7 @@
 
             $upload.removeClass( 'state-' + state );
             $upload.addClass( 'state-' + val );
+            $webuploaderPick = $(".webuploader-pick");
             state = val;
             console.log("state is "+state);
             switch ( state ) {
@@ -479,7 +480,8 @@
                 case 'finish':
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
-                        //alert( '上传成功' );
+                        // $upload.text( 'dfsfe' );
+                        $webuploaderPick.text("sdfefef");
                         console.log("上传成功，状态："+stats);
                     } else {
                         // 没有成功的图片，重设
@@ -590,5 +592,5 @@
         $upload.addClass( 'state-' + state );
         updateTotalProgress();
     });
+};
 
-})( jQuery );
