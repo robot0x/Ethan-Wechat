@@ -53,10 +53,6 @@
                 </div>
             </div>
         </div>
-	<style type="text/css">
-	.suoluetu{
-		height: 50px;
-	}
 
 </block>
 
