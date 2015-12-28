@@ -17,7 +17,7 @@
                     </form>
                 </div>
                 <div class="col-md-3">
-                    <a href="{$url}" class="btn btn-info">添加一级菜单</a>
+                    <a href="{$url}" class="btn btn-info">添加房型</a>
                 </div>
             </div>
             <div class="box">
@@ -62,7 +62,6 @@
                                             <else /><span class="badge">是</span></eq>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-success" onclick="location='{$value._url.add}'"><i class="glyphicon glyphicon-plus"></i>添加子菜单</button>
                                         <button class="btn btn-sm btn-primary" onclick="location='{$value._url.edit}'"><i class="fa fa-pencil"></i>编辑</button>
                                         <button class="btn btn-sm btn-danger" onclick="location='{$value._url.delete}'"><i class="fa fa-trash-o "></i>删除</button>
                                     </td>
