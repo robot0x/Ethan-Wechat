@@ -2,9 +2,9 @@
         <a class="button"  href="{:U('add')}" >添加</a>
 </div>
 
-<form action="{:U('index')}" method="post">
+<form action="{:U('index?p=', I('get.'))}" method="post">
 <div>
-    <input type="text" placeholder="search" name="keywords" value ="{:I('get.field')}"
+    <input type="text" placeholder="search" name="keywords" value ="{:I('get.keywords')}"
      ></input>
     <button id="search" type="submit">搜索</button>
 </div>
