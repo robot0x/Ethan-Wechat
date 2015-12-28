@@ -21,10 +21,10 @@
 		<foreach name="users" item="user" key="k">
 			<tr>
 				<td>{$k+1}</td>
-                                <td>{$user[username]}</td>
-				<td>{$user[name]}</td>
-				<td>{$user[phonenumber]}</td>
-				<td>{$user[email]}</td>
+                <td>{$user['username']}</td>
+				<td>{$user['name']}</td>
+				<td>{$user['phonenumber']}</td>
+				<td>{$user['email']}</td>
 				<td><a class="button" href="{:U('edit?id='.$user['id'])}">编辑</a>&nbsp;&nbsp;
 				<a class="button" href="{:U('delete?id='.$user['id'])}">删除</a></td>
             </tr>
