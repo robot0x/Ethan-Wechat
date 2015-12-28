@@ -11,10 +11,10 @@
 	<thead>
 		<tr>
 			<th>序号</th>
-                        <th>用户名</th>
+            <th>用户名</th>
 			<th>姓名</th>
 			<th>手机号</th>
-                        <th>邮箱</th>
+            <th>邮箱</th>
 			<th>操作</th>
 		</tr>
 	</thead>
@@ -27,7 +27,7 @@
 				<td>{$user[email]}</td>
 				<td><a class="button" href="{:U('edit?id='.$user['id'])}">编辑</a>&nbsp;&nbsp;
 				<a class="button" href="{:U('delete?id='.$user['id'])}">删除</a></td>
-                       </tr>
+            </tr>
 		</foreach>	
 </table>
 </form>
