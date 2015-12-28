@@ -141,12 +141,12 @@ class Html extends TagLib{
         $parseStr = '<input type="hidden" id="' . $name . '" name="' . $name . '" value="<?php echo $' . $value . '; ?>" />';
         $parseStr .= '<div class="' . $class . '" id="' . $name .'_img"><ul>';
 
-        $parseStr .= '<?php $lists = explode(",", $' . $value . '); foreach($lists as $key =>$value) : ?>' ;
+        $parseStr .= '<?php if($value !== "") : $lists = explode(",", $' . $value . '); foreach($lists as $key =>$value) : ?>' ;
         $parseStr .=  "<li>";          
         $parseStr .=  '<a href="<?php echo $value; ?>" target="_blank"><img src="<?php echo $value; ?>" class="img-rounded" /></a>';
         $parseStr .=  '<button type="button" data-url="<?php echo $value; ?>" data-file="'. $name .'" class="uploaderDelete btn btn-danger btn-xs"><i class="fa fa-times"></i></button>';
         $parseStr .= '</li>';
-        $parseStr .= "<?php endforeach; ?>";
+        $parseStr .= "<?php endforeach; endif;?>";
         $parseStr .= "</ul></div>";
         $parseStr .='<div class="uploadify"><div id="queue"></div><input id="' . $name . '_upload" name="' . $name . '_upload" type="file" multiple="true"><div class="error"></div></div>';
         $parseStr .='<script type="text/javascript">
