@@ -18,6 +18,9 @@
     <label for="status">配置值：</label>
     <input type="text" name="value" value="{$config.value}" /></br>
 
+    <label for="status">排序：</label>
+    <input type="text" name="sort" value="{$config.sort}" /></br>
+
     <button type="submit">保存</button></br>
     <a class="button" href="{:U('index?id= ',I('get.'))}">返回</a>
 </form>
