@@ -2,7 +2,7 @@
         <a class="button"  href="{:U('add')}" >添加</a>
 </div>
 
-<form action="{:U('index?p=', I('get.'))}" method="post">
+<form action="{:U('index?p=', I('get.'))}" method="get">
 <div>
     <input type="text" placeholder="search" name="keywords" value ="{:I('get.keywords')}"
      ></input>
