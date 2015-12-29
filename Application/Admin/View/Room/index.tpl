@@ -17,7 +17,7 @@
                     </form>
                 </div>
                 <div class="col-md-3">
-                    <a href="{$url}" class="btn btn-info">添加房型</a>
+                    <a href="{:U('add', I('get.'))}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> 添加房型</a>
                 </div>
             </div>
             <div class="box">
