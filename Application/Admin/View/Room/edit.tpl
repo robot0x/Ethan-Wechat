@@ -8,23 +8,24 @@
                 </div>
                 <div class="panel-body">
                     <form role="form" action="{:U('save',I('get.'))}" method="post">
+                        <input type="hidden" name="id" value="{$room['id']}" />
                         <div class="row">
                             <div class="col-xs-12 col-md-6 col-lg-3">
                                 <div class="form-group">
                                     <label>房型</label>
-                                    <input class="form-control" id="title" name="title" type="text" value="" />
+                                    <input class="form-control" id="title" name="title" type="text" value="{$room['title']}" />
                                 </div>
                                 <div class="form-group">
                                     <label>价格</label>
-                                    <input class="form-control" id="price" name="price" type="money" value="" />
+                                    <input class="form-control" id="price" name="price" type="money" value="{$room['price'] | format_money}" />
                                 </div>
                                 <div class="form-group">
                                     <label>描述</label>
-                                    <input class="form-control" id="description" name="description" type="text" value="" />
+                                    <textarea class="form-control" id="description" name="description">{$room['description']}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>总间数</label>
-                                    <input class="form-control" id="total_rooms" name="total_rooms" type="text" value="" />
+                                    <input class="form-control" id="total_rooms" name="total_rooms" type="text" value="{$room['total_rooms']}" />
                                 </div>
                             </div>
                         </div>
@@ -34,6 +35,7 @@
                                     <label>房型介绍</label>
                                     <div>
                                         <html:editor id="ueditor" type="Ueditor" name="detial_description">
+                                            {$room['detial_description'] | htmlspecialchars_decode}
                                         </html:editor>
                                     </div>
                                 </div>
@@ -43,8 +45,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label>房型图片</label>
-                                    <?php $value=""; ?>
-                                        <html:uploader value="value" name="url">
+                                        <html:uploader value="room['url']" name="url">
                                             请选择图片
                                         </html:uploader>
                                 </div>

@@ -25,6 +25,19 @@ function my_json_encode($type, $p)
     return $str;
 }
 
+
+function moreThanZero($num)
+{
+    $num = (int)$num;
+    if(!preg_match('^[1-9]\d', $num))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 //根程序文件
 // 判断是否是在微信浏览器里
 //author:panjie 3792535@qq.com
