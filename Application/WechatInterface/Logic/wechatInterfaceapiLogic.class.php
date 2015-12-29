@@ -4,7 +4,9 @@ namespace WechatInterface\Logic;
 use WechatInterface\Controller\IndexController;
 
 class wechatInterfaceapiLogic extends IndexController {
-	 public function getAccessToken($appid, $appsecret){
+	 public function getAccessToken(){
+        $appid = C('APPID');
+        $appsecret = C('APPSECRET');
 
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$appid."&secret=".$appsecret;
 
