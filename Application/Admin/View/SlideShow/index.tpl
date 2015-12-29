@@ -37,9 +37,13 @@
 				<td><img class="suoluetu" src="{$slideshow[url]}" /></td>
 				<td>{$slideshow[weight]}</td>
 				<td>{$slideshow[status]?'正常':'冻结'}</td>
-				<td><a class="btn btn-sm btn-success" href="{:U('detail?id='.$slideshow['id'].'&p='.I('get.p'))}">查看</a>&nbsp;&nbsp;
-				<a class="btn btn-sm btn-success" href="{:U('edit?id='.$slideshow['id'].'&p='.I('get.p'))}">编辑</a>&nbsp;&nbsp;
-				<a class="btn btn-sm btn-success" href="{:U('delete?id='.$slideshow['id'].'&p='.I('get.p'))}">删除</a></td>
+				<td>
+				<a class="btn btn-sm btn-primary" href="{:U('edit?id='.$slideshow['id'].'&p='.I('get.p'))}">
+                <i class="fa fa-pencil"></i>
+                编辑</a>&nbsp;&nbsp;
+				<a class="delete btn btn-sm btn-danger" href="{:U('delete?id='.$slideshow['id'].'&p='.I('get.p'))}">
+                <i class="fa fa-trash-o "></i>
+                删除</a></td>
 			</tr>
 		</foreach>	
                             </tbody>
