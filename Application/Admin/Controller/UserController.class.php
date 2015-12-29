@@ -67,11 +67,11 @@ class UserController extends AdminController
             $error = implode('<br/>',$errors);
 
             //显示错误
-            $this->error("添加失败，原因：".$error,U('User/Index/index?p ='.I('get.p')));
+            $this->error("添加失败，原因：".$error,U('Admin/User/index?p ='.I('get.p')));
         }
         else
         {
-            $this->success("操作成功",U('User/Index/index?p ='.I('get.p')));
+            $this->success("操作成功",U('Admin/User/index?p ='.I('get.p')));
         }
     }
 
@@ -104,12 +104,12 @@ class UserController extends AdminController
             $error = implode('<br/>',$errors);
 
             //显示错误
-            $this->error("添加失败，原因：".$error,U('User/Index/index?p='.I('get.p')));
+            $this->error("添加失败，原因：".$error,U('Admin/User/index?p='.I('get.p')));
         }
         else
         {
             //保存成功success()
-            $this->success("操作成功",U('user/Index/index?p='.I('get.p')));
+            $this->success("操作成功",U('Admin/User/index?p='.I('get.p')));
         }
     }
 
@@ -123,11 +123,11 @@ class UserController extends AdminController
         //判断是否删除成功
         if($status!==false)
         {
-            $this->success("删除成功",U('User/Index/index?p='.I('get.p')));
+            $this->success("删除成功",U('Admin/User/index?p='.I('get.p')));
         }
         else
         {
-            $this->error("删除失败",U('User/Index/index?p='.I('get.p')));
+            $this->error("删除失败",U('Admin/User/index?p='.I('get.p')));
         }
     }
 

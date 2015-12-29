@@ -2,17 +2,23 @@
     <a class="button"  href="{:U('add')}" >添加用户</a>
 </div>
 <form action="{:U('index')}" method="get">
-<div>
-    <input type = "text" placeholder = "search" name = "keywords" value = "{:I('get.keywords')}"></input>
-    <button id="search" type="submit">搜索</button>
-</div>
+     <div class="panel-body">
+		<input type="text" placeholder="search" name="keywords" value ="{:I('get.keywords')}">
+		</input>
+		<button id="search" type="submit">搜索</button>
+    </div>
+</form>
 
 <table class = "table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th>序号</th>
-            <th>用户名</th>
-			<th>姓名</th>
+            <th>序号</th>
+            <?php $order = I('get.order') ?>
+			<th><a href="<eq name='order' value="desc"> {:U('index?by=username&order=asc', I('get.'))}  
+			<else/> {:U('index?by=username&order=desc', I('get.'))} </eq>">用户名</a></th>
+
+			<th><a href="<eq name='order' value="desc"> {:U('index?by=name&order=asc', I('get.'))}  
+			<else/> {:U('index?by=name&order=desc', I('get.'))} </eq>">姓名</a></th>
 			<th>手机号</th>
             <th>邮箱</th>
 			<th>操作</th>
