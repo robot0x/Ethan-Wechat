@@ -56,10 +56,10 @@ class ConfigController extends AdminController
             //数组变字符串
             $error =implode('<br/>', $errors);
             //显示错误
-            $this->error("添加失败，原因：".$error,U('Config/Index/index?id=',I('get.p')));
+            $this->error("添加失败，原因：".$error,U('Admin/Config/index?id=',I('get.p')));
 
         }
-        $this->success("操作成功" , U('Config/Index/index?id=',I('get.p')));
+        $this->success("操作成功" , U('Admin/Config/index?id=',I('get.p')));
     }
     public function updateAction(){
         //取用户信息
