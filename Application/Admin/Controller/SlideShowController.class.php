@@ -21,6 +21,8 @@ class SlideShowController extends AdminController
     }
 
     public function addAction(){
+        //传js
+        $this->assign("js",$this->fetch("editJs"));
         //显示 display
         $this->display('edit');
     }
@@ -56,6 +58,8 @@ class SlideShowController extends AdminController
 
         //传给前台
         $this->assign('slideshow',$slideshow);
+        //传js
+        $this->assign("js",$this->fetch("editJs"));
         
         $this->display('edit'); 
     }

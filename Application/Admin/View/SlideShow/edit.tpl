@@ -8,10 +8,9 @@
                     <div class="panel-body">
                         <button type="button" class="btn btn-info" onclick="javascript:history.back(-1);">返回</button>
                     </div>
-                    <form class="form-horizontal" <eq name="Think.ACTION_NAME" value="add"> action="{:U('save',I('get.'))}"<else />action="{:U('update',I('get.'))}"</eq> method="post">
+                    <form id="demoForm" class="form-horizontal" <eq name="Think.ACTION_NAME" value="add"> action="{:U('save',I('get.'))}"<else />action="{:U('update',I('get.'))}"</eq> method="post">
                     <input type="hidden" name="id" value="{$slideshow.id}">
-                    </input>
-
+                        
                         <div class="form-group">
                             <label for="title" class="col-sm-2 control-label">标题</label>
                             <div class="col-sm-4">
@@ -30,10 +29,9 @@
                                   <label for="url" class="col-sm-2 control-label">上传新图片：</label>
                               </eq>
                               <div class="col-sm-5">
-
-        <html:uploader value="value" name="url">
-        请选择图片
-        </html:uploader>
+                                <html:uploader value="value" name="url">
+                                请选择图片
+                                </html:uploader>
                               </div>
                         </div>
                         <div class="form-group">
@@ -62,12 +60,8 @@
                 </div>
             </div>
         </div>
-    </div>   
-    <style type="text/css">
-    .suoluetu{
-        height: 50px;
-    }
-    </style> 
+    </div> 
+    {$js}   
 </block>
 
 

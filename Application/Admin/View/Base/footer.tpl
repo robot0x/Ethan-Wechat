@@ -22,6 +22,9 @@
     <!--uploadify-->
     <js href="__ROOT__/lib/uploadify/jquery.uploadify.min.js" />
     <js href="__ROOT__/js/js.js" />
+    <js href="__ROOT__/Admin/js/jquery.validate.js" />
+    <js href="__ROOT__/Admin/js/jquery-1.9.1.min.js" />
+   <!--  <js href="__ROOT__/Admin/js/yunzhi.js" charset="UTF-8" /> -->
 
     <block name="footerCssJs">
     </block>

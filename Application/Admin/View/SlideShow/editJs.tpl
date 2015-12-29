@@ -1,0 +1,20 @@
+<script>
+	$(document).ready(function(){
+		$("#demoForm").validate({
+			rules:{
+				title:{
+					required:true,
+				},
+				url:{
+					required:true,
+				},
+				weight:{
+					required:true,
+				},
+				status:{
+					required:true,
+				},
+			},
+		})
+	});
+</script>
