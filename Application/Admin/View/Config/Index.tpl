@@ -4,14 +4,15 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-3">
-                    <form action="{:U('index?p=', I('get.'))}" method="get">
+                    <form action="{:U('index?keywords=')}" method="get">
                         <div class="input-group custom-search-form">
                             <input class="form-control" name="keywords" placeholder="Search..." type="text" value="{:I('get.keywords')}" />
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+
                         </div>
                     </form>
                 </div>
@@ -45,23 +46,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <foreach name="config" item="conf" key="k">
-                            <tr>
-                                <td>{$k+1}</td>
-                                <td>{$conf['id']}</td>
-                                <td>{$conf['name']}</td>
-                                <td>{$conf['type']}</td>
-                                <td>{$conf['remark']}</td>
-                                <td>{$conf['create_time']}</td>
-                                <td>{$conf['update_time']}</td>
-                                <td>{$conf['status']}</td>
-                                <td>{$conf['value']}</td>
-                                <td>{$conf['sort']}</td>
-                                <td>
-                                <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$conf['id'],I('get.'))}"><i class="fa fa-pencil"></i>编辑</a>
-                                <a class="btn btn-sm btn-danger" href="{:U('delete?id='.$conf['id'],I('get.'))}"><i class="fa fa-trash-o "></i>删除</a>
-                                </td>
-                            </tr>
+                            <foreach name="config" item="conf" key="k">
+                                <tr>
+                                    <td>{$k+1}</td>
+                                    <td>{$conf['id']}</td>
+                                    <td>{$conf['name']}</td>
+                                    <td>{$conf['type']}</td>
+                                    <td>{$conf['remark']}</td>
+                                    <td>{$conf['create_time']}</td>
+                                    <td>{$conf['update_time']}</td>
+                                    <td>{$conf['status']}</td>
+                                    <td>{$conf['value']}</td>
+                                    <td>{$conf['sort']}</td>
+                                    <td>
+                                    <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$conf['id'],I('get.'))}"><i class="fa fa-pencil"></i>编辑</a>
+                                    <a class="btn btn-sm btn-danger" href="{:U('delete?id='.$conf['id'],I('get.'))}"><i class="fa fa-trash-o "></i>删除</a>
+                                    </td>
+                                </tr>
                             </foreach>
                         </tbody>
                     </table>
@@ -73,3 +74,4 @@
         </div>
     </div>
 </block>
+
