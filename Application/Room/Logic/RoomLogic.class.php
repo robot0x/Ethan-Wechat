@@ -11,21 +11,23 @@ class RoomLogic extends RoomModel
 {
 	public function addList($list)
 	{
+		dump($list);
 		try{
 			if($this->create($list))
 			{
-				$id=$this->add();
+				$id = $this->add();
 				return $id;
 			}
 			else
 			{
-				$this->errors[]=$this->getErrors();
+				$this->setError("data create error");
+
 				return false;
 			}
 		}
 		catch(\Think\Exception $e)
 		{
-			$this->errors[]=$e->getMessage();
+			$this->setError($e->getMessage());
 			return false;
 		}
 	}
