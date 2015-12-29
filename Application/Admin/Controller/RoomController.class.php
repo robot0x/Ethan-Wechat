@@ -25,25 +25,36 @@ class RoomController extends AdminController
         $this->display();
     }
 
+    /**
+     * 处理用户添加信息
+     * @return string 
+     */
     public function saveAction(){
 
         //取用户信息
         $Room = I('post.');
+        dump($Room);
+
        //dump(I('get.'));
         //添加 add()
         $RoomL = new RoomLogic();
+        $errors = $RoomL->getErrors();
+
         $RoomL->addList($Room);
 
         //判断异常
-        if(count($errors=$RoomL->getErrors())!==0)
+        if(count($errors = $RoomL->getErrors()) !== 0)
         {
+            dump($errors);
+            exit();
             //数组变字符串
             $error =implode('<br/>', $errors);
             //显示错误
-            $this->error("添加失败，原因：".$error,U('Room/Index/index?id=',I('get.p')));
+            $this->error("添加失败，原因：". $error,U('index?id=',I('get.p')));
             
         }
-        $this->success("操作成功" , U('Room/Index/index?id=',I('get.p')));    
+        exit();
+        $this->success("操作成功" , U('index?id=',I('get.p')));    
     }
 
     public function editAction(){
