@@ -11,104 +11,77 @@ class RoomController extends AdminController
 
 {
 	public function indexAction(){
-		 //获取列表
+
+		//获取列表
         $RoomL = new RoomLogic();
-        $Rooms = $RoomL->getLists();
-        //echo $RoomL->getLastSql();
+        $rooms = $RoomL->getLists();
 
-		$this->assign('Rooms',$Rooms);
+		$this->assign('rooms',$rooms);
         $this->display();
     }
 
-    public function addAction(){
-        //显示 display
-        $this->display();
-    }
-
+    /**
+     * 处理用户添加信息
+     * @return string 
+     */
     public function saveAction(){
 
         //取用户信息
-        $Room = I('post.');
-       //dump(I('get.'));
-        //添加 add()
+        $room = I('post.');
+
         $RoomL = new RoomLogic();
-        $RoomL->addList($Room);
+        $RoomL->saveList($room);
 
         //判断异常
-        if(count($errors=$RoomL->getErrors())!==0)
+        if(count($errors = $RoomL->getErrors()) !== 0)
         {
             //数组变字符串
-            $error =implode('<br/>', $errors);
+            $error = implode('<br/>', $errors);
             //显示错误
-            $this->error("添加失败，原因：".$error,U('Room/Index/index?id=',I('get.p')));
-            
+            $this->error("添加失败，原因：". $error, U('index?id=',I('get.')));
+            return;
         }
-        $this->success("操作成功" , U('Room/Index/index?id=',I('get.p')));    
+
+        $this->success("操作成功" , U('index?id=',I('get.')));    
     }
 
+    /**
+     * 编辑
+     * @return [type] [description]
+     */
     public function editAction(){
-        //获取用户ID
-        $RoomId = I('get.id');
-        // dump(I('get.'));
-        //取用户信息 getListById()
-        $RoomL = new RoomLogic();
-        $Room = $RoomL->getListbyId($RoomId);
-
-        //传给前台
-        $this->assign('Room',$Room);
         
-        $this->display('edit'); 
-    }
-
-    public function updateAction(){
-        //取用户信息
-        $data = I('post.');
-        dump(I('get.'));
-        //exit();
-        //传给M层
-        $RoomL = new RoomLogic();
-        $RoomL->saveList($data);
-
-        //判断异常
-        if(count($errors=$RoomL->getErrors())!==0)
+        if($id = (int)I('get.id'))
         {
-            //数组变字符串
-            $error =implode('<br/>', $errors);
-            //显示错误
-            $this->error("添加失败，原因：".$error,U('Room/Index/index',I('get.')));
+            $RoomL = new RoomLogic();
+            if(!$room = $RoomL->getListbyId($id))
+            {
+                $this->error("Sorry, the record not exist or deleted." , U('index?id=', I('get.')));
+                return;
+            }
 
-             return false;
-            
+            //传给前台
+            $this->assign('room',$room);
         }
-            $this->success("操作成功" , U('Room/Index/index',I('get.')));
+
+        $this->display(); 
     }
 
     public function deleteAction(){
 
-        $userId = I('get.id');
+        $id = I('get.id');
 
         $RoomL = new RoomLogic();
-        $status = $RoomL->deleteInfo($userId);
+        $status = $RoomL->deleteList($id);
 
         if($status！==false){
-           $this->success("删除成功", U('Room/Index/index'.I('get.'))); 
+           $this->success("删除成功", U('index?id=', I('get.'))); 
+           return;
         }
         else{
-            $this->error("删除失败" , U('Room/Index/index?id='.I('get.')));
+            $this->error("删除失败" , U('index?id=', I('get.')));
+            return;
         }
     }
 
-    public function detailAction(){
-    	//取用户ID
-    	$RoomId = I('get.id');
-
-    	//抓取用户信息
-    	$RoomL = new RoomLogic();
-    	$Room = $RoomL->getListById($RoomId);
-
-        //传值
-        $this->assign('Room',$Room);
-
-    	$this->display();
-    }
 }
