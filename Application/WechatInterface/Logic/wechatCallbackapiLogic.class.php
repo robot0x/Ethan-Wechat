@@ -3,6 +3,7 @@ namespace WechatInterface\Logic;
 
 use WechatInterface\Controller\IndexController;
 use WechatInterface\Logic\CustomMenuLogic;
+use Customer\Logic\CustomerLogic;
 
 class wechatCallbackapiLogic extends IndexController {
 	//初始化
@@ -89,6 +90,8 @@ class wechatCallbackapiLogic extends IndexController {
     	switch($object->Event)
         {
             case "subscribe":
+                $CustomerL = new CustomerLogic;
+                $CustomerL->saveCustomerInfo($object);
             	$content = "邓浩洋测试";
             	break;
             case "unsubscribe":
