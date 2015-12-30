@@ -12,7 +12,11 @@ class ConfigModel extends YunzhiModel
     protected $_validate = array(
         // 在新增的时候验证
         array('name','require','必须输入配置名称'),
-        // array('')
+        array('type','require','必须输入配置类型'),
+        array('status','require','必须输入状态'),
+        array('value','require','必须输入配置值'),
+        array('sort','require','必须输入排序大小'),
+        array('remark','require','必须输入配置说明'),
         //
    );
 }

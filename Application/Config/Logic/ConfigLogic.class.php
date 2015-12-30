@@ -8,12 +8,6 @@ use Config\Model\ConfigModel;
 */
 class ConfigLogic extends ConfigModel
 {
-        protected  $errors = array();
-
-        public function getErrors()
-        {
-            return $this->errors;
-        }
         public function addList($config)
         {
             try{
