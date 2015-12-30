@@ -1,8 +1,14 @@
-<div>
-    <a class="button"  href="{:U('add')}" >添加用户</a>
-</div>
+<extend name="Base:index" />
+<block name="body">
+    <div class="row-fluid">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body table-responsive">
+                    <div class="panel-body">
+                        <a class="button btn btn-info"  href="{:U('add')}" >添加用户</a>
+                    </div>
 <form action="{:U('index')}" method="get">
-     <div class="panel-body">
+    <div class="panel-body">
 		<input type="text" placeholder="search" name="keywords" value ="{:I('get.keywords')}">
 		</input>
 		<button id="search" type="submit">搜索</button>
@@ -23,6 +29,7 @@
 			<th>操作</th>
 		</tr>
 	</thead>
+	<tbody>
 		<foreach name="users" item="user" key="k">
 			<tr>
 				<td>{$k+1}</td>
@@ -30,10 +37,20 @@
 				<td>{$user['name']}</td>
 				<td>{$user['phonenumber']}</td>
 				<td>{$user['email']}</td>
-				<td><a class="button" href="{:U('edit?id='.$user['id'])}">编辑</a>&nbsp;&nbsp;
-				<a class="button" href="{:U('delete?id='.$user['id'])}">删除</a></td>
+				<td><a class="button btn-sm btn-success" href="{:U('edit?id='.$user['id'])}">编辑</a>&nbsp;&nbsp; 
+				<a class="button btn-sm btn-success" href="{:U('delete?id='.$user['id'])}">删除</a></td>
             </tr>
 		</foreach>	
+	</tbody>
 </table>
-</form>
-<Yunzhi:page />
+
+                </div>
+                <nav>
+                    <Yunzhi:page />
+                </nav>
+
+            </div>
+        </div>
+    </div>
+
+</block>

@@ -20,19 +20,6 @@ class UserController extends AdminController
         $this -> display();
     }
 
-    public function detailAction()
-    {
-        //获取用户ID
-        $userId = I('get.id');
-        //取用户信息getListById()
-        $UserL = new UserLogic();
-        $user = $UserL->getListById($userId);
-        
-        //传值
-        $this -> assign('user',$user);
-        $this -> display();
-    }
-
     public function addAction()
     {
         //显示display
