@@ -17,8 +17,7 @@
 			<th><a href="<eq name='order' value="desc"> {:U('index?by=username&order=asc', I('get.'))}  
 			<else/> {:U('index?by=username&order=desc', I('get.'))} </eq>">用户名</a></th>
 
-			<th><a href="<eq name='order' value="desc"> {:U('index?by=name&order=asc', I('get.'))}  
-			<else/> {:U('index?by=name&order=desc', I('get.'))} </eq>">姓名</a></th>
+			<th>姓名</th>
 			<th>手机号</th>
             <th>邮箱</th>
 			<th>操作</th>
