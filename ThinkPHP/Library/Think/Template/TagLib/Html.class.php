@@ -27,6 +27,7 @@ class Html extends TagLib{
         'radio'         => array('attr'=>'name,radios,checked,separator','close'=>0),
         'page'          => array('attr'=>'style, totalCount, class, id', 'close'=>0),
         'webuploader'   => array('attr'=>'name, class','close'=>1),
+        'uploader'      => array('attr'=>'name, class, value','close'=>1),
         );
 
     /**
@@ -65,7 +66,11 @@ class Html extends TagLib{
                 $parseStr   =  '<script type="text/javascript" src="__ROOT__/Public/Js/KindEditor/kindeditor.js"></script><script type="text/javascript"> KE.show({ id : \''.$id.'\'  ,urlType : "absolute"});</script><textarea id="'.$id.'" style="'.$style.'" name="'.$name.'" >'.$content.'</textarea>';
                 break;
             case 'UEDITOR' :
-                $parseStr   = '<script>$(function(){var ue = UE.getEditor("'.$id.'",{serverUrl :"__ROOT__/yunzhi.php/Ueditor/index.html"});})</script><script id="'. $id .'" name="'.$name.'" style="'. $style .'" class="'. $class .'" type="text/plain">'  . $content .'</script>';
+                if($name === "" || !isset($name))
+                {
+                    $name = "editorValue";
+                }
+                $parseStr   = '<script>$(function(){var ue = UE.getEditor("'.$id.'",{serverUrl :"__ROOT__/yunzhi.php/Ueditor/index.html","textarea":"' . $name . '"});})</script><script id="'. $id .'" name="'.$name.'" style="'. $style .'" class="'. $class .'" type="text/plain">'  . $content .'</script>';
                 break;
             default :
                 $parseStr  =  '<textarea id="'.$id.'" style="'.$style.'" name="'.$name.'" >'.$content.'</textarea>';
@@ -127,6 +132,34 @@ class Html extends TagLib{
         return  $parseStr;
     }
 
+
+    public function _uploader($tag, $content = null)
+    {
+        $name       = isset($tag['name']) ? $tag['name'] : 'file';
+        $class      = isset($tag['class']) ? $tag['class'] : 'uploader';
+        $value      = isset($tag['value']) ? $tag['value'] : '';
+        $btnClass   = isset($tag['btnclass']) ? $tag['btnclass'] : 'btn btn-primary';
+
+        $content    = isset($content) ? $content : "上传图片";
+
+        $parseStr = '<input type="hidden" id="' . $name . '" name="' . $name . '" value="<?php echo $' . $value . '; ?>" />';
+        $parseStr .= '<div class="' . $class . '" id="' . $name .'_img"><ul>';
+
+        $parseStr .= '<?php if($' . $value .' !== "" && isset($' . $value . ')) : $lists = explode(",", $' . $value . '); foreach($lists as $key =>$value) : ?>' ;
+        $parseStr .=  "<li>";          
+        $parseStr .=  '<a href="<?php echo $value; ?>" target="_blank"><img src="<?php echo $value; ?>" class="img-rounded" /></a>';
+        $parseStr .=  '<button type="button" data-url="<?php echo $value; ?>" data-file="'. $name .'" class="uploaderDelete btn btn-danger btn-xs"><i class="fa fa-times"></i></button>';
+        $parseStr .= '</li>';
+        $parseStr .= "<?php endforeach; endif;?>";
+        $parseStr .= "</ul></div>";
+        $parseStr .='<div class="uploadify"><div id="queue"></div><input id="' . $name . '_upload" name="' . $name . '_upload" type="file" multiple="true"><div class="error"></div></div>';
+        $parseStr .='<script type="text/javascript">
+                        $(function(){
+                            uploader("__ROOT__","' . $name . '","' . $btnClass . '", "' . $content. '");
+                        }); 
+                    </script>';
+        return $parseStr;
+    }
     /**
      * imageBtn标签解析
      * 格式： <html:imageBtn type="" value="" />

@@ -1,16 +1,14 @@
 <?php
+/**
+ * 后台幻灯片管理
+ * 魏静云
+ */
 namespace SlideShow\Logic;
 
 use SlideShow\Model\SlideShowModel;
 
 class SlideShowLogic extends SlideShowModel
 {
-	protected  $errors = array();
-
-	public function getErrors()
-	{
-		return $this->errors;
-	}
 	public function addList($slideshow)
 	{
 		try{
@@ -21,7 +19,7 @@ class SlideShowLogic extends SlideShowModel
 			}
 			else
 			{
-				$this->errors[]=$this->getError();
+				$this->errors[]=$this->getErrors();
 				return false;
 			}
 		}
@@ -31,16 +29,18 @@ class SlideShowLogic extends SlideShowModel
 			return false;
 		}
 	}
+
 	public function saveList($list){
 		try{
 			if($this->create($list))
 			{
+
 				$id=$this->save();
 				return $id;
 			}
 			else
 			{
-				$this->errors[]=$this->getError();
+				$this->errors[]=$this->getErrors();
 				return false;
 			}
 		}
@@ -50,6 +50,7 @@ class SlideShowLogic extends SlideShowModel
 			return false;
 		}
 	}
+
 	public function deleteInfo($id)
 	{
 		$map['id'] = $id;
