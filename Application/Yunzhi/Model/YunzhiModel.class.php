@@ -13,6 +13,7 @@ class YunzhiModel extends Model
     protected $maps         = array();              //查询条件
     protected $keywords     = "";                   //查询关键字
     protected $field        = "title";              //查询字段
+    protected $pk           = "id";                 //主键
 
     public function __construct()
     {
@@ -113,15 +114,13 @@ class YunzhiModel extends Model
         return;
     }
 
-    public function getError()
-    {
-        return $this->error;
-    }
-
     public function getErrors()
     {
         return $this->errors;
     }
+
+
+
 
     /**
      * 如果未传入第二个参数，则第一个参数必须为数组，进行合并。
@@ -169,7 +168,55 @@ class YunzhiModel extends Model
         return $this->maps;
     }
 
-    public function getListbyId($id, $pk = "id")
+    /**
+     * 更新数据表（有ID则更新，无则添加）
+     * @param  array $list 一维数据
+     * @return int       数据关键字
+     */
+    public function saveList($list){
+        try{
+            if ($this->create($list))
+            {
+                if (isset($this->data[$this->pk]) && $this->data[$this->pk] !== '')
+                {
+                    $id = $this->save();
+                }
+                else
+                {
+                    $id = $this->add();
+                }
+                return $id;
+            }
+            else
+            {
+                $this->setError("data create false:" . $this->getError());
+                return false;
+            }
+        }
+        catch (\Think\Exception $e)
+        {
+            $this->setError = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * 删除ID为$id的数据
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function deleteList($id)
+    {
+        $map['id'] = (int)$id;
+        $lists = $this->where($map)->delete();
+        return $lists;
+    }
+
+    /**
+     * 获取获取数据信息
+     */
+
+    public function getListbyId($id)
     {
         if ((int)$id === 0)
         {
@@ -179,7 +226,10 @@ class YunzhiModel extends Model
 
         try
         {
-            $list = $this->where("$pk = $id")->find();
+            $pk = $this->pk;
+            $maps = $this->maps;
+            $maps["$pk"] = $id;
+            $list = $this->where($maps)->find();
             return $list;
         }
         catch(\Think\Exception $e)
@@ -188,6 +238,9 @@ class YunzhiModel extends Model
             return $this;
         }
     }
+    /**
+     * 获取当前页内容列表
+     */
 
     public function getLists($fields = array(), $maps = array())
     {
@@ -199,8 +252,15 @@ class YunzhiModel extends Model
         return $lists;
     }
 
+    /**
+     * 获取所有数据
+     * @param  array  $fields [description]
+     * @param  array  $maps   [description]
+     * @return [type]         [description]
+     */
     public function getAllLists($fields = array(), $maps = array())
     {
+        $maps = array_merge($this->maps, $maps);
         $lists =    $this->
                     _getLists($fields, $maps)->
                     select();
