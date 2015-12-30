@@ -9,54 +9,37 @@ use Room\Model\RoomModel;
 
 class RoomLogic extends RoomModel
 {
-	public function addList($list)
+	public function saveList($list)
 	{
-		dump($list);
-		try{
-			if($this->create($list))
-			{
-				$id = $this->add();
-				return $id;
-			}
-			else
-			{
-				$this->setError("data create error");
+		$list['price'] = (int)100*$list['price'];
+		return parent::saveList($list);
+	}
 
+	/**
+	 * 删除记录：执行的实为冻结操作
+	 * @param  int $id 要冻结的ID
+	 * @return 成功 返回操作id 失败:false
+	 */
+	public function deleteList($id)
+	{
+		try {
+			$data = array();
+			$data['id'] = (int)$id;
+			$data['status'] = 1;
+			if ($this->create($data))
+			{
+				return $this->save();
+			}
+			else 
+			{
+				$this->setError("data delete error: " . $this->getError());
 				return false;
 			}
 		}
-		catch(\Think\Exception $e)
-		{
-			$this->setError($e->getMessage());
-			return false;
-		}
-	}
-
-	public function saveList($list){
-		try{
-			if($this->create($list))
-			{
-
-				$id=$this->save();
-				return $id;
-			}
-			else
-			{
-				$this->errors[]=$this->getErrors();
-				return false;
-			}
-		}
-		catch(\Think\Exception $e)
-		{
-			$this->errors[]=$e->getMessage();
-			return false;
-		}
-	}
-
-	public function deleteInfo($id)
-	{
-		$map['id'] = $id;
-		$datas=$this->where($map)->delete();
-		return $datas;
+        catch (\Think\Exception $e)
+        {
+            $this->setError = $e->getMessage();
+            return false;
+        }
 	}
 }
