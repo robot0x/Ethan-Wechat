@@ -91,7 +91,7 @@ class wechatCallbackapiLogic extends IndexController {
         {
             case "subscribe":
                 $CustomerL = new CustomerLogic;
-                $CustomerL->saveCustomerInfo($object);
+                $CustomerL->addCustomerInfo($object->FromUserName);
             	$content = "邓浩洋测试";
             	break;
             case "unsubscribe":

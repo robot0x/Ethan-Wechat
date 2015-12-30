@@ -1,5 +1,5 @@
 	<div>
-        <a class="button"  href="{:U('createMenu')}" >同步服务器的客户信息
+        <a class="button"  href="{:U('synchro')}" >同步服务器的客户信息
 </a>
     </div>
 	<table>
