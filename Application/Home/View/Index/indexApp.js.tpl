@@ -262,10 +262,15 @@ app.controller("EvaluationingCtrl", function($scope,$http){
  };
 });
 
-app.controller('SlideCtrl', function($scope) {
+app.controller('SlideCtrl', function($scope,$timeout) {
   $scope.detail = false;
+  $scope.order = {text:'#/tab/confirmOrder'};
   $scope.toggleDetail = function(){
+    $scope.order = {text:''};
     $scope.detail = !$scope.detail;
+    $timeout(function(){
+        $scope.order = {text:'#/tab/confirmOrder'};
+    },100);
   }
   $scope.countEm = [
   '__IMG__/jiudian.jpg',

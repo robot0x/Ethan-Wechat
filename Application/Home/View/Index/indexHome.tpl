@@ -40,7 +40,7 @@
       <h3 class="positive">共1晚></h3>
     </button>
     </a>
-  <a class="item item-button-right" href="#/tab/confirmOrder">
+  <a class="item item-button-right" href="{{order.text}}">
     <h2>景观大床房</h2>
     <p>55平米大床1.8m有wifi</p>
     <span ng-click='toggleDetail()' class="item-note energized">
