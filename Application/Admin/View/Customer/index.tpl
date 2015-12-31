@@ -23,7 +23,7 @@
 				<td>{$list['city']}</td>
 				<td>{$list['province']}</td>
 				<td>{$list['country']}</td>	
-				<td>{$list['subscribe_time']}</td>
+				<td>{:date('Y-m-d',$list['subscribe_time'])}</td>
 				<td><a class="button" href="{:U('edit?id='.$list['id'])}">冻结用户</a></td>
 			</tr>
 		</foreach>	

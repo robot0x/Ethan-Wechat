@@ -27,8 +27,9 @@ class CustomerController extends AdminController {
 		foreach ($lists['data']['openid'] as $key => $value) {
 			$customers[] = $CustomerL->getCustomerInfo($value);
 		}
-		var_dump($customers);
+
 		//与数据库的数据同步
-		echo $CustomerL->synchro($customers);
+		$result = $CustomerL->synchro($customers);
+		$this->success("新增".$result['add']."条数据，修改".$result['save']."条数据",U('index'));
 	}
 }

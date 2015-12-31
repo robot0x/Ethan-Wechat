@@ -22,7 +22,7 @@ class CustomerLogic extends CustomerModel {
 		$this->addList($data);
 	}
 
-	private function addList($data){
+	private function addCustomer($data){
 		//对性别进行转换
 		if ($data['sex'] == 0) {
 			$data['sex'] = "女";
@@ -32,7 +32,22 @@ class CustomerLogic extends CustomerModel {
 
 		$data['is_subscribe'] = $data['subscribe'];
 
-		$this->add($data);
+		return $this->add($data);
+	}
+
+	private function saveCustomer($data){
+		//对性别进行转换
+		if ($data['sex'] == 0) {
+			$data['sex'] = "女";
+		}else{
+			$data['sex'] = "男";
+		}
+
+		$data['is_subscribe'] = $data['subscribe'];
+
+		$map = array();
+		$map['openid'] = $data['openid'];
+		return $this->where($map)->save($data);
 	}
 
 	/**
@@ -59,15 +74,42 @@ class CustomerLogic extends CustomerModel {
 
 	/**
 	 * 将用户信息列表同步到数据库中
-	 * @return int 返回影响的数据条数
+	 * @return array 第一项为添加数据的数目，第二项为修改数据的数目
 	 */
-	public function synchro($lists){
-		foreach ($lists as $key => $value) {
-			$this->addList($value);
-			$map = array();
-			$map['openid'] = $value['openid'];
-			$count = $this->where($map)->save($value);
+	public function synchro($customers){
+		//将customers与lists对比后分为两个数组add和save中
+		$adds = array();
+		$saves = array();
+		$lists = $this->getLists();
+
+		
+		foreach ($customers as $key => $customer) {
+			$i = count($lists);
+			foreach ($lists as $key => $list) {
+
+				if ($customer['openid'] == $list['openid']) {
+					$saves[] = $customer;
+				}else{
+					--$i;
+				}
+			}
+			if ($i == 0) {
+				$adds[] = $customer;
+			}
 		}
+
+		//将没有的数据进行添加
+		$count = array();
+		foreach ($adds as $key => $add) {
+			$result[] = $this->addCustomer($add);
+			$count['add'] = count($result);
+		}
+		
+		//对已有的数据进行改正
+		foreach ($saves as $key => $save) {
+			$count['save'] = $this->saveCustomer($save);
+		}
+		//返回添加数目，改正数目
 		return $count;
 	}
 }
