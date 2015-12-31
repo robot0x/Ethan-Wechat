@@ -2,47 +2,60 @@
 <block name="body">
     <div class="row-fluid">
         <div class="col-xs-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <form action="{:U('index?keywords=')}" method="get">
+                        <div class="input-group custom-search-form">
+                            <input class="form-control" name="keywords" placeholder="Search..." type="text" value="{:I('get.keywords')}" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button> 
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <a class="button btn btn-info"  href="{:U('add')}" ><i class="glyphicon glyphicon-plus"></i> 添加用户</a>
+                </div>
+            </div>
             <div class="box">
                 <div class="box-body table-responsive">
                     <div class="panel-body">
-                        <a class="button btn btn-info"  href="{:U('add')}" >添加用户</a>
                     </div>
-<form action="{:U('index')}" method="get">
-    <div class="panel-body">
-		<input type="text" placeholder="search" name="keywords" value ="{:I('get.keywords')}">
-		</input>
-		<button id="search" type="submit">搜索</button>
-    </div>
-</form>
 
-<table class = "table table-bordered table-striped table-hover">
-	<thead>
-		<tr>
-            <th>序号</th>
-            <?php $order = I('get.order') ?>
-			<th><a href="<eq name='order' value="desc"> {:U('index?by=username&order=asc', I('get.'))}  
-			<else/> {:U('index?by=username&order=desc', I('get.'))} </eq>">用户名</a></th>
+                    <table class = "table table-bordered table-striped table-hover">
+	                    <thead>
+	                        <tr>
+                                <th>序号</th>
+                                <?php $order = I('get.order') ?>
+			                    <th>
+			                    <a href="<eq name='order' value="desc"> {:U('index?by=username&order=asc', I('get.'))}  
+			                    <else/> {:U('index?by=username&order=desc', I('get.'))} </eq>">用户名</a>
+			                    </th>
 
-			<th>姓名</th>
-			<th>手机号</th>
-            <th>邮箱</th>
-			<th>操作</th>
-		</tr>
-	</thead>
-	<tbody>
-		<foreach name="users" item="user" key="k">
-			<tr>
-				<td>{$k+1}</td>
-                <td>{$user['username']}</td>
-				<td>{$user['name']}</td>
-				<td>{$user['phonenumber']}</td>
-				<td>{$user['email']}</td>
-				<td><a class="button btn-sm btn-success" href="{:U('edit?id='.$user['id'])}">编辑</a>&nbsp;&nbsp; 
-				<a class="button btn-sm btn-success" href="{:U('delete?id='.$user['id'])}">删除</a></td>
-            </tr>
-		</foreach>	
-	</tbody>
-</table>
+			                    <th>姓名</th>
+			                    <th>手机号</th>
+                                <th>邮箱</th>
+			                    <th>操作</th>
+		                    </tr>
+	                    </thead>
+	                    <tbody>
+		                    <foreach name="users" item="user" key="k">
+			                    <tr>
+				                    <td>{$k+1}</td>
+                                    <td>{$user['username']}</td>
+				                    <td>{$user['name']}</td>
+				                    <td>{$user['phonenumber']}</td>
+				                    <td>{$user['email']}</td>
+				                    <td>
+				                    <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$user['id'])}"><i class="fa fa-pencil"></i>编辑</a>
+				                    <a class="btn btn-sm btn-danger" href="{:U('delete?id='.$user['id'])}"><i class="fa fa-trash-o "></i>删除</a>
+				                    </td>
+                                </tr>
+		                    </foreach>	
+	                    </tbody>
+                    </table>
 
                 </div>
                 <nav>

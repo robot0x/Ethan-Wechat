@@ -8,7 +8,7 @@
             <button type="button" class="btn btn-info" onclick="javascript:history.back(-1);">返回</button>
           </div>
 
-    <form class="form-horizontal" <eq  name = "Think.ACTION_NAME" value = "add"> action = "{:U('save')}" <else/> action = "{:U('update')}" </eq> method = 'post'>
+    <form class="form-horizontal" <eq name = "Think.ACTION_NAME" value = "add"> action = "{:U('save')}" <else/> action = "{:U('update')}" </eq> method = 'post'>
       <input type="hidden" name="id" value="{$user.id}"></input>
 
 

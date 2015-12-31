@@ -6,9 +6,9 @@ use Yunzhi\Model\YunzhiModel;
 
 class UserModel extends YunzhiModel
 {
-    protected $orderBys     = array("username"=>"desc"); //排序字段方式
+    protected $orderBys     = array("username"=>"asc"); //排序字段方式
     protected $keywords     = "I('get.keywords')"; //查询关键字
-    protected $field        = "username"; //查询字段
+    protected $field        = "name"; //查询字段
 
     //自动验证
 	protected $_validate = array(
