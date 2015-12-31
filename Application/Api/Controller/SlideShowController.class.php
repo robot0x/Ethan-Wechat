@@ -15,9 +15,9 @@ class SlideShowController extends ApiController
 	 * panjie
 	 * @return jsonLists 
 	 */
-	public function getSlideUrlAction()
+	public function getSlideUrlsAction()
 	{
-		return $this->ajaxReturn($this->getSlideUrl());
+		return $this->ajaxReturn($this->getSlideUrls());
 	}
 
 	/**
@@ -25,19 +25,19 @@ class SlideShowController extends ApiController
 	 * panjie
 	 * @return lists 
 	 */
-	public function getSlideUrl()
+	public function getSlideUrls()
 	{
 		//实例化幻灯片
 		$SlideShowL = new SlideShowLogic();
 		$slideshows = $SlideShowL->getNormalLists();
 
 		//抓取出：存在URL值而且不是首页地图信息的信息，并返回
-		$datas = array();
+		$datas = array('status'=>'success');
 		foreach($slideshows as $key => $value)
 		{
 			if ($value['url'] !== '' && $value['is_map'] == '0')
 			{
-				$datas['url'] = $value['url'];
+				$datas['data'][]['url'] = $value['url'];
 			}
 		}
 
@@ -66,12 +66,12 @@ class SlideShowController extends ApiController
 		$slideshows = $SlideShowL->getNormalLists();
 
 		//抓取出：存在URL值 而且 是首页地图信息的信息，中断并返回
-		$data = array();
+		$data = array('status'=>'success');
 		foreach($slideshows as $key => $value)
 		{
 			if ($value['url'] !== '' && $value['is_map'] == '1')
 			{
-				$data['url'] = $value['url'];
+				$data['data']['url'] = $value['url'];
 				break;
 			}
 		}
