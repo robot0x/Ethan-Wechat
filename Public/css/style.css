@@ -96,6 +96,7 @@ a {
     margin: 5px;
     padding: 5px;
 }
-
-
+.error{
+        color: red;
+    }
 /* uploadify end */

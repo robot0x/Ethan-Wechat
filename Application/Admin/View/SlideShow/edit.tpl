@@ -53,6 +53,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
+                            {__TOKEN__}
                                 <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check "></i>保存</button>
                             </div>
                         </div>
