@@ -29,6 +29,8 @@ class EvaluationController extends ApiController
 		//实例化
 		$EvaluationCustomL = new EvaluationCustomLogic();
 		$evaluationCustoms = $EvaluationCustomL->getLists();
+
+		//将url信息转换为数组信息
 		foreach($evaluationCustoms as $key => $value)
 		{
 			$evaluationCustoms["$key"]["url"] = explode(",", $value["url"]);

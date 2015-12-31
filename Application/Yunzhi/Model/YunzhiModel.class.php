@@ -9,10 +9,11 @@ class YunzhiModel extends Model
     protected $pageSize     = 20;                   //每页多少条记录
     protected $totalCount   = 0;                    //总条数
     protected $errors       = array();              //错误信息
-    protected $orderBys     = array("id"=>"desc");      //排序字段方式
+    protected $orderBys     = array("id"=>"desc");  //排序字段方式
     protected $maps         = array();              //查询条件
     protected $keywords     = "";                   //查询关键字
     protected $field        = "title";              //查询字段
+    protected $fields       = array();              //回显字段
     protected $pk           = "id";                 //主键
 
     public function __construct()
@@ -119,7 +120,33 @@ class YunzhiModel extends Model
         return $this->errors;
     }
 
+    public function setFields($fields)
+    {
+        $this->fields = $fields;
+        return $this;
+    }
 
+    public function getFields()
+    {
+        return $this->fileds;
+    }
+
+    public function addFields($value)
+    {
+        $this->fields[] = $value;
+        return $this;
+    }
+
+    public function subFileds($value)
+    {
+        foreach($this->fields as $k => $v)
+        {
+            if($value == $v)
+            {
+                unset($this->fields["$k"]);
+            }
+        }
+    }
 
 
     /**
@@ -260,7 +287,6 @@ class YunzhiModel extends Model
      */
     public function getAllLists($fields = array(), $maps = array())
     {
-        $maps = array_merge($this->maps, $maps);
         $lists =    $this->
                     _getLists($fields, $maps)->
                     select();
@@ -275,17 +301,9 @@ class YunzhiModel extends Model
             return $this;
         }
 
-        if (empty($maps))
-        {
-            $maps = $this->maps;
-        }
-
-        // $orderBys = array();
-        // foreach ($this->bys as $k => $by)
-        // {
-        //     $order = ($this->orders[$k] == "asc") ? "asc" : "desc";
-        //     $orderBys[$by] = $order;
-        // }
+        //合并回显字段与查询条件
+        $fields = array_merge($this->fields, $fields);
+        $maps = array_merge($this->maps, $maps);
 
         $this->_getCounts($maps);
         
