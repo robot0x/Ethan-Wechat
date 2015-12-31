@@ -5,6 +5,7 @@ use Customer\Model\CustomerModel;
 use WechatInterface\Logic\wechatInterfaceapiLogic;
 
 class CustomerLogic extends CustomerModel {
+	private $i;
 
 	public function getLists(){
 		return $this->select();
@@ -19,7 +20,7 @@ class CustomerLogic extends CustomerModel {
 		//获取用户信息
 		$data = $this->getCustomerInfo($object);
 		
-		$this->addList($data);
+		$this->addCustomer($data);
 	}
 
 	private function addCustomer($data){
@@ -47,7 +48,9 @@ class CustomerLogic extends CustomerModel {
 
 		$map = array();
 		$map['openid'] = $data['openid'];
-		return $this->where($map)->save($data);
+		if ($this->where($map)->save($data)) {
+			$this->i++;
+		}
 	}
 
 	/**
@@ -82,7 +85,8 @@ class CustomerLogic extends CustomerModel {
 		$saves = array();
 		$lists = $this->getLists();
 
-		
+		//customers:从服务器中获取的列表
+		//lists：从数据库中获取的列表
 		foreach ($customers as $key => $customer) {
 			$i = count($lists);
 			foreach ($lists as $key => $list) {
@@ -97,7 +101,7 @@ class CustomerLogic extends CustomerModel {
 				$adds[] = $customer;
 			}
 		}
-
+		//var_dump($saves);
 		//将没有的数据进行添加
 		$count = array();
 		foreach ($adds as $key => $add) {
@@ -107,8 +111,9 @@ class CustomerLogic extends CustomerModel {
 		
 		//对已有的数据进行改正
 		foreach ($saves as $key => $save) {
-			$count['save'] = $this->saveCustomer($save);
+			$this->saveCustomer($save);
 		}
+		$count['save'] = $this->i;
 		//返回添加数目，改正数目
 		return $count;
 	}
