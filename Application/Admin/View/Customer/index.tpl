@@ -24,7 +24,7 @@
 				<td>{$list['province']}</td>
 				<td>{$list['country']}</td>	
 				<td>{:date('Y-m-d',$list['subscribe_time'])}</td>
-				<td><a class="button" href="{:U('edit?id='.$list['id'])}">冻结用户</a></td>
+				<td><a class="button" href="{:U('freezen?openid='.$list['openid'])}">冻结用户</a></td>
 			</tr>
 		</foreach>	
 	</table>

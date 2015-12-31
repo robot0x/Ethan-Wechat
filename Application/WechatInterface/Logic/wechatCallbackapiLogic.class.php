@@ -95,7 +95,8 @@ class wechatCallbackapiLogic extends IndexController {
             	$content = "邓浩洋测试";
             	break;
             case "unsubscribe":
-           		$content = "你真的不爱我么?";
+           		$CustomerL = new CustomerLogic;
+                $CustomerL->freezen($object->FromUserName);
                 break;
             case "CLICK":
             	$menuL = new CustomMenuLogic();

@@ -32,4 +32,11 @@ class CustomerController extends AdminController {
 		$result = $CustomerL->synchro($customers);
 		$this->success("新增".$result['add']."条数据，修改".$result['save']."条数据",U('index'));
 	}
+
+	public function freezenAction(){
+		$openid = I("get.openid");
+		$CustomerL = new CustomerLogic;
+		$CustomerL->freezen($openid);
+		$this->success("",U('index'));
+	}	
 }

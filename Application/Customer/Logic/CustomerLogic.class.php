@@ -8,7 +8,9 @@ class CustomerLogic extends CustomerModel {
 	private $i;
 
 	public function getLists(){
-		return $this->select();
+		$map = array();
+		$map['is_subscribe'] = 1;
+		return $this->where($map)->find();
 	}
 
 	/**
@@ -101,7 +103,7 @@ class CustomerLogic extends CustomerModel {
 				$adds[] = $customer;
 			}
 		}
-		//var_dump($saves);
+
 		//将没有的数据进行添加
 		$count = array();
 		foreach ($adds as $key => $add) {
@@ -114,7 +116,16 @@ class CustomerLogic extends CustomerModel {
 			$this->saveCustomer($save);
 		}
 		$count['save'] = $this->i;
+		
 		//返回添加数目，改正数目
 		return $count;
+	}
+
+	public function freezen($openid){
+		$map = array();
+		$map['openid'] = $openid;
+		$customer = $this->where($map)->find();
+		$customer['is_subscribe'] = 0;
+		$this->save($customer);
 	}
 }
