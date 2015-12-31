@@ -6,6 +6,7 @@
 namespace Room\Logic;
 
 use Room\Model\RoomModel;
+use Book\Logic\BookLogic;
 
 class RoomLogic extends RoomModel
 {
@@ -55,9 +56,25 @@ class RoomLogic extends RoomModel
 	 * panjie
 	 * @return lists 
 	 */
-	public function getAllListsWithTimeRange($beginTime, )
+	public function getAllListsWithTimeRange($beginTime = null, $endTime = null)
 	{
+		//取出所有房型
 		$lists = $this->getAllLists();
+		
+		//日期格式化，不成功，则进行当日及次日初始化
+		if (!$beginTime = date_to_int($beginTime))
+		{
+			$beginTime = date_to_int(date("Y-m-d"));
+		}
 
+		if (!$endTime = date_to_int($endTime))
+		{
+			$endTime = $beginTime+24*60*60;
+		}
+
+		$BookL = new BookLogic();
+		$books = $BookL->getBookedListInDateRange($beginTime, $endTime);
+
+		//todo:依次循环，用房型的总数，减去已预订的数量：得出房型可预订数量
 	}
 }
