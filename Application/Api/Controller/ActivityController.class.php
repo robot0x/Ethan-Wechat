@@ -31,8 +31,8 @@ class ActivityController extends ApiController
 		$ActivityL->setMaps($maps);
 
 		//设置取回字段
-		$fields = array("id","end_time","title","thumbnails_url"=>"url");
-		$ActivityL->setFields($fields);
+		$fields = array("id","end_time","title","thumbnails_url");
+		$ActivityL->setBackFields($fields);
 
 		//取LISTS
 		$activeties = $ActivityL->getLists(); 
@@ -65,30 +65,20 @@ class ActivityController extends ApiController
 		//返回值初始化
 		$data = array("status"=>"error");
 
-		//获取传入关键字
-		$id = (int)I('get.id');
-
 		//实例化
 		$ActivityL = new ActivityLogic();
-		$activity = $ActivityL->getListById($id);
 
-		//排错
-		if(count($ActivityL->getErrors()) > 0)
+		//返回数据，则返回正常。返回错误，则返回报错信息
+		if ($activity = $ActivityL->getNormalListById(I('get.id')))
 		{
-			$data["message"] = "activityConError: " . $ActivityL->getError();
-			return $data;
+			$data['status'] = "success";
+			$data['data'] = $activity;
+		}
+		else
+		{
+			$data['message'] = "ActivityConError: " . $ActivityL->getError();
 		}
 
-		//去除记录为空或状态为冻结的记录
-		if($activity === null || $activity['status'] == '1')
-		{
-			$data['message'] = "activityConError: the list of $id is not exist, or the list is freezed!";
-			return $data;
-		}
-
-		//返回数据
-		$data['data'] = $activity;
 		return $data;
-
 	}
 }

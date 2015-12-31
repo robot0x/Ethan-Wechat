@@ -13,7 +13,7 @@ class YunzhiModel extends Model
     protected $maps         = array();              //查询条件
     protected $keywords     = "";                   //查询关键字
     protected $field        = "title";              //查询字段
-    protected $fields       = array();              //回显字段
+    protected $backFields   = array();              //回显字段
     protected $pk           = "id";                 //主键
 
     public function __construct()
@@ -120,30 +120,30 @@ class YunzhiModel extends Model
         return $this->errors;
     }
 
-    public function setFields($fields)
+    public function setBackFields($backFields)
     {
         $this->fields = $fields;
         return $this;
     }
 
-    public function getFields()
+    public function getBackFields()
     {
-        return $this->fileds;
+        return $this->backFileds;
     }
 
-    public function addFields($value)
+    public function addBackFields($value)
     {
-        $this->fields[] = $value;
+        $this->backFields[] = $value;
         return $this;
     }
 
-    public function subFileds($value)
+    public function subBackFileds($value)
     {
-        foreach($this->fields as $k => $v)
+        foreach($this->backFields as $k => $v)
         {
             if($value == $v)
             {
-                unset($this->fields["$k"]);
+                unset($this->backFields["$k"]);
             }
         }
     }
@@ -248,7 +248,7 @@ class YunzhiModel extends Model
         if ((int)$id === 0)
         {
             $this->setError("YunzhiModel:getListbyId id类型不是INT或是传入的ID值为空");
-            return $this;
+            return false;
         }
 
         try
@@ -262,7 +262,7 @@ class YunzhiModel extends Model
         catch(\Think\Exception $e)
         {
             $this->setError($e->getMessage());
-            return $this;
+            return false;
         }
     }
     /**
@@ -285,30 +285,30 @@ class YunzhiModel extends Model
      * @param  array  $maps   [description]
      * @return [type]         [description]
      */
-    public function getAllLists($fields = array(), $maps = array())
+    public function getAllLists($backFields = array(), $maps = array())
     {
         $lists =    $this->
-                    _getLists($fields, $maps)->
+                    _getLists($backFields, $maps)->
                     select();
         return $lists;
     }
 
-    private function _getLists($fields = array(), $maps = array())
+    private function _getLists($backFields = array(), $maps = array())
     {
-        if (!is_array($fields) || !is_array($maps))
+        if (!is_array($backFields) || !is_array($maps))
         {
             $this->setError("YunzhiModel:_getList 传入的参数类型有误");
             return $this;
         }
 
         //合并回显字段与查询条件
-        $fields = array_merge($this->fields, $fields);
+        $backFields = array_merge($this->backFields, $backFields);
         $maps = array_merge($this->maps, $maps);
 
         $this->_getCounts($maps);
         
         return  $this->
-                field($fields)->
+                field($backFields)->
                 where($maps)->
                 order($this->orderBys);
     }
