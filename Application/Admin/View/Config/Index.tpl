@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-3">
-                    <form action="{:U('index?keywords=')}" method="get">
+                    <form action="{:U('index?p=',I('get.'))}" method="get">
                         <div class="input-group custom-search-form">
                             <input class="form-control" name="keywords" placeholder="Search..." type="text" value="{:I('get.keywords')}" />
                             <span class="input-group-btn">
