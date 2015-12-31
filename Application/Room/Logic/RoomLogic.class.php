@@ -9,8 +9,15 @@ use Room\Model\RoomModel;
 
 class RoomLogic extends RoomModel
 {
+	/**
+	 * 保存数据
+	 * panjie
+	 * @param  [type] $list [description]
+	 * @return [type]       [description]
+	 */
 	public function saveList($list)
 	{
+		//元变分
 		$list['price'] = (int)100*$list['price'];
 		return parent::saveList($list);
 	}
@@ -41,5 +48,16 @@ class RoomLogic extends RoomModel
             $this->setError = $e->getMessage();
             return false;
         }
+	}
+
+	/**
+	 * 获取指定日期区间内，加入剩余房间数的列表信息
+	 * panjie
+	 * @return lists 
+	 */
+	public function getAllListsWithTimeRange($beginTime, )
+	{
+		$lists = $this->getAllLists();
+
 	}
 }
