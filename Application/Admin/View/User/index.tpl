@@ -16,7 +16,7 @@
                     </form>
                 </div>
                 <div class="col-md-3">
-                    <a class="button btn btn-info"  href="{:U('add')}" ><i class="glyphicon glyphicon-plus"></i> 添加用户</a>
+                    <a class="button btn btn-info"  href="{:U('edit')}" ><i class="glyphicon glyphicon-plus"></i> 添加用户</a>
                 </div>
             </div>
             <div class="box">

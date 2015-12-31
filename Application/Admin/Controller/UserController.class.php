@@ -20,11 +20,6 @@ class UserController extends AdminController
         $this -> display();
     }
 
-    public function addAction()
-    {
-        //显示display
-        $this -> display();
-    }
 
     public function saveAction()
     {
@@ -34,7 +29,7 @@ class UserController extends AdminController
         $user = I('post.');
         //添加add()
         $UserL = new UserLogic();
-        $UserL -> addList($user);
+        $UserL -> saveList($user);
 
         //echo $this->getlastsql();
 
@@ -68,29 +63,7 @@ class UserController extends AdminController
         $this -> display('add');
     }
 
-    public function updateAction()
-    {
-        //取用户信息
-        $data = I('post.');
-        //保存修改save()
-        $UserL = new UserLogic();
-        $UserL -> saveList($data);
-
-        //判断异常
-        if(count($errors = $UserL->getErrors())!==0)
-        {
-            //数组变字符串
-            $error = implode('<br/>',$errors);
-
-            //显示错误
-            $this -> error("添加失败，原因：".$error,U('Admin/User/index?p='.I('get.p')));
-        }
-        else
-        {
-            //保存成功success()
-            $this -> success("操作成功",U('Admin/User/index?p='.I('get.p')));
-        }
-    }
+    
 
     public function deleteAction()
     {

@@ -221,7 +221,7 @@ class YunzhiModel extends Model
         if ((int)$id === 0)
         {
             $this->setError("YunzhiModel:getListbyId id类型不是INT或是传入的ID值为空");
-            return $this;
+            return false;
         }
 
         try
@@ -235,7 +235,7 @@ class YunzhiModel extends Model
         catch(\Think\Exception $e)
         {
             $this->setError($e->getMessage());
-            return $this;
+            return false;
         }
     }
     /**
