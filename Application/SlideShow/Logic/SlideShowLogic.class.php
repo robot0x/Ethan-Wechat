@@ -9,6 +9,21 @@ use SlideShow\Model\SlideShowModel;
 
 class SlideShowLogic extends SlideShowModel
 {
+	/**
+	 * 获取状态为正常的所有记录
+	 * panjie
+	 * @return lists 
+	 */
+	public function getNormalLists()
+	{
+		$maps['status'] = 0;
+		$this->setMaps($maps);
+		$lists = $this->getAllLists();
+		// echo $this->getLastSql();
+		return $lists;
+	}
+
+
 	public function addList($slideshow)
 	{
 		try{
