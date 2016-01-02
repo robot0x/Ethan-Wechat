@@ -39,7 +39,7 @@
 							<tr>
 								<td>{$k+1}</td>&nbsp
 								<td>{$activity[id]}</td>&nbsp
-								<td><img class="thumbnail" src="{$activity[thumbnails_url]}" /></td>&nbsp
+								<td><img class="thumbnails" src="{$activity[thumbnails_url][0]}" /></td>&nbsp
 								<td>{$activity[title]}</td>&nbsp
 								<td>{$activity[end_time]}</td>&nbsp
 								<td>{$activity[detail]}</td>&nbsp
@@ -60,8 +60,8 @@
             </div>
        </div>
 <style type="text/css">
-.thumbnail{
-	width: 10px;
+.thumbnails{
+	height: 10px;
 }
 </style>
 </block>

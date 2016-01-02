@@ -66,9 +66,6 @@ class ActivityLogic extends ActivityModel
 		return $datas;
 	}
 
-
-
-
 	/**
 	 * 获取状态为正常的活动信息
 	 * @param  int $id 
