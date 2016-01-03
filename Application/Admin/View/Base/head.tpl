@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>SB Admin 2 - Bootstrap Admin Theme</title>
+<title>梦云智--洛克酒店后台管理系统</title>
 <!-- Bootstrap Core CSS -->
 <link href="__BOW__/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- MetisMenu CSS -->
@@ -16,6 +16,10 @@
 <link href="__BOW__/morrisjs/morris.css" rel="stylesheet">
 <!-- Custom Fonts -->
 <link href="__BOW__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--webuploader-->
+<link href="__ROOT__/lib/webuploader/css/webuploader.css" rel="stylesheet" />
+
+<link href="__ROOT__/css/style.css" rel="stylesheet" />
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -24,11 +28,5 @@
     <![endif]-->
 <!-- jQuery -->
 <script src="__BOW__/jquery/dist/jquery.min.js"></script>
-<!--ueditor-->
-<js href="__ROOT__/lib/ueditor/ueditor.config.js" />
-<js href="__ROOT__/lib/ueditor/ueditor.all.min.js" />
-<js href="__ROOT__/lib/ueditor/lang/zh-cn/zh-cn.js" />
-<!--webuploader-->
-<link href="__ROOT__/lib/webuploader/css/webuploader.css" rel="stylesheet" />
 <block name="headCssJs">
 </block>
