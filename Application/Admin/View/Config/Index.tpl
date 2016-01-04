@@ -31,12 +31,8 @@
                         <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>配置ID</th>
                                 <th>配置名称</th>
-                                <th>配置类型</th>
                                 <th>配置说明</th>
-                                <th>创建时间</th>
-                                <th>更新时间</th>
                                 <th>状态</th>
                                 <th>配置值</th>
                                 <?php $order = I('get.order') ?>
@@ -49,18 +45,15 @@
                             <foreach name="config" item="conf" key="k">
                                 <tr>
                                     <td>{$k+1}</td>
-                                    <td>{$conf['id']}</td>
                                     <td>{$conf['name']}</td>
-                                    <td>{$conf['type']}</td>
                                     <td>{$conf['remark']}</td>
-                                    <td>{$conf['create_time']}</td>
-                                    <td>{$conf['update_time']}</td>
-                                    <td>{$conf['status']}</td>
+                                    <?php $status = I('get.status') ?>
+                                    <td><eq name="status" value="1">正常<else/>冻结</eq></td>
                                     <td>{$conf['value']}</td>
                                     <td>{$conf['sort']}</td>
                                     <td>
                                     <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$conf['id'],I('get.'))}"><i class="fa fa-pencil"></i>编辑</a>
-                                    <a class="btn btn-sm btn-danger" href="{:U('delete?id='.$conf['id'],I('get.'))}"><i class="fa fa-trash-o "></i>删除</a>
+                                    <eq name="status" value="0"><a class="btn btn-sm btn-warning"><i class="fa fa-lock"></i>冻结<else /><a class="btn btn-sm btn-warning"><i class="fa fa-lock "></i>取消冻结</a></eq>
                                     </td>
                                 </tr>
                             </foreach>
