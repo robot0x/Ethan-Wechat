@@ -23,6 +23,10 @@
     <js href="__ROOT__/lib/uploadify/jquery.uploadify.min.js" />
     <js href="__ROOT__/js/js.js" />
 
+    <!--datapickir-->
+    <js href="__BOW__/datatimepicker/bootstrap-datetimepicker.js" />
+    <js href="__BOW__/datatimepicker/bootstrap-datetimepicker.zh-CN.js" />
+    <link href="__BOW__/datatimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <block name="footerCssJs">
     </block>
 
