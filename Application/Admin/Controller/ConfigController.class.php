@@ -95,4 +95,14 @@ class ConfigController extends AdminController
             $this->error("删除失败" , U('Config/Index/index?id='.I('get.')));
         }
     }
+    public function freezenAction()
+    {
+        // 取用户ID
+        $configId = I('get.id');
+        $ConfigL = new ConfigLogic;
+        $config = $ConfigL->changeConfigFreezenState($configId);
+        //返回index页面
+        $url = U('Config/Index/index');
+        redirect_url($url);
+    }
 }

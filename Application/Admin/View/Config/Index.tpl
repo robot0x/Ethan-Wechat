@@ -52,7 +52,7 @@
                                     <td>{$conf['sort']}</td>
                                     <td>
                                     <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$conf['id'],I('get.'))}"><i class="fa fa-pencil"></i>编辑</a>
-                                    <eq name="conf.status" value="0"><a class="btn btn-sm btn-warning"><i class="fa fa-lock"></i>冻结<else /><a class="btn btn-sm btn-warning"><i class="fa fa-lock "></i>取消冻结</a></eq>
+                                    <a href="{:U('freezen?id='.$conf['id'],I('get.'))}" class="btn btn-sm <eq name="conf.status" value="0">btn-default<else/>btn-warning</eq>"><i class="fa fa-lock"></i><eq name="conf.status" value="0">冻结<else/>解冻</eq>
                                     </td>
                                 </tr>
                             </foreach>

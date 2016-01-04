@@ -95,4 +95,11 @@ class ConfigLogic extends ConfigModel
                 $this->error("删除失败" , U('Admin/Config/index?p='.I('get.p')));
             }
         }
+        public function changeConfigFreezenState($id)
+        {
+            $map['id'] = $id;
+            $res = $this->where($map)->find();
+            $res['status'] = $res['status'] ^ 1;
+            $this->save($res);
+        }
 }
