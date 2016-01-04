@@ -92,6 +92,7 @@ class RoomController extends AdminController
     {
         $RoomL = new RoomLogic();
         $lists = $RoomL->getAllLists();
+        // $lists = change_key($lists);
         $i = 1;
         foreach($lists as $key => $list)
         {

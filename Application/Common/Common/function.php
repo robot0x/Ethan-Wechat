@@ -873,7 +873,7 @@ function change_key_by_key1_key2($arr,$key1,$key2)
 /*
  * 改变数据组KEY的值
  */
-function change_key($arr,$key)
+function change_key($arr,$key = "id")
 {
     $arrRes = array();
     foreach($arr as $k => $v)

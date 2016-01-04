@@ -1,22 +1,20 @@
 <?php
 /**
- *幻灯片后台管理模块
- * 完成人：魏静云
+ * 现场出房
  */
 namespace Admin\Controller;
 
-use Sale\Logic\SaleLogic;   //Sale
+use Sale\Logic\SaleLogic;       //出房
 use Admin\Model\Sale\EditModel; //
   
 class SaleController extends AdminController
-
 {
 	public function indexAction(){
-
 		//获取列表
         $SaleL = new SaleLogic();
-        $sales = $SaleL->getLists();
+        $sales = $SaleL->getReminingListsInRange(I('get.begin_time'), I('get.end_time'));
 
+        dump($sales);
 		$this->assign('sales',$sales);
         $this->display();
     }
