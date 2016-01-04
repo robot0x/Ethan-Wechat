@@ -25,6 +25,21 @@ function my_json_encode($type, $p)
     return $str;
 }
 
+/**
+ * 判断是否大于0
+ */
+function moreThanZero($num)
+{
+    $num = (int)$num;
+    if(!preg_match('^[1-9]\d', $num))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 //根程序文件
 // 判断是否是在微信浏览器里
 //author:panjie 3792535@qq.com
@@ -971,14 +986,14 @@ function date_to_int($date , $connecter = '-')
     //查找分隔符的位置，如果小于2，则返回FALSE。
     if(!$firstPosition = strpos($date ,$connecter))
     {
-        return $date;
+        return false;
     }
 
     //截取出年,如果是2位，则拼加20，如果即不是2位，也不是4位，flase
     $year = (int)substr($date , 0 , $firstPosition);
     if($year == 0 || $year > 9999)
     {
-        return $date;
+        return false;
     }
 
     if($year < 100)
@@ -987,7 +1002,7 @@ function date_to_int($date , $connecter = '-')
     }
     elseif($year < 1000)
     {
-        return $date;
+        return false;
     }
 
     //截取月，如果等于0，或是大于12，返回$date    
@@ -996,14 +1011,14 @@ function date_to_int($date , $connecter = '-')
  
     if($month < 1 || $month > 12)
     {
-        return $date;
+        return false;
     }
   
     //截取日，如果不大于0和小于31，则返回FLASE
     $day = (int)substr($date , $secondPosition+1);
     if($day < 1 || $day > 31)
     {
-        return $date;
+        return false;
     }
 
     return mktime(0,0,0,$month,$day,$year);
