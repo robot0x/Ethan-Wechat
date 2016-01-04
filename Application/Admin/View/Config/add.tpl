@@ -13,29 +13,54 @@
                             <input type="hidden" name="p" value="{$p}" />
                             <input type="hidden" name="id" value="{$config.id}" />
                         </div>
-                        <div class="form-group">
-                            <label for="name">配置名称:</label>
-                            <input class="form-control" type="text" name="name" value="{$config.name}"/>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label for="name">配置名称:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="name" value="{$config.name}"/>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="type">配置类型  ：</label>
-                            <input class="form-control" type="text" name="type" value="{$config.type}" />
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label for="type">配置类型  ：</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="type" value="{$config.type}" />
+                            </div>
                         </div>
-                        <div class="form-group">
+
+                        <div class="form-group row">
+                        <div class="col-md-3">
                             <label for="remark">配置说明：</label>
+                        </div>
+                        <div class="col-md-6">
                             <input class="form-control" type="text" name="remark" value="{$config.remark}" />
                         </div>
-                        <div class="form-group">
+                        </div>
+                        <div class="form-group row">
+                        <div class="col-md-3">
                             <label for="status">状态：</label>
+                            </div>
+                            <div class="col-md-6">
                             <input class="form-control" type="text" name="status" value="{$config.status}" />
+                            </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
+                        <div class="col-md-3">
                             <label for="status">配置值：</label>
+                            </div>
+                            <div class="col-md-6">
                             <input class="form-control" type="text" name="value" value="{$config.value}" />
+                            </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
+                        <div class="col-md-3">
                             <label for="status">排序：</label>
+                            </div>
+                            <div class="col-md-6">
                             <input class="form-control" type="text" name="sort" value="{$config.sort}" />
+                            </div>
                         </div>
                         <button class="btn btn-primary" type="submit">保存</button>
                         <a class="btn btn-default" href="{:U('index?id= ',I('get.'))}">返回</a>
