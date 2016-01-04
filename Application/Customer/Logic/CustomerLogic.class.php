@@ -138,5 +138,4 @@ class CustomerLogic extends CustomerModel {
 		}
 		$this->save($customer);
 	}
->>>>>>> denghaoyang
 }
