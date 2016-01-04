@@ -63,8 +63,6 @@ class UserController extends AdminController
         $this -> display('add');
     }
 
-    
-
     public function deleteAction()
     {
         //取id
@@ -80,6 +78,21 @@ class UserController extends AdminController
         else
         {
             $this -> error("删除失败",U('Admin/User/index?p='.I('get.p')));
+        }
+    }
+
+    public function resetPasswordAction()
+    {
+        $userId = I('get.id');
+        $userL = new UserLogic();
+        $status = $userL -> resetPassword($userId);
+        if($status!==false)
+        {
+            $this ->success('您的密码已重置，新密码为:'.C(DEFAULT_PASSWORD),U('Admin/User/index?p='.I('get.p')));
+        }
+        else
+        {
+            $this -> error("重置失败",U('Admin/User/index?p='.I('get.p')));
         }
     }
 }

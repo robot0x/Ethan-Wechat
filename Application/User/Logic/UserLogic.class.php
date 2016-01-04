@@ -50,33 +50,4 @@ class UserLogic extends UserModel
 		return $datas;
 	}
 
-	// public function getSearchLists()
-	// {
-	// 	//去空格
-	// 	$keywords = trim(I('get.keywords'));
-
-	// 	//判断是否为空
-	// 	try
-	// 	{
-	// 	    if ($keywords!=="")
-	// 	    {
-	// 		    $map['name'] = array('like','%'.$keywords.'%');
-	// 		    import('ORG.Util.Page');// 导入分页类
-
-	// 		    $lists=$this->page($_GET['p'],$pagesize)->where($map)->select();
-	// 		    return $lists;
-	// 	    }
-	// 	    else
-	// 	    {
-	// 		    $lists = $this->page($_GET['p'],$pagesize)->select();
-	// 		    return $lists;
-	// 	    }
-	//     }
-	// 	catch(\Think\Exception $e)
-	// 	{
-	// 		$this->errors[]=$e->getMessage();
-	// 		return false;
-	// 	}
-	// }
-
 }

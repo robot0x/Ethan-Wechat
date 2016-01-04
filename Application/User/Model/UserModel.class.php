@@ -30,4 +30,29 @@ class UserModel extends YunzhiModel
     array('email','email','email format is not correct',0,''), 
     // 验证邮箱格式是否正确
    );
+
+
+    /**
+     * [resetPassword 重置密码]
+     * 重置密码为mengyunzhi
+     * @param  [type] $userId [用户id]
+     * @return [type]         [description]
+     */
+    public function resetPassword($userId)
+    {
+        if ($userId == null) 
+        {
+            $this ->error = "系统错误!";
+            throw new \Think\Exception($this->error,1);
+        }
+        else
+        {
+            $data['id'] = $userId;
+            $data['password'] = sha1(C(DEFAULT_PASSWORD));
+            $this->save($data);
+            return true;
+        }
+    }
+
+
 }
