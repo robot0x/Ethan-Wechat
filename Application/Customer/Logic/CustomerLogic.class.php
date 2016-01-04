@@ -15,13 +15,21 @@ class CustomerLogic extends CustomerModel {
 
 	/**
 	 * 存储关注用户的基本信息
-	 * @param object 触发关注事件post过来的xml信息
+	 * @param openid 触发关注事件post过来的xml信息
 	 * @return status 存储状态
 	 */
-	public function addCustomerInfo($object){
-		//获取用户信息
-		$data = $this->getCustomerInfo($object);
+	public function addCustomerInfo($openid){
+		//先判断用户时否为之前注册过，
+		$map = array();
+		$map['openid'] = $openid;
 		
+		if (is_array($this->where($map)->find())) {
+			$this->freezen($openid);
+		}else{
+			//获取用户信息
+			$data = $this->getCustomerInfo($openid);
+		}
+
 		$this->addCustomer($data);
 	}
 
@@ -125,7 +133,11 @@ class CustomerLogic extends CustomerModel {
 		$map = array();
 		$map['openid'] = $openid;
 		$customer = $this->where($map)->find();
-		$customer['is_subscribe'] = 0;
+		if ($customer['is_subscribe'] == 0) {
+			$customer['is_subscribe'] = 1;
+		} else {
+			$customer['is_subscribe'] = 0;
+		}
 		$this->save($customer);
 	}
 }
