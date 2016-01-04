@@ -47,13 +47,12 @@
                                     <td>{$k+1}</td>
                                     <td>{$conf['name']}</td>
                                     <td>{$conf['remark']}</td>
-                                    <?php $status = I('get.status') ?>
-                                    <td><eq name="status" value="1">正常<else/>冻结</eq></td>
+                                    <td><eq name="conf.status" value="0">正常<else/>冻结</eq></td>
                                     <td>{$conf['value']}</td>
                                     <td>{$conf['sort']}</td>
                                     <td>
                                     <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$conf['id'],I('get.'))}"><i class="fa fa-pencil"></i>编辑</a>
-                                    <eq name="status" value="0"><a class="btn btn-sm btn-warning"><i class="fa fa-lock"></i>冻结<else /><a class="btn btn-sm btn-warning"><i class="fa fa-lock "></i>取消冻结</a></eq>
+                                    <eq name="conf.status" value="0"><a class="btn btn-sm btn-warning"><i class="fa fa-lock"></i>冻结<else /><a class="btn btn-sm btn-warning"><i class="fa fa-lock "></i>取消冻结</a></eq>
                                     </td>
                                 </tr>
                             </foreach>
