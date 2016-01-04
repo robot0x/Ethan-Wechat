@@ -49,8 +49,8 @@ class ActivityController extends AdminController
 		//取信息
 		$ActivityL = new ActivityLogic();
 		$activity = $ActivityL->getListById($activityId);
-		dump($activity['thumbnails_url']);
-		dump($activity['thumbnails_url']=explode(",",$activity['thumbnails_url']));
+		// dump($activity['thumbnails_url']);
+		 $activity['thumbnails_url']=explode(",",$activity['thumbnails_url']);
 		//向V层赋值
 		$this->assign('activity',$activity);
 		$this->display();
@@ -76,7 +76,7 @@ class ActivityController extends AdminController
              return false;
             
         }
-            $this->success("操作成功" , U('Activity/Index/index?p='.I('get.p')),20);
+            $this->success("操作成功" , U('Activity/Index/index?p='.I('get.p')));
 	}
 	public function deleteAction()
 	{
@@ -101,6 +101,7 @@ class ActivityController extends AdminController
 		$ActivityL = new ActivityLogic();
 		$activity=$ActivityL->getListById($activityId);
 		//向V层赋值
+		 $activity['thumbnails_url']=explode(",",$activity['thumbnails_url']);
 		$this->assign('activity',$activity);
 		$this->display();
 	}
