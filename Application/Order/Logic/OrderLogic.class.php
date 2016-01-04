@@ -3,11 +3,11 @@
  * 预订信息
  * panjie
  */
-namespace Book\Logic;
+namespace Order\Logic;
 
-use Book\Model\BookModel;
+use Order\Model\OrderModel;
 
-class BookLogic extends BookModel
+class OrderLogic extends OrderModel
 {
 	/**
 	 * 取出区间内所有房型的预订信息
@@ -15,7 +15,7 @@ class BookLogic extends BookModel
 	 * @param  int $endTime   结束日期:2016-01-03
 	 * @return lists
 	 */
-	public function getBookedListInDateRange($beginTime, $endTime)
+	public function getOrderedListInDateRange($beginTime, $endTime)
 	{
 		$beginTime 	= (int)$beginTime;
 		$endTime 	= (int)$endTime;

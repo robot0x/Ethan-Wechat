@@ -3,11 +3,11 @@
  * 预订信息
  * panjie
  */
-namespace Book\Model;
+namespace Order\Model;
 
 use Yunzhi\Model\YunzhiModel;
 
-class BookModel extends YunzhiModel
+class OrderModel extends YunzhiModel
 {
 	
 }
