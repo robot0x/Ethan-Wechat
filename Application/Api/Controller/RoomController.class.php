@@ -17,7 +17,6 @@ class RoomController extends ApiController
 	public function getRoomsAction()
 	{	
 		return $this->ajaxReturn($this->getRooms());
-		
 	}
 
 	/**
