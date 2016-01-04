@@ -11,8 +11,9 @@ use Yunzhi\Model\YunzhiModel;
 
 class RoomModel extends YunzhiModel
 {
-	protected $maps = array("status"=>0);
-	protected $_auto = array(
+	protected $maps 	= array("status"=>0);					//默认条件
+	protected $orderBys = array("sort"=>"desc", "id"=>"desc");	//默认排序 
+	protected $_auto 	= array(
 		array("status", "0"),	//新增给0
 	);
 
