@@ -14,7 +14,7 @@
 			<th>注册时间</th>
 			<th>操作</th>
 		</tr>
-		<foreach name="M:getCustomers()" item="list" key="k">
+		<foreach name="M:getlists()" item="list" key="k">
 			<tr>
 				<td>{++$k}</td>
 				<td>{$list['openid']}</td>

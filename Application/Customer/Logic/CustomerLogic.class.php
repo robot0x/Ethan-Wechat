@@ -7,12 +7,6 @@ use WechatInterface\Logic\wechatInterfaceapiLogic;
 class CustomerLogic extends CustomerModel {
 	private $i;
 
-	public function getLists(){
-		$map = array();
-		$map['is_subscribe'] = 1;
-		return $this->where($map)->find();
-	}
-
 	/**
 	 * 存储关注用户的基本信息
 	 * @param openid 触发关注事件post过来的xml信息
@@ -21,7 +15,7 @@ class CustomerLogic extends CustomerModel {
 	public function addCustomerInfo($openid){
 		//先判断用户时否为之前注册过，
 		$map = array();
-		$map['openid'] = $openid;
+		$map['id'] = $openid;
 		
 		if (is_array($this->where($map)->find())) {
 			$this->freezen($openid);
@@ -57,7 +51,7 @@ class CustomerLogic extends CustomerModel {
 		$data['is_subscribe'] = $data['subscribe'];
 
 		$map = array();
-		$map['openid'] = $data['openid'];
+		$map['id'] = $data['openid'];
 		if ($this->where($map)->save($data)) {
 			$this->i++;
 		}
@@ -101,7 +95,7 @@ class CustomerLogic extends CustomerModel {
 			$i = count($lists);
 			foreach ($lists as $key => $list) {
 
-				if ($customer['openid'] == $list['openid']) {
+				if ($customer['id'] == $list['openid']) {
 					$saves[] = $customer;
 				}else{
 					--$i;
@@ -131,7 +125,7 @@ class CustomerLogic extends CustomerModel {
 
 	public function freezen($openid){
 		$map = array();
-		$map['openid'] = $openid;
+		$map['id'] = $openid;
 		$customer = $this->where($map)->find();
 		if ($customer['is_subscribe'] == 0) {
 			$customer['is_subscribe'] = 1;
