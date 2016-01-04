@@ -1,5 +1,5 @@
 	<div>
-        <a class="button"  href="{:U('createMenu')}" >同步服务器的客户信息
+        <a class="button"  href="{:U('synchro')}" >同步服务器的客户信息
 </a>
     </div>
 	<table>
@@ -14,7 +14,7 @@
 			<th>注册时间</th>
 			<th>操作</th>
 		</tr>
-		<foreach name="M:getCustomers()" item="list" key="k">
+		<foreach name="M:getlists()" item="list" key="k">
 			<tr>
 				<td>{++$k}</td>
 				<td>{$list['openid']}</td>
@@ -23,8 +23,8 @@
 				<td>{$list['city']}</td>
 				<td>{$list['province']}</td>
 				<td>{$list['country']}</td>	
-				<td>{$list['subscribe_time']}</td>
-				<td><a class="button" href="{:U('edit?id='.$list['id'])}">冻结用户</a></td>
+				<td>{:date('Y-m-d',$list['subscribe_time'])}</td>
+				<td><a class="button" href="{:U('freezen?openid='.$list['openid'])}">冻结用户</a></td>
 			</tr>
 		</foreach>	
 	</table>
