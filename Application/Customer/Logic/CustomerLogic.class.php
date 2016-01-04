@@ -1,4 +1,8 @@
 <?php
+/**
+ * 客户
+ * panjie
+ */
 namespace Customer\Logic;
 
 use Customer\Model\CustomerModel;
@@ -8,9 +12,9 @@ class CustomerLogic extends CustomerModel {
 	private $i;
 
 	/**
-	 * 存储关注用户的基本信息
-	 * @param openid 触发关注事件post过来的xml信息
-	 * @return status 存储状态
+	 * 通过用户ID添加记录
+	 * @param  string $id 28位openid
+	 * @return list     
 	 */
 	public function addCustomerInfo($openid){
 		//先判断用户时否为之前注册过，
@@ -134,4 +138,5 @@ class CustomerLogic extends CustomerModel {
 		}
 		$this->save($customer);
 	}
+>>>>>>> denghaoyang
 }
