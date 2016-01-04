@@ -23,10 +23,9 @@
             <label for="thumbnails_url" class="col-sm-2 control-label">上传新图片：</label>
                </eq>
          <div class="col-sm-4">
-         <html:uploader value="activity[thumbnails_url]" name="thumbnails_url" id="thumbnails_url">
+         <html:uploader value="activity[thumbnails_url][0]" name="thumbnails_url" id="thumbnails_url">
         请选择图片
         </html:uploader>
-        
           </div>
           </div>
 		<div class="form-group">
