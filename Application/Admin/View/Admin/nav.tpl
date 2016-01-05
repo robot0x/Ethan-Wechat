@@ -224,7 +224,7 @@
             <ul class="nav" id="side-menu">
                 <foreach name="M:getMenuLists()" item="list">
                     <li>
-                        <a href="{:U($list['module'] . '/' . $list['controller'] . '/' . $list['action'] . '?id=' . $list['id'])}"><i class="{$list['icon']}"></i> {$list['title']}</a>
+                        <a href="{:U($list['module'] . '/' . $list['controller'] . '/' . $list['action'])}"><i class="{$list['icon']}"></i> {$list['title']}</a>
                     </li>
                 </foreach>
             </ul>
