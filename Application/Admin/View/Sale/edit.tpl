@@ -4,11 +4,10 @@
         <div class="col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    出房,共{{days}}晚
+                    出房
                 </div>
                 <div class="panel-body" >
                     <form ng-submit="processForm()" role="form" action="{:U('save',I('get.'))}" method="post">
-                        <input type="hidden" name="id" value="{$room['id']}" />
                         <div class="row">
                             <div class="col-xs-12 col-md-6 col-lg-3">
                                 <div class="form-group">
@@ -16,7 +15,7 @@
                                     <input ng-model="formData.begin_time" class="form-control date" id="total_rooms" name="begin_time" type="text" value="4" />
                                 </div>
                                 <div class="form-group">
-                                    <label>请选择离店日期</label>
+                                    <label>请选择离店日期（共{{days}}晚）</label>
                                     <input ng-model="formData.end_time" class="form-control date" id="total_rooms" name="end_time" type="text" />
                                 </div>
 
@@ -27,9 +26,9 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>房型单价</label>
-                                    <input type="hidden" ng-model="per_price" name="per_price"/>
-                                    <p class="form-control-static">{{per_price}}</p>
+                                    <label>房型单价(元)</label>
+                                    <input type="hidden" ng-model="per_price"/>
+                                    <p class="form-control-static">{{per_price}}元</p>
                                 </div>
                                 <div class="form-group">
                                     <label>数量</label>
@@ -38,8 +37,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>实付金额(应付金额：{{total_pay}})</label>
-                                    <input class="form-control" name="total_pay" value="{{total_pay}}" />
+                                    <label>实付金额(应付金额：{{total_pay}}元)</label>
+                                    <input class="form-control" ng-model="total_pay" />
                                 </div>
                                 <div class="form-group">
                                     <label>客户姓名</label>

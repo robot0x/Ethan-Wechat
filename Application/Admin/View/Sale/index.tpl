@@ -43,9 +43,9 @@
                                         <td>{$value["title"]}</td>
                                         <td class="text-right">{$value["price"] | format_money}</td>
                                         <td>{$value["description"]}</td>
-                                        <td>{$value["remaining"]}</td>
+                                        <td><eq name="value.remaining" value="0"><span class="badge">{$value["remaining"]}</span><else />{$value["remaining"]}</eq></td>
                                         <td>
-                                            <a class="btn btn-sm btn-primary" href="{:U('edit?id=' . $value['id'], I('get.'))}"><i class="fa fa-external-link "></i>&nbsp;出房</a>
+                                            <neq name="value.remaining" value="0"><a class="btn btn-sm btn-primary" href="{:U('edit?id=' . $value['id'], I('get.'))}"><i class="fa fa-external-link "></i>&nbsp;出房</a></neq>
                                         </td>
                                     </tr>
                                 </foreach>

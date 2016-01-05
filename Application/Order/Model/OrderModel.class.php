@@ -9,5 +9,7 @@ use Yunzhi\Model\YunzhiModel;
 
 class OrderModel extends YunzhiModel
 {
-	
+	protected $_auto = array(
+		array("order_time", "time", 1, "function"),
+	);
 }

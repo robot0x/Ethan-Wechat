@@ -26,6 +26,30 @@ function my_json_encode($type, $p)
 }
 
 /**
+ * 通过正则表达式对传入的angularjs自动加入的变量类型进行过滤
+ * panjie
+ * 2016-01-05
+ * 
+ * 例输入：
+ * array (size=2)
+ * 'room_id' => string 'string:9' (length=8)
+ * 'count' => string 'number:1' (length=8)
+ * 返回：
+ * array (size=2)
+ * 'room_id' => string '9' (length=8)
+ * 'count' => string '1' (length=8)
+ */
+
+function remove_json_formart($array)
+{
+    foreach($array as $key => $value)
+    {
+        $array["$key"] = preg_replace('/([a-z]{0,}|[A-Z]{0,}):/', "", $value);
+    }
+    return $array;
+}
+
+/**
  * 判断是否大于0
  */
 function moreThanZero($num)
