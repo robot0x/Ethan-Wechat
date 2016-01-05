@@ -1,5 +1,6 @@
 <extend name="Base:index" />
 <block name="body">
+<div class="row-fluid" ng-app="config" ng-controller="configAdd">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -8,7 +9,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form <eq name="Think.ACTION_NAME" value="edit"> action="{:U('update',I('get.'))}"<else />action="{:U('save',I('get.'))}"</eq> method="post" class="form">
+                        <form  name="form" <eq name="Think.ACTION_NAME" value="edit"> action="{:U('update',I('get.'))}"<else />action="{:U('save',I('get.'))}"</eq> method="post" class="form">
                         <div class="form-group">
                             <input type="hidden" name="p" value="{$p}" />
                             <input type="hidden" name="id" value="{$config.id}" />
@@ -18,7 +19,8 @@
                                 <label for="name">配置名称:</label>
                             </div>
                             <div class="col-xs-6">
-                                <input class="form-control" <eq name="config.name" value=""><else/>disabled="disabled"</eq> type="text" name="name" value="{$config.name}"/>
+                                <input id="configname" class="form-control" type="text" name="name" ng-model="configname" ng-disabled="{{edit}}" required />
+                                <p ng-show="form.configname.$dirty && form.configname.$invalid"><span ng-show="form.configname.$error.required">配置名称不能为空</span></p>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -82,6 +84,8 @@
             </div><!--body-->
         </div>
     </div>
+    </div>
+    <include file="add.js" />
     </block>
 
 
