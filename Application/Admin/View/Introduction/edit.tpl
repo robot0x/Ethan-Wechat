@@ -37,8 +37,9 @@
                                   <label for="url" class="col-sm-2 control-label">上传新图片：</label>
                               </eq>
                               <div class="col-sm-5">
-                              <html:webuploader name="url" class="ourClass" >    
-                              </html:webuploader>
+                                 <html:uploader value="introduction['url']" name="url">
+        请选择图片
+        </html:uploader>
                               </div>
                         </div>                      
                         <div class="form-group">
