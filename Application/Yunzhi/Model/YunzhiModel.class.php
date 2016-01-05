@@ -276,6 +276,11 @@ class YunzhiModel extends Model
                     _getLists($fields, $maps)->         
                     page("$page")->
                     select();
+                    
+        //利用C函数，向PAGE标签传值
+        C("YUNZHI_TOTAL_COUNT", $this->totalCount);
+        C("YUNZHI_PAGE_SIZE", $this->pageSize);
+        C("YUNZHI_P", $this->p);
         return $lists;
     }
 
@@ -321,10 +326,5 @@ class YunzhiModel extends Model
         $this->p = (int)ceil($this->totalCount / $this->pageSize) > $this->p ?
                     (int)ceil($this->totalCount / $this->pageSize) :
                     $this->p;
-
-        //利用C函数，向PAGE标签传值
-        C("YUNZHI_TOTAL_COUNT", $this->totalCount);
-        C("YUNZHI_PAGE_SIZE", $this->pageSize);
-        C("YUNZHI_P", $this->p);
     }
 }
