@@ -84,4 +84,24 @@ class RoomController extends AdminController
         }
     }
 
+    /**
+     * 获取剩余房间
+     * @return [type] [description]
+     */
+    public function getRemainderRoomsAjaxAction()
+    {
+        $RoomL = new RoomLogic();
+        $lists = $RoomL->getAllLists();
+        // $lists = change_key($lists);
+        $i = 1;
+        foreach($lists as $key => $list)
+        {
+            $lists["$key"]["count"] = $i++;
+        }
+
+        $datas = array("status"=>"success");
+        $datas["lists"] = $lists;
+        $this->ajaxReturn($datas);
+    }
+
 }

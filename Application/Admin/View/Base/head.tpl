@@ -29,5 +29,6 @@
     <![endif]-->
 <!-- jQuery -->
 <script src="__BOW__/jquery/dist/jquery.min.js"></script>
+<script src="__ROOT__/js/angular.min.js"></script>
 <block name="headCssJs">
 </block>

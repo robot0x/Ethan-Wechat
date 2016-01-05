@@ -9,10 +9,11 @@ class YunzhiModel extends Model
     protected $pageSize     = 20;                   //每页多少条记录
     protected $totalCount   = 0;                    //总条数
     protected $errors       = array();              //错误信息
-    protected $orderBys     = array("id"=>"desc");      //排序字段方式
+    protected $orderBys     = array("id"=>"desc");  //排序字段方式
     protected $maps         = array();              //查询条件
     protected $keywords     = "";                   //查询关键字
     protected $field        = "title";              //查询字段
+    protected $backFields   = array();              //回显字段
     protected $pk           = "id";                 //主键
 
     public function __construct()
@@ -119,7 +120,33 @@ class YunzhiModel extends Model
         return $this->errors;
     }
 
+    public function setBackFields($backFields)
+    {
+        $this->fields = $fields;
+        return $this;
+    }
 
+    public function getBackFields()
+    {
+        return $this->backFileds;
+    }
+
+    public function addBackFields($value)
+    {
+        $this->backFields[] = $value;
+        return $this;
+    }
+
+    public function subBackFileds($value)
+    {
+        foreach($this->backFields as $k => $v)
+        {
+            if($value == $v)
+            {
+                unset($this->backFields["$k"]);
+            }
+        }
+    }
 
 
     /**
@@ -221,7 +248,7 @@ class YunzhiModel extends Model
         if ((int)$id === 0)
         {
             $this->setError("YunzhiModel:getListbyId id类型不是INT或是传入的ID值为空");
-            return $this;
+            return false;
         }
 
         try
@@ -235,7 +262,7 @@ class YunzhiModel extends Model
         catch(\Think\Exception $e)
         {
             $this->setError($e->getMessage());
-            return $this;
+            return false;
         }
     }
     /**
@@ -249,6 +276,11 @@ class YunzhiModel extends Model
                     _getLists($fields, $maps)->         
                     page("$page")->
                     select();
+                    
+        //利用C函数，向PAGE标签传值
+        C("YUNZHI_TOTAL_COUNT", $this->totalCount);
+        C("YUNZHI_PAGE_SIZE", $this->pageSize);
+        C("YUNZHI_P", $this->p);
         return $lists;
     }
 
@@ -258,39 +290,30 @@ class YunzhiModel extends Model
      * @param  array  $maps   [description]
      * @return [type]         [description]
      */
-    public function getAllLists($fields = array(), $maps = array())
+    public function getAllLists($backFields = array(), $maps = array())
     {
-        $maps = array_merge($this->maps, $maps);
         $lists =    $this->
-                    _getLists($fields, $maps)->
+                    _getLists($backFields, $maps)->
                     select();
         return $lists;
     }
 
-    private function _getLists($fields = array(), $maps = array())
+    private function _getLists($backFields = array(), $maps = array())
     {
-        if (!is_array($fields) || !is_array($maps))
+        if (!is_array($backFields) || !is_array($maps))
         {
             $this->setError("YunzhiModel:_getList 传入的参数类型有误");
             return $this;
         }
 
-        if (empty($maps))
-        {
-            $maps = $this->maps;
-        }
-
-        // $orderBys = array();
-        // foreach ($this->bys as $k => $by)
-        // {
-        //     $order = ($this->orders[$k] == "asc") ? "asc" : "desc";
-        //     $orderBys[$by] = $order;
-        // }
+        //合并回显字段与查询条件
+        $backFields = array_merge($this->backFields, $backFields);
+        $maps = array_merge($this->maps, $maps);
 
         $this->_getCounts($maps);
         
         return  $this->
-                field($fields)->
+                field($backFields)->
                 where($maps)->
                 order($this->orderBys);
     }
@@ -303,10 +326,5 @@ class YunzhiModel extends Model
         $this->p = (int)ceil($this->totalCount / $this->pageSize) > $this->p ?
                     (int)ceil($this->totalCount / $this->pageSize) :
                     $this->p;
-
-        //利用C函数，向PAGE标签传值
-        C("YUNZHI_TOTAL_COUNT", $this->totalCount);
-        C("YUNZHI_PAGE_SIZE", $this->pageSize);
-        C("YUNZHI_P", $this->p);
     }
 }

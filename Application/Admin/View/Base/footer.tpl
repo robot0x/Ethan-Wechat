@@ -25,6 +25,10 @@
     <js href="__ROOT__/Admin/js/jquery.validate.js" />
     <js href="__ROOT__/Admin/js/yunzhi.js" />
 
+    <!--datapickir-->
+    <js href="__BOW__/datatimepicker/bootstrap-datetimepicker.js" />
+    <js href="__BOW__/datatimepicker/bootstrap-datetimepicker.zh-CN.js" />
+    <link href="__BOW__/datatimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <block name="footerCssJs">
     </block>
 
