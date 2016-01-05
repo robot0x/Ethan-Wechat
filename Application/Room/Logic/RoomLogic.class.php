@@ -6,7 +6,7 @@
 namespace Room\Logic;
 
 use Room\Model\RoomModel;	//房型信息
-use Book\Logic\BookLogic;	//预订信息
+use Order\Logic\OrderLogic;	//预订信息
 
 class RoomLogic extends RoomModel
 {
@@ -56,6 +56,7 @@ class RoomLogic extends RoomModel
 	 * panjie
 	 * @return lists 
 	 */
+
 	public function getAllListsWithTimeRange($beginTime = null, $endTime = null)
 	{
 		//取出所有状态为正常的房型
@@ -73,11 +74,11 @@ class RoomLogic extends RoomModel
 		}
 
 		//取出预订信息
-		$BookL = new BookLogic();
-		$books = $BookL->getBookedListInDateRange($beginTime, $endTime);
+		$OrderL = new OrderLogic();
+		$orders = $OrderL->getOrderedListInDateRange($beginTime, $endTime);
 
 		//预订信息按房型ID重新分组
-		$books = group_by_key($books, $key = "room_id");
+		$orders = group_by_key($orders, $key = "room_id");
 
 		$data = array();
 		$i = 0;
@@ -89,10 +90,10 @@ class RoomLogic extends RoomModel
 			$id = $room['id'];
 
 			//预订总数
-			$bookedTotalCount = 0;
-			foreach($books["$id"] as $book)
+			$orderedTotalCount = 0;
+			foreach($orders["$id"] as $order)
 			{
-				$bookedTotalCount += $book['count'];
+				$orderedTotalCount += $order['count'];
 			}
 
 			$data[$i]['id'] 				= $room['id'];
@@ -101,11 +102,12 @@ class RoomLogic extends RoomModel
 			$data[$i]['url'] 				= $urls[0];
 			$data[$i]['price'] 				= $room['price'];
 			$data[$i]['description'] 		= $room['description'];
-			$data[$i]['detail_description'] = $room['detial_description'];
+			$data[$i]['detail_description'] = $room['detail_description'];
 			$data[$i]['status'] 			= $room['status'];
-			$data[$i]['remaining_count'] 	= $room['total_rooms'] - $bookedTotalCount;
+			$data[$i]['remaining_count'] 	= $room['total_rooms'] - $orderedTotalCount;
 			$i++;
 		}
+
 
 		return $data;
 	}
