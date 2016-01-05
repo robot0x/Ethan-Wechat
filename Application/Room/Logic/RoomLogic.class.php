@@ -102,7 +102,7 @@ class RoomLogic extends RoomModel
 			$data[$i]['url'] 				= $urls[0];
 			$data[$i]['price'] 				= $room['price'];
 			$data[$i]['description'] 		= $room['description'];
-			$data[$i]['detail_description'] = $room['detial_description'];
+			$data[$i]['detail_description'] = $room['detail_description'];
 			$data[$i]['status'] 			= $room['status'];
 			$data[$i]['remaining_count'] 	= $room['total_rooms'] - $orderedTotalCount;
 			$i++;
