@@ -2,7 +2,7 @@
 <block name="body">
     <div class="row-fluid">
         <div class="col-xs-12">
-            <div class="box">
+            
                 
                 <div class="box-body table-responsive">
                     <div class="panel-body">
@@ -26,11 +26,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="url" class="col-sm-2 control-label">缩略图</label>
+                            <label for="url" class=" col-sm-2 control-label">缩略图</label>
 
                             <eq name="Think.ACTION_NAME" value="edit">
                                   <div class="col-sm-4">
-                                  <img class="suoluetu" src="{$introduction['url']}"  />
+                                  <img class="thumbnails" src="{$introduction['url']}"  />
                                   </div>
                              </div>
                              <div class="form-group">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                
             </div>
         </div>
     </div>   
@@ -57,6 +57,12 @@
         height: 50px;
     }
     </style> 
+    <style type="text/css">
+.thumbnails{
+    height: 110px;
+    width: 56px;
+}
+</style>
 </block>
 
 

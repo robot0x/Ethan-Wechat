@@ -2,7 +2,7 @@
 <block name="body">
         <div class="row-fluid">
             <div class="col-xs-12">
-                <div class="box">
+                
                     <div class="box-body table-responsive">
                         <div class="panel-body">
                             <a class="button btn btn-info"  href="{:U('add')}" >添加</a>
@@ -40,7 +40,7 @@
                         <Yunzhi:page />
     
                     </nav>
-                </div>
+                
             </div>
         </div>
     <style type="text/css">
