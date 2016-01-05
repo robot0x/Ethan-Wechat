@@ -47,7 +47,7 @@
                                     <td>{$k+1}</td>
                                     <td>{$conf['name']}</td>
                                     <td>{$conf['remark']}</td>
-                                    <td><eq name="conf.status" value="0">正常<else/>冻结</eq></td>
+                                    <td><eq name="conf.status" value="0">正常<else/><span class="badge">冻结</span></eq></td>
                                     <td>{$conf['value']}</td>
                                     <td>{$conf['sort']}</td>
                                     <td>
@@ -59,9 +59,9 @@
                         </tbody>
                     </table>
                 </div>
-                <nav>
-                    <Yunzhi:page totalcount="totalCount" />
-                </nav>
+                <div class="row">
+                    <Html:page />
+                </div>
             </div>
         </div>
     </div>
