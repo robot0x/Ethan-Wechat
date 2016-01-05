@@ -6,5 +6,12 @@ class IndexController extends Controller {
 		$jssdk = new JssdkController("wxc92a0067c6338cbf", "bb721eba1ceb506c78f46aa9451e2104");
 		$signPackage = $jssdk->GetSignPackage();
 		$this->ajaxReturn($signPackage);
-	}	
+	}
+	public function getSlideInitAction()
+	{
+		$SlideShow = new SlideShowController();
+		$slideUrls = $SlideShow->getSLideUrls();
+		$data['slideUrls'] = $slideUrls;
+		$this->ajaxReturn($data);
+	}
 }

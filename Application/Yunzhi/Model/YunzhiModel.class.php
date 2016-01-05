@@ -9,10 +9,12 @@ class YunzhiModel extends Model
     protected $pageSize     = 20;                   //每页多少条记录
     protected $totalCount   = 0;                    //总条数
     protected $errors       = array();              //错误信息
-    protected $orderBys     = array("id"=>"desc");      //排序字段方式
+    protected $orderBys     = array("id"=>"desc");  //排序字段方式
     protected $maps         = array();              //查询条件
     protected $keywords     = "";                   //查询关键字
     protected $field        = "title";              //查询字段
+    protected $backFields   = array();              //回显字段
+    protected $pk           = "id";                 //主键
 
     public function __construct()
     {
@@ -113,15 +115,39 @@ class YunzhiModel extends Model
         return;
     }
 
-    public function getError()
-    {
-        return $this->error;
-    }
-
     public function getErrors()
     {
-        return $this->errors();
+        return $this->errors;
     }
+
+    public function setBackFields($backFields)
+    {
+        $this->fields = $fields;
+        return $this;
+    }
+
+    public function getBackFields()
+    {
+        return $this->backFileds;
+    }
+
+    public function addBackFields($value)
+    {
+        $this->backFields[] = $value;
+        return $this;
+    }
+
+    public function subBackFileds($value)
+    {
+        foreach($this->backFields as $k => $v)
+        {
+            if($value == $v)
+            {
+                unset($this->backFields["$k"]);
+            }
+        }
+    }
+
 
     /**
      * 如果未传入第二个参数，则第一个参数必须为数组，进行合并。
@@ -169,25 +195,79 @@ class YunzhiModel extends Model
         return $this->maps;
     }
 
-    public function getListbyId($id, $pk = "id")
+    /**
+     * 更新数据表（有ID则更新，无则添加）
+     * @param  array $list 一维数据
+     * @return int       数据关键字
+     */
+    public function saveList($list){
+        try{
+            if ($this->create($list))
+            {
+                if (isset($this->data[$this->pk]) && $this->data[$this->pk] !== '')
+                {
+                    $id = $this->save();
+                }
+                else
+                {
+                    $id = $this->add();
+                }
+                return $id;
+            }
+            else
+            {
+                $this->setError("data create false:" . $this->getError());
+                return false;
+            }
+        }
+        catch (\Think\Exception $e)
+        {
+            $this->setError = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * 删除ID为$id的数据
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function deleteList($id)
+    {
+        $map['id'] = (int)$id;
+        $lists = $this->where($map)->delete();
+        return $lists;
+    }
+
+    /**
+     * 获取获取数据信息
+     */
+
+    public function getListbyId($id)
     {
         if ((int)$id === 0)
         {
             $this->setError("YunzhiModel:getListbyId id类型不是INT或是传入的ID值为空");
-            return $this;
+            return false;
         }
 
         try
         {
-            $list = $this->where("$pk = $id")->find();
+            $pk = $this->pk;
+            $maps = $this->maps;
+            $maps["$pk"] = $id;
+            $list = $this->where($maps)->find();
             return $list;
         }
         catch(\Think\Exception $e)
         {
             $this->setError($e->getMessage());
-            return $this;
+            return false;
         }
     }
+    /**
+     * 获取当前页内容列表
+     */
 
     public function getLists($fields = array(), $maps = array())
     {
@@ -199,38 +279,36 @@ class YunzhiModel extends Model
         return $lists;
     }
 
-    public function getAllLists($fields = array(), $maps = array())
+    /**
+     * 获取所有数据
+     * @param  array  $fields [description]
+     * @param  array  $maps   [description]
+     * @return [type]         [description]
+     */
+    public function getAllLists($backFields = array(), $maps = array())
     {
         $lists =    $this->
-                    _getLists($fields, $maps)->
+                    _getLists($backFields, $maps)->
                     select();
         return $lists;
     }
 
-    private function _getLists($fields = array(), $maps = array())
+    private function _getLists($backFields = array(), $maps = array())
     {
-        if (!is_array($fields) || !is_array($maps))
+        if (!is_array($backFields) || !is_array($maps))
         {
             $this->setError("YunzhiModel:_getList 传入的参数类型有误");
             return $this;
         }
 
-        if (empty($maps))
-        {
-            $maps = $this->maps;
-        }
-
-        // $orderBys = array();
-        // foreach ($this->bys as $k => $by)
-        // {
-        //     $order = ($this->orders[$k] == "asc") ? "asc" : "desc";
-        //     $orderBys[$by] = $order;
-        // }
+        //合并回显字段与查询条件
+        $backFields = array_merge($this->backFields, $backFields);
+        $maps = array_merge($this->maps, $maps);
 
         $this->_getCounts($maps);
         
         return  $this->
-                field($fields)->
+                field($backFields)->
                 where($maps)->
                 order($this->orderBys);
     }

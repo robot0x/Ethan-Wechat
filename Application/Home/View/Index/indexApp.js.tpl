@@ -262,17 +262,51 @@ app.controller("EvaluationingCtrl", function($scope,$http){
  };
 });
 
-app.controller('SlideCtrl', function($scope) {
-  $scope.detail = false;
-  $scope.toggleDetail = function(){
-    $scope.detail = !$scope.detail;
+app.controller('SlideCtrl', function($scope,$timeout,$http) {
+  $http.get('api.php/Api/Api/getSlideInit')
+   .success(function(data){
+      if(data.slideUrls.status==='success'){
+        $scope.slideUrls = data.slideUrls.data;
+      }else{
+      alert("幻灯片数据错误");
+      }
+      if(data.slideMapUrl.status==='success'){
+        $scope.slideMapUrl = data.slideMapUrl.data;
+      }else{
+      alert("地图数据错误");
+      }
+      if(data.rooms.status==='success'){
+        $scope.rooms = data.rooms.data;
+      }else{
+      alert("房间数据错误");
+      }
+    })
+   .error(function(data,status){
+      alert("没有该方法");
+   });
+  $scope.toggleDetail = function(room){
+    room.detail = !room.detail;
+    room.order = '';
+    $timeout(function(){
+     room.order = '#/tab/confirmOrder';
+    },100);
   }
-  $scope.countEm = [
-  '__IMG__/jiudian.jpg',
-  '__IMG__/big.jpg',
-  '__IMG__/rujia.jpg',
-  '__IMG__/tupian.png',
-  ];
+   
+ 
+});
+
+app.controller('IntroductionCtrl', function($scope,$http) {
+    $http.get('api.php/Api/Api/getHotelIntroduction')
+     .success(function(data,status){
+      if(data.status==='success'){
+        $scope.introduction = data.data;
+      }else{
+      alert("幻灯片数据错误");
+      }
+      })
+     .error(function(data,status){
+      
+     });
 });
 
 app.controller('MapCtrl', function() {
@@ -292,4 +326,6 @@ app.controller('MapCtrl', function() {
     }
   }, "天津市");
 });
+
+
 

@@ -1,10 +1,17 @@
 <?php
+
+/**
+ * 酒店介绍logic
+ * panjie
+ */
+
 namespace Introduction\Logic;
 
 use Introduction\Model\IntroductionModel;
 
 class IntroductionLogic extends IntroductionModel
 {
+
 	protected  $errors = array();
 
 	public function getErrors()
@@ -56,6 +63,12 @@ class IntroductionLogic extends IntroductionModel
 		$datas=$this->where($map)->delete();
 		return $datas;
 	}
+
+	/**
+	 * 获取一条记录信息
+	 * @return list 
+	 */
+
 	public function getList()
 	{
 		return $this->find();
