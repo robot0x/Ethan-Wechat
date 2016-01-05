@@ -1,6 +1,6 @@
 <extend name="Base:index" />
 <block name="body">
-  <div class="row-fluid">
+  <div class="row-fluid" ng-app="user" ng-controller="userAdd">
     <div class="col-xs-12">
       <button type="button" class="btn btn-info" onclick="javascript:history.back(-1);">
         返回
@@ -12,20 +12,24 @@
           添加用户
         </div> -->
           <div class="panel-body">
-            <form class="form-horizontal" action = "{:U('save')}" method = 'post'>
+            <form class="form-horizontal" name="form" action = "{:U('save')}" method = 'post'>
               <input type="hidden" name="id" value="{$user.id}"></input>
 
               <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">用户名：</label>
                   <div class="col-sm-4">
-                    <input id="username" name="username" class="form-control" <eq name="user['name']" value=""><else />disabled="disabled"</eq> value="{$user.username}">
+                    <input id="username" name="username" class="form-control" ng-model="username" ng-disabled="{{edit}}" required/>
+
+                    <p class="" ng-show="form.username.$dirty && form.username.$invalid"> <span ng-show="from.username.$error.required">用户名不能为空</span></p>
                   </div>
               </div>
 
               <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">姓名：</label>
                   <div class="col-sm-4">
-                    <input id="name" name = "name" class="form-control" <eq name="user['name']" value=""><else />disabled="disabled"</eq> value="{$user.name}">
+                    <input id="name" name = "name" class="form-control" ng-model="name" ng-disabled="{{edit}}" required/>
+
+                    <p class="" ng-show="form.name.$dirty && form.name.$invalid"> <span ng-show="from.name.$error.required">姓名不能为空</span></p>
                   </div>
               </div>
 
@@ -39,7 +43,9 @@
               <div class="form-group">
 	              <label for="email" class="col-sm-2 control-label">邮箱：</label>
                   <div class="col-sm-4">
-                    <input id="email" name="email" class="form-control" value="{$user.email}">
+                    <input id="email" name="email" class="form-control" ng-model="email" required/>
+
+                    <p class="" ng-show="form.email.$dirty && form.email.$invalid"> <span ng-show="from.email.$error.required">邮箱不能为空</span></p>
                   </div>
               </div>
               <div class="form-group">
@@ -53,6 +59,6 @@
       </div> 
     </div>
   </div>
- 
+ <include file = "add.js"/>
 
 </block>
