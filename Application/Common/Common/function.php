@@ -37,6 +37,76 @@ function my_json_encode($type, $p)
     return $str;
 }
 
+
+/**
+ * 判断是否大于0
+ */
+function moreThanZero($num)
+{
+    $num = (int)$num;
+    if(!preg_match('^[1-9]\d', $num))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+//根程序文件
+// 判断是否是在微信浏览器里
+//author:panjie 3792535@qq.com
+//是返回true,否返回false
+function isWeixinBrowser() {
+    $agent = $_SERVER ['HTTP_USER_AGENT'];
+    if (! strpos ( $agent, "icroMessenger" )) {
+            return false;
+    }
+    return true;
+}
+
+function get_default($value ,$type = "int")
+{
+    if($type == 'int')
+    {
+        if((int)$value == '0')
+        {
+            return 0;
+        }
+        else
+        {
+            return (int)$value;
+        }
+    }
+
+    if($type == 'string')
+    {
+        if(trim($value) == "")
+        {
+            return "";
+        }
+        else
+        {
+            return trim($value);
+        }
+    }
+}
+
+/**
+ * 获取用户id
+ * todo:用session来实现 
+ * @return [type]
+ */
+function get_user_id()
+{   
+    $userId = session('user_id');
+    if(isset($userId)){
+        return $userId;
+    }else{
+        redirect_url(U('Login/Index/index'));
+        exit();
+    }
+}
 //向url上以POST方式提交数据
 //author:panjie 3792535@qq.com
 //@url 提交的地址
@@ -799,4 +869,150 @@ function get_server_ip() {
     } 
     return $server_ip; 
 }
+
+    
+    /**
+     * 将树形结构转化为list列表
+     * @param type $tree 数组，要转化成List的树
+     * @param type $i  树的层级
+     * @param type $type  子集数组的下标
+     * @return type 返回list列表
+     * creat by pan
+     */
+    
+function treeToList($tree,$i,$type){
+    $list = array();
+    foreach($tree as $key => $value)
+    {
+        $value['level'] = $i;
+        $list[] = $value;
+        if(is_array($value[$type]))
+        {
+            $i++;
+            $list = array_merge($list,treeToList($value[$type],$i));
+            $i--;
+        }
+    }
+    return $list;
+}
+/**
+ * [add_url 添加url信息]
+ * @param [type] $array     [要添加的信息数组]
+ * @param [type] $key1    [添加之后的数组下标]
+ * @param [type] $url_array [添加的url数组,键为存的下标值为要跳转的url]
+ *  * @param [type] $key2    [添加url的key]
+ * xuao 295184686@qq.com
+ */
+function add_url($array,$key1,$url_array,$key2){
+    $data = $array;
+    $url = $url_array;
+    foreach ($data as $key => $value) {
+        foreach ($url_array as $k => $v) {
+            $url[$k] = $v.'?'.$key2.'='.$value[$key2];
+        }
+        $data[$key][$key1] = $url;
+    }
+    return $data;
+}
+
+/**
+ * 字符串截取，支持中文和其他编码
+ * @static
+ * @access public
+ * @param string $str 需要转换的字符串
+ * @param string $start 开始位置
+ * @param string $length 截取长度
+ * @param string $charset 编码格式
+ * @param string $suffix 截断显示字符
+ * @return string
+ * author:oneThink
+ */
+function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true) {
+    if(function_exists("mb_substr"))
+        $slice = mb_substr($str, $start, $length, $charset);
+    elseif(function_exists('iconv_substr')) {
+        $slice = iconv_substr($str,$start,$length,$charset);
+        if(false === $slice) {
+            $slice = '';
+        }
+    }else{
+        $re['utf-8']   = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
+        $re['gb2312'] = "/[\x01-\x7f]|[\xb0-\xf7][\xa0-\xfe]/";
+        $re['gbk']    = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
+        $re['big5']   = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
+        preg_match_all($re[$charset], $str, $match);
+        $slice = join("",array_slice($match[0], $start, $length));
+    }
+    return $suffix ? $slice.'...' : $slice;
+}
+
+/**
+ * 将DATE字符串转换为INT类型
+ * 例输入2015-09-15,则输出2015年9月15日0时的时间戳
+ * @return int字符串
+ */
+function date_to_int($date , $connecter = '-')
+{
+    $date = trim($date);
+    //查找分隔符的位置，如果小于2，则返回FALSE。
+    if(!$firstPosition = strpos($date ,$connecter))
+    {
+        return false;
+    }
+
+    //截取出年,如果是2位，则拼加20，如果即不是2位，也不是4位，flase
+    $year = (int)substr($date , 0 , $firstPosition);
+    if($year == 0 || $year > 9999)
+    {
+        return false;
+    }
+
+    if($year < 100)
+    {
+        $year += 2000;
+    }
+    elseif($year < 1000)
+    {
+        return false;
+    }
+
+    //截取月，如果等于0，或是大于12，返回$date    
+    $secondPosition = strpos($date , $connecter , $firstPosition+1);
+    $month = (int)substr($date , $firstPosition+1 , $secondPosition);
+ 
+    if($month < 1 || $month > 12)
+    {
+        return false;
+    }
+  
+    //截取日，如果不大于0和小于31，则返回FLASE
+    $day = (int)substr($date , $secondPosition+1);
+    if($day < 1 || $day > 31)
+    {
+        return false;
+    }
+
+    return mktime(0,0,0,$month,$day,$year);
+}
+
+/**
+ * 将数组中，包括有特定尾缀的字符串，进行 时间转换
+ * @param array $lists     = array(array('begin_time'=>'2015-09-15'));
+ * @param  string $connecter 连续符，可知，我们不能时间化没有连接符号的
+ * @param  后缀 $suffix    比如_time
+ * @return arry            替换后返回
+ */
+function lists_date_format_to_int($lists , $connecter = '-' , $suffix = "date")
+{
+    foreach($lists as $key => $value)
+    {
+        $lastPosition = strrpos($key , '_');
+        if( substr($key, $lastPosition+1) == $suffix)
+        {
+            $lists[$key] = date_to_int($value , $connecter);
+        }
+    }
+    return $lists;
+}
+
 
