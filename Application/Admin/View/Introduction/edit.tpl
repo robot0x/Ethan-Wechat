@@ -19,8 +19,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="col-sm-12 control-label">酒店介绍</label>
-                            <div class="col-sm-26">
+                            <label for="title" class="col-sm-2 control-label">酒店介绍</label>
+                            <div class="col-sm-4">
                                 <input class="form-control" name="description" value="{$introduction.description}">
                             </div>
                         </div>

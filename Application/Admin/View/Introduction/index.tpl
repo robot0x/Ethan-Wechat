@@ -27,8 +27,8 @@
                                     <td>{$introduction['hotel_phone']}</td>
                                     <td>{$introduction['description']}</td>
                                     <td><img class="suoluetu" src="{$introduction['url']}" /></td>
-                                    <td><a class="btn btn-sm btn-success" href="{:U('detail?id='.$introduction['id'].'&p='.I('get.p'))}">查看</a>&nbsp;&nbsp;
-                                    <a class="btn btn-sm btn-success" href="{:U('edit?id='.$introduction['id'].'&p='.I('get.p'))}">编辑</a>&nbsp;&nbsp;
+                                    <td>
+                                    <a class="btn btn-sm btn-success" href="{:U('edit?id='.$introduction['id'].'&p='.I('get.p'))}">编辑</a>
                                     <a class="btn btn-sm btn-success" href="{:U('delete?id='.$introduction['id'].'&p='.I('get.p'))}">删除</a></td>
                                 </tr>
                                     </foreach>  
