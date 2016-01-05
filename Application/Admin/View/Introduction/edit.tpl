@@ -1,22 +1,77 @@
 <extend name="Base:index" />
 <block name="body">
-	<form <eq name="Think.ACTION_NAME" value="add"> action="{:U('save')}"<else />action="{:U('update')}"</eq> method="post">
-	<input type="hidden" name="id" value="{$introduction.id}"></input>
-	<label>电话：<input  name="hotel_phone" value="{$introduction.hotel_phone}" /></br></label>
-	<label>酒店介绍：</label><input type = "text" name="description" value="{$introduction.description
-	}"/></br>
-	<label>URL</label><img class="suoluetu" src="{$introduction[url]}" /></br>
-    
-    <html:webuploader name="url" class="ourClass">    
-    </html:webuploader>
-  
-	<button type="submit">保存</button>
-	</form>
-	<style type="text/css">
-	.suoluetu
-	{
-		height: 50px;
-	}
-	</style>
-	</block>
+    <div class="row-fluid">
+        <div class="col-xs-12">
+            <div class="box">
+                
+                <div class="box-body table-responsive">
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-info" onclick="javascript:history.back(-1);">返回</button>
+                    </div>
+                    <form class="form-horizontal" <eq name="Think.ACTION_NAME" value="add"> action="{:U('save',I('get.'))}"<else />action="{:U('update',I('get.'))}"</eq> method="post">
+                    <input type="hidden" name="id" value="{$introduction.id}">
+                    </input>
+
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">电话</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" name="hotel_phone" value="{$introduction.hotel_phone}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-12 control-label">酒店介绍</label>
+                            <div class="col-sm-26">
+                                <input class="form-control" name="description" value="{$introduction.description}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url" class="col-sm-2 control-label">缩略图</label>
+
+                            <eq name="Think.ACTION_NAME" value="edit">
+                                  <div class="col-sm-4">
+                                  <img class="suoluetu" src="{$introduction['url']}"  />
+                                  </div>
+                             </div>
+                             <div class="form-group">
+                                  <label for="url" class="col-sm-2 control-label">上传新图片：</label>
+                              </eq>
+                              <div class="col-sm-5">
+                              <html:webuploader name="url" class="ourClass" >    
+                              </html:webuploader>
+                              </div>
+                        </div>                      
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check "></i>保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>   
+    <style type="text/css">
+    .suoluetu{
+        height: 50px;
+    }
+    </style> 
+</block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

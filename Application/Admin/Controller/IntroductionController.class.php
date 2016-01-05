@@ -20,6 +20,10 @@ class IntroductionController extends AdminController
         
         $this->display('edit'); 
     }
+        public function addAction(){
+        //显示 display
+        $this->display('edit');
+    }
 
     public function saveAction(){
         //取用户信息
@@ -70,11 +74,25 @@ class IntroductionController extends AdminController
 
         //抓取用户信息
         $IntroductionL = new IntroductionLogic();
-        $introduction = $IntroductionL->getList();
+        $introduction = $IntroductionL->getLists();
         //传值
-        $this->assign('introduction',$introduction);
+        $this->assign('introductions',$introduction);
         dump($introduction);
         $this->display();
+    }
+     public function deleteAction(){
+
+        $userId = I('get.id');
+
+        $IntroductionL = new IntroductionLogic();
+        $status = $IntroductionL->deleteInfo($userId);
+
+        if($status！==false){
+           $this->success("删除成功", U('Introduction/Index/index?p='.I('get.p'))); 
+        }
+        else{
+            $this->error("删除失败" , U('Introduction/Index/index?p='.I('get.p')));
+        }
     }
 
 }
