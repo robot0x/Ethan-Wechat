@@ -49,8 +49,8 @@
 				                    <td>{$user['phonenumber']}</td>
 				                    <td>{$user['email']}</td>
 				                    <td>
-				                    <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$user['id'])}"><i class="fa fa-pencil"></i>编辑</a>
-				                    <a class="btn btn-sm btn-danger" href="{:U('delete?id='.$user['id'])}"><i class="fa fa-trash-o "></i>删除</a>
+				                    <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$user['id'])}"><i class="fa fa-pencil"></i>编辑</a>&nbsp;
+				                    <a class="btn btn-sm btn-danger" href="{:U('delete?id='.$user['id'])}"><i class="fa fa-trash-o "></i>删除</a>&nbsp;
 				                    <a class="btn btn-sm btn-warning delete" href="{:U('resetPassword?id='.$user['id'])}"><i class="fa fa-repeat"></i>重置密码</a>
 				                    </td>
                                 </tr>
