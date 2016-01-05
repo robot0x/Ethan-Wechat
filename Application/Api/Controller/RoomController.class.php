@@ -18,7 +18,7 @@ class RoomController extends ApiController
 	public function getRooms()
 	{
 		$RoomL = new RoomLogic();
-		$rooms = $RoomL->getAllListsWithRemainingCount();
+		$rooms = $RoomL->getAllListsWithTimeRange();
 
 		$data = array("status"=>"success");
 		$data['data'] = $rooms;

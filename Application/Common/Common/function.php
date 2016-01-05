@@ -1,4 +1,16 @@
 <?php
+//根程序文件
+// 判断是否是在微信浏览器里
+//author:panjie 3792535@qq.com
+//是返回true,否返回false
+function isWeixinBrowser() {
+    $agent = $_SERVER ['HTTP_USER_AGENT'];
+    if (! strpos ( $agent, "icroMessenger" )) {
+            return false;
+    }
+    return true;
+}
+
 /*
  * 微信不接收\u***格式的json内容需要对json字符串处理
  * 仅支持发送text消息，其他类型消息自己添加代码
@@ -25,73 +37,6 @@ function my_json_encode($type, $p)
     return $str;
 }
 
-
-function moreThanZero($num)
-{
-    $num = (int)$num;
-    if(!preg_match('^[1-9]\d', $num))
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-//根程序文件
-// 判断是否是在微信浏览器里
-//author:panjie 3792535@qq.com
-//是返回true,否返回false
-function isWeixinBrowser() {
-    $agent = $_SERVER ['HTTP_USER_AGENT'];
-    if (! strpos ( $agent, "icroMessenger" )) {
-            return false;
-    }
-    return true;
-}
-
-function get_default($value ,$type = "int")
-{
-    if($type == 'int')
-    {
-        if((int)$value == '0')
-        {
-            return 0;
-        }
-        else
-        {
-            return (int)$value;
-        }
-    }
-
-    if($type == 'string')
-    {
-        if(trim($value) == "")
-        {
-            return "";
-        }
-        else
-        {
-            return trim($value);
-        }
-    }
-}
-
-/**
- * 获取用户id
- * todo:用session来实现 
- * @return [type]
- */
-function get_user_id()
-{   
-    $userId = session('user_id');
-    if(isset($userId)){
-        return $userId;
-    }else{
-        redirect_url(U('Login/Index/index'));
-        exit();
-    }
-}
 //向url上以POST方式提交数据
 //author:panjie 3792535@qq.com
 //@url 提交的地址
@@ -132,11 +77,11 @@ function http_post_json($url, $data) {
  * 把返回的数据集转换成Tree
  *
  * @param array $list
- *          要转换的数据集
+ *        	要转换的数据集
  * @param string $pid
- *          parent标记字段
+ *        	parent标记字段
  * @param string $level
- *          level标记字段
+ *        	level标记字段
  * @return array
  * @author 麦当苗儿 <zuojiazi@vip.qq.com>
  */
@@ -169,96 +114,53 @@ function list_to_tree($list, $pk = 'id', $pid = 'pid', $child = '_child', $root 
  * 将list_to_tree的树还原成列表
  *
  * @param array $tree
- *          原来的树
+ *        	原来的树
  * @param string $child
- *          孩子节点的键
+ *        	孩子节点的键
  * @param string $order
- *          排序显示的键，一般是主键 升序排列
+ *        	排序显示的键，一般是主键 升序排列
  * @param array $list
- *          过渡用的中间数组，
+ *        	过渡用的中间数组，
  * @return array 返回排过序的列表数组
  * @author yangweijie <yangweijiester@gmail.com>
  */
-function tree_to_list_think($tree, $child = '_child', $order = 'id', &$list = array()) {
-    if (is_array ( $tree )) {
-        $refer = array ();
-        foreach ( $tree as $key => $value ) {
-            $reffer = $value;
-            if (isset ( $reffer [$child] )) {
-                unset ( $reffer [$child] );
-                tree_to_list_think ( $value [$child], $child, $order, $list );
-            }
-            $list [] = $reffer;
-        }
-        //$list = list_sort_by ( $list, $order, $sortby = 'asc' );
-    }
-    return $list;
-}
+//function tree_to_list($tree, $child = '_child', $order = 'id', &$list = array()) {
+//	if (is_array ( $tree )) {
+//		$refer = array ();
+//		foreach ( $tree as $key => $value ) {
+//			$reffer = $value;
+//			if (isset ( $reffer [$child] )) {
+//				unset ( $reffer [$child] );
+//				tree_to_list ( $value [$child], $child, $order, $list );
+//			}
+//			$list [] = $reffer;
+//		}
+//		$list = list_sort_by ( $list, $order, $sortby = 'asc' );
+//	}
+//	return $list;
+//}
 /*
  * 将TREE转换为一行一行可以显示的LIST
  * level带表深度
  * 
  */
 
-function tree_to_list($tree , $i = 0,$child = '_child',$level = '_level',$order='id', &$list = array()){
-    if (is_array ( $tree )) {
-        $refer = array ();
-        //$tree = list_sort_by ( $tree, $order, $sortby = 'desc' );
-        foreach ( $tree as $key => $value ) {
-            $reffer = $value;
-            $reffer[$level] = $i;  
+function tree_to_list($tree,$i = 0){
+    $list = array();
+    foreach($tree as $key => $value)
+    {
+        $value['level'] = $i;       
+        if(is_array($value['_child']))
+        {
             $i++;
-
-            if (isset ( $reffer [$child] )) 
-            {
-                unset ( $reffer [$child] );
-                $list [] = $reffer;
-                tree_to_list ( $value [$child], $i, $child, $level ,$order ,$list );
-            }     
-            else
-            {
-                $list [] = $reffer;
-            }
+            $list = array_merge($list,tree_to_list($value['_child'],$i));
             $i--;
         }
-        
+        unset($value['_child']);
+        $list[] = $value;
     }
     return $list;
 }
-
-/**
-* 对查询结果集进行排序
-* @access public
-* @param array $list 查询结果
-* @param string $field 排序的字段名
-* @param array $sortby 排序类型
-* asc正向排序 desc逆向排序 nat自然排序
-* @return array
-*/
-function list_sort_by($list,$field, $sortby='asc') {
-   if(is_array($list)){
-       $refer = $resultSet = array();
-       foreach ($list as $i => $data)
-           $refer[$i] = &$data[$field];
-       switch ($sortby) {
-           case 'asc': // 正向排序
-                asort($refer);
-                break;
-           case 'desc':// 逆向排序
-                arsort($refer);
-                break;
-           case 'nat': // 自然排序
-                natcasesort($refer);
-                break;
-       }
-       foreach ( $refer as $key=> $val)
-           $resultSet[] = &$list[$key];
-       return $resultSet;
-   }
-   return false;
-}
-
-
 //为数组中的值增加根路
 //@$data 传入的一维数组，需要以/打头。
 //author:panjie
@@ -323,7 +225,7 @@ function create_noncestr( $length = 32 )
     return $str;
 }
 /**
-*   作用：array转xml
+* 	作用：array转xml
 */
 function array_to_xml($arr)
 {
@@ -343,10 +245,10 @@ function array_to_xml($arr)
 }
 
 /**
- *  作用：将xml转为array
+ * 	作用：将xml转为array
  */
 function xml_to_array($xml)
-{       
+{		
 //将XML转为array        
     $array_data = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
     return $array_data;
@@ -359,7 +261,7 @@ function xml_to_array($xml)
  * @second 默认超时时长
 */
 function post_xml_curl($xml,$url,$second=30)
-{       
+{		
     //初始化curl        
     $ch = curl_init();
     //设置超时
@@ -396,7 +298,7 @@ function post_xml_curl($xml,$url,$second=30)
     }
 }
 /**
-*   作用：使用证书，以post方式提交xml到对应的接口url
+* 	作用：使用证书，以post方式提交xml到对应的接口url
 */
 function post_xml_ssl_curl($xml,$url,$second=30)
 {
@@ -479,17 +381,17 @@ function get_jsapi_ticket() {
   }
 // 通过openid获取微信用户基本信息,此功能只有认证的服务号才能用
 function get_weichat_user_info($openid, $accessToken) {
-    if (empty ( $accessToken )) {
-        return false;
-    }   
-    $param2 ['access_token'] = $accessToken;
-    $param2 ['openid'] = $openid;
-    $param2 ['lang'] = 'zh_CN';
-    
-    $url = 'https://api.weixin.qq.com/cgi-bin/user/info?' . http_build_query ( $param2 );
-    $content = file_get_contents ( $url );
-    $content = json_decode ( $content, true );
-    return $content;
+	if (empty ( $accessToken )) {
+		return false;
+	}	
+	$param2 ['access_token'] = $accessToken;
+	$param2 ['openid'] = $openid;
+	$param2 ['lang'] = 'zh_CN';
+	
+	$url = 'https://api.weixin.qq.com/cgi-bin/user/info?' . http_build_query ( $param2 );
+	$content = file_get_contents ( $url );
+	$content = json_decode ( $content, true );
+	return $content;
 }
 /*
  * 通过OPENID来取用户的所有信息
@@ -580,15 +482,15 @@ function get_user_token($code)
 // 获取当前用户的OpenId
 function get_openid($openid = NULL) {
 //        return 'oZuoxt8tnEUUf6YPBG-mNPYjoKQA';
-    $openid = session ('openid');
+	$openid = session ('openid');
         $openidTime = session('openidTime');
         if($openid != false && $openidTime!=false && (time()-$openidTime < 60))
         {
             return $openid;
         }
         $code = I('code','');
-    $isWeixinBrowser = isWeixinBrowser ();
-    if ($isWeixinBrowser) {
+	$isWeixinBrowser = isWeixinBrowser ();
+	if ($isWeixinBrowser) {
             if( $openid == false && ($code == '' || $code == session('code')) )
             {
                 goto_auth();
@@ -614,15 +516,15 @@ function get_openid($openid = NULL) {
                     $customer->data($userInfo)->save();
                 }
             }
-    }   
-    if (empty ( $openid )) {
-        return false;
-    }   
-    return $openid;
+	}	
+	if (empty ( $openid )) {
+		return false;
+	}	
+	return $openid;
 }
 
  /**
-*   作用：生成签名
+* 	作用：生成签名
 * @arr,要生成签名的数组
 *  步骤：
 * 1按字典序排序各参数(数组)
@@ -655,7 +557,7 @@ function get_wechat_sign($arr)
 }
 
 /**
-*   作用：格式化参数，签名过程需要使用
+* 	作用：格式化参数，签名过程需要使用
 * 先按字典序进行排序，再拼接成get信息
 * @paraMap 需要格式化的带有key的数组
 * @urlencode 为真是表示进行unlencode转化，为假不转换
@@ -897,179 +799,4 @@ function get_server_ip() {
     } 
     return $server_ip; 
 }
-    
-    /**
-     * 将树形结构转化为list列表
-     * @param type $tree 数组，要转化成List的树
-     * @param type $i  树的层级
-     * @param type $type  子集数组的下标
-     * @return type 返回list列表
-     * creat by pan
-     */
-    
-function treeToList($tree,$i,$type){
-    $list = array();
-    foreach($tree as $key => $value)
-    {
-        $value['level'] = $i;
-        $list[] = $value;
-        if(is_array($value[$type]))
-        {
-            $i++;
-            $list = array_merge($list,treeToList($value[$type],$i));
-            $i--;
-        }
-    }
-    return $list;
-}
-/**
- * [add_url 添加url信息]
- * @param [type] $array     [要添加的信息数组]
- * @param [type] $key1    [添加之后的数组下标]
- * @param [type] $url_array [添加的url数组,键为存的下标值为要跳转的url]
- *  * @param [type] $key2    [添加url的key]
- * xuao 295184686@qq.com
- */
-function add_url($array,$key1,$url_array,$key2){
-    $data = $array;
-    $url = $url_array;
-    foreach ($data as $key => $value) {
-        foreach ($url_array as $k => $v) {
-            $url[$k] = $v.'?'.$key2.'='.$value[$key2];
-        }
-        $data[$key][$key1] = $url;
-    }
-    return $data;
-}
 
-/**
- * 字符串截取，支持中文和其他编码
- * @static
- * @access public
- * @param string $str 需要转换的字符串
- * @param string $start 开始位置
- * @param string $length 截取长度
- * @param string $charset 编码格式
- * @param string $suffix 截断显示字符
- * @return string
- * author:oneThink
- */
-function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true) {
-    if(function_exists("mb_substr"))
-        $slice = mb_substr($str, $start, $length, $charset);
-    elseif(function_exists('iconv_substr')) {
-        $slice = iconv_substr($str,$start,$length,$charset);
-        if(false === $slice) {
-            $slice = '';
-        }
-    }else{
-        $re['utf-8']   = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
-        $re['gb2312'] = "/[\x01-\x7f]|[\xb0-\xf7][\xa0-\xfe]/";
-        $re['gbk']    = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
-        $re['big5']   = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
-        preg_match_all($re[$charset], $str, $match);
-        $slice = join("",array_slice($match[0], $start, $length));
-    }
-    return $suffix ? $slice.'...' : $slice;
-}
-
-/**
- * 将DATE字符串转换为INT类型
- * 例输入2015-09-15,则输出2015年9月15日0时的时间戳
- * @return int字符串
- */
-function date_to_int($date , $connecter = '-')
-{
-    $date = trim($date);
-    //查找分隔符的位置，如果小于2，则返回FALSE。
-    if(!$firstPosition = strpos($date ,$connecter))
-    {
-        return $date;
-    }
-
-    //截取出年,如果是2位，则拼加20，如果即不是2位，也不是4位，flase
-    $year = (int)substr($date , 0 , $firstPosition);
-    if($year == 0 || $year > 9999)
-    {
-        return $date;
-    }
-
-    if($year < 100)
-    {
-        $year += 2000;
-    }
-    elseif($year < 1000)
-    {
-        return $date;
-    }
-
-    //截取月，如果等于0，或是大于12，返回$date    
-    $secondPosition = strpos($date , $connecter , $firstPosition+1);
-    $month = (int)substr($date , $firstPosition+1 , $secondPosition);
- 
-    if($month < 1 || $month > 12)
-    {
-        return $date;
-    }
-  
-    //截取日，如果不大于0和小于31，则返回FLASE
-    $day = (int)substr($date , $secondPosition+1);
-    if($day < 1 || $day > 31)
-    {
-        return $date;
-    }
-
-    return mktime(0,0,0,$month,$day,$year);
-}
-
-/**
- * 将数组中，包括有特定尾缀的字符串，进行 时间转换
- * @param array $lists     = array(array('begin_time'=>'2015-09-15'));
- * @param  string $connecter 连续符，可知，我们不能时间化没有连接符号的
- * @param  后缀 $suffix    比如_time
- * @return arry            替换后返回
- */
-function lists_date_format_to_int($lists , $connecter = '-' , $suffix = "date")
-{
-    foreach($lists as $key => $value)
-    {
-        $lastPosition = strrpos($key , '_');
-        if( substr($key, $lastPosition+1) == $suffix)
-        {
-            $lists[$key] = date_to_int($value , $connecter);
-        }
-    }
-    return $lists;
-}
-
-/**
- * 时间字符串格式化
- * @param  int $int 232213213    
- * @return [String]         [2015/09/15]
- */
-function date_to_string($int , $param = 'Y-m-d')
-{
-    $int = (int)$int;
-    if(!$int)
-    {
-        return date($param);
-    }
-    else
-    {
-        return date($param,$int);
-    }
-}
-/**
- * [union_array 取两个数组的并集]
- * @param  [type] $arr1 [数组1]
- * @param  [type] $arr2 [数组2]
- * @return [type]       [并集数组]
- */
-function union_array($arr1,$arr2){
-    $res_array = array();
-    //取差集
-    $intersection  = array_diff($arr1, $arr2);
-    //取并集
-    $res_array = array_merge($arr2,$intersection);
-    return $res_array;
-}
