@@ -19,7 +19,7 @@
                                 <label for="name">配置名称:</label>
                             </div>
                             <div class="col-xs-6">
-                                <input id="configname" class="form-control" type="text" name="name" ng-model="name" ng-disabled="{{edit}}" required />
+                                <input class="form-control" type="text" name="name" ng-model="name" ng-disabled="{{edit}}" required />
                                 <p ng-show="myForm.name.$dirty && myForm.name.$invalid"><span ng-show="myForm.name.$error.required">配置名称不能为空</span></p>
                             </div>
                         </div>
@@ -28,7 +28,8 @@
                                 <label for="type">配置类型  ：</label>
                             </div>
                             <div class="col-xs-6">
-                                <input class="form-control" type="text" name="type" value="{$config.type}" />
+                                <input class="form-control" type="text" name="type" ng-model="type" required />
+                                <p ng-show="myForm.type.$dirty && myForm.type.$invalid"><span ng-show="myForm.type.$error.required">配置类型不能为空</span></p>
                             </div>
                         </div>
 
@@ -37,7 +38,8 @@
                             <label for="remark">配置说明：</label>
                         </div>
                         <div class="col-xs-6">
-                            <input class="form-control" type="text" name="remark" value="{$config.remark}" />
+                            <input class="form-control" type="text" name="remark" ng-model="remark" required />
+                            <p ng-show="myForm.remark.$dirty && myForm.remark.$invalid"><span ng-show="myForm.remark.$error.required">配置说明不能为空</span></p>
                         </div>
                         </div>
                         <div class="form-group row">
@@ -57,16 +59,17 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                        <div class="col-xs-3">
-                            <label for="status">配置值：</label>
+                            <div class="col-xs-3">
+                                <label for="value">配置值：</label>
                             </div>
                             <div class="col-xs-6">
-                            <input class="form-control" type="text" name="value" value="{$config.value}" />
+                                <input class="form-control" type="text" name="value" ng-model="value" required />
+                                <p ng-show="myForm.value.$dirty && myForm.value.$invalid"><span ng-show="myForm.value.$error.required">配置值不能为空</span></p>
                             </div>
                         </div>
                         <div class="form-group row">
                         <div class="col-xs-3">
-                            <label for="status">排序：</label>
+                            <label for="sort">排序：</label>
                             </div>
                             <div class="col-xs-6">
                             <input class="form-control" type="text" name="sort" value="<eq name="config.sort" value="">0<else/>{$config.sort}</eq>" />
