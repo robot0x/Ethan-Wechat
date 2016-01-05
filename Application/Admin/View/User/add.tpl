@@ -20,7 +20,7 @@
                   <div class="col-sm-4">
                     <input id="username" name="username" class="form-control" ng-model="username" ng-disabled="{{edit}}" required/>
 
-                    <p class="" ng-show="Form.username.$dirty && Form.username.$invalid"> <span ng-show="from.username.$error.required">用户名不能为空</span></p>
+                    <p class="" ng-show="form.username.$dirty && form.username.$invalid"> <span ng-show="from.username.$error.required">用户名不能为空</span></p>
                   </div>
               </div>
 
@@ -29,7 +29,7 @@
                   <div class="col-sm-4">
                     <input id="name" name = "name" class="form-control" ng-model="name" ng-disabled="{{edit}}" required/>
 
-                    <p class="" ng-show="Form.name.$dirty && Form.name.$invalid"> <span ng-show="from.name.$error.required">姓名不能为空</span></p>
+                    <p class="" ng-show="form.name.$dirty && form.name.$invalid"> <span ng-show="from.name.$error.required">姓名不能为空</span></p>
                   </div>
               </div>
 
@@ -45,7 +45,7 @@
                   <div class="col-sm-4">
                     <input id="email" name="email" class="form-control" ng-model="email" required/>
 
-                    <p class="" ng-show="Form.email.$dirty && Form.email.$invalid"> <span ng-show="from.email.$error.required">邮箱不能为空</span></p>
+                    <p class="" ng-show="form.email.$dirty && form.email.$invalid"> <span ng-show="from.email.$error.required">邮箱不能为空</span></p>
                   </div>
               </div>
               <div class="form-group">
