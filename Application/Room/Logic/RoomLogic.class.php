@@ -55,9 +55,9 @@ class RoomLogic extends RoomModel
 	 * panjie
 	 * @return lists 
 	 */
-	public function getAllListsWithTimeRange($beginTime, )
+	public function getAllListsWithTimeRange($beginTime)
 	{
-		$lists = $this->getAllLists();
+		return $lists = $this->getAllLists();
 
 	}
 }
