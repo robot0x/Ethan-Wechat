@@ -1,9 +1,9 @@
 <extend name="Base:index" />
 <block name="body">
     <div class="row-fluid">
-        <div class="col-md-12">
+        <div class="col-xs-12">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-xs-3">
                     <form action="{:U('index?p=',I('get.'))}" method="get">
                         <div class="input-group custom-search-form">
                             <input class="form-control" name="keywords" placeholder="Search..." type="text" value="{:I('get.keywords')}" />
@@ -16,8 +16,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-3">
-                    <a href="{:U('add')}" class="btn btn-info">添加</a>
+                <div class="col-xs-3">
+                    <a href="{:U('add')}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> 添加</a>
                 </div>
             </div>
             <div class="box">
@@ -52,7 +52,7 @@
                                     <td>{$conf['sort']}</td>
                                     <td>
                                     <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$conf['id'],I('get.'))}"><i class="fa fa-pencil"></i>编辑</a>
-                                    <a href="{:U('freezen?id='.$conf['id'],I('get.'))}" class="btn btn-sm <eq name="conf.status" value="0">btn-default<else/>btn-warning</eq>"><i class="fa fa-lock"></i><eq name="conf.status" value="0">冻结<else/>解冻</eq>
+                                    <a href="{:U('freezen?id='.$conf['id'],I('get.'))}" class="btn btn-sm <eq name="conf.status" value="0">btn-default"><i class="fa fa-lock"></i>冻结<else/>btn-warning"><i class="fa fa-unlock"></i>解冻</eq></a>
                                     </td>
                                 </tr>
                             </foreach>

@@ -18,7 +18,7 @@
                                 <label for="name">配置名称:</label>
                             </div>
                             <div class="col-xs-6">
-                                <input class="form-control" type="text" name="name" value="{$config.name}"/>
+                                <input class="form-control" <eq name="config.name" value=""><else/>disabled="disabled"</eq> type="text" name="name" value="{$config.name}"/>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -43,10 +43,15 @@
                             <label for="status">状态：</label>
                             </div>
                             <div class="col-xs-6">
-                            <select class="form-control"  name="status" >
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                            </select>
+                                <select class="form-control"  name="status" >
+                                <eq name="config.status" value="0">
+                                    <option value="0">正常</option>
+                                    <option value="1">冻结</option>
+                                    <else/>
+                                    <option value="1">冻结</option>
+                                    <option value="0">正常</option>
+                                </eq>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -62,11 +67,15 @@
                             <label for="status">排序：</label>
                             </div>
                             <div class="col-xs-6">
-                            <input class="form-control" type="text" name="sort" value="{$config.sort}" />
+                            <input class="form-control" type="text" name="sort" value="<eq name="config.sort" value="">0<else/>{$config.sort}</eq>" />
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">保存</button>
-                        <a class="btn btn-default" href="{:U('index?id= ',I('get.'))}">返回</a>
+                        <div class="row">
+                        <div class="col-xs-3 col-xs-offset-5">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>保存</button>
+                        <a class="btn btn-default" href="{:U('index?id= ',I('get.'))}"><i class="fa fa-reply"></i>返回</a>
+                        </div>
+                        </div>
                     </form>
                     </div><!--col-->
                 </div><!--row-->
