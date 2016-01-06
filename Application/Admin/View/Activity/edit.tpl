@@ -37,7 +37,7 @@
 		<div class="form-group">
 			<label  for="end_time" class="col-xs-2 control-label">截止时间：</label>
 			<div class="col-xs-3">
-				<input id="end_time" class="form-control date" type = "text" name="end_time"  ng-model="end_time" required/>
+				<input id="end_time" class="form-control date" type = "text" name="end_time"  ng-model="end_time" value="{:I('get.end_time') ? I('get.end_time') : date('Y-m-d')}"required/>
 				<span style="color:red" ng-show="myForm.end_time.$dirty&&myForm.detail.$invalid">
 					<span ng-show="myForm.end_time.$error.required">活动截止日期是必须的。</span>
 				</span>

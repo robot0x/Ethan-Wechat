@@ -25,9 +25,6 @@
 							<thead>
 							<tr>
 								<th>序号</th>&nbsp
-							<!-- 	<?php $order = I('get.order') ?>
-								<th><a href="<eq name='order' value="desc"> {:U('index?by=id&order=asc', I('get.'))}  
-								<else/> {:U('index?by=id&order=desc', I('get.'))} </eq>">活动编号</a></th> -->
 								<th>活动名</th>&nbsp
 								<th>缩略图</th>&nbsp
 								<th>活动详情</th>&nbsp
