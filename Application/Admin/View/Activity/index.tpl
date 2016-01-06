@@ -44,7 +44,7 @@
 								<td>{$k+1}</td>&nbsp
 								<!-- <td>{$activity[id]}</td>&nbsp -->
 								<td>{$activity[title]}</td>&nbsp
-								<td class="col-xs-3"><img class="thumbnails"  src="{$activity[thumbnails_url][0]}"  /></td>&nbsp
+								<td class="col-xs-3"><img class="thumbnails"  src="{$activity[thumbnails_url]}"  /></td>&nbsp
 								<td>{$activity[detail]}</td>&nbsp
 								<td>{$activity[end_time]}</td>&nbsp
 								 <td><eq name="activity.status" value="0">正常<else/><span class="badge">冻结</span></eq></td>

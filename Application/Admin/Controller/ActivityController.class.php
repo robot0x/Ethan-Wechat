@@ -10,8 +10,8 @@ class ActivityController extends AdminController
 		//获取列表信息
 		$ActivityL = new ActivityLogic();
 		$activities = $ActivityL->getLists();
-		for($i=0;$i<count($activities);$i++)
-		$activities[$i]['thumbnails_url']=explode(",",$activities[$i]['thumbnails_url']);
+		// for($i=0;$i<count($activities);$i++)
+		// $activities[$i]['thumbnails_url']=explode(",",$activities[$i]['thumbnails_url']);
 	
 		//向V层复制
 		$this->assign('activities',$activities);
@@ -28,6 +28,9 @@ class ActivityController extends AdminController
 		$activity = I('post.');
 		//添加活动信息
 		dump($activity);
+		$arrayfirst=explode(",", $activity['thumbnails_url']);
+		$activity['thumbnails_url']=$arrayfirst[0];
+		dump($activity['thumbnails_url']);
 		$ActivityL = new ActivityLogic();
 		$ActivityL->addList($activity);
 
@@ -61,6 +64,8 @@ class ActivityController extends AdminController
 		//获取更新活动信息
 		$activity = I('post.');
 		dump($activity);
+		$arrayfirst=explode(",", $activity['thumbnails_url']);
+		$activity['thumbnails_url']=$arrayfirst[0];
 		//存更新活动信息
 		$ActivityL = new ActivityLogic();
 		$ActivityL->saveList($activity);
