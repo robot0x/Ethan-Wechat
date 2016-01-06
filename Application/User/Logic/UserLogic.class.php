@@ -50,4 +50,24 @@ class UserLogic extends UserModel
 		return $datas;
 	}
 
+    /**
+     * 通过ID获取用户的NAME值
+     * @param  int $id 
+     * @return list OR FALSE
+     * PANJIE
+     */
+    public function getNameById($id)
+    {
+        $id = (int)$id;
+        $map = array();
+        $map["id"] = $id;
+        if (!$list = $this->getListById($id))
+        {
+            $this->setError("UserLogic:The data of id:$id is not found(编号为$id的记录未找到:)" . $this->getError());
+            return false;
+        }
+
+        return $list['name'];
+    }
+
 }
