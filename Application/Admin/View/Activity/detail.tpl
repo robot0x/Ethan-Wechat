@@ -11,37 +11,39 @@
                   <div class="form-group">
                     <label class="col-sm-2 controll-label">活动编号:</label>
                     <div class="col-sm-4">
-                      {$activity[id]}</br>
+                      {$activitys[id]}</br>
                     </div>
                   </div> 
                   <div class="form-group">
                     <label  class="col-sm-2 controll-label">活动名称:</label>
                     <div class="col-sm-4">
-                      {$activity[title]}</br>
+                      {$activitys[title]}</br>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 controll-label">活动缩略图:</label>
                     <div class="col-sm-4">
-                      <img class="thumbnails"  src="{$activity[thumbnails_url][0]}" /></br>
+                    <foreach name="activitys['thumbnails_url']" item="activity['thumbnails_url']" key="k">
+                      <img class="thumbnails"  src="{$activity[thumbnails_url]}" /></br>
+                      </foreach>
                     </div>
                   </div>
                   <div class="form-group">
                     <label  class="col-sm-2 controll-label">活动详情:</label>
                     <div class="col-sm-4">
-                      {$activity[detail]}</br>
+                      {$activitys[detail]}</br>
                     </div>
                   </div>
                      <div class="form-group">
                     <label class="col-sm-2 controll-label">截止时间:</label>
                     <div class="col-sm-4">
-                      {$activity[end_time]}</br>
+                      {$activitys[end_time]}</br>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 controll-label">状态:</label>
                     <div class="col-sm-4">
-                      {$activity[status]}</br>
+                      {$activitys[status]?'冻结':'正常'}</br>
                     </div>
                   </div>
                 </form>

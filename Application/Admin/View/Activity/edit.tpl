@@ -4,7 +4,7 @@
 	 <button type="button" class="btn btn-info" onclick="javascript:history.back(-1);">返回</button>
 	</div>
 	<div ng-app="myActivity" ng-controller="activity" >
-	<form class="form-horizontal" name="myForm" novalidate<eq name="Think.ACTION_NAME" value="add"> action="{:U('save')}"<else />action="{:U('update')}"</eq> method="post"   >
+	<form class="form-horizontal" name="myForm"  method="post"  novalidate <eq name="Think.ACTION_NAME" value="add"> action="{:U('save',I('get.'))}"<else />action="{:U('update',I('get.'))}"</eq>>
 		<input type="hidden" name="id" value="{$activity.id}"></input>
 
 		<div class="form-group">
@@ -17,21 +17,25 @@
 			</div>
 		</div>
  		<div class="form-group">
-            <label for="thumbnails_url" class="col-sm-2 control-label">缩略图</label>
+            <label for="thumbnails_url" class="col-sm-2 control-label">缩略图:</label>
               <eq name="Think.ACTION_NAME" value="edit">
               <div class="col-sm-4">
-                 <img class="thumbnails"  src="{$activity[thumbnails_url][0]}"  />
+               <foreach name="activity['thumbnails_url']" item="activity['thumbnails_url']" key="k">
+                      <img class="thumbnails"  src="{$activity[thumbnails_url]}" /></br>
+               </foreach>
               </div>
+              </eq>
         </div>
         <div class="form-group">
             <label for="thumbnails_url" class="col-sm-2 control-label">上传新图片：</label>
-               </eq>
+               
          <div class="col-sm-4">
-         <html:uploader value="activity[thumbnails_url][0]" name="thumbnails_url" id="thumbnails_url">
+         <html:uploader value="activity[thumbnails_url]" name="thumbnails_url" id="thumbnails_url">
         请选择图片
         </html:uploader>
           </div>
           </div>
+          
 		<div class="form-group">
 			<label for="detail" class="col-sm-2 control-label">活动详情：</label>
 			<div class="col-sm-4">
@@ -52,28 +56,22 @@
 			</div>
 		</div>
 
-	<!-- 	<div class="form-group">
-			<label for="status" class="col-sm-2 control-label">状态：</label>
-			<div class="col-sm-4">
-				<input type ="text" name="status" value="{$activity.status}" /></br>
-			</div>
-		</div> -->
 
 		<div class="form-group">
 			<label class="col-sm-2 control-label" >状态</label>
-			<?php $status = $activity['status'] ; echo $activity['status'];?>
+			<?php $status = $activity['status'] ;?>
 			<label for="0">正常</label>
-			<input id="0" type="radio" value="0" name="status"<eq name="status" value="0">checked="checked" </eq>/></label>
+			<input id="0" type="radio" value="0" name="status" <eq name="status" value="0">checked="checked" </eq>/>
 			<label for="1">冻结</label>
-			<input id="1" type="radio" value="1"  name="status" <eq name="status" value="1">checked="checked"/> </eq></label>
+			<input id="1" type="radio" value="1" name="status" <eq name="status" value="1">checked="checked" </eq>/> 
 		</div>
 
-		<div class="form-group">
+		
 			<div class="col-sm-offset-2 col-sm-10">
-			{__TOKEN__}
-				<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check "></i>保存</button>
+				<button type="submit" class="btn btn-sm btn-success" ng-disabled="myForm.title.$invalid ||
+  				myForm.detail.$invalid||myForm.end_time.$invalid"><i class="fa fa-check "></i>保存</button>
 			</div>
-		</div>
+		
 	</form>
 </div>
 	
