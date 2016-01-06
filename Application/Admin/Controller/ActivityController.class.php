@@ -51,7 +51,7 @@ class ActivityController extends AdminController
 		$ActivityL = new ActivityLogic();
 		$activity = $ActivityL->getListById($activityId);
 		// dump($activity['thumbnails_url']);
-		 $activity['thumbnails_url']=explode(",",$activity['thumbnails_url']);
+		 // $activity['thumbnails_url']=explode(",",$activity['thumbnails_url']);
 		//向V层赋值
 		$this->assign('activity',$activity);
 		$this->display();
