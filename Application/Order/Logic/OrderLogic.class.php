@@ -59,11 +59,34 @@ class OrderLogic extends OrderModel
 		//2.已预订入住时间 >= 请求入住时间 同时 已预订入住间 < 请求退房时间
 		$map = array();
 		$map['_string'] 	= "(`begin_time` < '$beginTime' AND `end_time` > '$beginTime') OR (`begin_time` >= '$beginTime' AND `begin_time` < '$endTime')"; 
-		$map['status'] 		= '0';		//状态为正常
-		$map['is_pay'] 		= '1';		//已支付
-		$map['is_cancel']	= '0'; 		//未取清
 
 		return $map;
+	}
+
+	/**
+	 * 取消ID为传入值的订单信息
+	 * @param  int $id     
+	 * @param  int $userId 操作用户ID
+	 * @return this         
+	 */
+	public function cancelListById($id, $userId = null)
+	{
+		$id = (int)$id;
+
+		//当未传入用户信息时，取当前用户信息
+		if (!isset($userId))
+		{
+			$userId = get_user_id();
+		}
+
+		$data = array();
+		$data['id'] = $id;
+		$data['is_cancel'] = 1;
+		if (!$this->saveList($data))
+		{
+			$this->setError("Id:$id is not found or the order is canceled.(ID为$id的记录未找到，或找到的记录的状态本就是取消的)" . $this->getError());
+		}
+		return $this;
 	}
 
 }

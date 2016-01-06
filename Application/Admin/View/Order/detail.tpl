@@ -85,7 +85,7 @@
                         </div>
                         <div class="col-xs-12 text-center">
                             {__TOKEN__}
-                            <a href="" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;返回</a>&nbsp;&nbsp;<button ng-show="showSubmit" type="submit" class="btn btn-success none"><i class="fa fa-check"></i>&nbsp;确认</button>
+                            <a href="{:U('index?id=',I('get.'))}" class="btn btn-info"><i class="fa fa-reply"></i>&nbsp;返回</a>&nbsp;&nbsp;<eq name="value.is_cancel" value="0"><a href="{:U('cancel?id=' . I('get.id'), I('get.'))}" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;取消订单</a></eq>
                         </div>
                     </form>
                 </div>

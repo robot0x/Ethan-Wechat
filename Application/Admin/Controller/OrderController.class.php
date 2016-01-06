@@ -36,4 +36,21 @@ class OrderController extends AdminController
 		$this->assign("M", $M);
 		$this->display();
 	}
+
+	/**
+	 * 取消订单
+	 * @return [type] [description]
+	 */
+	public function cancelAction()
+	{
+		$OrderL = new OrderLogic();
+		if (count($OrderL->cancelListById(I('get.id'))->getErrors()) === 0 )
+		{
+			$this->success("操作成功", U("index?id=", I('get.')));
+		}
+		else
+		{
+			$this->error("操作失败，原因：" . $OrderL->getError(), U("index?id=", I('get.')));
+		}
+	}
 }

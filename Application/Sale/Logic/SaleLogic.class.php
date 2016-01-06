@@ -168,21 +168,26 @@ class SaleLogic extends SaleModel
 			$endTime = date("Y-m-d", time()+24*60*60);
 		}
 
+		//取房型信息
 		$RoomL 		= new RoomLogic();
 		$rooms 		= $RoomL->getLists();
 
+		//取预订信息
 		$beginTime 	= date_to_int($beginTime);
 		$endTime	= date_to_int($endTime);
 		$OrderL 	= new OrderLogic();
 		$orders 	= group_by_key($OrderL->getAllOrderedListsInDateRange($beginTime, $endTime), "room_id");
 
+		//按房型依次计算剩余信息
 		foreach($rooms as $key => $room)
 		{
 			$id = $room['id'];
 			$totalCount = 0;
 			foreach($orders["$id"] as $order)
 			{
-				$totalCount += $order['count'];
+				//如果预订未取消且已支付，则计算售卖总数
+				if ($order['is_cancel'] == 0 && $order['is_pay'] == 1)
+					$totalCount += $order['count'];
 			}
 			$rooms["$key"]["remaining"] = $room['total_rooms'] - $totalCount;
 		}

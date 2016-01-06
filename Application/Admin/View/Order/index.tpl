@@ -23,23 +23,23 @@
             <div class="box">
                 <div class="box-body table-responsive">
                     <div class="panel-body alert alert-success">
-                    系统将为您显示近90天的预订信息
+                        系统将为您显示近90天的预订信息
                     </div>
                     <!-- /input-group -->
                     <!-- Table -->
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
-                        <?php $order = I('get.order') == "asc" ? "desc" : "asc"; ?>
-                            <tr>
-                                <th>订单号</th>
-                                <th><a href='{:U("?order=$order&by=begin_time", I("get."))}'>入住日期</a></th>
-                                <th><a href='{:U("?order=$order&by=end_time", I("get."))}'>退房日期</a></th>
-                                <th>房型</th>
-                                <th>间数</th>
-                                <th>入住人</th>
-                                <th>联系方式</th>
-                                <th>支付方式</th>
-                            </tr>
+                            <?php $order = I('get.order') == "asc" ? "desc" : "asc"; ?>
+                                <tr>
+                                    <th>订单号</th>
+                                    <th><a href='{:U("?order=$order&by=begin_time", I("get."))}'>入住日期</a></th>
+                                    <th><a href='{:U("?order=$order&by=end_time", I("get."))}'>退房日期</a></th>
+                                    <th>房型</th>
+                                    <th>间数</th>
+                                    <th>入住人</th>
+                                    <th>联系方式</th>
+                                    <th>订单状态</th>
+                                </tr>
                         </thead>
                         <tbody>
                             <foreach name="M:orders" item="value" key="key">
@@ -51,7 +51,13 @@
                                     <td>{$value["count"]}</td>
                                     <td>{$value["customer_name"]}</td>
                                     <td>{$value["customer_phone"]}</td>
-                                    <td><eq name="value.type" value="offline"><span class="badge">{$value["type"]}</span><else />{$value["type"]}</eq></td>
+                                    <td>
+                                        <eq name="value.is_cancel" value="1"><span class="text-danger">已取消</span>
+                                            <else />
+                                            <eq name="value.is_pay" value="1"><span class="badge">已支付</span>
+                                                <else /><span class="text-warning">未支付</span></eq>
+                                        </eq>
+                                    </td>
                                 </tr>
                             </foreach>
                         </tbody>
