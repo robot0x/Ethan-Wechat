@@ -20,7 +20,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <input class="form-control" type="text" name="name" ng-model="name" ng-disabled="{{edit}}" required />
-                                <p class="text-danger" ng-show="myForm.name.$dirty && myForm.name.$invalid"><span ng-show="myForm.name.$error.required">配置名称不能为空</span></p>
+                                <p ng-show="myForm.name.$dirty && myForm.name.$invalid"><span ng-show="myForm.name.$error.required">配置名称不能为空</span></p>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <input class="form-control" type="text" name="type" ng-model="type" required />
-                                <p class="text-danger" ng-show="myForm.type.$dirty && myForm.type.$invalid"><span ng-show="myForm.type.$error.required">配置类型不能为空</span></p>
+                                <p ng-show="myForm.type.$dirty && myForm.type.$invalid"><span ng-show="myForm.type.$error.required">配置类型不能为空</span></p>
                             </div>
                         </div>
 
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-xs-6">
                             <input class="form-control" type="text" name="remark" ng-model="remark" required />
-                            <p class="text-danger" ng-show="myForm.remark.$dirty && myForm.remark.$invalid"><span ng-show="myForm.remark.$error.required">配置说明不能为空</span></p>
+                            <p ng-show="myForm.remark.$dirty && myForm.remark.$invalid"><span ng-show="myForm.remark.$error.required">配置说明不能为空</span></p>
                         </div>
                         </div>
                         <div class="form-group row">
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <input class="form-control" type="text" name="value" ng-model="value" required />
-                                <p class="text-danger" ng-show="myForm.value.$dirty && myForm.value.$invalid"><span ng-show="myForm.value.$error.required">配置值不能为空</span></p>
+                                <p ng-show="myForm.value.$dirty && myForm.value.$invalid"><span ng-show="myForm.value.$error.required">配置值不能为空</span></p>
                             </div>
                         </div>
                         <div class="form-group row">
