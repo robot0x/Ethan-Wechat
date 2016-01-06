@@ -4,6 +4,7 @@
   <ion-content>
 
     <div class="list">
+    <div ng-bind="evaluations | json"></div>
       <div class="item item-avatar" href="#" ng-repeat='evaluation in evaluations'>
         <img ng-src="{{evaluation.headimgurl}}" >
           <div class="row">
@@ -11,11 +12,11 @@
               <h2>{{evaluation.nickname}}</h2>
             </div>
             <div class="col">
-            <i class="icon ion-iconfontunie614 stars"></i>&nbsp
-            <i class="icon ion-iconfontunie614 stars"></i>&nbsp
-            <i class="icon ion-iconfontunie614 stars"></i>&nbsp
-            <i class="icon ion-iconfontunie616 stars"></i>&nbsp
-            <i class="icon ion-iconfontunie616 stars"></i>
+            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>&nbsp
+            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>&nbsp
+            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>&nbsp
+            <i class="icon ion-iconfontunie616" style="color:#FFFF00;"></i>&nbsp
+            <i class="icon ion-iconfontunie616" style="color:#FFFF00;"></i>
             </div>
           </div>
           <p>{{evaluation.evaluation}}</p>
@@ -28,12 +29,13 @@
           </div>
       </div>
     </div>
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMoreData()">
+</ion-infinite-scroll>
     <div class="padding">
      <a class="button button-block button-positive" href="#/tab/evaluationing">我要评论</a>
      </div>
  
-<ion-infinite-scroll  distance="10%" ng-if="moreDataCanBeLoaded" on-infinite="loadMoreData()">
-</ion-infinite-scroll>
+
 </ion-content>
 </ion-view>
 </script>

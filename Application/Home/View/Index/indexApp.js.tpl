@@ -311,11 +311,12 @@ app.controller('IntroductionCtrl', function($scope,$http) {
 
 app.controller('EvaluationCtrl', function($scope,$http,$timeout) {
   var page = 1;
-  var more = "";
-  $scope.moreDataCanBeLoaded = true;
+  var moreData = "";
+  
   $http.get('api.php/Api/Api/getEvaluation',{params:{p:'1'}})
           .success(function(data,status){
             if(data.status==='success'){
+              moreData = data.data;
               $scope.evaluations = data.data;
             }else{
               alert('评论数据不正确');
@@ -330,26 +331,26 @@ app.controller('EvaluationCtrl', function($scope,$http,$timeout) {
         $http.get('api.php/Api/Api/getEvaluation',{params:{p:page}})
           .success(function(data,status){
             if(data.status==='success'){
-              more = data.data;
+              moreData = data.data;
               return data.data;
             }else{
               alert('评论数据不正确');
             }
           });
-      }
+      };
       $timeout(function () {
-        if (more != "") {
+        if (moreData != "") {
           page++;
           $scope.evaluations.push(getJosn(page));
-         
         }
          $scope.$broadcast('scroll.infiniteScrollComplete');
       },1000);
       $scope.moreDataCanBeLoaded = false;
     };
    $scope.$on('stateChangeSuccess', function() {
-    $scope.loadMore();
+    $scope.loadMoreData();
   });
+   $scope.moreDataCanBeLoaded = true;
 });
 
 app.controller('MapCtrl', function() {
