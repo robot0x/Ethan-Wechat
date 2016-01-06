@@ -62,7 +62,6 @@ class ActivityLogic extends ActivityModel
 	{
 		$map['id']=$id;
 		$datas=$this->where($map)->delete();
-		dump($datas);
 		return $datas;
 	}
 
