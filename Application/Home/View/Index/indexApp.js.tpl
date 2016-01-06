@@ -309,6 +309,49 @@ app.controller('IntroductionCtrl', function($scope,$http) {
      });
 });
 
+app.controller('EvaluationCtrl', function($scope,$http,$timeout) {
+  var page = 1;
+  var more = "";
+  $scope.moreDataCanBeLoaded = true;
+  $http.get('api.php/Api/Api/getEvaluation',{params:{p:'1'}})
+          .success(function(data,status){
+            if(data.status==='success'){
+              $scope.evaluations = data.data;
+            }else{
+              alert('评论数据不正确');
+            }
+          })
+          .error(function(data,status){
+      
+          });
+  
+    $scope.loadMoreData = function () {
+      var getJosn = function (page){
+        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page}})
+          .success(function(data,status){
+            if(data.status==='success'){
+              more = data.data;
+              return data.data;
+            }else{
+              alert('评论数据不正确');
+            }
+          });
+      }
+      $timeout(function () {
+        if (more != "") {
+          page++;
+          $scope.evaluations.push(getJosn(page));
+         
+        }
+         $scope.$broadcast('scroll.infiniteScrollComplete');
+      },1000);
+      $scope.moreDataCanBeLoaded = false;
+    };
+   $scope.$on('stateChangeSuccess', function() {
+    $scope.loadMore();
+  });
+});
+
 app.controller('MapCtrl', function() {
  // 百度地图API功能
  var map = new BMap.Map("allmap");

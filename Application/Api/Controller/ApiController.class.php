@@ -6,6 +6,7 @@ use Api\Controller\JssdkController;
 use Api\Controller\SlideShowController;
 use Api\Controller\IntroductionController;
 use Api\Controller\RoomController;
+use Api\Controller\EvaluationController;
 
 class ApiController extends Controller
 {
@@ -56,5 +57,11 @@ class ApiController extends Controller
 		$introduction = $Introduction->getHotalIntroduction();
 
 		$this->ajaxReturn($introduction);
+	}
+	public function getEvaluationAction()
+	{
+		$Evaluations = new EvaluationController();
+		$evaluations = $Evaluations->getEvaluations();
+		$this->ajaxReturn($evaluations);
 	}
 }

@@ -1,16 +1,4 @@
 <?php
-//根程序文件
-// 判断是否是在微信浏览器里
-//author:panjie 3792535@qq.com
-//是返回true,否返回false
-function isWeixinBrowser() {
-    $agent = $_SERVER ['HTTP_USER_AGENT'];
-    if (! strpos ( $agent, "icroMessenger" )) {
-            return false;
-    }
-    return true;
-}
-
 /*
  * 微信不接收\u***格式的json内容需要对json字符串处理
  * 仅支持发送text消息，其他类型消息自己添加代码
