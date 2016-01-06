@@ -174,7 +174,7 @@ class SaleLogic extends SaleModel
 		$beginTime 	= date_to_int($beginTime);
 		$endTime	= date_to_int($endTime);
 		$OrderL 	= new OrderLogic();
-		$orders 	= group_by_key($OrderL->getOrderedListInDateRange($beginTime, $endTime), "room_id");
+		$orders 	= group_by_key($OrderL->getAllOrderedListsInDateRange($beginTime, $endTime), "room_id");
 
 		foreach($rooms as $key => $room)
 		{
