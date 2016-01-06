@@ -45,7 +45,7 @@
 								<td class="col-sm-3"><img class="thumbnails"  src="{$activity[thumbnails_url][0]}"  /></td>&nbsp
 								<td>{$activity[detail]}</td>&nbsp
 								<td>{$activity[end_time]}</td>&nbsp
-								<td>{$activity[status]?'冻结':'正常'}</td>&nbsp
+								 <td><eq name="activity.status" value="0">正常<else/><span class="badge">冻结</span></eq></td>
 								<td><a class="button btn btn-sm btn-success" href="{:U('detail?id='.$activity['id'])}"><i class="fa fa-search"></i>&nbsp查看</a>&nbsp;&nbsp;
 								<a class="button btn btn-sm btn-primary" href="{:U('edit?id='.$activity['id'],I('get.'))}"><i class="fa fa-pencil"></i>&nbsp编辑</a>&nbsp;&nbsp;
 								<a class="button btn btn-sm btn-danger" href="{:U('delete?id='.$activity['id'],I('get.'))}"><i class="fa fa-trash-o "></i>&nbsp删除</a></td>
