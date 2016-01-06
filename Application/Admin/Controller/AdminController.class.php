@@ -21,6 +21,6 @@ class AdminController extends Controller
 		$this->assign("YZ_TEMPLATE_NAV", $YZ_TEMPLATE_NAV);
 
 		//存用户信息
-		session('user_id', 1);
+		session('user_id', 3);
 	}
 }

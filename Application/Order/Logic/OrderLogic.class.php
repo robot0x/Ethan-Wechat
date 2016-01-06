@@ -79,9 +79,12 @@ class OrderLogic extends OrderModel
 			$userId = get_user_id();
 		}
 
-		$data = array();
-		$data['id'] = $id;
-		$data['is_cancel'] = 1;
+		//更新订单表
+		$data 					= array();
+		$data['id'] 			= $id;
+		$data['cancel_time'] 	= time();	//取消时间
+		$data['is_cancel'] 		= 1;		//取消标志
+		$data['cancel_user_id']	= $userId;	//取消用户ID
 		if (!$this->saveList($data))
 		{
 			$this->setError("Id:$id is not found or the order is canceled.(ID为$id的记录未找到，或找到的记录的状态本就是取消的)" . $this->getError());
