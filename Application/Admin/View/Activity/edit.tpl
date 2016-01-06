@@ -19,20 +19,12 @@
  		<div class="form-group">
             <label for="thumbnails_url" class="col-xs-2 control-label">缩略图:</label>
               <eq name="Think.ACTION_NAME" value="edit">
-              <div class="col-xs-4">
-               <foreach name="activity['thumbnails_url']" item="activity['thumbnails_url']" key="k">
-                      <img class="thumbnails"  src="{$activity[thumbnails_url]}" /></br>
-               </foreach>
-              </div>
-              </eq>
-        </div>
-        <div class="form-group">
-            <label for="thumbnails_url" class="col-xs-2 control-label">上传新图片：</label>
+             
                
          <div class="col-xs-4">
          <html:uploader value="activity[thumbnails_url]" name="thumbnails_url" id="thumbnails_url">
         请选择图片
-        </html:uploader>
+        </html:uploader></eq>
           </div>
           </div>
           
@@ -68,7 +60,7 @@
 
 		
 			<div class="col-xs-offset-2 col-xs-10">
-				<button type="submit" class="btn btn-xs btn-success" ng-disabled="myForm.title.$invalid ||
+				<button type="submit" class="btn btn-sm btn-success" ng-disabled="myForm.title.$invalid ||
   				myForm.detail.$invalid||myForm.end_time.$invalid"><i class="fa fa-check "></i>保存</button>
 			</div>
 		
@@ -78,7 +70,7 @@
 	<style type="text/css">
 	.thumbnails{
 		height: 100px;
-		width: 56px;
+		
 	}
 	</style>
 	<script type="text/javascript">
