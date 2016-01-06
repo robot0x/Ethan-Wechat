@@ -102,4 +102,25 @@ class ConfigLogic extends ConfigModel
             $res['status'] = $res['status'] ^ 1;
             $this->save($res);
         }
+        public function getValueByName($name)
+        {
+            // 将字母转换成大写
+            $name = strtoupper($name);
+            // dump($name);
+            // 查询
+            $map['name'] = $name;
+            $value = $this->where($map)->getField('value,status');
+            if(isset($value)){
+                return $value;
+            }
+            else{
+                return false;
+            }
+            if($value[status] === 1){
+                return false;
+            }
+            else{
+                return $value;
+            }
+        }
 }
