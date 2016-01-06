@@ -44,7 +44,7 @@
                                 <p>
                                     <label>用户id　:</label>&nbsp;&nbsp;{$value["customer_id"]}</p>
                                 <p>
-                                    <label>昵　　称:</label>&nbsp;&nbsp;{$value["customer_id"]}</p>
+                                    <label>昵　　称:</label>&nbsp;&nbsp;{:$M->getNickNameById($value["customer_id"])}</p>
                                 <p>
                                     <label>下单时间:</label>&nbsp;&nbsp;{$value["order_time"] | date="Y-m-d H:i", ###}</p>
                                 <p>
