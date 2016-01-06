@@ -104,7 +104,6 @@ class ActivityController extends AdminController
 		//dump($activity);
 		//向V层赋值
 		$activitys['thumbnails_url']=explode(",",$activitys['thumbnails_url']);
-		 dump($activitys['thumbnails_url']);
 		$this->assign('activitys',$activitys);
 		$this->display();
 	}

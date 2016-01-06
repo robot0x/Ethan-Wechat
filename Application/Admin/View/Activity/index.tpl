@@ -6,7 +6,7 @@
 						<div class="panel-body">
 							<a class="button btn btn-info"  href="{:U('add')}" ><i class="glyphicon glyphicon-plus"></i>&nbsp添加活动</a>
 						</div>
-						<div class="col-md-3">
+						<div class="col-xs-3">
 						<form action="{:U('index?p=',I('get.'))}" method="get">
 						   <div class="input-group custom-search-form">
                             <input class="form-control" name="keywords" placeholder="Search..." type="text" value="{:I('get.keywords')}" />
@@ -42,13 +42,13 @@
 								<td>{$k+1}</td>&nbsp
 								<td>{$activity[id]}</td>&nbsp
 								<td>{$activity[title]}</td>&nbsp
-								<td class="col-sm-3"><img class="thumbnails"  src="{$activity[thumbnails_url][0]}"  /></td>&nbsp
+								<td class="col-xs-3"><img class="thumbnails"  src="{$activity[thumbnails_url][0]}"  /></td>&nbsp
 								<td>{$activity[detail]}</td>&nbsp
 								<td>{$activity[end_time]}</td>&nbsp
 								 <td><eq name="activity.status" value="0">正常<else/><span class="badge">冻结</span></eq></td>
-								<td><a class="button btn btn-sm btn-success" href="{:U('detail?id='.$activity['id'])}"><i class="fa fa-search"></i>&nbsp查看</a>&nbsp;&nbsp;
-								<a class="button btn btn-sm btn-primary" href="{:U('edit?id='.$activity['id'],I('get.'))}"><i class="fa fa-pencil"></i>&nbsp编辑</a>&nbsp;&nbsp;
-								<a class="button btn btn-sm btn-danger" href="{:U('delete?id='.$activity['id'],I('get.'))}"><i class="fa fa-trash-o "></i>&nbsp删除</a></td>
+								<td><a class="button btn btn-xs btn-success" href="{:U('detail?id='.$activity['id'])}"><i class="fa fa-search"></i>&nbsp查看</a>&nbsp;&nbsp;
+								<a class="button btn btn-xs btn-primary" href="{:U('edit?id='.$activity['id'],I('get.'))}"><i class="fa fa-pencil"></i>&nbsp编辑</a>&nbsp;&nbsp;
+								<a class="button btn btn-xs btn-danger" href="{:U('delete?id='.$activity['id'],I('get.'))}"><i class="fa fa-trash-o "></i>&nbsp删除</a></td>
 							</tr>
 							</foreach>
 							</tbody>
