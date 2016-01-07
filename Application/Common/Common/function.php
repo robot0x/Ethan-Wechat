@@ -116,7 +116,7 @@ function get_user_id()
     if(isset($userId)){
         return $userId;
     }else{
-        redirect_url(U('Login/Index/index'));
+        redirect_url(U('Admin/Login/index'));
         exit();
     }
 }
