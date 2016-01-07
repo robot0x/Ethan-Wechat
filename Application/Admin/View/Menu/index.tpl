@@ -62,7 +62,7 @@
                                         <eq name="value.show" value="1">否
                                             <else /><span class="badge">是</span></eq>
                                     </td>
-                                    <td>{$value["dev_time"] | date="Y-m-d", ###}</td>
+                                    <td>{$value["dev_time"]}</td>
                                     <td>{$value["dev_user"]}</td>
                                     <td>{$value["test_user"]}</td>
                                     <td>{$value["check_user"]}</td>

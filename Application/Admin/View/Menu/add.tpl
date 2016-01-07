@@ -120,7 +120,7 @@
                         <div class="form-group">
                             <label for="action" class="col-sm-2 control-label">开发日期</label>
                             <div class="col-sm-4">
-                                <input class="form-control" name="dev_time" value="{$data.dev_time | date='Y-m-d', ###}">
+                                <input class="form-control" name="dev_time" value="{$data.dev_time }">
                             </div>
                         </div>
                         <div class="form-group">
