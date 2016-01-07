@@ -15,7 +15,7 @@
                                 <tr>
                                     <th>序号</th>
                                     <th>电话</th>
-                                    <th>描述</th>
+                                    <th>textarea</th>
                                     <th>缩略图</th>
                                     <th>操作</th>
                                 </tr>

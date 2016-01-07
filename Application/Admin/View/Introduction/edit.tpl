@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="col-sm-2 control-label">酒店介绍</label>
+                            <label for="title" class="col-sm-2 control-label">textarea</label>
                             <div class="col-sm-4">
                                 <input class="form-control" name="description" value="{$introduction.description}">
                             </div>
