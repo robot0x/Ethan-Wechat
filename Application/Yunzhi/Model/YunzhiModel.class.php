@@ -6,7 +6,7 @@ use Think\Model;
 class YunzhiModel extends Model
 {
     protected $p            = 1;                    //当前页
-    protected $pageSize     = 20;                   //每页多少条记录
+    protected $pageSize     = 2;                   //每页多少条记录
     protected $totalCount   = 0;                    //总条数
     protected $errors       = array();              //错误信息
     protected $orderBys     = array("id"=>"desc");  //排序字段方式
@@ -20,7 +20,7 @@ class YunzhiModel extends Model
     {
         $this->p        = (int)I('get.p');
         $this->pageSize =   (I("get.pagesize") !== "") ? I("get.pagesize") : 
-                            (C("YUNZHI_PAGE_SIZE") ? C("YUNZHI_PAGE_SIZE") : 20);
+                            (C("YUNZHI_PAGE_SIZE") ? C("YUNZHI_PAGE_SIZE") : 2);
 
         $this->keywords = trim(I('get.keywords'));
         $this->field    = (I('get.field') === "" || (int)I('get.field')) ? $this->field : I('get.field');

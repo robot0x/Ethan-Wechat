@@ -309,48 +309,53 @@ app.controller('IntroductionCtrl', function($scope,$http) {
      });
 });
 
-app.controller('EvaluationCtrl', function($scope,$http,$timeout) {
+app.controller('EvaluationCtrl', function($scope,$http,$q,$timeout) {
+  var deferred = $q.defer();
   var page = 1;
-  var moreData = "";
-  
-  $http.get('api.php/Api/Api/getEvaluation',{params:{p:'1'}})
-          .success(function(data,status){
-            if(data.status==='success'){
-              moreData = data.data;
-              $scope.evaluations = data.data;
-            }else{
-              alert('评论数据不正确');
-            }
-          })
-          .error(function(data,status){
+  var moreData = [];
+  $scope.evaluations = [];
+  $scope.moreDataCanBeLoaded = true;
+  var canBeLoaded = function (moreData) {
+    if (moreData.length == 0) {
+      $scope.moreDataCanBeLoaded = false;
+    }else{
+      $scope.moreDataCanBeLoaded = true;
+    }
+  }
+  var getJosn = function (page){
       
-          });
-  
-    $scope.loadMoreData = function () {
-      var getJosn = function (page){
-        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page}})
+        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page,pagesize:'2'}})
           .success(function(data,status){
             if(data.status==='success'){
               moreData = data.data;
-              return data.data;
+              console.log(moreData);
+              canBeLoaded(moreData);
+              deferred.resolve(data.data);
+              if ($scope.evaluations.length == 0) {
+                $scope.evaluations = data.data;
+                console.log($scope.evaluations);
+              }else{
+                for (var i = 0; i < data.data.length; i++) {
+                  $scope.evaluations.push(data.data[i]);
+                }
+                console.log($scope.evaluations);
+              }
             }else{
               alert('评论数据不正确');
             }
           });
       };
+    $scope.loadMoreData = function () {
+      
       $timeout(function () {
-        if (moreData != "") {
-          page++;
-          $scope.evaluations.push(getJosn(page));
-        }
-         $scope.$broadcast('scroll.infiniteScrollComplete');
-      },1000);
-      $scope.moreDataCanBeLoaded = false;
+
+              deferred.promise.then(getJosn(page++)).then(function () {
+              $scope.$broadcast('scroll.infiniteScrollComplete');
+              console.log($scope.moreDataCanBeLoaded);
+            });
+      },2000);
     };
-   $scope.$on('stateChangeSuccess', function() {
-    $scope.loadMoreData();
-  });
-   $scope.moreDataCanBeLoaded = true;
+   
 });
 
 app.controller('MapCtrl', function() {

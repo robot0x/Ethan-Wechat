@@ -4,18 +4,18 @@
   <ion-content>
 
     <div class="list">
-    <div ng-bind="evaluations | json"></div>
+    {/*<div ng-bind="evaluations | json"></div>*/}
       <div class="item item-avatar" href="#" ng-repeat='evaluation in evaluations'>
         <img ng-src="{{evaluation.headimgurl}}" >
           <div class="row">
-            <div class="col col-33">      
+            <div class="col col-40">      
               <h2>{{evaluation.nickname}}</h2>
             </div>
             <div class="col">
-            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>&nbsp
-            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>&nbsp
-            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>&nbsp
-            <i class="icon ion-iconfontunie616" style="color:#FFFF00;"></i>&nbsp
+            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>
+            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>
+            <i class="icon ion-iconfontunie614" style="color:#FFFF00;"></i>
+            <i class="icon ion-iconfontunie616" style="color:#FFFF00;"></i>
             <i class="icon ion-iconfontunie616" style="color:#FFFF00;"></i>
             </div>
           </div>

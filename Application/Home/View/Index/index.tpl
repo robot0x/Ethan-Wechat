@@ -14,7 +14,6 @@
   <script src="{:U('indexApp.js')}"></script>
    <!-- <script src="__JS__/app.js"></script>
    <script src="__JS__/controllers.js"></script> -->
-  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=U7N6PIKHKGEKgXmi5wqNfItn"></script>
 
  </head>
  <body>

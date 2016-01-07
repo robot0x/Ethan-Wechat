@@ -41,8 +41,8 @@
     </button>
     </a>
     <div ng-repeat='room in rooms'>
-  <a class="item" href='{{room.order}}'>
-    <h2>{{room.title}}</h2>
+    <a class="item" href='{{room.order}}'>
+    <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">
       ￥{{room.price}}<i class="ion-down"></i>

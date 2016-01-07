@@ -36,7 +36,6 @@ class ApiController extends Controller
 		foreach ($slideRoomLists['data'] as $key => $value) {
 			$slideRoomLists['data'][$key]['detail'] = false;
 			$slideRoomLists['data'][$key]['order'] = '#/tab/confirmOrder';
-
 		}
 
 		//拼接数组
@@ -62,6 +61,14 @@ class ApiController extends Controller
 	{
 		$Evaluations = new EvaluationController();
 		$evaluations = $Evaluations->getEvaluations();
+
+		foreach ($evaluations['data'] as $key => $value) {
+			$count = $evaluations['data'][$key]['star_level'];
+			$evaluations['data'][$key]['icon'] = array_fill(0, $count, 'ion-iconfontunie616');
+			// $evaluations['data'][$key]['icon'] = array_fill($count-1, 5-$count, 'ion-iconfontunie614');
+
+
+		}
 		$this->ajaxReturn($evaluations);
 	}
 }
