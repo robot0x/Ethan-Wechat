@@ -309,8 +309,8 @@ app.controller('IntroductionCtrl', function($scope,$http) {
      });
 });
 
-app.controller('EvaluationCtrl', function($scope,$http,$q,$timeout) {
-  var deferred = $q.defer();
+app.controller('EvaluationCtrl', function($scope,$http,$q) {
+  
   var page = 1;
   var moreData = [];
   $scope.evaluations = [];
@@ -323,13 +323,12 @@ app.controller('EvaluationCtrl', function($scope,$http,$q,$timeout) {
     }
   }
   var getJosn = function (page){
-      
+      var deferred = $q.defer();
         $http.get('api.php/Api/Api/getEvaluation',{params:{p:page,pagesize:'2'}})
           .success(function(data,status){
             if(data.status==='success'){
               moreData = data.data;
               console.log(moreData);
-              canBeLoaded(moreData);
               deferred.resolve(data.data);
               if ($scope.evaluations.length == 0) {
                 $scope.evaluations = data.data;
@@ -344,16 +343,16 @@ app.controller('EvaluationCtrl', function($scope,$http,$q,$timeout) {
               alert('评论数据不正确');
             }
           });
+          return deferred.promise;
       };
     $scope.loadMoreData = function () {
-      
-      $timeout(function () {
-
-              deferred.promise.then(getJosn(page++)).then(function () {
-              $scope.$broadcast('scroll.infiniteScrollComplete');
-              console.log($scope.moreDataCanBeLoaded);
-            });
-      },2000);
+      getJosn(page++).then(function () {
+      canBeLoaded(moreData);
+      return $scope.moreDataCanBeLoaded;
+      console.log($scope.moreDataCanBeLoaded);
+      }).then(function (data) {
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
     };
    
 });
