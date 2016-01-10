@@ -1,67 +1,50 @@
 <script id="templates/indexDate.html" type="text/ng-template">
-	<ion-view view-title="选择日期">
-	<div class="bar bar-subheader bar-stable">
-  <a href="" class="button button-icon ion-back"></a>
-  <h6 class="title">2015年12月</h6>
-  <a href="" class="button button-icon ion-right"></a>
+<ion-view view-title="选择日期" ng-controller='DateCtrl'>
+<ion-content>
+<div class="u-cover">
+    <div class="u-dtp">
+        <div class="u-dtp-header">
+            <label>日期:
+                <input class="ipt-date" type="text" ng-model="source.crtDate"/>
+            </label>
+        </div>
+        <div class="u-dtp-content" id="{{id}}">
+            <div class="month" ng-repeat="month in source.result track by $index">
+                <div class="title">
+                    <span>{{month.date| date: 'yyyy年MM月'}}</span>
+                </div>
+                <div class="dtp-week">
+                    <span class="week">日</span>
+                    <span class="week">一</span>
+                    <span class="week">二</span>
+                    <span class="week">三</span>
+                    <span class="week">四</span>
+                    <span class="week">五</span>
+                    <span class="week">六</span>
+                </div>
+                <div class="dtp-day">
+            <span class="day"
+                  ng-repeat="day in month.days "
+                  ng-style="{
+                    'visibility': day.getMonth() === month.date.getMonth() ? 'visible' : 'hidden',
+                    }"
+                  ng-class="{
+                  'today': source.today.getTime() === day.getTime(),
+                  'z-crt': day.getTime() === crtTimestamp
+                  }"
+                  ng-click="setDate(day)"
+                    >
+                {{ day | date: 'dd' }}
+            </span>
+                </div>
+            </div>
+        </div>
+        <div class="u-dtp-btns">
+            <button class="ok">确定</button>
+            <button class="cancel">取消</button>
+        </div>
+    </div>
 </div>
-	<ion-content>
-	<div class="list has-header">
-		<div class="item row">
-			<div class="col">日</div>
-			<div class="col">一</div>
-			<div class="col">二</div>
-			<div class="col">三</div>
-			<div class="col">四</div>
-			<div class="col">五</div>
-			<div class="col">六</div>
-		</div>
-		<div class="item row">
-			<div class="col"></div>
-			<div class="col"></div>
-			<div class="col stable">1</div>
-			<div class="col stable">2</div>
-			<div class="col stable">3</div>
-			<div class="col positive">4</div>
-			<div class="col">5</div>
-		</div>
-		<div class="item row">
-			<div class="col">6</div>
-			<div class="col">7</div>
-			<div class="col">8</div>
-			<div class="col">9</div>
-			<div class="col">10</div>
-			<div class="col">11</div>
-			<div class="col">12</div>
-		</div>
-		<div class="item row">
-			<div class="col">13</div>
-			<div class="col">14</div>
-			<div class="col">15</div>
-			<div class="col">16</div>
-			<div class="col">17</div>
-			<div class="col">18</div>
-			<div class="col">19</div>
-		</div>
-		<div class="item row">
-			<div class="col">20</div>
-			<div class="col">21</div>
-			<div class="col">22</div>
-			<div class="col">23</div>
-			<div class="col">24</div>
-			<div class="col">25</div>
-			<div class="col">26</div>
-		</div>
-		<div class="item row">
-			<div class="col">27</div>
-			<div class="col">28</div>
-			<div class="col">29</div>
-			<div class="col">30</div>
-			<div class="col">31</div>
-			<div class="col"></div>
-			<div class="col"></div>
-		</div>
-	</div>
 </ion-content>
 </ion-view>
 </script>

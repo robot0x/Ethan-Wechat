@@ -357,6 +357,10 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
    
 });
 
+app.controller('DateCtrl',function(){
+
+});
+
 app.controller('MapCtrl', function() {
  // 百度地图API功能
  var map = new BMap.Map("allmap");
