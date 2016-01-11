@@ -25,10 +25,8 @@ class ActivityController extends AdminController
 		//获取添加活动信息
 		$activity = I('post.');
 		//添加活动信息
-		dump($activity);
 		$arrayfirst=explode(",", $activity['thumbnails_url']);
 		$activity['thumbnails_url']=$arrayfirst[0];
-		dump($activity['thumbnails_url']);
 		$ActivityL = new ActivityLogic();
 		$ActivityL->addList($activity);
 
@@ -59,7 +57,7 @@ class ActivityController extends AdminController
 	{
 		//获取更新活动信息
 		$activity = I('post.');
-		dump($activity);
+		
 		$arrayfirst=explode(",", $activity['thumbnails_url']);
 		$activity['thumbnails_url']=$arrayfirst[0];
 		//存更新活动信息
