@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{$key+1}</td>
                                     <td>
-                                        <a href="javascript:void(0);" data-trigger="focus" data-container="body" data-toggle="popover" data-title="功能简介" data-placement="right" data-content="{$value['abstract']}">
+                                        <a href="javascript:void(0);" data-trigger="focus" data-container="body" data-toggle="popover" data-title="{$value['module']}/{$value['controller']}/{$value['action']}" data-placement="right" data-content="{$value['abstract']}">
                                                                 <php>
                                             for( $level = 0; $level
                                             < $value[ '_level']; $level++) echo "|----"; </php>
