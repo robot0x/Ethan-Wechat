@@ -1,50 +1,56 @@
 <script id="templates/indexDate.html" type="text/ng-template">
 <ion-view view-title="选择日期" ng-controller='DateCtrl'>
 <ion-content>
-<div class="u-cover">
-    <div class="u-dtp">
-        <div class="u-dtp-header">
-            <label>日期:
-                <input class="ipt-date" type="text" ng-model="source.crtDate"/>
-            </label>
+<style>
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+
+    <h4>Inline</h4>
+    <div style="display:inline-block; min-height:290px;">
+      <uib-datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>
+    </div>
+
+    <h4>Popup</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
         </div>
-        <div class="u-dtp-content" id="{{id}}">
-            <div class="month" ng-repeat="month in source.result track by $index">
-                <div class="title">
-                    <span>{{month.date| date: 'yyyy年MM月'}}</span>
-                </div>
-                <div class="dtp-week">
-                    <span class="week">日</span>
-                    <span class="week">一</span>
-                    <span class="week">二</span>
-                    <span class="week">三</span>
-                    <span class="week">四</span>
-                    <span class="week">五</span>
-                    <span class="week">六</span>
-                </div>
-                <div class="dtp-day">
-            <span class="day"
-                  ng-repeat="day in month.days "
-                  ng-style="{
-                    'visibility': day.getMonth() === month.date.getMonth() ? 'visible' : 'hidden',
-                    }"
-                  ng-class="{
-                  'today': source.today.getTime() === day.getTime(),
-                  'z-crt': day.getTime() === crtTimestamp
-                  }"
-                  ng-click="setDate(day)"
-                    >
-                {{ day | date: 'dd' }}
-            </span>
-                </div>
-            </div>
-        </div>
-        <div class="u-dtp-btns">
-            <button class="ok">确定</button>
-            <button class="cancel">取消</button>
+
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="date" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Format: <span class="muted-text">(manual alternate <em>{{altInputFormats[0]}}</em>)</span></label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
+        </div>
+    </div>
+
+    <hr />
+    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+    <button type="button" class="btn btn-sm btn-default" ng-click="setDate(2009, 7, 24)">2009-08-24</button>
+    <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
+    <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
 </ion-content>
 </ion-view>
 </script>

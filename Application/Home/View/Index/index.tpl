@@ -6,6 +6,7 @@
 
   <link href="__LIB__/ionic/css/ionic.css" rel="stylesheet">
   <link href="__CSS__/style.css" rel="stylesheet">
+  <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
 
   <!-- ionic/angularjs js -->
   <script src="__LIB__/ionic/js/ionic.bundle.js"></script>
@@ -14,6 +15,7 @@
   <script src="{:U('indexApp.js')}"></script>
    <!-- <script src="__JS__/app.js"></script>
    <script src="__JS__/controllers.js"></script> -->
+   <script src="__JS__/ui-bootstrap-tpls-1.0.0.min.js"></script>
 
  </head>
  <body>
