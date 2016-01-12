@@ -20,15 +20,21 @@ class IntroductionController extends AdminController
         
         $this->display('edit'); 
     }
+
         public function addAction(){
         //显示 display
         $this->display('edit');
     }
 
+    /**
+     * 数据保存
+     * @return  跳转至editAction
+     */
     public function saveAction(){
         //取用户信息
         $introduction = I('post.');
-
+        dump($introduction);
+        exit();
         //添加 add()
         $IntroductionL = new IntroductionLogic();
         $IntroductionL->addList($introduction);
