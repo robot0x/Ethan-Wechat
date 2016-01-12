@@ -11,59 +11,21 @@ use Introduction\Model\IntroductionModel;
 
 class IntroductionLogic extends IntroductionModel
 {
-
-	protected  $errors = array();
-
-	public function getErrors()
+	public function saveList($list)
 	{
-		return $this->errors;
-	}
-	public function addList($introduction)
-	{
-		try{
-			if($this->create($introduction))
-			{
-				$id=$this->add();
-				return $id;
-			}
-			else
-			{
-				$this->errors[]=$this->getError();
-				return false;
-			}
-		}
-		catch(\Think\Exception $e)
+		$data = array();
+		if (!$id = (int)$list['id'])
 		{
-			$this->errors[]=$e->getMessage();
+			$this->setError("IntrodctionL:The datas must be have KEY id(必须传入参数ID)");
 			return false;
 		}
-	}
-	public function saveList($list){
-		try{
-			if($this->create($list))
-			{
-				$id=$this->save();
-				return $id;
-			}
-			else
-			{
-				$this->errors[]=$this->getError();
-				return false;
-			}
-		}
-		catch(\Think\Exception $e)
-		{
-			$this->errors[]=$e->getMessage();
-			return false;
-		}
-	}
-	public function deleteInfo($id)
-	{
-		$map['id'] = $id;
-		$datas=$this->where($map)->delete();
-		return $datas;
-	}
 
+		$data['id'] = $id;
+		$data['hotel_phone'] = $list['hotel_phone'];
+		$data['description'] = $list['description'];
+
+		return parent::saveList($data);
+	}
 	/**
 	 * 获取一条记录信息
 	 * @return list 
