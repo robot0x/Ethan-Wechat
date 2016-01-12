@@ -42,23 +42,23 @@ class WxPayLogic
 		
 		//异步通知url未设置，则使用配置文件中的url
 		if(!$inputObj->IsNotify_urlSet()){
-			$inputObj->SetNotify_url(WxPayConfig::NOTIFY_URL);//异步通知url
+			$inputObj->SetNotify_url(C("NOTIFY_URL");//异步通知url
 		}
 		
-		$inputObj->SetAppid(WxPayConfig::APPID);//公众账号ID
-		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
+		$inputObj->SetAppid(C("APPID");//公众账号ID
+		$inputObj->SetMch_id(C("MCHID");//商户号
 		$inputObj->SetSpbill_create_ip($_SERVER['REMOTE_ADDR']);//终端ip	  
 		//$inputObj->SetSpbill_create_ip("1.1.1.1");  	    
-		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
+		$inputObj->SetNonce_str($this->getNonceStr());//随机字符串
 		
 		//签名
 		$inputObj->SetSign();
 		$xml = $inputObj->ToXml();
 		
-		$startTimeStamp = self::getMillisecond();//请求开始时间
-		$response = self::postXmlCurl($xml, $url, false, $timeOut);
+		$startTimeStamp = $this->getMillisecond();//请求开始时间
+		$response = $this->postXmlCurl($xml, $url, false, $timeOut);
 		$result = WxPayResults::Init($response);
-		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
+		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
 		return $result;
 	}

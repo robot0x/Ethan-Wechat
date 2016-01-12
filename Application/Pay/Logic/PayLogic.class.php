@@ -17,7 +17,7 @@ class PayLogic extends PayModel
 		$WxOrderL = new WxOrderLogic();
 		$WxOrderL->SetBody("test");
 		$WxOrderL->SetAttach("test");
-		$WxOrderL->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
+		$WxOrderL->SetOut_trade_no(C("MCHID").date("YmdHis"));
 		$WxOrderL->SetTotal_fee("1");
 		$WxOrderL->SetTime_start(date("YmdHis"));
 		$WxOrderL->SetTime_expire(date("YmdHis", time() + 600));

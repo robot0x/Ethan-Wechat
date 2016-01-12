@@ -7,6 +7,9 @@
  */
 namespace Pay\Logic;
 
+use Pay\Logic\WxPayExceptionLogic;
+use Pay\Logic\WxPay
+
 class JsapiPayLogic.class.php
 {
 	/**
@@ -65,7 +68,7 @@ class JsapiPayLogic.class.php
 		|| !array_key_exists("prepay_id", $UnifiedOrderResult)
 		|| $UnifiedOrderResult['prepay_id'] == "")
 		{
-			throw new WxPayException("参数错误");
+			throw new WxExceptionLogic("参数错误");
 		}
 		$jsapi = new WxPayJsApiPay();
 		$jsapi->SetAppid($UnifiedOrderResult["appid"]);
