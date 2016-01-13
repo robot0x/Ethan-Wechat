@@ -309,6 +309,166 @@ app.controller('IntroductionCtrl', function($scope,$http) {
      });
 });
 
+app.controller('EvaluationCtrl', function($scope,$http,$q) {
+  
+  var page = 1;
+  var moreData = [];
+  $scope.evaluations = [];
+  $scope.moreDataCanBeLoaded = true;
+  var canBeLoaded = function (moreData) {
+    if (moreData.length == 0) {
+      $scope.moreDataCanBeLoaded = false;
+    }else{
+      $scope.moreDataCanBeLoaded = true;
+    }
+  }
+  var getJosn = function (page){
+      var deferred = $q.defer();
+        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page,pagesize:'2'}})
+          .success(function(data,status){
+            if(data.status==='success'){
+              moreData = data.data;
+              console.log(moreData);
+              deferred.resolve(data.data);
+              if ($scope.evaluations.length == 0) {
+                $scope.evaluations = data.data;
+                console.log($scope.evaluations);
+              }else{
+                for (var i = 0; i < data.data.length; i++) {
+                  $scope.evaluations.push(data.data[i]);
+                }
+                console.log($scope.evaluations);
+              }
+            }else{
+              alert('评论数据不正确');
+            }
+          });
+          return deferred.promise;
+      };
+    $scope.loadMoreData = function () {
+      getJosn(page++).then(function () {
+      canBeLoaded(moreData);
+      return $scope.moreDataCanBeLoaded;
+      console.log($scope.moreDataCanBeLoaded);
+      }).then(function (data) {
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
+    };
+   
+});
+
+app.controller('DateCtrl',function($scope){
+
+});
+
+app.directive("mystarselect", function() {
+    return {
+        restrict: 'AE',
+        replace: true,
+        scope: {
+            level: '=',
+        },
+        template: '<div id="mystarselect"></div>',
+        link: function (scope) {
+            function star5(starid) {
+                src = "__IMG__/";
+                this.star_on_left = src + "star.png";
+                this.star_off_left = src + "starBack.png";
+                this.star_on_right = src + "star.png";
+                this.star_off_right = src + "starBack.png";
+                this.id = starid;
+                this.point = 0;
+
+                this.initial = starInitial;
+                this.redraw = starRedraw;
+                this.attach = starAttach;
+                this.deattach = starDeAttach;
+                this.doall = starDoall;
+            }
+
+            function starDoall(point) {
+                this.initial();
+                this.attach();
+                this.redraw(point);
+            }
+
+            function starInitial() {
+                var 
+                html = "<img id='star" + this.id + "_1' point='1' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_2' point='2' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_3' point='3' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_4' point='4' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_5' point='5' src='" + this.star_off_right + "'>";
+                //document.write(html);
+                document.getElementById("mystarselect").innerHTML = html;
+            }
+
+            function starAttach() {
+                for (var i = 1; i < 6; i++) {
+                    document.getElementById("star" + this.id + "_" + i).style.cursor = "pointer";
+                    document.getElementById("star" + this.id + "_" + i).onmouseover = moveStarPoint;
+                    document.getElementById("star" + this.id + "_" + i).onmouseout = outStarPoint;
+                    document.getElementById("star" + this.id + "_" + i).starid = this.id;
+                    document.getElementById("star" + this.id + "_" + i).onclick = setStarPoint;
+                }
+            }
+
+            function starDeAttach() {
+                for (var i = 1; i < 6; i++) {
+                    document.getElementById("star" + this.id + "_" + i).style.cursor = "default";
+                    document.getElementById("star" + this.id + "_" + i).onmouseover = null;
+                    document.getElementById("star" + this.id + "_" + i).onmouseout = null;
+                    document.getElementById("star" + this.id + "_" + i).onclick = null;
+                }
+            }
+
+            function starRedraw(point) {
+                for (var i = 1; i < 6; i++) {
+                    if (i <= point)
+                        if (parseInt(i / 2) * 2 == i)
+                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_right;
+                        else
+                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_left;
+                    else if (parseInt(i / 2) * 2 == i)
+                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_right;
+                    else
+                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_left;
+                }
+            }
+
+            function moveStarPoint(evt) {
+                var pstar = evt ? evt.target : event.toElement;
+                var point = pstar.getAttribute("point");
+                var starobj = new star5(pstar.starid);
+                starobj.redraw(point);
+            }
+
+            function outStarPoint(evt) {
+                var pstar = evt ? evt.target : event.srcElement;
+                var starobj = new star5(pstar.starid);
+                starobj.redraw(0);
+            }
+
+            function setStarPoint(evt) {
+                var pstar = evt ? evt.target : event.srcElement;
+                var starobj = new star5(pstar.starid);
+                starobj.attach();
+                var n = pstar.getAttribute("point");
+                console.log("选择的等级:" + n);
+                scope.level = n;
+                starobj.doall(n);
+            }
+
+            var star = new star5("point");
+            star.doall();
+        }
+    };
+});
+app.controller('EvaluationingCtrl',function($scope){
+  var level = $scope.evaluateLevel;
+  console.log($scope.evaluateLevel);
+});
+
 app.controller('MapCtrl', function() {
  // 百度地图API功能
  var map = new BMap.Map("allmap");
