@@ -4,7 +4,7 @@
         <div class="col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    订单详情
+                    添加
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" action="{:U('save',I('get.'))}" method='post' id="demoForm">
@@ -48,19 +48,19 @@
                         <div class="form-group">
                             <label for="module" class="col-sm-2 control-label ">模块名</label>
                             <div class="col-sm-4">
-                                <input class="form-control" name="module" value="{$data.module}">
+                                <input class="form-control" name="module" value="{:($data['module'] !== null) ? $data['module'] : I('get.module')}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="controller" class="col-sm-2 control-label ">控制器名</label>
                             <div class="col-sm-4">
-                                <input class="form-control" name="controller" value="{$data.controller}">
+                                <input class="form-control" name="controller" value="{:(isset($data['controller']) ? $data['controller'] : I('get.controller'))}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="action" class="col-sm-2 control-label">方法名</label>
                             <div class="col-sm-4">
-                                <input class="form-control" name="action" value="{$data.action}">
+                                <input class="form-control" name="action" value="{:($data['action'] !== null) ? $data['action'] : I('get.action')}">
                             </div>
                         </div>
                         <div class="form-group">
