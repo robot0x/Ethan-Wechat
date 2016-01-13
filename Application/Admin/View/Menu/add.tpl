@@ -4,7 +4,7 @@
         <div class="col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    订单详情
+                    添加
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" action="{:U('save',I('get.'))}" method='post' id="demoForm">
