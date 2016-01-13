@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header"><php>
-                if ($breadCrumbs = $YunzhiMenuM->getBreadCrumbs())
+                if (is_object($YunzhiMenuM) && $breadCrumbs = $YunzhiMenuM->getBreadCrumbs())
                 {
                     for($i = count($breadCrumbs)-1; $i >= 0 ; $i--)
                     {
