@@ -14,8 +14,7 @@
 				</div>
 
 				<div class="col">
-					<uib-rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
-					<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+					<mystarselect level="evaluateLevel"></mystarselect>
 				</div>
 			</div>
 
@@ -53,4 +52,3 @@
 		</ion-content>
 	</ion-view>
 </script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>

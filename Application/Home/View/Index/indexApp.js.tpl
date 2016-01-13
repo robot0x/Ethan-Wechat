@@ -1,4 +1,6 @@
-var app = angular.module('yunzhiclub', ['ionic','ui.bootstrap']);
+var app = angular.module('yunzhiclub', ['ionic']);
+
+
 
 app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
@@ -358,87 +360,115 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 app.controller('DateCtrl',function($scope){
-$scope.today = function() {
-    $scope.dt = new Date();
-  };
-  $scope.today();
 
-  $scope.clear = function() {
-    $scope.dt = null;
-  };
+});
 
-  // Disable weekend selection
-  $scope.disabled = function(date, mode) {
-    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-  };
+app.directive("mystarselect", function() {
+    return {
+        restrict: 'AE',
+        replace: true,
+        scope: {
+            level: '=',
+        },
+        template: '<div id="mystarselect"></div>',
+        link: function (scope) {
+            function star5(starid) {
+                src = "__IMG__/";
+                this.star_on_left = src + "star.png";
+                this.star_off_left = src + "starBack.png";
+                this.star_on_right = src + "star.png";
+                this.star_off_right = src + "starBack.png";
+                this.id = starid;
+                this.point = 0;
 
-  $scope.toggleMin = function() {
-    $scope.minDate = $scope.minDate ? null : new Date();
-  };
+                this.initial = starInitial;
+                this.redraw = starRedraw;
+                this.attach = starAttach;
+                this.deattach = starDeAttach;
+                this.doall = starDoall;
+            }
 
-  $scope.toggleMin();
-  $scope.maxDate = new Date(2020, 5, 22);
+            function starDoall(point) {
+                this.initial();
+                this.attach();
+                this.redraw(point);
+            }
 
-  $scope.open1 = function() {
-    $scope.popup1.opened = true;
-  };
+            function starInitial() {
+                var 
+                html = "<img id='star" + this.id + "_1' point='1' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_2' point='2' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_3' point='3' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_4' point='4' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_5' point='5' src='" + this.star_off_right + "'>";
+                //document.write(html);
+                document.getElementById("mystarselect").innerHTML = html;
+            }
 
-  $scope.open2 = function() {
-    $scope.popup2.opened = true;
-  };
+            function starAttach() {
+                for (var i = 1; i < 6; i++) {
+                    document.getElementById("star" + this.id + "_" + i).style.cursor = "pointer";
+                    document.getElementById("star" + this.id + "_" + i).onmouseover = moveStarPoint;
+                    document.getElementById("star" + this.id + "_" + i).onmouseout = outStarPoint;
+                    document.getElementById("star" + this.id + "_" + i).starid = this.id;
+                    document.getElementById("star" + this.id + "_" + i).onclick = setStarPoint;
+                }
+            }
 
-  $scope.setDate = function(year, month, day) {
-    $scope.dt = new Date(year, month, day);
-  };
+            function starDeAttach() {
+                for (var i = 1; i < 6; i++) {
+                    document.getElementById("star" + this.id + "_" + i).style.cursor = "default";
+                    document.getElementById("star" + this.id + "_" + i).onmouseover = null;
+                    document.getElementById("star" + this.id + "_" + i).onmouseout = null;
+                    document.getElementById("star" + this.id + "_" + i).onclick = null;
+                }
+            }
 
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
+            function starRedraw(point) {
+                for (var i = 1; i < 6; i++) {
+                    if (i <= point)
+                        if (parseInt(i / 2) * 2 == i)
+                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_right;
+                        else
+                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_left;
+                    else if (parseInt(i / 2) * 2 == i)
+                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_right;
+                    else
+                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_left;
+                }
+            }
 
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
-  $scope.altInputFormats = ['M!/d!/yyyy'];
+            function moveStarPoint(evt) {
+                var pstar = evt ? evt.target : event.toElement;
+                var point = pstar.getAttribute("point");
+                var starobj = new star5(pstar.starid);
+                starobj.redraw(point);
+            }
 
-  $scope.popup1 = {
-    opened: false
-  };
+            function outStarPoint(evt) {
+                var pstar = evt ? evt.target : event.srcElement;
+                var starobj = new star5(pstar.starid);
+                starobj.redraw(0);
+            }
 
-  $scope.popup2 = {
-    opened: false
-  };
+            function setStarPoint(evt) {
+                var pstar = evt ? evt.target : event.srcElement;
+                var starobj = new star5(pstar.starid);
+                starobj.attach();
+                var n = pstar.getAttribute("point");
+                console.log("选择的等级:" + n);
+                scope.level = n;
+                starobj.doall(n);
+            }
 
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  var afterTomorrow = new Date();
-  afterTomorrow.setDate(tomorrow.getDate() + 1);
-  $scope.events =
-    [
-      {
-        date: tomorrow,
-        status: 'full'
-      },
-      {
-        date: afterTomorrow,
-        status: 'partially'
-      }
-    ];
-
-  $scope.getDayClass = function(date, mode) {
-    if (mode === 'day') {
-      var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-      for (var i = 0; i < $scope.events.length; i++) {
-        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-        if (dayToCheck === currentDay) {
-          return $scope.events[i].status;
+            var star = new star5("point");
+            star.doall();
         }
-      }
-    }
-
-    return '';
-  };
+    };
+});
+app.controller('EvaluationingCtrl',function($scope){
+  var level = $scope.evaluateLevel;
+  console.log($scope.evaluateLevel);
 });
 
 app.controller('MapCtrl', function() {
