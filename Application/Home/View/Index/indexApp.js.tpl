@@ -363,112 +363,75 @@ app.controller('DateCtrl',function($scope){
 
 });
 
-app.directive("mystarselect", function() {
-    return {
-        restrict: 'AE',
-        replace: true,
-        scope: {
-            level: '=',
-        },
-        template: '<div id="mystarselect"></div>',
-        link: function (scope) {
-            function star5(starid) {
-                src = "__IMG__/";
-                this.star_on_left = src + "star.png";
-                this.star_off_left = src + "starBack.png";
-                this.star_on_right = src + "star.png";
-                this.star_off_right = src + "starBack.png";
-                this.id = starid;
-                this.point = 0;
-
-                this.initial = starInitial;
-                this.redraw = starRedraw;
-                this.attach = starAttach;
-                this.deattach = starDeAttach;
-                this.doall = starDoall;
-            }
-
-            function starDoall(point) {
-                this.initial();
-                this.attach();
-                this.redraw(point);
-            }
-
-            function starInitial() {
-                var 
-                html = "<img id='star" + this.id + "_1' point='1' src='" + this.star_off_right + "'>&nbsp;";
-                html += "<img id='star" + this.id + "_2' point='2' src='" + this.star_off_right + "'>&nbsp;";
-                html += "<img id='star" + this.id + "_3' point='3' src='" + this.star_off_right + "'>&nbsp;";
-                html += "<img id='star" + this.id + "_4' point='4' src='" + this.star_off_right + "'>&nbsp;";
-                html += "<img id='star" + this.id + "_5' point='5' src='" + this.star_off_right + "'>";
-                //document.write(html);
-                document.getElementById("mystarselect").innerHTML = html;
-            }
-
-            function starAttach() {
-                for (var i = 1; i < 6; i++) {
-                    document.getElementById("star" + this.id + "_" + i).style.cursor = "pointer";
-                    document.getElementById("star" + this.id + "_" + i).onmouseover = moveStarPoint;
-                    document.getElementById("star" + this.id + "_" + i).onmouseout = outStarPoint;
-                    document.getElementById("star" + this.id + "_" + i).starid = this.id;
-                    document.getElementById("star" + this.id + "_" + i).onclick = setStarPoint;
-                }
-            }
-
-            function starDeAttach() {
-                for (var i = 1; i < 6; i++) {
-                    document.getElementById("star" + this.id + "_" + i).style.cursor = "default";
-                    document.getElementById("star" + this.id + "_" + i).onmouseover = null;
-                    document.getElementById("star" + this.id + "_" + i).onmouseout = null;
-                    document.getElementById("star" + this.id + "_" + i).onclick = null;
-                }
-            }
-
-            function starRedraw(point) {
-                for (var i = 1; i < 6; i++) {
-                    if (i <= point)
-                        if (parseInt(i / 2) * 2 == i)
-                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_right;
-                        else
-                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_left;
-                    else if (parseInt(i / 2) * 2 == i)
-                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_right;
-                    else
-                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_left;
-                }
-            }
-
-            function moveStarPoint(evt) {
-                var pstar = evt ? evt.target : event.toElement;
-                var point = pstar.getAttribute("point");
-                var starobj = new star5(pstar.starid);
-                starobj.redraw(point);
-            }
-
-            function outStarPoint(evt) {
-                var pstar = evt ? evt.target : event.srcElement;
-                var starobj = new star5(pstar.starid);
-                starobj.redraw(0);
-            }
-
-            function setStarPoint(evt) {
-                var pstar = evt ? evt.target : event.srcElement;
-                var starobj = new star5(pstar.starid);
-                starobj.attach();
-                var n = pstar.getAttribute("point");
-                console.log("选择的等级:" + n);
-                scope.level = n;
-                starobj.doall(n);
-            }
-
-            var star = new star5("point");
-            star.doall();
+app.directive("star", function() {
+   return {
+    template: '<h1><ul class="rating" ng-mouseleave="leave()">' +
+        '<li ng-repeat="star in stars" ng-class="star" ng-click="click($index + 1)" ng-mouseover="over($index + 1)">' +
+        '\u2605' +
+        '</li>' +
+        '</ul></h1>',
+    scope: {
+      ratingValue: '=',
+      max: '=',
+      readonly: '@',
+      onHover: '=',
+      onLeave: '='
+    },
+    controller: function($scope){
+      $scope.ratingValue = $scope.ratingValue || 0;
+      $scope.max = $scope.max || 5;
+      $scope.click = function(val){
+        if ($scope.readonly && $scope.readonly === 'true') {
+          return;
         }
-    };
+        $scope.ratingValue = val;
+      };
+      $scope.over = function(val){
+        $scope.onHover(val);
+      };
+      $scope.leave = function(){
+        $scope.onLeave();
+      }
+    },
+    link: function (scope, elem, attrs) {
+      elem.css("text-align", "center");
+      var updateStars = function () {
+        scope.stars = [];
+        for (var i = 0; i < scope.max; i++) {
+          scope.stars.push({
+            filled: i < scope.ratingValue
+          });
+        }
+      };
+      updateStars();
+ 
+      scope.$watch('ratingValue', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+      scope.$watch('max', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+    }
+  };
 });
 app.controller('EvaluationingCtrl',function($scope){
-  var level = $scope.evaluateLevel;
-  console.log($scope.evaluateLevel);
+  $scope.max = 5;
+  $scope.ratingVal = 2;
+  $scope.readonly = false;
+  $scope.onHover = function(val){
+    $scope.hoverVal = val;
+  };
+  $scope.onLeave = function(){
+    $scope.hoverVal = null;
+  }
+  $scope.onChange = function(val){
+    $scope.ratingVal = val;
+    alert(val);
+  }
 });
 
 app.controller('MapCtrl', function() {

@@ -1,4 +1,25 @@
 <script id="templates/indexEvaluationing.html" type="text/ng-template">
+<style>
+.rating {
+  color: #a9a9a9;
+  margin: 0;
+  padding: 0;
+}
+ul.rating {
+  display: inline-block;
+}
+.rating li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 1px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+.rating .filled {
+  color: #ffee33;
+}
+</style>
 	<ion-view view-title="评论">
 	<ion-content ng-controller='EvaluationingCtrl'>
 	<div class="item item-thumbnail-left">
@@ -14,7 +35,7 @@
 				</div>
 
 				<div class="col">
-					<mystarselect level="evaluateLevel"></mystarselect>
+					<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
 				</div>
 			</div>
 
