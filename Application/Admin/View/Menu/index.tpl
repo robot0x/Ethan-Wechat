@@ -17,7 +17,7 @@
                     </form>
                 </div>
                 <div class="col-md-3">
-                    <a href="{$url}" class="btn btn-info">添加一级菜单</a>
+                    <a href="{:U('add?id=', I('get.'))}" class="btn btn-info">添加一级菜单</a>
                 </div>
             </div>
             <div class="box">
@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{$key+1}</td>
                                     <td>
-                                        <a href="javascript:void(0);" data-trigger="focus" data-container="body" data-toggle="popover" data-title="{$value['module']}/{$value['controller']}/{$value['action']}" data-placement="right" data-content="{$value['abstract']}">
+                                        <a href="javascript:void(0);" data-trigger="focus" data-container="body" data-toggle="popover" data-title="{$value['module']}\{$value['controller']}\{$value['action']}" data-placement="right" data-content="{$value['abstract']}">
                                                                 <php>
                                             for( $level = 0; $level
                                             < $value[ '_level']; $level++) echo "|----"; </php>
