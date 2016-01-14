@@ -1,8 +1,6 @@
 <extend name="Base:index" />
 <block name="body">
-	<div>
-	 <button type="button" class="btn btn-info" onclick="javascript:history.back(-1);">返回</button>
-	</div>
+	
 	<div ng-app="myActivity" ng-controller="activity" >
 	<form class="form-horizontal" name="myForm"  method="post"  novalidate <eq name="Think.ACTION_NAME" value="add"> action="{:U('save',I('get.'))}"<else />action="{:U('update',I('get.'))}"</eq>>
 		<input type="hidden" name="id" value="{$activity.id}"></input>
