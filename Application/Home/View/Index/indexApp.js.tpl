@@ -360,6 +360,8 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 app.controller('DateCtrl',function($scope){
+  var D = new Date();
+  var today = D.getTime()-60*60*24*1000;
   $scope.datepickerObject = {
       titleLabel: '选择入住日期',  //Optional
       todayLabel: '今天',  //Optional
@@ -377,7 +379,7 @@ app.controller('DateCtrl',function($scope){
       showTodayButton: 'true', //Optional
       modalHeaderColor: 'bar-positive', //Optional
       modalFooterColor: 'bar-positive', //Optional
-      from: new Date(2012, 8, 2), //Optional
+      from: new Date(today), //Optional
       to: new Date(2018, 8, 25),  //Optional
       callback: function (val) {  //Mandatory
         datePickerCallback(val);
