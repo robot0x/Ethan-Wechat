@@ -35,7 +35,7 @@ ul.rating {
 				</div>
 
 				<div class="col">
-					<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+					<div star ng-click='getStarLeave()' rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
 				</div>
 			</div>
 
