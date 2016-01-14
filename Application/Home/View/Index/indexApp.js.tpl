@@ -361,18 +361,18 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 
 app.controller('DateCtrl',function($scope){
   $scope.datepickerObject = {
-      titleLabel: 'Title',  //Optional
-      todayLabel: 'Today',  //Optional
-      closeLabel: 'Close',  //Optional
-      setLabel: 'Set',  //Optional
+      titleLabel: '选择入住日期',  //Optional
+      todayLabel: '今天',  //Optional
+      closeLabel: '关闭',  //Optional
+      setLabel: '确定',  //Optional
       setButtonType : 'button-assertive',  //Optional
       todayButtonType : 'button-assertive',  //Optional
       closeButtonType : 'button-assertive',  //Optional
       inputDate: new Date(),  //Optional
       mondayFirst: true,  //Optional
       disabledDates: disabledDates, //Optional
-      weekDaysList: weekDaysList, //Optional
-      monthList: monthList, //Optional
+      weekDaysList: ["日", "一", "二", "三", "四", "五", "六"], //Optional
+      monthList: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //Optional
       templateType: 'popup', //Optional
       showTodayButton: 'true', //Optional
       modalHeaderColor: 'bar-positive', //Optional
@@ -382,7 +382,7 @@ app.controller('DateCtrl',function($scope){
       callback: function (val) {  //Mandatory
         datePickerCallback(val);
       },
-      dateFormat: 'dd-MM-yyyy', //Optional
+      dateFormat: 'yyyy-MM-dd', //Optional
       closeOnSelect: false, //Optional
     };
   var disabledDates = [
@@ -393,13 +393,12 @@ app.controller('DateCtrl',function($scope){
       new Date("08-14-2015"), //Short format
       new Date(1439676000000) //UNIX format
     ];
-    var weekDaysList = ["Sun", "Mon", "Tue", "Wed", "thu", "Fri", "Sat"];
-  var monthList = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
   var datePickerCallback = function (val) {
   if (typeof(val) === 'undefined') {
     console.log('No date selected');
   } else {
-    console.log('Selected date is : ', val)
+    console.log('Selected date is : ', val);
+    $scope.datepickerObject.inputDate = new Date(val);
   }
 };
 });
