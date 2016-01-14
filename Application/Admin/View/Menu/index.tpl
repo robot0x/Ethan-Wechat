@@ -38,7 +38,7 @@
                                 <th>开发人</th>
                                 <th>测试人</th>
                                 <th>核验人</th>
-                                <th>排序</th>
+                                <th>完成</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -66,7 +66,7 @@
                                     <td>{$value["dev_user"]}</td>
                                     <td>{$value["test_user"]}</td>
                                     <td>{$value["check_user"]}</td>
-                                    <td>{$value.order}</td>
+                                    <td><eq name="value['is_done']" value="1"><span class="badge">是</span><else />否</eq></td>
                                     <td>
                                         <button class="btn btn-sm btn-primary" onclick="location='{$value._url.edit}'"><i class="fa fa-pencil"></i>编辑</button>
                                         <button class="btn btn-sm btn-danger" onclick="location='{$value._url.delete}'"><i class="fa fa-trash-o "></i>删除</button>

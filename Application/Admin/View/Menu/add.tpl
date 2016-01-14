@@ -155,6 +155,15 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="action" class="col-sm-2 control-label">是否已完成</label>
+                            <div class="col-sm-4">
+                            <select name="is_done">
+                                <option value="0">否</option>
+                                <option value="1" <eq name="data['is_done']" value="1">selected="selected"</eq>>是</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="remarks" class="col-sm-2 control-label">备注</label>
                             <div class="col-sm-4">
                                 <textarea class="form-control" rows="3" name="remarks">{$data.remark}</textarea>
