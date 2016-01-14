@@ -18,7 +18,7 @@ class YunzhiModel extends Model
 
     public function __construct()
     {
-        $this->p        = (int)I('get.p');
+        $this->p        = (int)I('get.p') ? (int)I('get.p') : 1;
         $this->pageSize =   (I("get.pagesize") !== "") ? I("get.pagesize") : 
                             (C("YUNZHI_PAGE_SIZE") ? C("YUNZHI_PAGE_SIZE") : 20);
 
@@ -276,24 +276,34 @@ class YunzhiModel extends Model
                     _getLists($fields, $maps)->         
                     page("$page")->
                     select();
+                    
+        //利用C函数，向PAGE标签传值
+        C("YUNZHI_TOTAL_COUNT", $this->totalCount);
+        C("YUNZHI_PAGE_SIZE", $this->pageSize);
+        C("YUNZHI_P", $this->p);
         return $lists;
     }
 
     /**
      * 获取所有数据
-     * @param  array  $fields [description]
-     * @param  array  $maps   [description]
+     * @param  array  $fields 回显字段
+     * @param  array  $maps   附加查询条件
      * @return [type]         [description]
      */
     public function getAllLists($backFields = array(), $maps = array())
     {
         $lists =    $this->
-                    _getLists($backFields, $maps)->
+                    _getLists($backFields, $maps, 1)->
                     select();
         return $lists;
     }
 
-    private function _getLists($backFields = array(), $maps = array())
+    /**
+     * 
+     * @param   $isShowAll 是否为返回全部的记录 返回全部记录，则不排序。
+     * 
+     * */
+    private function _getLists($backFields = array(), $maps = array(), $isShowAll = 0)
     {
         if (!is_array($backFields) || !is_array($maps))
         {
@@ -305,8 +315,14 @@ class YunzhiModel extends Model
         $backFields = array_merge($this->backFields, $backFields);
         $maps = array_merge($this->maps, $maps);
 
+        if ($isShowAll)
+        {      
+            return $this->
+                field($backFields)->
+                where($maps);
+        }
+
         $this->_getCounts($maps);
-        
         return  $this->
                 field($backFields)->
                 where($maps)->
@@ -315,16 +331,11 @@ class YunzhiModel extends Model
 
 
     //重新计算当前页码及总数
-    private function _getCounts()
+    private function _getCounts($maps)
     {
-        $this->totalCount = $this->where($this->maps)->count();
+        $this->totalCount = $this->where($maps)->count();
         $this->p = (int)ceil($this->totalCount / $this->pageSize) > $this->p ?
                     (int)ceil($this->totalCount / $this->pageSize) :
                     $this->p;
-
-        //利用C函数，向PAGE标签传值
-        C("YUNZHI_TOTAL_COUNT", $this->totalCount);
-        C("YUNZHI_PAGE_SIZE", $this->pageSize);
-        C("YUNZHI_P", $this->p);
     }
 }

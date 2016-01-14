@@ -19,5 +19,8 @@ class AdminController extends Controller
 		$tpl = T("Admin@Admin/nav");
 		$YZ_TEMPLATE_NAV = $this->fetch($tpl);
 		$this->assign("YZ_TEMPLATE_NAV", $YZ_TEMPLATE_NAV);
+
+		//存用户信息
+		session('user_id', 3);
 	}
 }
