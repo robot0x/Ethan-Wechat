@@ -8,21 +8,24 @@
                 </div>
                 <div class="panel-body">
                     <form role="form" action="{:U('save',I('get.'))}" method="post">
-                        <input type="hidden" name="id" value="{$room['id']}" />
+                        <input type="hidden" name="customer_id" value="{$credit['customer_id']}" />
                         <div class="row">
                             <div class="col-xs-12 col-md-6 col-lg-3">
                                 <div class="form-group">
-                                    <label>用户名</label>
+                                    <label>用户名:</label>
                                   <!--   <input class="form-control" id="title" name="title" type="text" value="{$credit['nickname']}" /> -->
                                     <label>{$credit['nickname']}</label>
                                 </div>
                                 <div class="form-group">
-                                    <label>总积分</label>
-                                    <input class="form-control" id="price" name="price" type="money" value="{$credit['total']}" />
+                                    <label>总积分:</label>
+                                    <input class="form-control" id="price" name="total" type="hidden" value="{$credit['total']}" /> 
+                                    <label>{$credit['total']}</label>
                                 </div>
+                                <label>修改积分</label>
+                                    <input class="form-control" id="credit_section" name="credit_section" type="money" value="" />
                                 <div class="form-group">
                                     <label>描述</label>
-                                    <textarea class="form-control" id="description" name="description">{$credit['describe']}</textarea>
+                                    <textarea class="form-control" id="describe" name="describe">{$credit['describe']}</textarea>
                                 </div>
                             </div>
                         </div>

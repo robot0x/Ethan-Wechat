@@ -36,10 +36,12 @@ class CreditController extends AdminController
 	}
 
 	public function editAction(){
+		
 		if($id = I('get.id'))
+		
         {
             $CreditL = new CreditLogic();
-            if(!$Credit = $CreditL->getListbyCustomerId($id))
+            if(!$Credit = $CreditL->getElembyId($id))
             {
                 $this->error("Sorry, the record not exist or deleted." , U('index?id=', I('get.')));
                 return;
@@ -47,9 +49,31 @@ class CreditController extends AdminController
             //传给前台
             $this->assign('credit',$Credit);
         }
-        dump($Credit);
         $this->display(); 
+        
+
 	}
+
+	public function saveAction()
+	{
+		 //取用户信息
+        $credit = I('post.');
+
+        $CreditL = new CreditLogic();
+        $CreditL->saveList($credit);
+
+        //判断异常
+        if(count($errors = $CreditL->getErrors()) !== 0)
+        {
+            //数组变字符串
+            $error = implode('<br/>', $errors);
+            //显示错误
+            $this->error("添加失败，原因：". $error, U('index?id=',I('get.')));
+            return;
+        }
+
+        $this->success("操作成功" , U('index?id=',I('get.')));    
+	 }
 	
 
 }

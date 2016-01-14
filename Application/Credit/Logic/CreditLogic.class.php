@@ -59,10 +59,29 @@ class CreditLogic extends CreditModel
 
     }
 
-    public function getElembyId($value='')
+    public function getElembyId($id)
     {
-    	# code...
+    	$maps["customer_id"] = $id;
+    	$cre = $this ->order('id desc')-> where($maps) ->find();
+
+    	$map = array('id' => $id);
+    	$CustomerL = new CustomerLogic();
+    	$cus = $CustomerL ->where($map)->find();
+
+    	$cre["nickname"] = $cus["nickname"];
+    	return $cre ; 
+
     }
+
+    public function saveList($list)
+	{
+		$list['date'] = time();
+
+		$list['total'] = ((int)$list['total']+(int)$list['credit_section']);
+		
+		$tep = $this ->add($list);
+		return $tep;
+	}
 
 	
 }

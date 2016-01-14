@@ -14,8 +14,9 @@
                                 <th>序号</th>
                                 <th>用户</th>
                                 <th>每次积分</th>
-                                <th>时间</th>
                                 <th>总积分</th>
+                                <th>时间</th>
+                                <th>说明</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -25,8 +26,9 @@
                                     <td>{$key+1}</td>
                                     <td>{$value["nickname"]}</td>
                                     <td>{$value["credit_section"]}</td> 
-                                    <td>{$value["date"]}</td>
                                     <td>{$value["total"]}</td>
+                                    <td>{$value["date"]}</td>
+                                    <td>{$value["describe"]}</td>
                                     <td>
                                         <a class="btn btn-sm btn-primary" href="{:U('edit?id=' . $value['customer_id'], I('get.'))}"><i class="fa fa-pencil"></i>&nbsp;修改积分</a>                          
                                     </td>
