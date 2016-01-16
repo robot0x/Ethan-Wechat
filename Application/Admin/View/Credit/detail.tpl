@@ -17,7 +17,6 @@
                                 <th>总积分</th>
                                 <th>时间</th>
                                 <th>说明</th>
-                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,11 +26,8 @@
                                     <td>{$value["nickname"]}</td>
                                     <td>{$value["credit_section"]}</td> 
                                     <td>{$value["total"]}</td>
-                                    <td>{$value["date"]}</td>
+                                    <td>{:date('Y-m-d',$value["date"])}</td>
                                     <td>{$value["describe"]}</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary" href="{:U('edit?id=' . $value['customer_id'], I('get.'))}"><i class="fa fa-pencil"></i>&nbsp;修改积分</a>                          
-                                    </td>
                                 </tr>
                             </foreach>
                         </tbody>
