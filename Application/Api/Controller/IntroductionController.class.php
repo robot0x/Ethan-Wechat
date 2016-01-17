@@ -28,6 +28,7 @@ class IntroductionController extends ApiController
 	{
 		$IntroductionL = new IntroductionLogic();
 		$introduction = $IntroductionL->getList();
+		$introduction['description'] = htmlspecialchars_decode($introduction['description']);
 
 		$data = array("status"=>"success");
 		$data['data'] = $introduction;

@@ -8,11 +8,11 @@
                             <div class="input-group custom-search-form">
                                 <div class="form-group input-group">
                                     <span class="input-group-addon">入住日期</span>
-                                    <input class="form-control" placeholder="Username" type="text">
+                                    <input class="form-control date" name="begin_time" type="date" value="{:I('get.begin_time') ? I('get.begin_time') : date('Y-m-d')}">
                                 </div>
                                 <div class="form-group input-group">
                                     <span class="input-group-addon">退房日期</span>
-                                    <input class="form-control" placeholder="Username" type="text">
+                                    <input class="form-control date" name="end_time" value="{:I('get.end_time') ? I('get.end_time') : date('Y-m-d', time()+24*60*60)}" type="date">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info"> <i class="fa fa-search"></i>&nbsp;查询</button>
@@ -32,21 +32,20 @@
                                     <th>房型</th>
                                     <th>单价</th>
                                     <th>描述</th>
-                                    <th>总间数</th>
+                                    <th>剩余间数</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <foreach name="rooms" item="value" key="key">
+                                <foreach name="sales" item="value" key="key">
                                     <tr>
                                         <td>{$key+1}</td>
                                         <td>{$value["title"]}</td>
                                         <td class="text-right">{$value["price"] | format_money}</td>
                                         <td>{$value["description"]}</td>
-                                        <td>{$value["total_rooms"]}</td>
+                                        <td><eq name="value.remaining" value="0"><span class="badge">{$value["remaining"]}</span><else />{$value["remaining"]}</eq></td>
                                         <td>
-                                            <a class="btn btn-sm btn-primary" href="{:U('edit?id=' . $value['id'], I('get.'))}"><i class="fa fa-pencil"></i>&nbsp;编辑</a>
-                                            <a class="btn btn-sm btn-danger delete" href="{:U('delete?id=' . $value['id'], I('get.'))}"><i class="fa fa-trash-o "></i>&nbsp;删除</a>
+                                            <neq name="value.remaining" value="0"><a class="btn btn-sm btn-primary" href="{:U('edit?id=' . $value['id'], I('get.'))}"><i class="fa fa-external-link "></i>&nbsp;出房</a></neq>
                                         </td>
                                     </tr>
                                 </foreach>

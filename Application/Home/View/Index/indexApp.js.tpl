@@ -262,17 +262,211 @@ app.controller("EvaluationingCtrl", function($scope,$http){
  };
 });
 
-app.controller('SlideCtrl', function($scope) {
-  $scope.detail = false;
-  $scope.toggleDetail = function(){
-    $scope.detail = !$scope.detail;
+app.controller('SlideCtrl', function($scope,$timeout,$http) {
+  $http.get('api.php/Api/Api/getSlideInit')
+   .success(function(data){
+      if(data.slideUrls.status==='success'){
+        $scope.slideUrls = data.slideUrls.data;
+      }else{
+      alert("幻灯片数据错误");
+      }
+      if(data.slideMapUrl.status==='success'){
+        $scope.slideMapUrl = data.slideMapUrl.data;
+      }else{
+      alert("地图数据错误");
+      }
+      if(data.rooms.status==='success'){
+        $scope.rooms = data.rooms.data;
+      }else{
+      alert("房间数据错误");
+      }
+    })
+   .error(function(data,status){
+      alert("没有该方法");
+   });
+  $scope.toggleDetail = function(room){
+    room.detail = !room.detail;
+    room.order = '';
+    $timeout(function(){
+     room.order = '#/tab/confirmOrder';
+    },100);
   }
-  $scope.countEm = [
-  '__IMG__/jiudian.jpg',
-  '__IMG__/big.jpg',
-  '__IMG__/rujia.jpg',
-  '__IMG__/tupian.png',
-  ];
+   
+ 
+});
+
+app.controller('IntroductionCtrl', function($scope,$http) {
+    $http.get('api.php/Api/Api/getHotelIntroduction')
+     .success(function(data,status){
+      if(data.status==='success'){
+        $scope.introduction = data.data;
+      }else{
+      alert("幻灯片数据错误");
+      }
+      })
+     .error(function(data,status){
+      
+     });
+});
+
+app.controller('EvaluationCtrl', function($scope,$http,$q) {
+  
+  var page = 1;
+  var moreData = [];
+  $scope.evaluations = [];
+  $scope.moreDataCanBeLoaded = true;
+  var canBeLoaded = function (moreData) {
+    if (moreData.length == 0) {
+      $scope.moreDataCanBeLoaded = false;
+    }else{
+      $scope.moreDataCanBeLoaded = true;
+    }
+  }
+  var getJosn = function (page){
+      var deferred = $q.defer();
+        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page,pagesize:'2'}})
+          .success(function(data,status){
+            if(data.status==='success'){
+              moreData = data.data;
+              console.log(moreData);
+              deferred.resolve(data.data);
+              if ($scope.evaluations.length == 0) {
+                $scope.evaluations = data.data;
+                console.log($scope.evaluations);
+              }else{
+                for (var i = 0; i < data.data.length; i++) {
+                  $scope.evaluations.push(data.data[i]);
+                }
+                console.log($scope.evaluations);
+              }
+            }else{
+              alert('评论数据不正确');
+            }
+          });
+          return deferred.promise;
+      };
+    $scope.loadMoreData = function () {
+      getJosn(page++).then(function () {
+      canBeLoaded(moreData);
+      return $scope.moreDataCanBeLoaded;
+      console.log($scope.moreDataCanBeLoaded);
+      }).then(function (data) {
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
+    };
+   
+});
+
+app.controller('DateCtrl',function($scope){
+
+});
+
+app.directive("mystarselect", function() {
+    return {
+        restrict: 'AE',
+        replace: true,
+        scope: {
+            level: '=',
+        },
+        template: '<div id="mystarselect"></div>',
+        link: function (scope) {
+            function star5(starid) {
+                src = "__IMG__/";
+                this.star_on_left = src + "star.png";
+                this.star_off_left = src + "starBack.png";
+                this.star_on_right = src + "star.png";
+                this.star_off_right = src + "starBack.png";
+                this.id = starid;
+                this.point = 0;
+
+                this.initial = starInitial;
+                this.redraw = starRedraw;
+                this.attach = starAttach;
+                this.deattach = starDeAttach;
+                this.doall = starDoall;
+            }
+
+            function starDoall(point) {
+                this.initial();
+                this.attach();
+                this.redraw(point);
+            }
+
+            function starInitial() {
+                var 
+                html = "<img id='star" + this.id + "_1' point='1' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_2' point='2' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_3' point='3' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_4' point='4' src='" + this.star_off_right + "'>&nbsp;";
+                html += "<img id='star" + this.id + "_5' point='5' src='" + this.star_off_right + "'>";
+                //document.write(html);
+                document.getElementById("mystarselect").innerHTML = html;
+            }
+
+            function starAttach() {
+                for (var i = 1; i < 6; i++) {
+                    document.getElementById("star" + this.id + "_" + i).style.cursor = "pointer";
+                    document.getElementById("star" + this.id + "_" + i).onmouseover = moveStarPoint;
+                    document.getElementById("star" + this.id + "_" + i).onmouseout = outStarPoint;
+                    document.getElementById("star" + this.id + "_" + i).starid = this.id;
+                    document.getElementById("star" + this.id + "_" + i).onclick = setStarPoint;
+                }
+            }
+
+            function starDeAttach() {
+                for (var i = 1; i < 6; i++) {
+                    document.getElementById("star" + this.id + "_" + i).style.cursor = "default";
+                    document.getElementById("star" + this.id + "_" + i).onmouseover = null;
+                    document.getElementById("star" + this.id + "_" + i).onmouseout = null;
+                    document.getElementById("star" + this.id + "_" + i).onclick = null;
+                }
+            }
+
+            function starRedraw(point) {
+                for (var i = 1; i < 6; i++) {
+                    if (i <= point)
+                        if (parseInt(i / 2) * 2 == i)
+                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_right;
+                        else
+                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_left;
+                    else if (parseInt(i / 2) * 2 == i)
+                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_right;
+                    else
+                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_left;
+                }
+            }
+
+            function moveStarPoint(evt) {
+                var pstar = evt ? evt.target : event.toElement;
+                var point = pstar.getAttribute("point");
+                var starobj = new star5(pstar.starid);
+                starobj.redraw(point);
+            }
+
+            function outStarPoint(evt) {
+                var pstar = evt ? evt.target : event.srcElement;
+                var starobj = new star5(pstar.starid);
+                starobj.redraw(0);
+            }
+
+            function setStarPoint(evt) {
+                var pstar = evt ? evt.target : event.srcElement;
+                var starobj = new star5(pstar.starid);
+                starobj.attach();
+                var n = pstar.getAttribute("point");
+                console.log("选择的等级:" + n);
+                scope.level = n;
+                starobj.doall(n);
+            }
+
+            var star = new star5("point");
+            star.doall();
+        }
+    };
+});
+app.controller('EvaluationingCtrl',function($scope){
+  var level = $scope.evaluateLevel;
+  console.log($scope.evaluateLevel);
 });
 
 app.controller('MapCtrl', function() {
@@ -292,4 +486,6 @@ app.controller('MapCtrl', function() {
     }
   }, "天津市");
 });
+
+
 

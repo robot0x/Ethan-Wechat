@@ -26,7 +26,34 @@ function my_json_encode($type, $p)
 }
 
 /**
+ * 通过正则表达式对传入的angularjs自动加入的变量类型进行过滤
+ * panjie
+ * 2016-01-05
+ * 
+ * 例输入：
+ * array (size=2)
+ * 'room_id' => string 'string:9' (length=8)
+ * 'count' => string 'number:1' (length=8)
+ * 返回：
+ * array (size=2)
+ * 'room_id' => string '9' (length=8)
+ * 'count' => string '1' (length=8)
+ */
+
+function remove_json_formart($array)
+{
+    foreach($array as $key => $value)
+    {
+        $array["$key"] = preg_replace('/([a-z]{0,}|[A-Z]{0,}):/', "", $value);
+    }
+    return $array;
+}
+
+/**
  * 判断是否大于0
+ * @param  intt $num 
+ * @return 是true 否false
+ * panjie
  */
 function moreThanZero($num)
 {
@@ -86,11 +113,11 @@ function get_default($value ,$type = "int")
  */
 function get_user_id()
 {   
-    $userId = session('user_id');
+    $userId = session("userId");
     if(isset($userId)){
         return $userId;
     }else{
-        redirect_url(U('Login/Index/index'));
+        redirect_url(U('Admin/Login/index'));
         exit();
     }
 }
@@ -986,14 +1013,14 @@ function date_to_int($date , $connecter = '-')
     //查找分隔符的位置，如果小于2，则返回FALSE。
     if(!$firstPosition = strpos($date ,$connecter))
     {
-        return false;
+        return $date;
     }
 
     //截取出年,如果是2位，则拼加20，如果即不是2位，也不是4位，flase
     $year = (int)substr($date , 0 , $firstPosition);
     if($year == 0 || $year > 9999)
     {
-        return false;
+        return $date;
     }
 
     if($year < 100)
@@ -1002,7 +1029,7 @@ function date_to_int($date , $connecter = '-')
     }
     elseif($year < 1000)
     {
-        return false;
+        return $date;
     }
 
     //截取月，如果等于0，或是大于12，返回$date    
@@ -1011,14 +1038,14 @@ function date_to_int($date , $connecter = '-')
  
     if($month < 1 || $month > 12)
     {
-        return false;
+        return $date;
     }
   
     //截取日，如果不大于0和小于31，则返回FLASE
     $day = (int)substr($date , $secondPosition+1);
     if($day < 1 || $day > 31)
     {
-        return false;
+        return $date;
     }
 
     return mktime(0,0,0,$month,$day,$year);
