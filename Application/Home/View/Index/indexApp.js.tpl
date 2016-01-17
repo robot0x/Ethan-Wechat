@@ -361,7 +361,9 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 
 app.controller('DateCtrl',function($scope){
   var D = new Date();
-  var today = D.getTime()-60*60*24*1000;
+  var today = D.getTime();
+  var limitToday = today-60*60*24*1000;//今天减一天
+  var limitDay = D.getTime()+60*60*24*1000*30*3;//往后3个月
   $scope.datepickerObject = {
       titleLabel: '选择入住日期',  //Optional
       todayLabel: '今天',  //Optional
@@ -370,7 +372,7 @@ app.controller('DateCtrl',function($scope){
       setButtonType : 'button-assertive',  //Optional
       todayButtonType : 'button-assertive',  //Optional
       closeButtonType : 'button-assertive',  //Optional
-      inputDate: new Date(),  //Optional
+      inputDate: new Date(today),  //Optional
       mondayFirst: true,  //Optional
       disabledDates: disabledDates, //Optional
       weekDaysList: ["日", "一", "二", "三", "四", "五", "六"], //Optional
@@ -379,14 +381,16 @@ app.controller('DateCtrl',function($scope){
       showTodayButton: 'true', //Optional
       modalHeaderColor: 'bar-positive', //Optional
       modalFooterColor: 'bar-positive', //Optional
-      from: new Date(today), //Optional
-      to: new Date(2018, 8, 25),  //Optional
+      from: new Date(limitToday), //Optional
+      to: new Date(limitDay),  //Optional
       callback: function (val) {  //Mandatory
         datePickerCallback(val);
       },
       dateFormat: 'yyyy-MM-dd', //Optional
       closeOnSelect: false, //Optional
     };
+    var minDay = "";//入住日期
+    var maxDay = "";//离开日期
   var disabledDates = [
       new Date(1437719836326),
       new Date(),
@@ -401,6 +405,7 @@ app.controller('DateCtrl',function($scope){
   } else {
     console.log('Selected date is : ', val);
     $scope.datepickerObject.inputDate = new Date(val);
+    
   }
 };
 });
