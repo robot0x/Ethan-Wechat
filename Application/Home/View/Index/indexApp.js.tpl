@@ -1,4 +1,4 @@
-var app = angular.module('yunzhiclub', ['ionic']);
+var app = angular.module('yunzhiclub', ['ionic','ionic-datepicker']);
 
 app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
@@ -358,115 +358,127 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 app.controller('DateCtrl',function($scope){
-
+  var D = new Date();
+  var today = D.getTime();
+  var limitToday = today-60*60*24*1000;//今天减一天
+  var limitDay = D.getTime()+60*60*24*1000*30*3;//往后3个月
+  $scope.datepickerObject = {
+      titleLabel: '选择入住日期',  //Optional
+      todayLabel: '今天',  //Optional
+      closeLabel: '关闭',  //Optional
+      setLabel: '确定',  //Optional
+      setButtonType : 'button-assertive',  //Optional
+      todayButtonType : 'button-assertive',  //Optional
+      closeButtonType : 'button-assertive',  //Optional
+      inputDate: new Date(today),  //Optional
+      mondayFirst: true,  //Optional
+      disabledDates: disabledDates, //Optional
+      weekDaysList: ["日", "一", "二", "三", "四", "五", "六"], //Optional
+      monthList: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //Optional
+      templateType: 'popup', //Optional
+      showTodayButton: 'true', //Optional
+      modalHeaderColor: 'bar-positive', //Optional
+      modalFooterColor: 'bar-positive', //Optional
+      from: new Date(limitToday), //Optional
+      to: new Date(limitDay),  //Optional
+      callback: function (val) {  //Mandatory
+        datePickerCallback(val);
+      },
+      dateFormat: 'yyyy-MM-dd', //Optional
+      closeOnSelect: false, //Optional
+    };
+    var minDay = "";//入住日期
+    var maxDay = "";//离开日期
+  var disabledDates = [
+      new Date(1437719836326),
+      new Date(),
+      new Date(2015, 7, 10), //months are 0-based, this is August, 10th!
+      new Date('Wednesday, August 12, 2015'), //Works with any valid Date formats like long format
+      new Date("08-14-2015"), //Short format
+      new Date(1439676000000) //UNIX format
+    ];
+  var datePickerCallback = function (val) {
+  if (typeof(val) === 'undefined') {
+    console.log('No date selected');
+  } else {
+    console.log('Selected date is : ', val);
+    $scope.datepickerObject.inputDate = new Date(val);
+    
+  }
+};
 });
 
-app.directive("mystarselect", function() {
-    return {
-        restrict: 'AE',
-        replace: true,
-        scope: {
-            level: '=',
-        },
-        template: '<div id="mystarselect"></div>',
-        link: function (scope) {
-            function star5(starid) {
-                src = "__IMG__/";
-                this.star_on_left = src + "star.png";
-                this.star_off_left = src + "starBack.png";
-                this.star_on_right = src + "star.png";
-                this.star_off_right = src + "starBack.png";
-                this.id = starid;
-                this.point = 0;
-
-                this.initial = starInitial;
-                this.redraw = starRedraw;
-                this.attach = starAttach;
-                this.deattach = starDeAttach;
-                this.doall = starDoall;
-            }
-
-            function starDoall(point) {
-                this.initial();
-                this.attach();
-                this.redraw(point);
-            }
-
-            function starInitial() {
-                var 
-                html = "<img id='star" + this.id + "_1' point='1' src='" + this.star_off_right + "'>&nbsp;";
-                html += "<img id='star" + this.id + "_2' point='2' src='" + this.star_off_right + "'>&nbsp;";
-                html += "<img id='star" + this.id + "_3' point='3' src='" + this.star_off_right + "'>&nbsp;";
-                html += "<img id='star" + this.id + "_4' point='4' src='" + this.star_off_right + "'>&nbsp;";
-                html += "<img id='star" + this.id + "_5' point='5' src='" + this.star_off_right + "'>";
-                //document.write(html);
-                document.getElementById("mystarselect").innerHTML = html;
-            }
-
-            function starAttach() {
-                for (var i = 1; i < 6; i++) {
-                    document.getElementById("star" + this.id + "_" + i).style.cursor = "pointer";
-                    document.getElementById("star" + this.id + "_" + i).onmouseover = moveStarPoint;
-                    document.getElementById("star" + this.id + "_" + i).onmouseout = outStarPoint;
-                    document.getElementById("star" + this.id + "_" + i).starid = this.id;
-                    document.getElementById("star" + this.id + "_" + i).onclick = setStarPoint;
-                }
-            }
-
-            function starDeAttach() {
-                for (var i = 1; i < 6; i++) {
-                    document.getElementById("star" + this.id + "_" + i).style.cursor = "default";
-                    document.getElementById("star" + this.id + "_" + i).onmouseover = null;
-                    document.getElementById("star" + this.id + "_" + i).onmouseout = null;
-                    document.getElementById("star" + this.id + "_" + i).onclick = null;
-                }
-            }
-
-            function starRedraw(point) {
-                for (var i = 1; i < 6; i++) {
-                    if (i <= point)
-                        if (parseInt(i / 2) * 2 == i)
-                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_right;
-                        else
-                            document.getElementById("star" + this.id + "_" + i).src = this.star_on_left;
-                    else if (parseInt(i / 2) * 2 == i)
-                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_right;
-                    else
-                        document.getElementById("star" + this.id + "_" + i).src = this.star_off_left;
-                }
-            }
-
-            function moveStarPoint(evt) {
-                var pstar = evt ? evt.target : event.toElement;
-                var point = pstar.getAttribute("point");
-                var starobj = new star5(pstar.starid);
-                starobj.redraw(point);
-            }
-
-            function outStarPoint(evt) {
-                var pstar = evt ? evt.target : event.srcElement;
-                var starobj = new star5(pstar.starid);
-                starobj.redraw(0);
-            }
-
-            function setStarPoint(evt) {
-                var pstar = evt ? evt.target : event.srcElement;
-                var starobj = new star5(pstar.starid);
-                starobj.attach();
-                var n = pstar.getAttribute("point");
-                console.log("选择的等级:" + n);
-                scope.level = n;
-                starobj.doall(n);
-            }
-
-            var star = new star5("point");
-            star.doall();
+app.directive("star", function() {
+   return {
+    template: '<h1><ul class="rating" ng-mouseleave="leave()">' +
+        '<li ng-repeat="star in stars" ng-class="star" ng-click="click($index + 1)" ng-mouseover="over($index + 1)">' +
+        '\u2605' +
+        '</li>' +
+        '</ul></h1>',
+    scope: {
+      ratingValue: '=',
+      max: '=',
+      readonly: '@',
+      onHover: '=',
+      onLeave: '='
+    },
+    controller: function($scope){
+      $scope.ratingValue = $scope.ratingValue || 0;
+      $scope.max = $scope.max || 5;
+      $scope.click = function(val){
+        if ($scope.readonly && $scope.readonly === 'true') {
+          return;
         }
-    };
+        $scope.ratingValue = val;
+      };
+      $scope.over = function(val){
+        $scope.onHover(val);
+      };
+      $scope.leave = function(){
+        $scope.onLeave();
+      }
+    },
+    link: function (scope, elem, attrs) {
+      elem.css("text-align", "center");
+      var updateStars = function () {
+        scope.stars = [];
+        for (var i = 0; i < scope.max; i++) {
+          scope.stars.push({
+            filled: i < scope.ratingValue
+          });
+        }
+      };
+      updateStars();
+ 
+      scope.$watch('ratingValue', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+      scope.$watch('max', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+    }
+  };
 });
 app.controller('EvaluationingCtrl',function($scope){
-  var level = $scope.evaluateLevel;
-  console.log($scope.evaluateLevel);
+  $scope.max = 5;
+  $scope.ratingVal = 2;
+  $scope.readonly = false;
+  $scope.onHover = function(val){
+    $scope.hoverVal = val;
+  };
+  $scope.onLeave = function(){
+    $scope.hoverVal = null;
+  }
+  $scope.onChange = function(val){
+    $scope.ratingVal = val;
+  }
+  $scope.getStarLeave = function() {
+    alert($scope.ratingVal);
+  }
 });
 
 app.controller('MapCtrl', function() {
