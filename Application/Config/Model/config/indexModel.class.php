@@ -4,7 +4,7 @@ namespace Config\Model\Config;
 /**
 *
 */
-class indexModel
+class IndexModel
 {
     protected $config = array();
     #

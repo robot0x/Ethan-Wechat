@@ -4,6 +4,7 @@ namespace Admin\Controller;
 use Think\Controller;
 use Config\Model\ConfigModel;
 use Config\Logic\ConfigLogic;
+use Config\Model\Config\IndexModel;
 /**
 *模块：系统配置
 * @author litian
@@ -17,7 +18,7 @@ class ConfigController extends AdminController
         $ConfigL = new ConfigLogic;
         $config = $ConfigL->getLists();
         // dump($config);
-        $ConfigM = new ConfigModel;
+        $ConfigM = new IndexModel;
         $ConfigM->setConfig($config);
 
         // 传入列表
