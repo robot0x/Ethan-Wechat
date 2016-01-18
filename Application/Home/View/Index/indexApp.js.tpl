@@ -360,7 +360,9 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 app.controller('DateCtrl',function($scope){
-  var D = new Date();
+    var minDay = "";//入住日期
+    var maxDay = "";//离开日期
+    var D = new Date();
   var today = D.getTime();
   var limitToday = today-60*60*24*1000;//今天减一天
   var limitDay = D.getTime()+60*60*24*1000*30*3;//往后3个月
@@ -384,13 +386,13 @@ app.controller('DateCtrl',function($scope){
       from: new Date(limitToday), //Optional
       to: new Date(limitDay),  //Optional
       callback: function (val) {  //Mandatory
-        datePickerCallback(val);
+        $scope.datePickerCallback(val);
       },
       dateFormat: 'yyyy-MM-dd', //Optional
       closeOnSelect: false, //Optional
     };
-    var minDay = "";//入住日期
-    var maxDay = "";//离开日期
+    $scope.minDay = $scope.datepickerObject.inputDate;
+    $scope.maxDay = new Date(today+60*60*24*1000);
   var disabledDates = [
       new Date(1437719836326),
       new Date(),
@@ -399,13 +401,40 @@ app.controller('DateCtrl',function($scope){
       new Date("08-14-2015"), //Short format
       new Date(1439676000000) //UNIX format
     ];
-  var datePickerCallback = function (val) {
+     $scope.datePickerCallback = function  (val) {
+      if (typeof(val) === 'undefined') {
+    console.log('No date selected');
+  } else {
+    console.log('Selected date is : ', val);
+    $scope.datepickerObject.inputDate = new Date(val);
+    $scope.minDay = new Date(val); 
+    $scope.datepickerObject.from = new Date(val);
+  }
+    }
+  
+});
+
+app.controller('BeginCtrl',function($scope){
+   $scope.datePickerCallback = function (val) {
   if (typeof(val) === 'undefined') {
     console.log('No date selected');
   } else {
     console.log('Selected date is : ', val);
     $scope.datepickerObject.inputDate = new Date(val);
-    
+    $scope.minDay = new Date(val); 
+    $scope.datepickerObject.from = new Date(val);
+  }
+};
+});
+
+app.controller('FinishCtrl',function($scope){
+  $scope.datePickerCallback = function (val) {
+  if (typeof(val) === 'undefined') {
+    console.log('No date selected');
+  } else {
+    console.log('Selected date is : ', val);
+    $scope.datepickerObject.inputDate = new Date(val);
+    $scope.maxDay = new Date(val); 
   }
 };
 });
