@@ -17,9 +17,13 @@ class ConfigController extends AdminController
         $ConfigL = new ConfigLogic;
         $config = $ConfigL->getLists();
         // dump($config);
-        //sq语句
-        // echo $SlideShowL->getLastSql();
-        $this->assign('config',$config);
+        $ConfigM = new ConfigModel;
+        $ConfigM->setConfig($config);
+
+        // 传入列表
+        $this->assign('M',$ConfigM);
+        // $this->assign('config',$config);
+        // 调用V层
         $this->display();
     }
     public function addAction()

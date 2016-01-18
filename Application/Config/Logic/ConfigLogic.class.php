@@ -121,6 +121,6 @@ class ConfigLogic extends ConfigModel
             }
             else{
                 return $value;
-            }-
+            }
         }
 }
