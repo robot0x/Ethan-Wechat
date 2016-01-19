@@ -999,7 +999,11 @@ function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true) {
         preg_match_all($re[$charset], $str, $match);
         $slice = join("",array_slice($match[0], $start, $length));
     }
-    return $suffix ? $slice.'...' : $slice;
+    if ($slice == $str)
+    {
+        return $slice;
+    }
+    return ($slice === $str) ? $slice : ($suffix ? $slice.'...' : $slice);
 }
 
 /**
