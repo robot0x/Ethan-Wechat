@@ -222,14 +222,15 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <foreach name="M:getMenuLists()" item="list">
+                <foreach name="YunzhiMenuM:getMenuLists()" item="list">
                     <li>
-                        <a href="{:U($list['module'] . '/' . $list['controller'] . '/' . $list['action'])}"><i class="{$list['icon']}"></i> {$list['title']}</a>
+                        <a class="<eq name="YunzhiMenuM:checkIsCurrent($list)" value="1">active</eq>"href="{:U($list['module'] . '/' . $list['controller'] . '/' . $list['action'])}"><i class="{$list['icon']}"></i> {$list['title']}</a>
                     </li>
                 </foreach>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
     </div>
+
     <!-- /.navbar-static-side -->
 </nav>

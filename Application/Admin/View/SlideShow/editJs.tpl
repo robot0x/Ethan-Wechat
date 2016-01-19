@@ -1,20 +1,8 @@
 <script>
-	$(document).ready(function(){
-		$("#demoForm").validate({
-			rules:{
-				title:{
-					required:true,
-				},
-				url:{
-					required:true,
-				},
-				weight:{
-					required:true,
-				},
-				status:{
-					required:true,
-				},
-			},
-		})
-	});
+var app = angular.module('slideshow', []);
+app.controller('slideshowAdd', function($scope) {
+    console.log("start");
+    $scope.title = "{$slideshow.title}";
+    $scope.weight = "{$slideshow.weight}";
+});
 </script>
