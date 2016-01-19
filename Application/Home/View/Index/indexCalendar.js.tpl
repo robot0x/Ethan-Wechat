@@ -24,7 +24,7 @@ app.controller('DateCtrl',function($scope){
 		{
 			return;
 		}
-		
+
 		//判断点击是开始时间还是结束时间
 		if (checkBeginOrEndDate(currentday.index))
 		{
@@ -50,6 +50,7 @@ app.controller('DateCtrl',function($scope){
 		}
 		else
 		{
+			//如果先点的结束日期，后点的开始日期，则进行两个日期的互换操作
 			if (currentday.index > $scope.beginIndex)
 			{
 				$scope.endIndex = currentday.index;
@@ -85,6 +86,7 @@ app.controller('DateCtrl',function($scope){
 	//判断用户点击的是否开始时间
 	//是，返回ture.否，false
 	var checkBeginOrEndDate = function(index){
+		
 		//如果有开始时间，没有结束时间，则用户点击的为结束时间
 		//否则，用户点击的为开始时间
 		if ($scope.beginIndex != -1 && $scope.endIndex == -1)
