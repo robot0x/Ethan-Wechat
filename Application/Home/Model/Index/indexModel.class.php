@@ -2,6 +2,7 @@
 /**
  * 首页indexAction 模型 
  * panjie
+ * todo:增加当前day对应的字符串日期，用以返回。
  */
 namespace Home\Model\Index;
 
