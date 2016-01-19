@@ -18,7 +18,7 @@ class YunzhiModel extends Model
 
     public function __construct()
     {
-        $this->p        = (int)I('get.p');
+        $this->p        = (int)I('get.p') ? (int)I('get.p') : 1;
         $this->pageSize =   (I("get.pagesize") !== "") ? I("get.pagesize") : 
                             (C("YUNZHI_PAGE_SIZE") ? C("YUNZHI_PAGE_SIZE") : 20);
 

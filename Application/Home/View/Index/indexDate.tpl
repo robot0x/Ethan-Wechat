@@ -1,11 +1,11 @@
 <script id="templates/indexDate.html" type="text/ng-template">
-	<ion-view view-title="选择日期">
+<ion-view view-title="选择日期" ng-controller='DateCtrl'>
 	<div class="bar bar-subheader bar-stable">
   <a href="" class="button button-icon ion-back"></a>
   <h6 class="title">2015年12月</h6>
   <a href="" class="button button-icon ion-right"></a>
-</div>
-	<ion-content>
+  </div>
+<ion-content>
 	<div class="list has-header">
 		<div class="item row">
 			<div class="col">日</div>
@@ -62,6 +62,5 @@
 			<div class="col"></div>
 		</div>
 	</div>
-</ion-content>
 </ion-view>
 </script>
