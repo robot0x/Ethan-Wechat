@@ -358,72 +358,7 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 app.controller('DateCtrl',function($scope){
-    var minDay = "";//入住日期
-    var maxDay = "";//离开日期
-    var D = new Date();
-  var today = D.getTime();
-  var limitToday = today-60*60*24*1000;//今天减一天
-  var limitDay = D.getTime()+60*60*24*1000*30*3;//往后3个月
-  $scope.datepickerObject = {
-      titleLabel: '选择入住日期',  //Optional
-      todayLabel: '今天',  //Optional
-      closeLabel: '关闭',  //Optional
-      setLabel: '确定',  //Optional
-      setButtonType : 'button-assertive',  //Optional
-      todayButtonType : 'button-assertive',  //Optional
-      closeButtonType : 'button-assertive',  //Optional
-      inputDate: new Date(today),  //Optional
-      mondayFirst: true,  //Optional
-      disabledDates: disabledDates, //Optional
-      weekDaysList: ["日", "一", "二", "三", "四", "五", "六"], //Optional
-      monthList: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //Optional
-      templateType: 'modal', //Optional
-      showTodayButton: 'true', //Optional
-      modalHeaderColor: 'bar-positive', //Optional
-      modalFooterColor: 'bar-positive', //Optional
-      from: new Date(limitToday), //Optional
-      to: new Date(limitDay),  //Optional
-      callback: function (val) {  //Mandatory
-        $scope.datePickerCallback(val);
-      },
-      dateFormat: 'yyyy-MM-dd', //Optional
-      closeOnSelect: false, //Optional
-    };
-    $scope.minDay = $scope.datepickerObject.inputDate;
-    $scope.maxDay = new Date(today+60*60*24*1000);
-  var disabledDates = [
-      new Date(1437719836326),
-      new Date(),
-      new Date(2015, 7, 10), //months are 0-based, this is August, 10th!
-      new Date('Wednesday, August 12, 2015'), //Works with any valid Date formats like long format
-      new Date("08-14-2015"), //Short format
-      new Date(1439676000000) //UNIX format
-    ];
-     $scope.datePickerCallback = function  (val) {
-      if (typeof(val) === 'undefined') {
-    console.log('No date selected');
-  } else {
-    console.log('Selected date is : ', val);
-    $scope.datepickerObject.inputDate = new Date(val);
-    $scope.minDay = new Date(val); 
-    $scope.datepickerObject.from = new Date(val);
-  }
-    }
-  
-});
-
-app.controller('BeginCtrl',function($scope){
-   $scope.datePickerCallback = function (val) {
-  if (typeof(val) === 'undefined') {
-    console.log('No date selected');
-  } else {
-    console.log('Selected date is : ', val);
-    $scope.datepickerObject.inputDate = new Date(val);
-    $scope.minDay = new Date(val); 
-    $scope.datepickerObject.from = new Date(val);
-  }
-};
-});
+ });
 
 app.controller('FinishCtrl',function($scope){
   $scope.datePickerCallback = function (val) {
