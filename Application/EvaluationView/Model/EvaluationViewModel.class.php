@@ -13,7 +13,8 @@ namespace EvaluationView\Model;
 
 use Yunzhi\Model\YunzhiModel;
 
-class EvaluationViewLogic extends YunzhiModel
+class EvaluationViewModel extends YunzhiModel
 {
-	
+	protected $orderBys     = array("update_time" => "desc");  //排序字段方式
+	protected $field        = "customer-nickname";              //查询字段
 }
