@@ -25,7 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     .state('tabs.home',{
       url: "/home",
       views:{
-        	//首页
+          //首页
           'home-tab':{
             templateUrl: "templates/indexHome.html",
             controller: "HomeTabCtrl"
@@ -35,7 +35,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     .state('tabs.evaluation',{
       url: "/evaluation",
       views:{
-        	//首页的查看评论
+          //首页的查看评论
           'home-tab':{
             templateUrl: "templates/indexEvaluation.html"
           }
@@ -44,7 +44,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     .state('tabs.evaluationing',{
       url: "/evaluationing",
       views:{
-        	//评论界面
+          //评论界面
           'home-tab':{
             templateUrl: "templates/indexEvaluationing.html"
           }
@@ -108,7 +108,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
       url: "/rim",
       views: {
         "rim-tab":{
-            	//搜周边
+              //搜周边
               templateUrl: "templates/indexRim.html"
             }
           }
@@ -117,7 +117,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
       url: "/activity",
       views: {
         "activity-tab":{
-            	//活动
+              //活动
               templateUrl: "templates/indexActivity.html"
             }
           }
@@ -135,7 +135,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
       url: "/personal",
       views: {
         'personal-tab': {
-        	//个人中心
+          //个人中心
           templateUrl: "templates/indexPersonalCenter.html"
         }
       }
@@ -225,12 +225,13 @@ app.controller("HomeTabCtrl", ['$scope', function(){
     $http.get('api.php/Index/getJssdk')
     .success(function(data,status){
      wx.config({
+jsapiTicket: data.jsapiTicket,
       debug: true,
       appId:  data.appId,
       timestamp: data.timestamp,
       nonceStr: data.nonceStr,
       signature: data.signature,
-      url: data.url,
+      url: location.href.split('#')[0],
       jsApiList: [
       // 所有要调用的 API 都要加到这个列表中
       'previewImage','uploadImage','downloadImage','chooseImage'
@@ -241,10 +242,10 @@ app.controller("HomeTabCtrl", ['$scope', function(){
       // 在这里调用 API
 
       //选择图片
-      var images = {
-          localId: [],
-          serverId: []
-      };
+  var images = {
+      localId: [],
+      serverId: []
+   };
        wx.chooseImage({
         success: function (res) {
             images.localId = res.localIds;
@@ -266,7 +267,7 @@ app.controller("HomeTabCtrl", ['$scope', function(){
                 if (i < length) {
                   upload();
                 }
-                 $http.get('api.php/Evaluation/uploadImage',{params: {serverId: res.serverId}})
+                 $http.get('api.php/Evaluation/uploadImage')
                  .success(function(data,status){
                       alert('data');
                  })
