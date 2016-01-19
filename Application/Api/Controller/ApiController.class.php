@@ -7,6 +7,7 @@ use Api\Controller\SlideShowController;
 use Api\Controller\IntroductionController;
 use Api\Controller\RoomController;
 use Api\Controller\EvaluationController;
+use Api\Controller\ActivityController;
 
 class ApiController extends Controller
 {
@@ -57,6 +58,11 @@ class ApiController extends Controller
 
 		$this->ajaxReturn($introduction);
 	}
+	/**
+	 * 取评价信息
+	 * xulinjie
+	 * @return ajaxlists
+	 */
 	public function getEvaluationAction()
 	{
 		$Evaluations = new EvaluationController();
@@ -76,5 +82,19 @@ class ApiController extends Controller
 
 		
 		$this->ajaxReturn($evaluations);
+	}
+
+
+	/**
+	 * 取活动的信息
+	 * xulinjie
+	 * @return ajaxlist
+	 */
+	public function getActivityListsAction()
+	{
+		$Activity = new ActivityController();
+		$activitys = $Activity->getActivitys();
+		$this->ajaxReturn($activitys);
+
 	}
 }

@@ -379,7 +379,7 @@ app.controller('DateCtrl',function($scope){
       disabledDates: disabledDates, //Optional
       weekDaysList: ["日", "一", "二", "三", "四", "五", "六"], //Optional
       monthList: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], //Optional
-      templateType: 'popup', //Optional
+      templateType: 'modal', //Optional
       showTodayButton: 'true', //Optional
       modalHeaderColor: 'bar-positive', //Optional
       modalFooterColor: 'bar-positive', //Optional
@@ -437,6 +437,22 @@ app.controller('FinishCtrl',function($scope){
     $scope.maxDay = new Date(val); 
   }
 };
+});
+
+//活动列表
+app.controller('ActivityCtrl',function($scope,$http){
+    $http.get('api.php/Api/Api/getActivityLists')
+     .success(function(data,status){
+      if(data.status == 'success'){
+        $scope.activitys = data.data;
+      }
+      else{
+        alert('数据不正确');
+      }
+      })
+     .error(function(data,status){
+        
+     });
 });
 
 app.directive("star", function() {
