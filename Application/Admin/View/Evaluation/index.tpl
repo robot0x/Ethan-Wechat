@@ -54,7 +54,7 @@
                                     </a>
                                 <else />
                                     <a href="{:U('freeze?id=' . $list['id'], I('get.'))}" class="btn btn-sm btn-warning"><i class="fa fa-unlock"></i>
-                                        &nbsp;解冻
+                                        解冻
                                     </a>
                                 </eq>
                                     </a><a href="{:U('edit?id=' . $list['id'] , I('get.'))}" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i>&nbsp;编辑</a></td>
