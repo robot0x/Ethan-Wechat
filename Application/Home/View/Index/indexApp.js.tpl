@@ -1,4 +1,4 @@
-var app = angular.module('yunzhiclub', ['ionic']);
+var app = angular.module('yunzhiclub', ['ionic','ionic-datepicker']);
 
 app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
@@ -309,6 +309,157 @@ app.controller('IntroductionCtrl', function($scope,$http) {
      });
 });
 
+app.controller('EvaluationCtrl', function($scope,$http,$q) {
+  
+  var page = 1;
+  var moreData = [];
+  $scope.evaluations = [];
+  $scope.moreDataCanBeLoaded = true;
+  var canBeLoaded = function (moreData) {
+    if (moreData.length == 0) {
+      $scope.moreDataCanBeLoaded = false;
+    }else{
+      $scope.moreDataCanBeLoaded = true;
+    }
+  }
+  var getJosn = function (page){
+      var deferred = $q.defer();
+        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page,pagesize:'2'}})
+          .success(function(data,status){
+            if(data.status==='success'){
+              moreData = data.data;
+              console.log(moreData);
+              deferred.resolve(data.data);
+              if ($scope.evaluations.length == 0) {
+                $scope.evaluations = data.data;
+                console.log($scope.evaluations);
+              }else{
+                for (var i = 0; i < data.data.length; i++) {
+                  $scope.evaluations.push(data.data[i]);
+                }
+                console.log($scope.evaluations);
+              }
+            }else{
+              alert('评论数据不正确');
+            }
+          });
+          return deferred.promise;
+      };
+    $scope.loadMoreData = function () {
+      getJosn(page++).then(function () {
+      canBeLoaded(moreData);
+      return $scope.moreDataCanBeLoaded;
+      console.log($scope.moreDataCanBeLoaded);
+      }).then(function (data) {
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
+    };
+   
+});
+
+
+
+app.controller('FinishCtrl',function($scope){
+  $scope.datePickerCallback = function (val) {
+  if (typeof(val) === 'undefined') {
+    console.log('No date selected');
+  } else {
+    console.log('Selected date is : ', val);
+    $scope.datepickerObject.inputDate = new Date(val);
+    $scope.maxDay = new Date(val); 
+  }
+};
+});
+
+//活动列表
+app.controller('ActivityCtrl',function($scope,$http){
+    $http.get('api.php/Api/Api/getActivityLists')
+     .success(function(data,status){
+      if(data.status == 'success'){
+        $scope.activitys = data.data;
+      }
+      else{
+        alert('数据不正确');
+      }
+      })
+     .error(function(data,status){
+        
+     });
+});
+
+app.directive("star", function() {
+   return {
+    template: '<h1><ul class="rating" ng-mouseleave="leave()">' +
+        '<li ng-repeat="star in stars" ng-class="star" ng-click="click($index + 1)" ng-mouseover="over($index + 1)">' +
+        '\u2605' +
+        '</li>' +
+        '</ul></h1>',
+    scope: {
+      ratingValue: '=',
+      max: '=',
+      readonly: '@',
+      onHover: '=',
+      onLeave: '='
+    },
+    controller: function($scope){
+      $scope.ratingValue = $scope.ratingValue || 0;
+      $scope.max = $scope.max || 5;
+      $scope.click = function(val){
+        if ($scope.readonly && $scope.readonly === 'true') {
+          return;
+        }
+        $scope.ratingValue = val;
+      };
+      $scope.over = function(val){
+        $scope.onHover(val);
+      };
+      $scope.leave = function(){
+        $scope.onLeave();
+      }
+    },
+    link: function (scope, elem, attrs) {
+      elem.css("text-align", "center");
+      var updateStars = function () {
+        scope.stars = [];
+        for (var i = 0; i < scope.max; i++) {
+          scope.stars.push({
+            filled: i < scope.ratingValue
+          });
+        }
+      };
+      updateStars();
+ 
+      scope.$watch('ratingValue', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+      scope.$watch('max', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+    }
+  };
+});
+app.controller('EvaluationingCtrl',function($scope){
+  $scope.max = 5;
+  $scope.ratingVal = 2;
+  $scope.readonly = false;
+  $scope.onHover = function(val){
+    $scope.hoverVal = val;
+  };
+  $scope.onLeave = function(){
+    $scope.hoverVal = null;
+  }
+  $scope.onChange = function(val){
+    $scope.ratingVal = val;
+  }
+  $scope.getStarLeave = function() {
+    alert($scope.ratingVal);
+  }
+});
+
 app.controller('MapCtrl', function() {
  // 百度地图API功能
  var map = new BMap.Map("allmap");
@@ -326,6 +477,7 @@ app.controller('MapCtrl', function() {
     }
   }, "天津市");
 });
-
+<include file="indexCalendarController.js" />
+<include file="indexCalendarFactory.js" />
 
 

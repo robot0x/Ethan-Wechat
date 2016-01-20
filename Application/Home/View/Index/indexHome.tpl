@@ -12,17 +12,15 @@
 <!-- 酒店介绍 -->
 <div class="list">
     <div class="item item-thumbnail row">
-        <div class="col-33">
-          <a href="#/tab/evaluation">
+          <a href="#/tab/evaluation" class="col-33">
             <h1 class="energized">4.9分</h1>
             <h2 class="energized">棒极了</h2>
             <p>100%好评</p>
             <p>84条评论></p>
           </a>
-        </div>
-        <div class="col-67">
+        <a href="#" class="col-67">
             <img class="full-image" ng-src="{{slideMapUrl.url}}">
-        </div>
+        </a>
     </div>
       <a class="item row" href="#/tab/hotel">
         <i class="ion-shineiwifi col"></i>

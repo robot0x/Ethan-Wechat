@@ -88,11 +88,12 @@ class CustomMenuLogic extends CustomMenuModel
 			return false;
 		}
 	}
+
 	public function saveList($list){
 		try{
 			if($this->create($list))
 			{
-				$id=$this->save();
+				$id = $this->save();
 				return $id;
 			}
 			else

@@ -81,7 +81,7 @@ class CustomMenuController extends Controller {
    public function updateAction(){
    		 //取用户信息
         $data = I('post.');
-
+      
         //传给M层
         $MenuL = new CustomMenuLogic();
         $MenuL->saveList($data);
@@ -94,12 +94,12 @@ class CustomMenuController extends Controller {
             
             
             //显示错误
-             $this->error("添加失败，原因：".$error,U('User/Index/index'));
+             $this->error("添加失败，原因：".$error,U('index'));
 
              return false;
             
         }
-            $this->success("操作成功" , U('User/Index/index'));
+            $this->success("操作成功" , U('index'));
    }
    //自定义菜单添加
    public function addAction(){
@@ -119,23 +119,23 @@ class CustomMenuController extends Controller {
    public function saveAction(){
    		 //取用户信息
         $menu = I('post.');
-        var_dump($menu);
+
         //添加 add()
         $MenuL = new CustomMenuLogic();
         $MenuL->addList($menu);
 
         //判断异常
-        // if(count($errors=$MenuL->getErrors())!==0)
-        // {
-        //     //数组变字符串
-        //     $error =implode('<br/>', $errors);
+        if(count($errors=$MenuL->getErrors())!==0)
+        {
+            //数组变字符串
+            $error =implode('<br/>', $errors);
             
             
-        //     //显示错误
-        //     $this->error("添加失败，原因：".$error,U('User/Index/index'));
+            //显示错误
+            $this->error("添加失败，原因：".$error,U('index'));
             
-        // }
-        // $this->success("操作成功" , U('index'));
+        }
+        $this->success("操作成功" , U('index'));
    }
 
    //自定义菜单删除
