@@ -138,5 +138,23 @@ class CustomerLogic extends CustomerModel {
 		}
 		$this->save($customer);
 	}
->>>>>>> denghaoyang
+
+
+	/**
+	 * 通过ID值，获取客户的昵称
+	 * @param  string $id 28位字符串
+	 * @return string/false
+	 * panjie
+	 */
+	public function getNicknameById($id)
+	{
+		if (!$list = $this->getListById($id))
+		{
+			return false;
+		}
+		else
+		{
+			return $list['nickname'];
+		}
+	}
 }

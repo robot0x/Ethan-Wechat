@@ -17,12 +17,12 @@
                     </form>
                 </div>
                 <div class="col-md-3">
-                    <a href="{$url}" class="btn btn-info">添加一级菜单</a>
+                    <a href="{:U('add?id=', I('get.'))}" class="btn btn-info">添加一级菜单</a>
                 </div>
             </div>
             <div class="box">
                 <div class="box-body table-responsive">
-                    <div class="panel-body">
+                    <div class="panel-body" id="test">
                         
                     </div>
                     <!-- /input-group -->
@@ -32,11 +32,13 @@
                             <tr>
                                 <th>序号</th>
                                 <th>标题</th>
-                                <th>副标题</th>
-                                <th>URL</th>
-                                <th>开发者模式</th>
-                                <th>排序</th>
+                                <th>开发</th>
                                 <th>隐藏</th>
+                                <th>开发时间</th>
+                                <th>开发人</th>
+                                <th>测试人</th>
+                                <th>核验人</th>
+                                <th>完成</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -45,24 +47,27 @@
                                 <tr>
                                     <td>{$key+1}</td>
                                     <td>
-                                        <php>
+                                        <a href="javascript:void(0);" data-trigger="focus" data-container="body" data-toggle="popover" data-title="{$value['module']}\{$value['controller']}\{$value['action']}" data-placement="right" data-content="{$value['abstract']}">
+                                                                <php>
                                             for( $level = 0; $level
                                             < $value[ '_level']; $level++) echo "|----"; </php>
                                                 {$value.title}
+                                        </a>
                                     </td>
-                                    <td>{$value.subhead}</td>
-                                    <td>{$value.url}{$value.parameter}</td>
                                     <td>
                                         <eq name="value.development" value="0">否
                                             <else /><span class="badge">是</span></eq>
                                     </td>
-                                    <td>{$value.order}</td>
                                     <td>
                                         <eq name="value.show" value="1">否
                                             <else /><span class="badge">是</span></eq>
                                     </td>
+                                    <td>{$value["dev_time"]}</td>
+                                    <td>{$value["dev_user"]}</td>
+                                    <td>{$value["test_user"]}</td>
+                                    <td>{$value["check_user"]}</td>
+                                    <td><eq name="value['is_done']" value="1"><span class="badge">是</span><else />否</eq></td>
                                     <td>
-                                        <button class="btn btn-sm btn-success" onclick="location='{$value._url.add}'"><i class="glyphicon glyphicon-plus"></i>添加子菜单</button>
                                         <button class="btn btn-sm btn-primary" onclick="location='{$value._url.edit}'"><i class="fa fa-pencil"></i>编辑</button>
                                         <button class="btn btn-sm btn-danger" onclick="location='{$value._url.delete}'"><i class="fa fa-trash-o "></i>删除</button>
                                     </td>
@@ -77,4 +82,9 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    $(function(){
+         $('[data-toggle="popover"]').popover();
+    });
+    </script>
 </block>

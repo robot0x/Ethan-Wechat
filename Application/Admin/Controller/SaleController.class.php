@@ -1,49 +1,65 @@
 <?php
 /**
- *幻灯片后台管理模块
- * 完成人：魏静云
+ * 现场出房
  */
 namespace Admin\Controller;
 
-use Sale\Logic\SaleLogic;   //Sale
+use Sale\Logic\SaleLogic;       //出房
 use Admin\Model\Sale\EditModel; //
   
 class SaleController extends AdminController
-
 {
 	public function indexAction(){
 
-		//获取列表
+		//获取指定日期内的房型列表
         $SaleL = new SaleLogic();
-        $sales = $SaleL->getLists();
+        $sales = $SaleL->getReminingListsInRange(I('get.begin_time'), I('get.end_time'));
 
 		$this->assign('sales',$sales);
         $this->display();
     }
 
+
     /**
-     * 处理用户添加信息
-     * @return string 
+     * 获取房型剩余可售卖的信息
+     * @return ajaxReturn 
+     */
+    public function getRemainingRoomsAjaxAction()
+    {
+        //实例化，获取指定日期内的房型信息
+        $SaleL = new SaleLogic();
+        $sales = $SaleL->getReminingListsInRange(I('post.begin_time'), I('post.end_time'));
+
+        //去除数量为0的房间
+        $sales = $SaleL->removeZeroRooms($sales);
+        
+        //组装返回状态码
+        $data = array("status"=>"success");
+        $data['data'] = $sales;
+
+        $this->ajaxReturn($data);
+    }
+    /**
+     * 保存信息
+     * @return 
      */
     public function saveAction(){
 
-        //取用户信息
-        $sale = I('post.');
-
+        //取传入信息并格式化json类型
+        $sale = remove_json_formart(I('post.'));
+        
+        //实例化：
+        //判断传入的日期、房型、间数是否可用
+        //存定单信息
+        //存支付信息
         $SaleL = new SaleLogic();
-        $SaleL->saveList($sale);
-
-        //判断异常
-        if(count($errors = $SaleL->getErrors()) !== 0)
+        if (count($SaleL->checkAvailabe($sale)->addOrder($sale)->addPay($sale)->getErrors()) > 0)
         {
-            //数组变字符串
-            $error = implode('<br/>', $errors);
-            //显示错误
-            $this->error("添加失败，原因：". $error, U('index?id=',I('get.')));
-            return;
+            $errors = explode(",", $SaleL->getErrors());
+            $this->error("系统错误：SaleController:$errors", U("index?id=",I("get.")));
         }
 
-        $this->success("操作成功" , U('index?id=',I('get.')));    
+        $this->success("操作成功" , U('index?id=',I('get.')));
     }
 
     /**
@@ -51,8 +67,6 @@ class SaleController extends AdminController
      * @return [type] [description]
      */
     public function editAction(){
-        C("TMPL_L_DELIM", '<{');
-        C("TMPL_R_DELIM", '}>');
         $M = New EditModel();
         $this->assign("M", $M);
         $this->display(); 

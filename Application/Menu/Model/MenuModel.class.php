@@ -14,6 +14,7 @@ class MenuModel extends YunzhiModel{
     public function getMenuList($keywords = ""){
         $menuTree = $this -> getMenuTree(null, $where, 0, 3, $keywords);
         $menuList = tree_to_list($menuTree,0,'_son','_level','order');
+
         //设置总条数
         $this -> totalCount = count($menuList);
         //截取该页的信息
