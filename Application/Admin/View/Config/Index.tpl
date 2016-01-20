@@ -3,7 +3,7 @@
     <div class="row-fluid">
         <div class="col-xs-12">
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-md-3">
                     <form action="{:U('index?p=',I('get.'))}" method="get">
                         <div class="input-group custom-search-form">
                             <input class="form-control" name="keywords" placeholder="Search..." type="text" value="{:I('get.keywords')}" />
@@ -16,7 +16,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-md-3">
                     <a href="{:U('add')}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> 添加</a>
                 </div>
             </div>
