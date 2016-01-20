@@ -42,8 +42,8 @@
 				<td>{:date('Y-m-d',$list['subscribe_time'])}</td>
 				<td><a class="btn btn-small btn-default" href="{:U('freezen?openid='.$list['openid'])}"><i class="fa fa-lock"></i>冻结用户</a></td>
 			</tr>
-		</foreach>
-        </tbody>
+		  </foreach>
+                            </tbody>
 	</table>
 	</div>
                 <div class="row">

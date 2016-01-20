@@ -1,11 +1,7 @@
-	<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>添加自定义菜单</title>
-</head>
-<body>
-	<form <eq name="Think.ACTION_NAME" value="add"> action="{:U('save')}"<else />action="{:U('update')}"</eq> method="post">
+<extend name="Base:index" />
+<block name="body">
+hello
+	<!-- <form <eq name="Think.ACTION_NAME" value="add"> action="{:U('save')}"<else />action="{:U('update')}"</eq> method="post">
 	<input type="hidden" name="id" value="{$user.id}"></input>
 	<label>上级菜单：</label>
 	<eq name="Think.ACTION_NAME" value="add">
@@ -40,6 +36,5 @@
 	<label>跳转链接：</label><input type = "text" name="url" value="{:$M->getMenu()['url']}"/></br>
 	<label>回复类型：</label><input type = "text" name="form_type" value="{:$M->getMenu()['form_type']}"/></br>
 	<button type="submit">保存</button
-	</form>
-	</body>
-	</html>
+	</form> -->
+</block>
