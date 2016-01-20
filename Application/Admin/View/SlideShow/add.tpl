@@ -9,10 +9,10 @@
            <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form  name="myForm" <eq name="Think.ACTION_NAME" value="edit"> action="{:U('update',I('get.'))}"<else />action="{:U('save',I('get.'))}"</eq> method="post" class="form">
-                        <div class="form-group">
-                            <input type="hidden" name="p" value="{$p}" />
-                            <input type="hidden" name="id" value="{$config.id}" />
+                        <form action="{:U('save',I('get.'))}" method="post" class="form-horizontal">
+                        <div style="display:none">
+                            <input name="edit" value="{$slideshow.edit}">
+                            <input name="id" value="{$slideshow.id}">
                         </div>
                         <div class="form-group row">
                             <div class="col-xs-3">
@@ -28,8 +28,8 @@
                                 <label for="url">缩略图:</label>
                                 </div>
                             <eq name="Think.ACTION_NAME" value="edit">
-                                  <div class="col-xs-6">
-                                  <img class="mythumbnail" src="{$slideshow[url]}"  />
+                                  <div class="col-xs-1">
+                                 <img class="img-responsive" src="{$slideshow[url]}" />
                                   </div>
                              
                         </div>
@@ -84,12 +84,7 @@
         </div>
     </div>
     </div>
-    <include file="editJs" />
-    <style type="text/css">
-    .mythumbnail{
-        height: 50px;
-    }
-</style>
+    <include file="addJs" />
     </block>
 
 

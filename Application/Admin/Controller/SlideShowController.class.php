@@ -5,7 +5,9 @@
  */
 namespace Admin\Controller;
 
-use SlideShow\Logic\SlideShowLogic;//SlideShow
+use SlideShow\Logic\SlideShowLogic;
+
+use SlideShow\Model\SlideShowModel;//SlideShow
   
 class SlideShowController extends AdminController
 
@@ -22,30 +24,37 @@ class SlideShowController extends AdminController
 
     public function addAction(){
         //传js
-        $this->assign("js",$this->fetch("editJs"));
+        $this->assign("js",$this->fetch("addJs"));
         //显示 display
-        $this->display('edit');
+        $this->display('add');
     }
 
     public function saveAction(){
-
-        //取用户信息
-        $slideshow = I('post.');
-       //dump(I('get.'));
-        //添加 add()
-        $SlideShowL = new SlideShowLogic();
-        $SlideShowL->addList($slideshow);
-
-        //判断异常
-        if(count($errors=$SlideShowL->getErrors())!==0)
-        {
-            //数组变字符串
-            $error =implode('<br/>', $errors);
-            //显示错误
-            $this->error("添加失败，原因：".$error,U('Admin/SlideShow/index',I('get.')));
-            
+         //获取post数据
+        $data = I('post.');
+        $slideshowModel = new SlideShowModel();
+        $state = $slideshowModel->saveSlideShow($data);
+        if($state == "success"){
+            $this->success('新增成功', U('index',I('get.')));
         }
-        $this->success("操作成功" , U('Admin/SlideShow/index',I('get.')));    
+
+       //  //取用户信息
+       //  $slideshow = I('post.');
+       // //dump(I('get.'));
+       //  //添加 add()
+       //  $SlideShowL = new SlideShowLogic();
+       //  $SlideShowL->addList($slideshow);
+
+       //  //判断异常
+       //  if(count($errors=$SlideShowL->getErrors())!==0)
+       //  {
+       //      //数组变字符串
+       //      $error =implode('<br/>', $errors);
+       //      //显示错误
+       //      $this->error("添加失败，原因：".$error,U('Admin/SlideShow/index',I('get.')));
+            
+       //  }
+       //  $this->success("操作成功" , U('Admin/SlideShow/index',I('get.')));    
     }
 
     public function editAction(){
@@ -53,39 +62,40 @@ class SlideShowController extends AdminController
         $slideshowId = I('get.id');
         // dump(I('get.'));
         //取用户信息 getListById()
+        
         $SlideShowL = new SlideShowLogic();
         $slideshow = $SlideShowL->getListbyId($slideshowId);
 
         //传给前台
         $this->assign('slideshow',$slideshow);
         //传js
-        $this->assign("js",$this->fetch("editJs"));
+        $this->assign("js",$this->fetch("addJs"));
         
-        $this->display('edit'); 
+        $this->display('add'); 
     }
 
-    public function updateAction(){
-        //取用户信息
-        $data = I('post.');
-        dump(I('get.'));
-        //exit();
-        //传给M层
-        $SlideShowL = new SlideShowLogic();
-        $SlideShowL->saveList($data);
+    // public function updateAction(){
+    //     //取用户信息
+    //     $data = I('post.');
+    //     dump(I('get.'));
+    //     //exit();
+    //     //传给M层
+    //     $SlideShowL = new SlideShowLogic();
+    //     $SlideShowL->saveList($data);
 
-        //判断异常
-        if(count($errors=$SlideShowL->getErrors())!==0)
-        {
-            //数组变字符串
-            $error =implode('<br/>', $errors);
-            //显示错误
-            $this->error("添加失败，原因：".$error,U('Admin/SlideShow/index',I('get.')));
+    //     //判断异常
+    //     if(count($errors=$SlideShowL->getErrors())!==0)
+    //     {
+    //         //数组变字符串
+    //         $error =implode('<br/>', $errors);
+    //         //显示错误
+    //         $this->error("添加失败，原因：".$error,U('Admin/SlideShow/index',I('get.')));
 
-             return false;
+    //          return false;
             
-        }
-            $this->success("操作成功" , U('Admin/SlideShow/index',I('get.')));
-    }
+    //     }
+    //         $this->success("操作成功" , U('Admin/SlideShow/index',I('get.')));
+    // }
 
     public function deleteAction(){
 

@@ -17,7 +17,7 @@
                     </form>
                 </div>
                 <div class="col-xs-3">
-                    <a href="{:U('edit')}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> 添加</a>
+                    <a href="{:U('edit?id=', I('get.'))}" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i> 添加</a>
                 </div>
             </div>
             <div class="box">
@@ -46,13 +46,13 @@
             <tr>
                 <td>{$k+1}</td>
                 <td>{$slideshow[title]}</td>
-                <td><img class="suoluetu" src="{$slideshow[url]}" /></td>
+                <td><img class="img-responsive" src="{$slideshow[url]}" /></td>
                 <td>{$slideshow[weight]}</td>
-                <td><eq name="conf.status" value="0">正常<else/><span class="badge">冻结</span></eq></td>
+                <td><eq name="slideshow.status" value="0">正常<else/><span class="badge">冻结</span></eq></td>
                 <td>
                 <a class="btn btn-sm btn-primary" href="{:U('edit?id='.$slideshow['id'].'&p='.I('get.p'))}">
                 <i class="fa fa-pencil"></i>
-                编辑</a>&nbsp;&nbsp;
+                编辑</a>
                 <a class="delete btn btn-sm btn-danger" href="{:U('delete?id='.$slideshow['id'].'&p='.I('get.p'))}">
                 <i class="fa fa-trash-o "></i>
                 删除</a></td>
