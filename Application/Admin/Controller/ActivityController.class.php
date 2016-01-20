@@ -22,6 +22,11 @@ class ActivityController extends AdminController
 	}
 	public function saveAction()
 	{
+		if (isset($_POST['end_time']))
+		{
+			$_POST['end_time'] = strtotime($_POST['end_time']);
+		}
+
 		//获取添加活动信息
 		$activity = I('post.');
 		//添加活动信息
@@ -37,10 +42,10 @@ class ActivityController extends AdminController
             
             
             //显示错误
-             $this->error("添加失败，原因：".$error,U('Activity/Index/index?p='.I('get.p')));
+             $this->error("添加失败，原因：".$error,U('index?id=', I('get.')));
             
         }
-        $this->success("操作成功" , U('Activity/Index/index?p='.I('get.p'))); 
+        $this->success("操作成功" , U('index?id=', I('get.'))); 
 	}
 	public function editAction()
 	{
@@ -55,6 +60,11 @@ class ActivityController extends AdminController
 	}
 	public function updateAction()
 	{
+		if (isset($_POST['end_time']))
+		{
+			$_POST['end_time'] = strtotime($_POST['end_time']);
+		}
+
 		//获取更新活动信息
 		$activity = I('post.');
 		
@@ -71,12 +81,12 @@ class ActivityController extends AdminController
             
             
             //显示错误
-             $this->error("添加失败，原因：".$error,U('Activity/Index/index?p='.I('get.p')));
+             $this->error("添加失败，原因：".$error,U('index?id=', I('get')));
 
              return false;
             
         }
-            $this->success("操作成功" , U('Activity/Index/index?p='.I('get.p')));
+            $this->success("操作成功" , U('index?id=', I('get')));
 	}
 	public function deleteAction()
 	{
@@ -87,10 +97,10 @@ class ActivityController extends AdminController
 		$ActivityL->deleteInfo($activityId);
 
 		if($status！==false){
-           $this->success("删除成功", U('Activity/Index/index?p='.I('get.p'))); 
+           $this->success("删除成功", U('index?id=', I('get.'))); 
         }
         else{
-            $this->error("删除失败" , U('Activity/Index/index?p='.I('get.p')));
+            $this->error("删除失败" , U('index?id=', I('get.')));
         }
 	}
 	public function detailAction()
