@@ -26,6 +26,32 @@ function my_json_encode($type, $p)
 }
 
 /**
+ * 获取当月的最后一天
+ * panjie
+ * 2016-01-19
+ * @param   string $yearMonth 2016-01
+ * @return  string            31
+ */
+function get_last_day($yearMonth)
+{
+    $firstday   = date('Y-m-01', strtotime($yearMonth));
+    $lastday    = date('d', strtotime("$firstday +1 month -1 day"));
+    return $lastday;
+}
+
+/**
+ * 获取下一个月份的值
+ * @param  string $yearMonth 2016-12
+ * @return string            01
+ */
+function get_next_month($yearMonth)
+{
+    $firstday   = date('Y-m-01', strtotime($yearMonth));
+    $nextMonth  = date('m', strtotime("$firstday +1 month"));
+    return $nextMonth;
+}
+
+/**
  * 通过正则表达式对传入的angularjs自动加入的变量类型进行过滤
  * panjie
  * 2016-01-05

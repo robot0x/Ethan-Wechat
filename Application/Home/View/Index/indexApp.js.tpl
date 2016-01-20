@@ -357,8 +357,7 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
    
 });
 
-app.controller('DateCtrl',function($scope){
- });
+
 
 app.controller('FinishCtrl',function($scope){
   $scope.datePickerCallback = function (val) {
@@ -478,6 +477,7 @@ app.controller('MapCtrl', function() {
     }
   }, "天津市");
 });
-
+<include file="indexCalendarController.js" />
+<include file="indexCalendarFactory.js" />
 
 
