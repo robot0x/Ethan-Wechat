@@ -48,12 +48,12 @@
                             </div>
                             <div class="col-xs-6">
                                 <select class="form-control"  name="status" >
-                                <eq name="config.status" value="0">
-                                    <option value="0">正常</option>
+                                <eq name="config.status" value="1">
                                     <option value="1">冻结</option>
+                                    <option value="0">正常</option>
                                     <else/>
-                                    <option value="1">冻结</option>
                                     <option value="0">正常</option>
+                                    <option value="1">冻结</option>
                                 </eq>
                                 </select>
                             </div>

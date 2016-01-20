@@ -4,6 +4,7 @@ namespace Admin\Controller;
 use Think\Controller;
 use Config\Model\ConfigModel;
 use Config\Logic\ConfigLogic;
+use Config\Model\Config\IndexModel;
 /**
 *模块：系统配置
 * @author litian
@@ -17,9 +18,13 @@ class ConfigController extends AdminController
         $ConfigL = new ConfigLogic;
         $config = $ConfigL->getLists();
         // dump($config);
-        //sq语句
-        // echo $SlideShowL->getLastSql();
-        $this->assign('config',$config);
+        $ConfigM = new IndexModel;
+        $ConfigM->setConfig($config);
+
+        // 传入列表
+        $this->assign('M',$ConfigM);
+        // $this->assign('config',$config);
+        // 调用V层
         $this->display();
     }
     public function addAction()

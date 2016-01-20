@@ -9,5 +9,6 @@ use Yunzhi\Model\YunzhiModel;
 
 class ActivityModel extends YunzhiModel
 {
+
 	
 }
