@@ -104,12 +104,12 @@ class ConfigLogic extends ConfigModel
         }
         public function getValueByName($name)
         {
-            // 将字母转换成大写
-            $name = strtoupper($name);
+            // 去空格 将字母转换成大写
+            $name = strtoupper(str_replace('$name'));
             // dump($name);
             // 查询
             $map['name'] = $name;
-            $value = $this->where($map)->getField('value,status');
+            $value = $this->where($map)->find();
             if(isset($value)){
                 return $value;
             }
