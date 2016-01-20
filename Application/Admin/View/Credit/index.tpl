@@ -21,11 +21,11 @@
                             <foreach name="credit" item="value" key="key">
                                 <tr>
                                     <td>{$key+1}</td>
-                                    <td>{$value["nickname"]}</td>    
+                                    <td>{$value["nickname"]}</td>
                                     <td>{$value["total"]}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-primary" href="{:U('detail?id=' . $value['customer_id'], I('get.'))}"><i class="fa fa-pencil"></i>&nbsp;查看详情</a>
-                                       <a class="btn btn-sm btn-danger delete" href="{:U('edit?id=' . $value['customer_id'], I('get.'))}"><i class="fa fa-trash-o "></i>&nbsp;修改积分</a>
+                                        <a class="btn btn-sm btn-default" href="{:U('detail?id=' . $value['customer_id'], I('get.'))}"><i class="fa fa-smile-o"></i>&nbsp;查看详情</a>
+                                       <a class="btn btn-sm btn-primary" href="{:U('edit?id=' . $value['customer_id'], I('get.'))}"><i class="fa fa-pencil"></i>&nbsp;修改积分</a>
                                     </td>
                                 </tr>
                             </foreach>
