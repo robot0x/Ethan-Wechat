@@ -1,9 +1,9 @@
 <script id="templates/indexDate.html" type="text/ng-template">
 <ion-view view-title="选择日期" ng-controller='DateCtrl'>
 	<div class="bar bar-subheader bar-stable">
-  <span ng-show="showLeft" class="button button-icon ion-back"></span>
-  <h6 class="title">{{calendar.year}}年{{calendar.month}}月</h6>
-  <span ng-show="showRight" class="button button-icon ion-right"></span>
+  <span ng-show="!currentCalendar.isFirstMonth" ng-click="preMonth()" class="button button-icon ion-back"></span>
+  <h6 class="title">{{currentCalendar.year}}年{{currentCalendar.month}}月</h6>
+  <span ng-show="!currentCalendar.isLastMonth" ng-click="nextMonth()" class="button button-icon ion-right"></span>
   </div>
 <ion-content>
 
@@ -21,6 +21,9 @@
 			<div class="col {{day.class}}" ng-repeat="day in weeks" ng-click="chooseDay(day)">
 				{{day.day}}
 			</div>
+		</div>
+		<div class="item row">
+			<div class="col">共{{total}}晚</div>
 		</div>
 	</div>
 </ion-view>

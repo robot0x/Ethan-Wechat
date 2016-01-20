@@ -67,8 +67,9 @@ class indexModel
 			for( $k = 1; $k <= $lastDay; $j++, $k++, $index++)
 			{
 				$days[$j]["index"]	= $index;
-				$days[$j]["day"] = $k;
-
+				$days[$j]["day"] 	= $k;
+				$days[$j]["date"] 	= $year . "-" . $month . '-' . $k;
+				
 				//如果小于开始值，则将状态至为 不能点击
 				if ($k < $firstDay)
 				{

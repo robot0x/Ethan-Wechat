@@ -477,7 +477,7 @@ app.controller('MapCtrl', function() {
     }
   }, "天津市");
 });
-<include file="indexCalendar.js" />
-
+<include file="indexCalendarController.js" />
+<include file="indexCalendarFactory.js" />
 
 
