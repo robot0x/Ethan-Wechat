@@ -17,7 +17,7 @@
 		<foreach name="M:getlists()" item="list" key="k">
 			<tr>
 				<td>{++$k}</td>
-				<td>{$list['openid']}</td>
+				<td>{$list['id']}</td>
 				<td>{$list['nickname']}</td>
 				<td>{$list['language']}</td>
 				<td>{$list['city']}</td>
