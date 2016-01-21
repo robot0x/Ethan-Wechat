@@ -8,8 +8,9 @@ use WechatInterface\Logic\wechatCallbackapiLogic;
 use CustomMenu\Logic\CustomMenuLogic;
 use CustomMenu\Model\CustomMenu\IndexModel;
 use CustomMenu\Model\CustomMenu\addModel;
+use Admin\Controller\AdminController;
 
-class CustomMenuController extends Controller {
+class CustomMenuController extends AdminController {
  
     //将后台数据替换前台菜单
     public function createMenuAction(){

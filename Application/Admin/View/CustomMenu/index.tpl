@@ -23,7 +23,7 @@
 			                    <th>上级菜单</th>
 			                    <th>关键字</th>
 			                    <th>类型</th>
-			                    <th>操作</th>
+			                    <th>回复的文章内容</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
