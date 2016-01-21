@@ -36,16 +36,19 @@
               <div class="form-group">
                 <label for="phonenumber" class="col-sm-2 control-label">手机号：</label>
                   <div class="col-sm-4">
-                    <input id="phonenumber" name="phonenumber" class="form-control" value="{$user.phonenumber}">
+                    <input id="phonenumber" name="phonenumber" class="form-control" ng-model="phonenumber" ng-pattern="regex" required/>
+
+                    <p class="text-danger" ng-show="form.phonenumber.$dirty && form.phonenumber.$invalid"> <span ng-show="form.phonenumber.$error.required">请输入11位手机号码</span></p>
                   </div>
               </div>
-
               <div class="form-group">
-	              <label for="email" class="col-sm-2 control-label">邮箱：</label>
+                <label for="email" class="col-sm-2 control-label">邮箱：</label>
                   <div class="col-sm-4">
-                    <input id="email" name="email" class="form-control" ng-model="email" required/>
+                    <input type="email" name="email" class="form-control" ng-model="email" required/>
 
                     <p class="text-danger" ng-show="form.email.$dirty && form.email.$invalid"> <span ng-show="form.email.$error.required">邮箱不能为空</span></p>
+
+                    <span class="text-danger" ng-show="form.email.$error.email">*邮箱格式错误</span>
                   </div>
               </div>
               <div class="form-group">
@@ -56,7 +59,7 @@
               </div>
             </form>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
  <include file = "add.js"/>

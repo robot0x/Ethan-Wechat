@@ -13,6 +13,64 @@ class UserLogic extends UserModel
 		return $this->errors;
 	}
 
+    /**
+     * 更新用户信息
+     * @param   $list 用户信息
+     * @return true:$this false 
+     */
+    public function updateList($list)
+    {
+        $id = $list["id"];
+        if (!(int)$id)
+        {
+            $this->setError("UserLogic->updateList:Must has key of id.(必须传入ID)");
+            return $this;
+        } 
+
+        //取当前ID对应的信息
+        $user = $this->getListById($id);
+
+        //判断原密码是否正确
+        $password = sha1($list['password']);
+        if ($password !== $user['password'])
+        {
+            $this->setError("UserLogic->updateList:The old password is incorrect.(原密码输入错误)");
+            return $this;
+        }
+
+        //如果传入的新密码为空，则不重置密码;非空，则重置密码
+        $repassword = isset($list['repassword']) ? trim($list['repassword']) : '';
+        if ($repassword !== "")
+        {
+            $user['password'] = sha1($repassword);
+        }
+
+        //取其它更新的数据
+        $user['email'] = $list['email'];
+
+        //更新数据
+        try
+        {
+            if ($this->create($user))
+            {
+                $this->save();
+            }
+            else
+            {   
+                $this->setError("UserLogic->updateList:Data create error(数据创建错误):" . $this->getError());
+                return $this;
+            }
+            
+        }
+        catch(\Think\Exception $e)
+        {
+            $this->setError("UserLogic->updateList:data save error, msg(数据保存过程中出错，错误信息）:" . $e->getMessage());
+            return $this;
+        }
+
+        return $this;
+        
+    }
    
     public function saveList($list)
     {

@@ -18,13 +18,20 @@
 	{:$M->getMenu()['pid']}
 	</eq>
 	</br>
+	<input type ="hidden" name="id" value="{:$M->getMenu()['id']}" />
 	<label>标题：</label><input type ="text" name="name" value="{:$M->getMenu()['name']}" /></br>
 	<label>排序：</label><input type ="text" name="sort" value="{:$M->getMenu()['sort']}" /></br>
 	<label>关键字：</label><input type = "text" name="keyword" value="{:$M->getMenu()['keyword']}"/></br>
 	<label>类型：</label>
 	<select name="type">
-  		<option name="type" value="click">click</option>
-  		<option name="type" value="view">view</option>
+		<?php $type = $M->getMenu()['type']; ?>
+		<eq name="type" value="click">
+  			<option name="type" value="click">click</option>
+  			<option name="type" value="view">view</option>
+  		<else/>
+  			<option name="type" value="click">view</option>
+  			<option name="type" value="view">click</option>
+  		</eq>
 	</select>
 	</br>
 	<label>标题：</label><input type = "text" name="title" value="{:$M->getMenu()['title']}"/></br>
