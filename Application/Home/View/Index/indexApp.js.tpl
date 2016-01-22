@@ -1,3 +1,17 @@
+{}
+wx.config({
+jsapiTicket: "{$M->signPackage['jsapiTicket']}",
+      debug: true,
+      appId:  "{$M->signPackage['appId']}",
+      timestamp: "{$M->signPackage['timestamp']}",
+      nonceStr: "{$M->signPackage['nonceStr']}",
+      signature: "{$M->signPackage['signature']}",
+      url: location.href.split('#')[0],
+      jsApiList: [
+      // 所有要调用的 API 都要加到这个列表中
+      'previewImage','uploadImage','downloadImage','chooseImage','openLocation', 'getLocation'
+      ]
+     });
 var app = angular.module('yunzhiclub', ['ionic','ionic-datepicker']);
 
 app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
@@ -224,19 +238,7 @@ app.controller("HomeTabCtrl", ['$scope', function(){
   $scope.upload = function(){
     $http.get('api.php/Index/getJssdk')
     .success(function(data,status){
-     wx.config({
-jsapiTicket: data.jsapiTicket,
-      debug: true,
-      appId:  data.appId,
-      timestamp: data.timestamp,
-      nonceStr: data.nonceStr,
-      signature: data.signature,
-      url: location.href.split('#')[0],
-      jsApiList: [
-      // 所有要调用的 API 都要加到这个列表中
-      'previewImage','uploadImage','downloadImage','chooseImage'
-      ]
-     });
+     
 
      wx.ready(function () {
       // 在这里调用 API
@@ -488,23 +490,7 @@ app.controller('EvaluationingCtrl',function($scope){
   }
 });
 
-app.controller('MapCtrl', function() {
- // 百度地图API功能
- var map = new BMap.Map("allmap");
- var point = new BMap.Point(117.223579,39.119671);
- map.centerAndZoom(point,12);
-  // 创建地址解析器实例
-  var myGeo = new BMap.Geocoder();
-  // 将地址解析结果显示在地图上,并调整地图视野
-  myGeo.getPoint("天津市河西区凯德国贸中心C座（近小白楼地铁站C出口）", function(point){
-    if (point) {
-      map.centerAndZoom(point, 16);
-      map.addOverlay(new BMap.Marker(point));
-    }else{
-      alert("您选择地址没有解析到结果!");
-    }
-  }, "天津市");
-});
+<include file="indexMapController.js" />
 <include file="indexCalendarController.js" />
 <include file="indexCalendarFactory.js" />
 

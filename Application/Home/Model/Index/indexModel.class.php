@@ -5,10 +5,23 @@
  * todo:增加当前day对应的字符串日期，用以返回。
  */
 namespace Home\Model\Index;
+use Jssdk\Logic\JssdkLogic;	//jssdk
 
 class indexModel
 {
+	public $signPackage = array();
 
+	public function __construct()
+	{
+		$jssdk = new JssdkLogic("wx53bf06122618f768", "c1c300ea63649dba1cedd8b400a2f377");
+		$this->signPackage = $jssdk->getSignPackage();
+	}
+	
+	public function getJssdk()
+	{
+		return $this->signPackage;
+	}
+		
 	public function getCalendarAjax()
 	{
 		//取当前日期信息
