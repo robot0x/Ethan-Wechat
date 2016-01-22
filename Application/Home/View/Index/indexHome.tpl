@@ -18,7 +18,7 @@
             <p>100%好评</p>
             <p>84条评论></p>
           </a>
-        <a href="#" class="col-67">
+        <a href="#/tab/map" class="col-67">
             <img class="full-image" ng-src="{{slideMapUrl.url}}">
         </a>
     </div>
