@@ -41,6 +41,15 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
           }
         }
       })
+    .state('tabs.map',{
+      url: "/map",
+      views:{
+          //首页的地图导航页面
+          'home-tab':{
+            templateUrl: "templates/indexMap.html"
+          }
+        }
+      })
     .state('tabs.evaluationing',{
       url: "/evaluationing",
       views:{

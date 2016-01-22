@@ -35,6 +35,7 @@
 
 <include file="indexHotel" />
 <include file="indexEvaluation" />
+<include file="indexMap" />
 <include file="indexEvaluationing" />
 <include file="indexSuccess" />
 <include file="indexActivity" />
