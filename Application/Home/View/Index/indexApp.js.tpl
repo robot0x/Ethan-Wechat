@@ -1,4 +1,3 @@
-{}
 wx.config({
 jsapiTicket: "{$M->signPackage['jsapiTicket']}",
       debug: true,
@@ -498,9 +497,9 @@ app.controller('EvaluationingCtrl',function($scope){
     alert($scope.ratingVal);
   }
 });
+ 
 
-<include file="indexMapController.js" />
-<include file="indexCalendarController.js" />
-<include file="indexCalendarFactory.js" />
-
-
+<include file="indexMapController.js" />      //导航
+<include file="indexCalendarController.js" /> //日期选择器
+<include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
+<include file="indexRim.js" />                //搜周边

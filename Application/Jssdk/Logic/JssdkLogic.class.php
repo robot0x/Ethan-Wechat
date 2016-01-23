@@ -20,7 +20,7 @@ class JssdkLogic
 
         // 注意 URL 一定要动态获取，不能 hardcode.
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url = "http://192.168.1.100/Ethan-wechat/Public/";
+        $url = "http://192.168.1.103/Ethan-wechat/Public/";
           
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
