@@ -12,7 +12,7 @@ jsapiTicket: "{$M->signPackage['jsapiTicket']}",
       ]
      });
 var app = angular.module('yunzhiclub', ['ionic','ionic-datepicker']);
-
+var url = "{$M->signPackage['url']}";
 app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
     $ionicConfigProvider.platform.ios.tabs.style('standard');

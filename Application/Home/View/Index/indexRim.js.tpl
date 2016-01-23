@@ -8,9 +8,8 @@ app.controller('rimCtrl', function($scope) {
     ];
     var keywordTitle    = $scope.keywords[0].title;                 //初始化查询关键字
     var map             = new BMap.Map("rimMap");                   //实例化
-    var point           = new BMap.Point(117.223579,39.119671);     //中心点位置 
-    var lkpoint         = new BMap.Point(117.220579, 39.106000);    //洛克酒店位置
-    map.centerAndZoom(lkpoint, 14);                                 //生成地图
+    var point           = new BMap.Point(117.223579,39.119671);     //洛克酒店位置
+    map.centerAndZoom(point, 14);                                 //生成地图
     var local           = new BMap.LocalSearch(map, {
         renderOptions:{map: map}
     });                                                         //实始化地图查询对象
