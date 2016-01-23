@@ -22,10 +22,14 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
 
     $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
     $ionicConfigProvider.platform.android.navBar.alignTitle('left');
+  
+    //隐藏后台标题,设置后退图标,设置后退标题
+    $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('icon ion-shouye').previousTitleText(false);
+    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('icon ion-shouye').previousTitleText(false);
 
-    $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
-    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');
-
+    //设置后退按钮标题为空
+    $ionicConfigProvider.backButton.text('');
+    
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
     $stateProvider
