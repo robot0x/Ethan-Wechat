@@ -11,9 +11,12 @@ class indexModel
 {
 	public $signPackage = array();
 
+	//在构造函数中获取APPID与appSecret
 	public function __construct()
 	{
-		$jssdk = new JssdkLogic("wx53bf06122618f768", "c1c300ea63649dba1cedd8b400a2f377");
+		$appId = C("APPID");
+		$appSecret = C("APPSECRET");
+		$jssdk = new JssdkLogic($appId, $appSecret);
 		$this->signPackage = $jssdk->getSignPackage();
 	}
 	

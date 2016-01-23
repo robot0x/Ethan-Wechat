@@ -22,6 +22,6 @@ class IndexController extends Controller {
     public function unitTestAction()
     {
     	$M = new indexModel();
-    	echo $M->getCalendarAjax();
+    	dump($M->getJssdk()) ;
     }
 }

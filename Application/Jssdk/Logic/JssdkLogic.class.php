@@ -11,17 +11,19 @@ class JssdkLogic
     private $appSecret;
 
     public function __construct($appId, $appSecret) {
-        $this->appId = $appId;
-        $this->appSecret = $appSecret;
+        $this->appId        = $appId;
+        $this->appSecret    = $appSecret;
     }
 
     public function getSignPackage() {
         $jsapiTicket = $this->getJsApiTicket();
 
-        // 注意 URL 一定要动态获取，不能 hardcode.
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url = "http://192.168.1.103/Ethan-wechat/Public/";
-          
+        // 注意:一般的调用,由于URL不固定,所以要动态获取
+        // 不能 hardcode.
+        // 但在这里,由于是单入口, 所以进行了hardcode
+        // $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $url =  C("JSSDK_URL");
+
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
 
@@ -36,7 +38,8 @@ class JssdkLogic
             "nonceStr"  => $nonceStr,
             "timestamp" => $timestamp,
             "signature" => $signature,
-            "rawString" => $string
+            "rawString" => $string,
+            "url"       =>  $url,
         );
 
         return $signPackage; 
