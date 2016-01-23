@@ -9,7 +9,7 @@ require_once 'log.php';
 $logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
 $log = Log::Init($logHandler, 15);
 
-//打印输出数组信息
+//打印输出数组信息  2
 function printf_info($data)
 {
     foreach($data as $key=>$value){
