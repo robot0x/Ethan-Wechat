@@ -10,9 +10,13 @@ use Order\Logic\OrderLogic;	//订单
 
 class indexModel
 {
-	private $openid = "";			//用户openid
+	public $openId = "";			//用户openid
 	public $signPackage = array();	//JSSDK签名
 
+	public function setOpenId($openId)
+	{
+		$this->openId = $openId;
+	}
 	//在构造函数中获取APPID与appSecret
 	public function __construct()
 	{

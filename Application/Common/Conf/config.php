@@ -43,7 +43,7 @@ return array(
      
      // * APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置， 登录公众平台，进入开发者中心可设置），
      // * 获取地址：https://mp.weixin.qq.com/advanced/advanced?action=dev&t=advanced/dev&token=2005451881&lang=zh_CN
-    'APPSECRET'             => '01c6d59a3f9024db6336662ac95c8e74',
+    'APPSECRET'             => 'c1c300ea63649dba1cedd8b400a2f377',
 
     //=======【证书路径设置】=====================================
     /**
