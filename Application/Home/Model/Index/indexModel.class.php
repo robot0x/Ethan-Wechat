@@ -2,14 +2,16 @@
 /**
  * 首页indexAction 模型 
  * panjie
- * todo:增加当前day对应的字符串日期，用以返回。
+ * update:2016-01-24
  */
 namespace Home\Model\Index;
 use Jssdk\Logic\JssdkLogic;	//jssdk
+use Order\Logic\OrderLogic;	//订单
 
 class indexModel
 {
-	public $signPackage = array();
+	private $openid = "";			//用户openid
+	public $signPackage = array();	//JSSDK签名
 
 	//在构造函数中获取APPID与appSecret
 	public function __construct()
@@ -20,11 +22,18 @@ class indexModel
 		$this->signPackage = $jssdk->getSignPackage();
 	}
 	
+	//获取JSSDK
 	public function getJssdk()
 	{
 		return $this->signPackage;
 	}
-		
+	
+	/**
+	 * 获取近90天的日历信息
+	 * 历史日期不能点击。
+	 * 最多可选择90天内的日期
+	 * @return jsonArray 
+	 */
 	public function getCalendarAjax()
 	{
 		//取当前日期信息
@@ -73,10 +82,10 @@ class indexModel
 			//加入空数据
 			for ($j = 0 ; $j < $weekDay; $j++, $index++)
 			{
-				$days[$j]["day"] = "";
-				$days[$j]["isDisabled"] = true;
-				$days[$j]["isChecked"] = false;
-				$days[$j]["index"]	= $index;
+				$days[$j]["day"] 		= "";		//当前 日
+				$days[$j]["isDisabled"] = true;		//是否可选
+				$days[$j]["isChecked"] 	= false;	//是否选中
+				$days[$j]["index"]		= $index;	//在整个日历中的序号
 			}
 
 			//加入空数据后的信息, 利用了上一组FOR的J值
@@ -84,37 +93,26 @@ class indexModel
 			{
 				$days[$j]["index"]	= $index;
 				$days[$j]["day"] 	= $k;
-				$days[$j]["date"] 	= $year . "-" . $month . '-' . $k;
+				$days[$j]["date"] 	= $year . "-" . $month . '-' . $k;	//格式化前的日期如2016-01-01
 				
 				//如果小于开始值，则将状态至为 不能点击
 				if ($k < $firstDay)
 				{
 					$days[$j]["isDisabled"] = true;
-					$days[$j]["class"] 		= "stable";
+					$days[$j]["class"] 		= "stable";		//设置样式
 				}
 				else
 				{
-					$days[$j]["isDisabled"] = false;
+					$days[$j]["isDisabled"] = false;		//设置不可点击
 				}
-				
-				//如果当前月份是开始月份，当前天数是开始天数，添加默认选中事件
-				// if ($i == $minMonth && $k == $beginDay)
-				// {
-				// 	$days[$j]["isChecked"] 	= true;
-				// 	$days[$j]["class"] 		= "positive";
-				// }
-				// else
-				// {
-				// 	$days[$j]["isChecked"] = false;
-				// }
 
 				//如果为周六，则将当前天信息加入 周 变量
 				//将$j重新初始化的，是由于如果数组的起点不是 0 ，那么将被en_code为对象
 				if ($j%7 == 6)
 				{
-					$weeks[] = $days;
-					$days = array();
-					$j = -1;
+					$weeks[] 	= $days;
+					$days 		= array();
+					$j 			= -1;
 				}
 			}
 
@@ -127,24 +125,25 @@ class indexModel
 				$days[$j]["isChecked"] = false;
 			}
 
+			//如果days非空数组，则将其添加到周数组
 			if (count($days))
 			{
 				$weeks[] = $days;
 			}
 
 			$data[] = array(
-				"month"			=> $month,
-				"year"			=> $year,
-				"isShow"		=> $isShow,
-				"isFirstMonth" 	=> $isFirstMonth,
-				"isLastMonth"	=> $isLastMonth,
-				"weeks"			=> $weeks,
+				"month"			=> $month,			//月
+				"year"			=> $year,			//年
+				"isShow"		=> $isShow,			//是否为当前月
+				"isFirstMonth" 	=> $isFirstMonth,	//是否为首月
+				"isLastMonth"	=> $isLastMonth,	//是否为尾月
+				"weeks"			=> $weeks,			//周数
 				);
 
-			$firstDay = "1";
-			$isShow = false;
-			$isFirstMonth = false;
-			$month = get_next_month($year . "-" . $month);
+			$firstDay 		= "1";
+			$isShow 		= false;
+			$isFirstMonth 	= false;
+			$month = get_next_month($year . "-" . $month);	//获取下月月份
 
 			if ($nextMonth == "01")
 			{
@@ -152,7 +151,18 @@ class indexModel
 			}
 
 		}
+
 		$calendar["data"] = $data;
 		return json_encode($calendar);
+	}
+
+	/**
+	 * 获取近三个月的订单信息
+	 * @return [type] [description]
+	 */
+	public function getOrders()
+	{
+		$OrderL = new OrderLogic();
+		return json_encode($OrderL->getListsByCustomerId("oha4Tt-t_DrHCdmtvCkHOLO8ygTg")) ;
 	}
 }

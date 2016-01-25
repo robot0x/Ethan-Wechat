@@ -4,6 +4,7 @@ namespace Home\Controller;
 use Think\Controller;
 use CustomMenu\Model\CustomMenuModel;
 use Home\Model\Index\indexModel;
+use Api\Controller\WxPayController;
 
 class IndexController extends Controller {
 
@@ -21,7 +22,7 @@ class IndexController extends Controller {
 
     public function unitTestAction()
     {
-    	$M = new indexModel();
-    	dump($M->getJssdk()) ;
+    	$M = new WxPayController();
+    	$M->orderPay();
     }
 }
