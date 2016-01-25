@@ -19,7 +19,7 @@ return array(
     'MCHID'             => '1225312702',
     'KEY'               => 'e10adc3949ba59abbe56e057f20f883e',
              
-    'JSSDK_URL'         => 'http://192.168.1.103/Ethan-wechat/Public/', //JSSDK配置的安全地址取根目录
+    'JSSDK_URL'         => 'http://192.168.1.100/Ethan-wechat/Public/', //JSSDK配置的安全地址取根目录
     'SSLCERT_PATH'      => '../cert/apiclient_cert.pem',
     'SSLKEY_PATH'       => '../cert/apiclient_key.pem',
 );
