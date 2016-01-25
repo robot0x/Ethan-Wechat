@@ -8,6 +8,7 @@ use Home\Model\Index\indexModel;
 class IndexController extends Controller {
 
     public function indexAction(){
+        $openid = get_openid();
         $this->display();
     }
 
