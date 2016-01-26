@@ -1,20 +1,28 @@
 <?php
 namespace Home\Controller;
-
-use Think\Controller;
 use CustomMenu\Model\CustomMenuModel;
 use Home\Model\Index\indexModel;
+use Api\Controller\WxPayController;
+use WxPay\Logic\JsApiPayLogic;      //微信JSAPI
 
-class IndexController extends Controller {
+class IndexController extends HomeController {
 
+    /**
+     * 首页
+     * @return [type] [description]
+     */
     public function indexAction(){
-        $openid = get_openid();
         $this->display();
     }
 
+    /**
+     * 项目JS文件
+     * @return [type] [description]
+     */
     public function indexAppJsAction()
     {
     	$M = new indexModel();
+        $M->setOpenId(session("openId"));
     	$this->assign("M", $M);
 
     	$this->display("indexApp.js");
@@ -22,7 +30,7 @@ class IndexController extends Controller {
 
     public function unitTestAction()
     {
-    	$M = new indexModel();
-    	dump($M->getJssdk()) ;
+    	$M = new WxPayController();
+    	$M->orderPay();
     }
 }

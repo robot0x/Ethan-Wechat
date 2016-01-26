@@ -41,11 +41,9 @@
 <include file="indexActivity" />
 <include file="indexActivityDetails" />
 <include file="indexPersonalCenter" />
-<include file="indexToBePaid" />
-<include file="indexToBeStay" />
-<include file="indexToBeEvaluation" />
 <include file="indexIntegral" />
-<include file="indexAllOrder" />
+<!--订单-->
+<include file="indexOrder" />
 <include file="indexPaySuccess" />
 <include file="indexPayError" />
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=U7N6PIKHKGEKgXmi5wqNfItn"></script>
