@@ -333,18 +333,21 @@ app.controller('SlideCtrl', function($scope,$timeout,Home) {
  
 });
 
-app.controller('IntroductionCtrl', function($scope,$http) {
-    $http.get('api.php/Api/Api/getHotelIntroduction')
-     .success(function(data,status){
-      if(data.status==='success'){
-        $scope.introduction = data.data;
+app.controller('IntroductionCtrl', function($scope,Home) {
+    
+     Home.getJosn().success(function(data){
+      if(data.introduction.status==='success'){
+        $scope.introduction = data.introduction.data;
       }else{
       alert("幻灯片数据错误");
       }
-      })
-     .error(function(data,status){
-      
+      });
      });
+app.filter('trustHtml', function ($sce) {
+  return function (input) {
+      return $sce.trustAsHtml(input);
+  }
+
 });
 
 app.controller('EvaluationCtrl', function($scope,$http,$q) {
@@ -396,11 +399,11 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 //活动列表
-app.controller('ActivityCtrl',function($scope,$http){
-    $http.get('api.php/Api/Api/getActivityLists')
-     .success(function(data,status){
-      if(data.status == 'success'){
-        $scope.activitys = data.data;
+app.controller('ActivityCtrl',function($scope,Home){
+    
+     Home.getJosn().success(function(data){
+      if(data.activitys.status == 'success'){
+        $scope.activitys = data.activitys.data;
       }
       else{
         alert('数据不正确');
