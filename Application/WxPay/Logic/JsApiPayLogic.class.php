@@ -38,19 +38,17 @@ class JsApiPayLogic extends Controller
      * 通过跳转获取用户的openid，跳转流程如下：
      * 1、设置自己需要调回的url及其其他参数，跳转到微信服务器https://open.weixin.qq.com/connect/oauth2/authorize
      * 2、微信服务处理完成之后会跳转回用户redirect_uri地址，此时会带上一些参数，如：code
-     * 
+     * TODO：获取OPENID后，拉取服务器信息，生成当前用户信息，并更新用户信息
      * @return 用户的openid
      */
-    public function GetOpenid()
+    public function sessionOpenid()
     {
-        //用户认证成功后,第二次获取openId
-        //将opendId给用户后,即销毁.
-        //当用户再次刷新页面时,重新获取.
+        //如果存在openId,证明该用户已经认证。
+        //直接返回seesion,同时再次seesion一次
         if (session("openId") !== null)
         {
-            $openId = session("openId");
-            session("openId", null);
-            return $openId;
+            session("openId", session("openId"));
+            return;
         }
 
         //通过code获得openid
@@ -81,7 +79,7 @@ class JsApiPayLogic extends Controller
             //session
             session("openId", $openid);
 
-            //按cookie拼接URL
+            //按cookie拼接URL,将锚点信息加入
             $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
             $anchor = $_COOKIE['anchor'];
             if ($anchor && $anchor != "undefined")

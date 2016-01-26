@@ -12,12 +12,7 @@ class IndexController extends HomeController {
      * @return [type] [description]
      */
     public function indexAction(){
-        //①、获取用户openid
-        $tools = new JsApiPayLogic();
-        $openId = $tools->GetOpenid();
-
-        //session, 以indexAppJsAction共享
-        session("jsOpenId", $openId);
+        
         $this->display();
     }
 
@@ -28,7 +23,7 @@ class IndexController extends HomeController {
     public function indexAppJsAction()
     {
     	$M = new indexModel();
-        $M->setOpenId(session("jsOpenId"));
+        $M->setOpenId(session("openId"));
     	$this->assign("M", $M);
 
     	$this->display("indexApp.js");

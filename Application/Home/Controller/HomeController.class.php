@@ -9,6 +9,9 @@ class HomeController extends Controller
     public function __construct()
     {
         parent::__construct();
+        //①、获取用户openid并seesion
+        $JsApiPayL = new JsApiPayLogic();
+        $JsApiPayL->sessionOpenid();
     }
 
 }
