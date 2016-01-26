@@ -225,9 +225,7 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
     $urlRouterProvider.otherwise("/tab/home");
   });
 
-app.controller("HomeTabCtrl", ['$scope', function(){
-  console.log('HomeTabCtrl');
-}]);
+
 
   app.controller("EvaluationingCtrl", function($scope,$http){
     $scope.max = 5;
@@ -466,12 +464,14 @@ app.directive("star", function() {
     }
   };
 });
- 
-<include file="customerFactory.js"  />        //用户信息
+<include file="indexHomeTabController.js" />     //首页
+<include file="indexOrderController.js" />    //订单
 <include file="indexMapController.js" />      //导航
 <include file="indexCalendarController.js" /> //日期选择器
-<include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
-<include file="indexRim.js" />                //搜周边
-<include file="indexOrderFactory.js" />       //近三个月内的订单
+<include file="indexRimController.js" />      //搜周边
 <include file="indexPersonalCenter.js" />     //个人中心
-<include file="indexOrder.js" />              //订单
+
+<include file="indexOrderFactory.js" />       //近三个月内的订单
+<include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
+<include file="indexCustomerFactory.js"  />        //用户信息
+<include file="indexRoomFactory.js" />             //房型信息
