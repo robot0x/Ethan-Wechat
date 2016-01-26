@@ -11,18 +11,24 @@ class WxPayController extends ApiController
      * 支付订单
      * @return [type] [description]
      */
-    public function orderPay()
+    public function orderPayAction()
     {   
         $return = array();
 
-        //判断传入的OPENID
-        $openid = I('get.openid');
-        // if (strlen($openid) != 28)
-        // {
-        //     $return['state'] = "error";
-        //     $return["message"] = "wrong openid";
-        //     return $return;
-        // }
+        $openId = I('get.open_id');
+        if ($openId == "")
+        {
+            //取session中的OPENID
+            $openId = session("openId");
+            session("openId", $openId);
+        }
+
+        if ($openId == null)
+        {
+            $return['status'] = "error";
+            $return['message'] = "can not fetch openid";
+            return $return;
+        }
 
         //取订单信息,查看是否可支付.
         //可支付状态，则锁定房型。TODO:需要增加ordering字段
@@ -39,6 +45,8 @@ class WxPayController extends ApiController
         $UnifiedOrderL->SetTrade_type("JSAPI");
         $UnifiedOrderL->SetOpenid($openId);
         
+        dump($UnifiedOrderL);
+
         $order = ApiLogic::unifiedOrder($UnifiedOrderL);
         dump($order);
 

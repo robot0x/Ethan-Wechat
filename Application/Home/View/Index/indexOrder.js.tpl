@@ -1,4 +1,4 @@
-app.controller("order", function($scope, $stateParams, OrderFactory){
+app.controller("order", function($scope, $http, $stateParams, OrderFactory){
     var type = $stateParams.type;
     $scope.title = OrderFactory.title(type);
 
@@ -19,6 +19,17 @@ app.controller("order", function($scope, $stateParams, OrderFactory){
             break;
     };
     $scope.pay = function(order){
+        console.log("order");
+        var orderId = order.id;
+        $http.get('__ROOT__/api.php',{params:{id: orderId}})
+        .success(function(data, status, header, config){
+
+        })
+        .error(function(data, status, header, config){
+            
+        });
+    
+    return;
         wx.ready(function(){
             wx.chooseWXPay({
             timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符

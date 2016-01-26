@@ -4,6 +4,7 @@ use CustomMenu\Model\CustomMenuModel;
 use Home\Model\Index\indexModel;
 use Api\Controller\WxPayController;
 use WxPay\Logic\JsApiPayLogic;      //微信JSAPI
+use Jssdk\Logic\JssdkLogic;         //jssdk
 
 class IndexController extends HomeController {
 
@@ -12,6 +13,12 @@ class IndexController extends HomeController {
      * @return [type] [description]
      */
     public function indexAction(){
+        //①、获取用户openid并seesion
+        $JsApiPayL = new JsApiPayLogic();
+        $JsApiPayL->sessionOpenid();
+
+        JssdkLogic::sessionUrl();
+
         $this->display();
     }
 
@@ -30,7 +37,7 @@ class IndexController extends HomeController {
 
     public function unitTestAction()
     {
-    	$M = new WxPayController();
-    	$M->orderPay();
+    	$M = new indexModel();
+    	dump($M->getJssdk());
     }
 }
