@@ -26,5 +26,8 @@
 			<div class="col">共{{total}}晚</div>
 		</div>
 	</div>
+		<div class="padding">
+        <button class="button button-block button-positive">确定</button>
+      </div>
 </ion-view>
 </script>
