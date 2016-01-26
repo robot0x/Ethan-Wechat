@@ -15,7 +15,7 @@ class ApiLogic
 	 * 
 	 * 统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
 	 * appid、mchid、spbill_create_ip、nonce_str不需要填入
-	 * @param WxPayUnifiedOrder $inputObj
+	 * @param UnifiedOrderLogic $inputObj
 	 * @param int $timeOut
 	 * @throws WxPayException
 	 * @return 成功时返回，其他抛异常
@@ -23,6 +23,7 @@ class ApiLogic
 	public static function unifiedOrder($inputObj, $timeOut = 6)
 	{
 		$url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+
 		//检测必填参数
 		if(!$inputObj->IsOut_trade_noSet()) {
 			E("缺少统一支付接口必填参数out_trade_no！");
@@ -539,6 +540,7 @@ class ApiLogic
 			curl_setopt($ch,CURLOPT_PROXY, C('CURL_PROXY_HOST'));
 			curl_setopt($ch,CURLOPT_PROXYPORT, C('CURL_PROXY_PORT'));
 		}
+
 		curl_setopt($ch,CURLOPT_URL, $url);
 		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,TRUE);
 		curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,2);//严格校验
@@ -559,7 +561,9 @@ class ApiLogic
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 		//运行curl
+		header("Content-type: text/html; charset=utf-8");
 		$data = curl_exec($ch);
+
 		//返回结果
 		if($data){
 			curl_close($ch);

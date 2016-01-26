@@ -10,6 +10,13 @@ class JssdkLogic
     private $appId;
     private $appSecret;
 
+    static public function sessionUrl()
+    {
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $url =  $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        session("url", $url);
+    }
+
     public function __construct($appId, $appSecret) {
         $this->appId        = $appId;
         $this->appSecret    = $appSecret;
@@ -17,12 +24,17 @@ class JssdkLogic
 
     public function getSignPackage() {
         $jsapiTicket = $this->getJsApiTicket();
-
         // 注意:一般的调用,由于URL不固定,所以要动态获取
         // 不能 hardcode.
         // 但在这里,由于是单入口, 所以进行了hardcode
         // $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        $url =  C("JSSDK_URL");
+        // $url =  $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REDIRECT_URL'];
+        $url = session("url");
+        if ($url == null)
+        {
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+            $url =  $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        }
 
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
@@ -39,7 +51,7 @@ class JssdkLogic
             "timestamp" => $timestamp,
             "signature" => $signature,
             "rawString" => $string,
-            "url"       =>  $url,
+            "url"       => $url,
         );
 
         return $signPackage; 

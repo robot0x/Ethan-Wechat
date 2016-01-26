@@ -72,7 +72,7 @@ class JsApiPayLogic extends Controller
             //则重新获取code.
             if ($openid == "")
             {
-                $this->GetOpenid();
+                $this->sessionOpenid();
                 return;
             }
 
@@ -81,7 +81,7 @@ class JsApiPayLogic extends Controller
 
             //按cookie拼接URL,将锚点信息加入
             $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-            $anchor = $_COOKIE['anchor'];
+            $anchor = cookie('anchor');
             if ($anchor && $anchor != "undefined")
             {
                 $url = $url . "#" . $anchor;
@@ -148,6 +148,10 @@ class JsApiPayLogic extends Controller
         //取出openid
         $data = json_decode($res,true);
         $this->data = $data;
+        if ($data['errcode'] !== null)
+        {
+            E("网页授权失败,错误代码" . $data['errcode'] . ".信息:" . $data['errmsg']);
+        }
         $openid = $data['openid'];
         return $openid;
     }
