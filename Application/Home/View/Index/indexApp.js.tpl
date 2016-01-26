@@ -11,9 +11,9 @@ jsapiTicket: "{$M->signPackage['jsapiTicket']}",
       'previewImage','uploadImage','downloadImage','chooseImage','openLocation', 'getLocation','chooseWXPay'
       ]
      });
-var app = angular.module('yunzhiclub', ['ionic','ionic-datepicker']);
+var app = angular.module('yunzhiclub', ['ionic']);
 var url = "{$M->signPackage['url']}";
-app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
+app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
     $ionicConfigProvider.platform.ios.tabs.style('standard');
     $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -32,6 +32,17 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
+    
+
+    //构建相应的factory
+    $provide.factory('Home', function($http) {
+      var service = {};
+      service.getJosn = function () {
+        return $http.get('api.php/Api/Api/getSlideInit');
+      }
+        return service;
+    });
+
     $stateProvider
     .state('tabs',
     {
@@ -219,6 +230,21 @@ app.controller("HomeTabCtrl", ['$scope', function(){
 }]);
 
   app.controller("EvaluationingCtrl", function($scope,$http){
+    $scope.max = 5;
+    $scope.ratingVal = 2;
+    $scope.readonly = false;
+    $scope.onHover = function(val){
+      $scope.hoverVal = val;
+    };
+    $scope.onLeave = function(){
+      $scope.hoverVal = null;
+    }
+    $scope.onChange = function(val){
+      $scope.ratingVal = val;
+    }
+    $scope.getStarLeave = function() {
+      alert($scope.ratingVal);
+    }
   console.log('EvaluationingCtrl');
   $scope.upload = function(){
     $http.get('api.php/Index/getJssdk')
@@ -277,28 +303,25 @@ app.controller("HomeTabCtrl", ['$scope', function(){
  };
 });
 
-app.controller('SlideCtrl', function($scope,$timeout,$http) {
-  $http.get('api.php/Api/Api/getSlideInit')
-   .success(function(data){
-      if(data.slideUrls.status==='success'){
+app.controller('SlideCtrl', function($scope,$timeout,Home) {
+  Home.getJosn().success(function(data) {
+    if(data.slideUrls.status==='success'){
         $scope.slideUrls = data.slideUrls.data;
       }else{
-      alert("幻灯片数据错误");
+        alert("幻灯片数据错误");
       }
       if(data.slideMapUrl.status==='success'){
         $scope.slideMapUrl = data.slideMapUrl.data;
       }else{
-      alert("地图数据错误");
+        alert("地图数据错误");
       }
       if(data.rooms.status==='success'){
         $scope.rooms = data.rooms.data;
       }else{
-      alert("房间数据错误");
+        alert("房间数据错误");
       }
-    })
-   .error(function(data,status){
-      alert("没有该方法");
-   });
+  });
+  
   $scope.toggleDetail = function(room){
     room.detail = !room.detail;
     room.order = '';
@@ -372,20 +395,6 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
    
 });
 
-
-
-app.controller('FinishCtrl',function($scope){
-  $scope.datePickerCallback = function (val) {
-  if (typeof(val) === 'undefined') {
-    console.log('No date selected');
-  } else {
-    console.log('Selected date is : ', val);
-    $scope.datepickerObject.inputDate = new Date(val);
-    $scope.maxDay = new Date(val); 
-  }
-};
-});
-
 //活动列表
 app.controller('ActivityCtrl',function($scope,$http){
     $http.get('api.php/Api/Api/getActivityLists')
@@ -456,23 +465,6 @@ app.directive("star", function() {
       });
     }
   };
-});
-app.controller('EvaluationingCtrl',function($scope){
-  $scope.max = 5;
-  $scope.ratingVal = 2;
-  $scope.readonly = false;
-  $scope.onHover = function(val){
-    $scope.hoverVal = val;
-  };
-  $scope.onLeave = function(){
-    $scope.hoverVal = null;
-  }
-  $scope.onChange = function(val){
-    $scope.ratingVal = val;
-  }
-  $scope.getStarLeave = function() {
-    alert($scope.ratingVal);
-  }
 });
  
 <include file="customerFactory.js"  />        //用户信息

@@ -634,7 +634,7 @@ function get_user_token($code)
 
 // 获取当前用户的OpenId
 function get_openid($openid = NULL) {
-//        return 'oZuoxt8tnEUUf6YPBG-mNPYjoKQA';
+        return 'oZuoxt8tnEUUf6YPBG-mNPYjoKQA';
     $openid = session ('openid');
         $openidTime = session('openidTime');
         if($openid != false && $openidTime!=false && (time()-$openidTime < 60))

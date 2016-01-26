@@ -12,7 +12,6 @@ class IndexController extends HomeController {
      * @return [type] [description]
      */
     public function indexAction(){
-        
         $this->display();
     }
 
