@@ -303,7 +303,12 @@ app.controller("HomeTabCtrl", ['$scope', function(){
  };
 });
 
-app.controller('SlideCtrl', function($scope,$timeout,Home) {
+
+app.controller('SlideCtrl', function($scope,$timeout,Home,Calendar) {
+  $scope.beginDate = Calendar.beginDate;
+  $scope.endDate = Calendar.endDate;
+  console.log($scope.endDate);
+  $scope.total = Calendar.total;
   Home.getJosn().success(function(data) {
     if(data.slideUrls.status==='success'){
         $scope.slideUrls = data.slideUrls.data;
@@ -333,8 +338,9 @@ app.controller('SlideCtrl', function($scope,$timeout,Home) {
  
 });
 
+
 app.controller('IntroductionCtrl', function($scope,Home) {
-    
+  
      Home.getJosn().success(function(data){
       if(data.introduction.status==='success'){
         $scope.introduction = data.introduction.data;
