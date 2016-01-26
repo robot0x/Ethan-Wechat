@@ -9,8 +9,6 @@ return array(
     ),
 
     /* SESSION 和 COOKIE 配置 */
-    'SESSION_PREFIX'    => 'yunzhi_home', //session前缀
-    'COOKIE_PREFIX'     => 'yunzhi_home_', //Cookie前缀 避免冲突
      
    
 );
