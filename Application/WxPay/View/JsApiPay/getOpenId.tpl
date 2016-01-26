@@ -5,7 +5,7 @@
     <title>正在努力为您跳转</title>
 <script type="text/javascript">
     var query = location.href.split('#'); 
-    document.cookie = 'anchor=' + query[1];
+    document.cookie = 'yunzhi_anchor=' + query[1];
     self.location = '{$url}';     
 </script>
 </head>

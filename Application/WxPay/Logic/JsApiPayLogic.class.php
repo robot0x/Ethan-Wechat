@@ -81,7 +81,7 @@ class JsApiPayLogic extends Controller
 
             //按cookie拼接URL,将锚点信息加入
             $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-            $anchor = $_COOKIE['anchor'];
+            $anchor = cookie('anchor');
             if ($anchor && $anchor != "undefined")
             {
                 $url = $url . "#" . $anchor;
