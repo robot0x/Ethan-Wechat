@@ -56,17 +56,7 @@ class ApiController extends Controller
 
 		$this->ajaxReturn($data);
 	}
-	/**
-	 * 取酒店介绍的信息
-	 * xulinjie
-	 * @return ajaxlist
-	 */ 
-	public function getHotelIntroductionAction()
-	{
-		
 
-		$this->ajaxReturn($introduction);
-	}
 	/**
 	 * 取评价信息
 	 * xulinjie
@@ -93,16 +83,15 @@ class ApiController extends Controller
 		$this->ajaxReturn($evaluations);
 	}
 
-
 	/**
-	 * 取活动的信息
+	 * 获取新的房间信息
 	 * xulinjie
-	 * @return ajaxlist
+	 * @return 
 	 */
-	public function getActivityListsAction()
+	public function getNewRoomsAction()
 	{
-		
-		$this->ajaxReturn($activitys);
-
+		$Room = new RoomController();
+		$roomLists = $Room->getRooms();
+		$this->ajaxReturn($roomLists);
 	}
 }

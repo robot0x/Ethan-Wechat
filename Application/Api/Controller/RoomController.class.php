@@ -28,7 +28,6 @@ class RoomController extends ApiController
 	{
 		//实例化
 		$RoomL = new RoomLogic();
-
 		$rooms = $RoomL->getAllListsWithTimeRange(I('get.begin_time'), I('get.end_time'));
 
 

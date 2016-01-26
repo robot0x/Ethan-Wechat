@@ -75,10 +75,10 @@ class RoomLogic extends RoomModel
 
 		//取出预订信息
 		$OrderL = new OrderLogic();
-		// $orders = $OrderL->getOrderedListInDateRange($beginTime, $endTime);
+		$orders = $OrderL->getOrderedListsInDateRange($beginTime, $endTime);
 
-		// //预订信息按房型ID重新分组
-		// $orders = group_by_key($orders, $key = "room_id");
+		//预订信息按房型ID重新分组
+		$orders = group_by_key($orders, $key = "room_id");
 
 		$data = array();
 		$i = 0;

@@ -476,6 +476,7 @@ app.directive("star", function() {
   };
 });
  
+<include file="indexRoomFactory.js"  />        //房间信息
 <include file="customerFactory.js"  />        //用户信息
 <include file="indexMapController.js" />      //导航
 <include file="indexCalendarController.js" /> //日期选择器

@@ -1,4 +1,4 @@
-app.controller('DateCtrl',function($scope , Calendar){
+app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home){
 	//初始化
 	$scope.calendar		= {:$M::getCalendarAjax()};	//由M层中取得初始值
 	$scope.showLeft 	= 0;						//是否显示左侧菜单
@@ -6,7 +6,8 @@ app.controller('DateCtrl',function($scope , Calendar){
 	$scope.total 		= 0;						//初始化，共几晚
 	var beginIndex 		= -1;						//开始日期
 	var endIndex		= -1;						//结束日期
-	
+	var beginTime       = '';                       //用于get传值
+	var end_time        = '';                       //用于get传值
 	//记录当前月份
 	var index = 0;
 	var monthLength = $scope.calendar.data.length;
@@ -56,7 +57,7 @@ app.controller('DateCtrl',function($scope , Calendar){
 			//给factory传值
 			Calendar.beginDate = Calendar.endDate = currentday.date;
 			Calendar.total = 1;
-			console.log(Calendar);
+			//console.log(Calendar);
 			//设置总天数
 			$scope.total = 1;
 		}
@@ -83,7 +84,9 @@ app.controller('DateCtrl',function($scope , Calendar){
 
 			Calendar.total = (endIndex - beginIndex) ? endIndex - beginIndex : 1;
 			console.log(Calendar);
-
+			beginTime = Calendar.beginDate;
+			endTime = Calendar.endDate;
+			console.log(beginTime);
 			//用户点结结束时间，则判断数是否位于两者之间。点亮区间的数据。熄灭其它的
 			//选遍历月，再遍历周，再遍历天
 			$scope.calendar.data.forEach(function(month, monthIndex){
@@ -143,4 +146,21 @@ app.controller('DateCtrl',function($scope , Calendar){
 			return true;
 		}
 	};
+
+	$scope.upDateCalendar = function() {
+
+		$http.get('api.php/Api/Api/getNewRooms',{params:{begin_time:beginTime,end_time:endTime}})
+	   .success(function(data){
+			if (data.status ==='success') {
+				Home.getJosn().success(function(oldData) {
+			  		if(oldData.rooms.status==='success'){
+			    		oldData.rooms.data = data.data;
+			  		}else{
+			    		alert("房间数据错误");
+			  		}
+				});
+			}
+	    });
+	   $location.path('/tab/home');
+	}
  });

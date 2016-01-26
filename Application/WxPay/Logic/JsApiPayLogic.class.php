@@ -43,6 +43,8 @@ class JsApiPayLogic extends Controller
      */
     public function sessionOpenid()
     {
+        session("openId","sxxxxxx");
+        return;
         //如果存在openId,证明该用户已经认证。
         //直接返回seesion,同时再次seesion一次
         if (session("openId") !== null)

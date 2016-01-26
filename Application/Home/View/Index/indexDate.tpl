@@ -27,7 +27,7 @@
 		</div>
 	</div>
 		<div class="padding">
-        <button class="button button-block button-positive">确定</button>
+        <button ng-click="upDateCalendar()" class="button button-block button-positive">确定</button>
       </div>
 </ion-view>
 </script>
