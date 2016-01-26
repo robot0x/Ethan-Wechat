@@ -8,7 +8,7 @@ jsapiTicket: "{$M->signPackage['jsapiTicket']}",
       url: location.href.split('#')[0],
       jsApiList: [
       // 所有要调用的 API 都要加到这个列表中
-      'previewImage','uploadImage','downloadImage','chooseImage','openLocation', 'getLocation'
+      'previewImage','uploadImage','downloadImage','chooseImage','openLocation', 'getLocation','chooseWXPay'
       ]
      });
 var app = angular.module('yunzhiclub', ['ionic']);
@@ -177,33 +177,6 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
         }
       }
     })
-    .state('tabs.toBePaid', {
-      url: "/toBePaid",
-      views: {
-        'personal-tab': {
-            //待支付
-            templateUrl: "templates/indexToBePaid.html"
-          }
-        }
-      })
-    .state('tabs.toBeEvaluation', {
-      url: "/toBeEvaluation",
-      views: {
-        'personal-tab': {
-            //待评价
-            templateUrl: "templates/indexToBeEvaluation.html"
-          }
-        }
-      })
-    .state('tabs.toBeStay', {
-      url: "/toBeStay",
-      views: {
-        'personal-tab': {
-            //待入住
-            templateUrl: "templates/indexToBeStay.html"
-          }
-        }
-      })
     .state('tabs.paySuccess', {
       url: "/paySuccess",
       views: {
@@ -232,11 +205,11 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
           }
         })
     .state('tabs.allOrder', {
-      url: "/allOrder",
+      url: "/allOrder/:type",
       views: {
         'personal-tab': {
             //我的订单
-            templateUrl: "templates/indexAllOrder.html"
+            templateUrl: "templates/indexOrder.html"
           }
         }
       })
@@ -494,8 +467,11 @@ app.directive("star", function() {
   };
 });
  
-
+<include file="customerFactory.js"  />        //用户信息
 <include file="indexMapController.js" />      //导航
 <include file="indexCalendarController.js" /> //日期选择器
 <include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
 <include file="indexRim.js" />                //搜周边
+<include file="indexOrderFactory.js" />       //近三个月内的订单
+<include file="indexPersonalCenter.js" />     //个人中心
+<include file="indexOrder.js" />              //订单
