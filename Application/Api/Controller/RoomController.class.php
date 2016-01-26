@@ -20,7 +20,7 @@ class RoomController extends ApiController
 	}
 
 	/**
-	 * 获取房型信息
+	 * 获取房型信息(全部取出，包括剩余间数)
 	 * panjie
 	 * @return lists
 	 */
@@ -37,4 +37,6 @@ class RoomController extends ApiController
 
 		return $data;
 	}
+
+
 }

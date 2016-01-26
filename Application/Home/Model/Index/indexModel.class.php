@@ -7,6 +7,7 @@
 namespace Home\Model\Index;
 use Jssdk\Logic\JssdkLogic;	//jssdk
 use Order\Logic\OrderLogic;	//订单
+use Room\Logic\RoomLogic;	//房型
 
 class indexModel
 {
@@ -168,5 +169,21 @@ class indexModel
 	{
 		$OrderL = new OrderLogic();
 		return json_encode($OrderL->getListsByCustomerId("oha4Tt-t_DrHCdmtvCkHOLO8ygTg")) ;
+	}
+
+	/**
+	 *获取所有房型信息，供用户预订
+	 * @return json 
+	 */
+	public function getRooms()
+	{
+		$beginDate = date("Y-m-d");
+		$endDate = date("Y-m-d", time()+ 60*24*60);
+
+		//实例化
+		$RoomL = new RoomLogic();
+		$rooms = $RoomL->getAllListsWithTimeRange($beginDate, $endDate);
+
+		return json_encode($rooms);
 	}
 }
