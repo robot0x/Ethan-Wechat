@@ -72,7 +72,7 @@ class JsApiPayLogic extends Controller
             //则重新获取code.
             if ($openid == "")
             {
-                $this->GetOpenid();
+                $this->sessionOpenid();
                 return;
             }
 
@@ -148,6 +148,10 @@ class JsApiPayLogic extends Controller
         //取出openid
         $data = json_decode($res,true);
         $this->data = $data;
+        if ($data['errcode'] !== null)
+        {
+            E("网页授权失败,错误代码" . $data['errcode'] . ".信息:" . $data['errmsg']);
+        }
         $openid = $data['openid'];
         return $openid;
     }
