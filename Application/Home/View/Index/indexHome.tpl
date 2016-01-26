@@ -18,7 +18,7 @@
             <p>100%好评</p>
             <p>84条评论></p>
           </a>
-        <a href="#" class="col-67">
+        <a href="#/tab/map" class="col-67">
             <img class="full-image" ng-src="{{slideMapUrl.url}}">
         </a>
     </div>
@@ -40,7 +40,7 @@
     </a>
     <div ng-repeat='room in rooms'>
   <a class="item" href='{{room.order}}'>
-    <h2>{{room.title}}</h2>
+    <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">
       ￥{{room.price}}<i class="ion-down"></i>

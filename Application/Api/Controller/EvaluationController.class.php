@@ -6,6 +6,7 @@
 namespace Api\Controller;
 
 use EvaluationCustom\Logic\EvaluationCustomLogic;
+use Evaluation\Logic\EvaluationLogic;
 
 class EvaluationController extends ApiController
 {
@@ -42,4 +43,24 @@ class EvaluationController extends ApiController
 
 		return $data;
 	}
+
+	/*
+     * 上传微信服务器图片至本地服务器
+     * 返回图片ID
+     */
+    public function uploadImageAction()
+    {
+        $serverId = I('get.serverId','');
+        $openid = I('get.openid','');
+        if($serverId == '' || $openid == '')
+        {
+            return false;
+        }
+        
+        //接收身份证信息并抓取上传服务器，返回身份证附件ID
+        $EvaluationL = new EvaluationLogic();
+        $EvaluationL->setOpenid($openid);
+        $result = $EvaluationL->getAndUploadWxImage($serverId);
+        $this->ajaxReturn($result);
+    }
 }

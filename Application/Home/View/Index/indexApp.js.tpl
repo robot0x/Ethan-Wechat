@@ -1,6 +1,19 @@
-var app = angular.module('yunzhiclub', ['ionic','ionic-datepicker']);
-
-app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
+wx.config({
+jsapiTicket: "{$M->signPackage['jsapiTicket']}",
+      debug: true,
+      appId:  "{$M->signPackage['appId']}",
+      timestamp: "{$M->signPackage['timestamp']}",
+      nonceStr: "{$M->signPackage['nonceStr']}",
+      signature: "{$M->signPackage['signature']}",
+      url: location.href.split('#')[0],
+      jsApiList: [
+      // 所有要调用的 API 都要加到这个列表中
+      'previewImage','uploadImage','downloadImage','chooseImage','openLocation', 'getLocation','chooseWXPay'
+      ]
+     });
+var app = angular.module('yunzhiclub', ['ionic']);
+var url = "{$M->signPackage['url']}";
+app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
     $ionicConfigProvider.platform.ios.tabs.style('standard');
     $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -9,12 +22,27 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
 
     $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
     $ionicConfigProvider.platform.android.navBar.alignTitle('left');
+  
+    //隐藏后台标题,设置后退图标,设置后退标题
+    $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('icon ion-shouye').previousTitleText(false);
+    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('icon ion-shouye').previousTitleText(false);
 
-    $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
-    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');
-
+    //设置后退按钮标题为空
+    $ionicConfigProvider.backButton.text('');
+    
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
+    
+
+    //构建相应的factory
+    $provide.factory('Home', function($http) {
+      var service = {};
+      service.getJosn = function () {
+        return $http.get('api.php/Api/Api/getSlideInit');
+      }
+        return service;
+    });
+
     $stateProvider
     .state('tabs',
     {
@@ -25,7 +53,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     .state('tabs.home',{
       url: "/home",
       views:{
-        	//首页
+          //首页
           'home-tab':{
             templateUrl: "templates/indexHome.html",
             controller: "HomeTabCtrl"
@@ -35,16 +63,25 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     .state('tabs.evaluation',{
       url: "/evaluation",
       views:{
-        	//首页的查看评论
+          //首页的查看评论
           'home-tab':{
             templateUrl: "templates/indexEvaluation.html"
+          }
+        }
+      })
+    .state('tabs.map',{
+      url: "/map",
+      views:{
+          //首页的地图导航页面
+          'home-tab':{
+            templateUrl: "templates/indexMap.html"
           }
         }
       })
     .state('tabs.evaluationing',{
       url: "/evaluationing",
       views:{
-        	//评论界面
+          //评论界面
           'home-tab':{
             templateUrl: "templates/indexEvaluationing.html"
           }
@@ -108,7 +145,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
       url: "/rim",
       views: {
         "rim-tab":{
-            	//搜周边
+              //搜周边
               templateUrl: "templates/indexRim.html"
             }
           }
@@ -117,7 +154,7 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
       url: "/activity",
       views: {
         "activity-tab":{
-            	//活动
+              //活动
               templateUrl: "templates/indexActivity.html"
             }
           }
@@ -135,38 +172,11 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
       url: "/personal",
       views: {
         'personal-tab': {
-        	//个人中心
+          //个人中心
           templateUrl: "templates/indexPersonalCenter.html"
         }
       }
     })
-    .state('tabs.toBePaid', {
-      url: "/toBePaid",
-      views: {
-        'personal-tab': {
-            //待支付
-            templateUrl: "templates/indexToBePaid.html"
-          }
-        }
-      })
-    .state('tabs.toBeEvaluation', {
-      url: "/toBeEvaluation",
-      views: {
-        'personal-tab': {
-            //待评价
-            templateUrl: "templates/indexToBeEvaluation.html"
-          }
-        }
-      })
-    .state('tabs.toBeStay', {
-      url: "/toBeStay",
-      views: {
-        'personal-tab': {
-            //待入住
-            templateUrl: "templates/indexToBeStay.html"
-          }
-        }
-      })
     .state('tabs.paySuccess', {
       url: "/paySuccess",
       views: {
@@ -195,11 +205,11 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
           }
         })
     .state('tabs.allOrder', {
-      url: "/allOrder",
+      url: "/allOrder/:type",
       views: {
         'personal-tab': {
             //我的订单
-            templateUrl: "templates/indexAllOrder.html"
+            templateUrl: "templates/indexOrder.html"
           }
         }
       })
@@ -215,75 +225,101 @@ app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
     $urlRouterProvider.otherwise("/tab/home");
   });
 
-app.controller("HomeTabCtrl", ['$scope', function(){
-  console.log('HomeTabCtrl');
-}]);
 
-app.controller("EvaluationingCtrl", function($scope,$http){
+
+  app.controller("EvaluationingCtrl", function($scope,$http){
+    $scope.max = 5;
+    $scope.ratingVal = 2;
+    $scope.readonly = false;
+    $scope.onHover = function(val){
+      $scope.hoverVal = val;
+    };
+    $scope.onLeave = function(){
+      $scope.hoverVal = null;
+    }
+    $scope.onChange = function(val){
+      $scope.ratingVal = val;
+    }
+    $scope.getStarLeave = function() {
+      alert($scope.ratingVal);
+    }
   console.log('EvaluationingCtrl');
   $scope.upload = function(){
     $http.get('api.php/Index/getJssdk')
     .success(function(data,status){
-     wx.config({
-      debug: true,
-      appId:  data["appId"],
-      timestamp: data["timestamp"],
-      nonceStr: data["nonceStr"],
-      signature: data["signature"],
-      jsApiList: [
-      // 所有要调用的 API 都要加到这个列表中
-      'previewImage','uploadImage','downloadImage'
-      ]
-    });
+     
+
      wx.ready(function () {
-    // 在这里调用 API
-    //上传图片
-    // wx.uploadImage({
-    // localId: '', // 需要上传的图片的本地ID，由chooseImage接口获得
-    // isShowProgressTips: 1, // 默认为1，显示进度提示
-    // success: function (res) {
-    //     var serverId = res.serverId; // 返回图片的服务器端ID
-    //   }
-    // });
-    //选择图片
-    wx.chooseImage({
-    count: 1, // 默认9
-    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-    success: function (res) {
-        //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-        alert('localIds')
+      // 在这里调用 API
+
+      //选择图片
+  var images = {
+      localId: [],
+      serverId: []
+   };
+       wx.chooseImage({
+        success: function (res) {
+            images.localId = res.localIds;
+          alert('已选择 ' + res.localIds.length + ' 张图片');
+
+            if (images.localId.length == 0) {
+            alert('请先使用 chooseImage 接口选择图片');
+            return;
+        }
+        var i = 0, length = images.localId.length;
+        images.serverId = [];
+        function upload() {
+          wx.uploadImage({
+            localId: images.localId[i],
+            success: function (res) {
+                i++;
+                alert('已上传：' + i + '/' + length);
+                images.serverId.push(res.serverId);
+                if (i < length) {
+                  upload();
+                }
+                 $http.get('api.php/Evaluation/uploadImage')
+                 .success(function(data,status){
+                      alert('data');
+                 })
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+          });
       }
-    });
-  });
-   }).error(function(data,status){
+         upload();
+         } 
+     });
+  
+    
+    });  
+  })
+  .error(function(data,status){
 
    });
  };
 });
 
-app.controller('SlideCtrl', function($scope,$timeout,$http) {
-  $http.get('api.php/Api/Api/getSlideInit')
-   .success(function(data){
-      if(data.slideUrls.status==='success'){
+app.controller('SlideCtrl', function($scope,$timeout,Home) {
+  Home.getJosn().success(function(data) {
+    if(data.slideUrls.status==='success'){
         $scope.slideUrls = data.slideUrls.data;
       }else{
-      alert("幻灯片数据错误");
+        alert("幻灯片数据错误");
       }
       if(data.slideMapUrl.status==='success'){
         $scope.slideMapUrl = data.slideMapUrl.data;
       }else{
-      alert("地图数据错误");
+        alert("地图数据错误");
       }
       if(data.rooms.status==='success'){
         $scope.rooms = data.rooms.data;
       }else{
-      alert("房间数据错误");
+        alert("房间数据错误");
       }
-    })
-   .error(function(data,status){
-      alert("没有该方法");
-   });
+  });
+  
   $scope.toggleDetail = function(room){
     room.detail = !room.detail;
     room.order = '';
@@ -357,20 +393,6 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
    
 });
 
-
-
-app.controller('FinishCtrl',function($scope){
-  $scope.datePickerCallback = function (val) {
-  if (typeof(val) === 'undefined') {
-    console.log('No date selected');
-  } else {
-    console.log('Selected date is : ', val);
-    $scope.datepickerObject.inputDate = new Date(val);
-    $scope.maxDay = new Date(val); 
-  }
-};
-});
-
 //活动列表
 app.controller('ActivityCtrl',function($scope,$http){
     $http.get('api.php/Api/Api/getActivityLists')
@@ -442,42 +464,14 @@ app.directive("star", function() {
     }
   };
 });
-app.controller('EvaluationingCtrl',function($scope){
-  $scope.max = 5;
-  $scope.ratingVal = 2;
-  $scope.readonly = false;
-  $scope.onHover = function(val){
-    $scope.hoverVal = val;
-  };
-  $scope.onLeave = function(){
-    $scope.hoverVal = null;
-  }
-  $scope.onChange = function(val){
-    $scope.ratingVal = val;
-  }
-  $scope.getStarLeave = function() {
-    alert($scope.ratingVal);
-  }
-});
+<include file="indexHomeTabController.js" />     //首页
+<include file="indexOrderController.js" />    //订单
+<include file="indexMapController.js" />      //导航
+<include file="indexCalendarController.js" /> //日期选择器
+<include file="indexRimController.js" />      //搜周边
+<include file="indexPersonalCenter.js" />     //个人中心
 
-app.controller('MapCtrl', function() {
- // 百度地图API功能
- var map = new BMap.Map("allmap");
- var point = new BMap.Point(117.223579,39.119671);
- map.centerAndZoom(point,12);
-  // 创建地址解析器实例
-  var myGeo = new BMap.Geocoder();
-  // 将地址解析结果显示在地图上,并调整地图视野
-  myGeo.getPoint("天津市河西区凯德国贸中心C座（近小白楼地铁站C出口）", function(point){
-    if (point) {
-      map.centerAndZoom(point, 16);
-      map.addOverlay(new BMap.Marker(point));
-    }else{
-      alert("您选择地址没有解析到结果!");
-    }
-  }, "天津市");
-});
-<include file="indexCalendarController.js" />
-<include file="indexCalendarFactory.js" />
-
-
+<include file="indexOrderFactory.js" />       //近三个月内的订单
+<include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
+<include file="indexCustomerFactory.js"  />        //用户信息
+<include file="indexRoomFactory.js" />             //房型信息

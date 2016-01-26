@@ -634,7 +634,7 @@ function get_user_token($code)
 
 // 获取当前用户的OpenId
 function get_openid($openid = NULL) {
-//        return 'oZuoxt8tnEUUf6YPBG-mNPYjoKQA';
+        return 'oZuoxt8tnEUUf6YPBG-mNPYjoKQA';
     $openid = session ('openid');
         $openidTime = session('openidTime');
         if($openid != false && $openidTime!=false && (time()-$openidTime < 60))
@@ -926,14 +926,15 @@ function change_key_by_key1_key2($arr,$key1,$key2)
 /*
  * 改变数据组KEY的值
  */
-function change_key($arr,$key)
+function change_key(&$arr,$key = "id")
 {
     $arrRes = array();
     foreach($arr as $k => $v)
     {
         $arrRes[$v[$key]] = $v;
     }
-    return $arrRes;
+    $arr = $arrRes;
+    unset($arrRes);
 }
 
 /**

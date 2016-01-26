@@ -92,4 +92,29 @@ class OrderLogic extends OrderModel
 		return $this;
 	}
 
+	/**
+	 * 获取某个用户近三个月的订单信息
+	 * @return lists [description]
+	 */
+	public function getListsByCustomerId($customerId)
+	{
+		$customerId = (string)trim($customerId);
+		if (strlen($customerId) !== 28)
+		{
+			$this->setError("用户ID的长度不符合要求");
+			return false;
+		}
+
+		$time = time() - 90*24*60*60;
+		$map = array();
+		$map['customer_id'] = $customerId;
+		$map['order_time'] = array('EGT', $time);
+		if (!$lists = $this->getAllLists(array(), $map))
+		{
+			$this->setError("OrderLogic Error: getListsByCustomerId has errors.Msg:" . $this->getError());
+			return false;
+		}
+
+		return $lists;
+	}
 }

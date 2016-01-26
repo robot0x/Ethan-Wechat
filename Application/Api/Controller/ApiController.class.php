@@ -33,16 +33,26 @@ class ApiController extends Controller
 		//取房间信息
 		$SlideRoom = new RoomController();
 		$slideRoomLists = $SlideRoom->getRooms();
-		//room增加一个字段detail=‘false’
+		//room增加一个字段detail = false;
 		foreach ($slideRoomLists['data'] as $key => $value) {
 			$slideRoomLists['data'][$key]['detail'] = false;
 			$slideRoomLists['data'][$key]['order'] = '#/tab/confirmOrder';
 		}
 
+		//取酒店详细信息
+		$Introduction = new IntroductionController();
+		$introduction = $Introduction->getHotalIntroduction();
+
+		//取活动信息
+		$Activity = new ActivityController();
+		$activitys = $Activity->getActivitys();
+
 		//拼接数组
 		$data['slideUrls'] = $slideUrls;
 		$data['slideMapUrl'] = $slideMapUrl;
 		$data['rooms'] = $slideRoomLists;
+		$data['introduction'] = $introduction;
+		$data['activitys'] = $activitys;
 
 		$this->ajaxReturn($data);
 	}
@@ -53,8 +63,7 @@ class ApiController extends Controller
 	 */ 
 	public function getHotelIntroductionAction()
 	{
-		$Introduction = new IntroductionController();
-		$introduction = $Introduction->getHotalIntroduction();
+		
 
 		$this->ajaxReturn($introduction);
 	}
@@ -92,8 +101,7 @@ class ApiController extends Controller
 	 */
 	public function getActivityListsAction()
 	{
-		$Activity = new ActivityController();
-		$activitys = $Activity->getActivitys();
+		
 		$this->ajaxReturn($activitys);
 
 	}
