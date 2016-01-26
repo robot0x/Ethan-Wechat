@@ -13,8 +13,6 @@ class WxPayController extends ApiController
      */
     public function orderPayAction()
     {   
-        $return = array();
-
         $openId = I('get.open_id');
         if ($openId == "")
         {
@@ -27,7 +25,7 @@ class WxPayController extends ApiController
         {
             $return['status'] = "error";
             $return['message'] = "can not fetch openid";
-            return $return;
+            return json_encode($return);
         }
 
         //取订单信息,查看是否可支付.
@@ -48,7 +46,8 @@ class WxPayController extends ApiController
         dump($UnifiedOrderL);
 
         $order = ApiLogic::unifiedOrder($UnifiedOrderL);
-        dump($order);
-
+        $return['status'] = "success";
+        $return['data'] = $order;
+        return json_encode($return);
     }
 }
