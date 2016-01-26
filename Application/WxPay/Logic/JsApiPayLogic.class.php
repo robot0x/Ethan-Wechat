@@ -106,15 +106,16 @@ class JsApiPayLogic extends Controller
         {
             E("参数错误");
         }
-        $jsapi = new WxPayJsApiPay();
+        $jsapi = new WxPayJsApiPayLogic();
         $jsapi->SetAppid($UnifiedOrderResult["appid"]);
         $timeStamp = time();
         $jsapi->SetTimeStamp("$timeStamp");
-        $jsapi->SetNonceStr(WxPayApi::getNonceStr());
+        $jsapi->SetNonceStr(ApiLogic::getNonceStr());
         $jsapi->SetPackage("prepay_id=" . $UnifiedOrderResult['prepay_id']);
         $jsapi->SetSignType("MD5");
         $jsapi->SetPaySign($jsapi->MakeSign());
-        $parameters = json_encode($jsapi->GetValues());
+        // $parameters = json_encode($jsapi->GetValues());
+        $parameters = $jsapi->GetValues();
         return $parameters;
     }
     

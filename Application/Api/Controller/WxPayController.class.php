@@ -1,7 +1,7 @@
 <?php
 namespace Api\Controller;
 
-use WxPay\Logic\JsApiLogic;             //H5页面调用API接口
+use WxPay\Logic\JsApiPayLogic;             //H5页面调用API接口
 use WxPay\Logic\ApiLogic;               //微支付api统一接口
 use WxPay\Logic\UnifiedOrderLogic;      //统一下单
 
@@ -43,11 +43,16 @@ class WxPayController extends ApiController
         $UnifiedOrderL->SetTrade_type("JSAPI");
         $UnifiedOrderL->SetOpenid($openId);
         
-        dump($UnifiedOrderL);
+        // dump($UnifiedOrderL);
 
         $order = ApiLogic::unifiedOrder($UnifiedOrderL);
+
+        $JsApiPayL = new JsApiPayLogic();
+        $jsApiParameters = $JsApiPayL->GetJsApiParameters($order);
+    
         $return['status'] = "success";
-        $return['data'] = $order;
-        return json_encode($return);
+        $return['data'] = $jsApiParameters;
+        // dump($order);
+        echo json_encode($return);
     }
 }
