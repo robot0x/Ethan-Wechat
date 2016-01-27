@@ -45,6 +45,7 @@ app.controller('indexPayController',function($http, $scope, $ionicPopup, $stateP
                     $scope.$apply(function(){
                         $scope.message = "支付失败";
                     });
+                    window.location.href = "__ROOT__/index.php";
                     return false;
                 }
             }
