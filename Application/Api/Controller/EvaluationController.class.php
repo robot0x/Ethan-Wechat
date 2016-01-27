@@ -64,4 +64,3 @@ class EvaluationController extends ApiController
         $this->ajaxReturn($result);
     }
 }
-}

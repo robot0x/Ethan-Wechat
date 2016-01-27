@@ -54,7 +54,7 @@ class WxPayDataBase
 		if(!is_array($this->values) 
 			|| count($this->values) <= 0)
 		{
-    		throw new WxPayException("数组数据异常！");
+    		E("数组数据异常！");
     	}
     	
     	$xml = "<xml>";
@@ -78,7 +78,7 @@ class WxPayDataBase
 	public function FromXml($xml)
 	{	
 		if(!$xml){
-			throw new WxPayException("xml数据异常！");
+			E("xml数据异常！");
 		}
         //将XML转为array
         //禁止引用外部xml实体
@@ -147,14 +147,14 @@ class WxPayResults extends WxPayDataBase
 	{
 		//fix异常
 		if(!$this->IsSignSet()){
-			throw new WxPayException("签名错误！");
+			E("签名错误！");
 		}
 		
 		$sign = $this->MakeSign();
 		if($this->GetSign() == $sign){
 			return true;
 		}
-		throw new WxPayException("签名错误！");
+		E("签名错误！");
 	}
 	
 	/**

@@ -10,7 +10,6 @@
   <!-- ionic/angularjs js -->
   <script src="__LIB__/ionic/js/ionic.bundle.js"></script>
   <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-  <script src="__JS__/ionic-datepicker.bundle.min.js"></script>
 
   <!-- your app's js -->
   <script src="{:U('indexAppJs')}"></script>
@@ -42,11 +41,9 @@
 <include file="indexActivity" />
 <include file="indexActivityDetails" />
 <include file="indexPersonalCenter" />
-<include file="indexToBePaid" />
-<include file="indexToBeStay" />
-<include file="indexToBeEvaluation" />
 <include file="indexIntegral" />
-<include file="indexAllOrder" />
+<!--订单-->
+<include file="indexOrder" />
 <include file="indexPaySuccess" />
 <include file="indexPayError" />
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=U7N6PIKHKGEKgXmi5wqNfItn"></script>
