@@ -111,7 +111,8 @@ class OrderLogic extends OrderModel
 		$map = array();
 		$map['customer_id'] = $customerId;
 		$map['order_time'] = array('EGT', $time);
-		if (!$lists = $this->getAllLists(array(), $map))
+		$lists = $this->getAllLists(array(), $map);
+		if ($lists === false)
 		{
 			$this->setError("OrderLogic Error: getListsByCustomerId has errors.Msg:" . $this->getError());
 			return false;
