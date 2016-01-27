@@ -6,8 +6,9 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home){
 	$scope.total 		= 0;						//初始化，共几晚
 	var beginIndex 		= -1;						//开始日期
 	var endIndex		= -1;						//结束日期
-	var beginTime       = '';                       //用于get传值
-	var end_time        = '';                       //用于get传值
+	var beginTime       = Calendar.beginDate;       //用于get传值
+	var end_time        = Calendar.endDate;         //用于get传值
+	var total           = Calendar.total;
 	//记录当前月份
 	var index = 0;
 	var monthLength = $scope.calendar.data.length;
@@ -149,7 +150,7 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home){
 
 	$scope.upDateCalendar = function() {
 
-		$http.get('api.php/Api/Api/getNewRooms',{params:{begin_time:beginTime,end_time:endTime}})
+		$http.get('api.php/Api/Api/getNewRooms',{params:{begin_time:beginTime,end_time:endTime,total:total}})
 	   .success(function(data){
 			if (data.status ==='success') {
 				Home.getJosn().success(function(oldData) {
@@ -161,6 +162,6 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home){
 				});
 			}
 	    });
-	   $location.path('/tab/home');
+	   // $location.path('/tab/home');
 	}
  });

@@ -1,5 +1,5 @@
 <script id="templates/indexConfirmOrder.html" type="text/ng-template">
-<ion-view view-title="订单填写">
+<ion-view view-title="订单填写" ng-controller='ConfirmOrderCtrl'>
 	<ion-content class="ion-content">
 		<div class="">
       <h4 class="tittle">预付须知：</h4>
