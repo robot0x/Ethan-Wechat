@@ -1,7 +1,11 @@
-app.controller('indexPayController',function($http, $scope, $ionicPopup, $stateParams){
+app.controller('indexPayController',function($http, $scope, $timeout, $ionicPopup, $stateParams){
     var orderId = $stateParams.orderid;
     var params;
+    $scope.waitTime = 10;   //等待时间
     $scope.message = "正在支付";
+    $scope.paying = 1;
+    $scope.fail = 1;
+    $scope.success = 1;
     var jsApiCall = function(){
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest',
@@ -16,7 +20,6 @@ app.controller('indexPayController',function($http, $scope, $ionicPopup, $stateP
                     $scope.$apply(function(){
                         $scope.message = "支付失败";
                     });
-                    return false;
                 }
                 else if (res.result_code == 'SUCCESS')
                 {
@@ -45,11 +48,25 @@ app.controller('indexPayController',function($http, $scope, $ionicPopup, $stateP
                     $scope.$apply(function(){
                         $scope.message = "支付失败";
                     });
-                    window.location.href = "__ROOT__/index.php";
-                    return false;
                 }
+
+                onTimeOut();
             }
         );
+    };
+
+    //倒计时，并进行页面的跳转
+    var onTimeOut = function(){
+        $scope.waitTime--;
+        if (!$scope.waitTime)
+        {
+            window.location.href = "__ROOT__/index.php";
+            return;
+        }
+        else
+        {
+            $timeout(onTimeOut,1000);
+        }
     };
     var pay = function(){
         $http.get('__ROOT__/api.php/WxPay/orderPay',{params:{id: orderId}})
