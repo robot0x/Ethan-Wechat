@@ -105,15 +105,6 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
             }
           }
         })
-    .state('tabs.paySuccess1',{
-      url: "/paySuccess1",
-      views:{
-            //支付成功
-            'home-tab':{
-              templateUrl: "templates/indexPaySuccess.html"
-            }
-          }
-        })
     .state('tabs.date',{
       url: "/date",
       views:{
@@ -177,15 +168,10 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
         }
       }
     })
-    .state('tabs.paySuccess', {
-      url: "/paySuccess",
-      views: {
-        'personal-tab': {
-            //支付成功
-            templateUrl: "templates/indexPaySuccess.html"
-          }
-        }
-      })
+    .state('pay', {
+        url: "/pay/:orderid",
+        templateUrl: "templates/indexPay.html"
+        })
     .state('tabs.evaluationing1', {
       url: "/evaluationing1",
       views: {
@@ -478,6 +464,7 @@ app.directive("star", function() {
 <include file="indexMapController.js" />      //导航
 <include file="indexCalendarController.js" /> //日期选择器
 <include file="indexRimController.js" />      //搜周边
+<include file="indexPayController.js" />      //支付
 <include file="indexPersonalCenter.js" />     //个人中心
 
 <include file="indexOrderFactory.js" />       //近三个月内的订单

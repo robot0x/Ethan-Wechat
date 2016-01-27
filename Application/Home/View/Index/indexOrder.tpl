@@ -7,7 +7,7 @@
                 <h2>价格：￥99.9</h2>
                 <h2>介绍:大床房</h2>
                 <h2>入住时间:2015.11.23</h2>
-                <button ng-click="pay(order)" ng-if="order.toBePaid">立即支付</button>
+                <a class="" ui-sref="pay({orderid:order.id})" ng-if="order.toBePaid">立即支付</a>
                 <button ng-if="order.toBeEvaluation">评价赢积分</button>
             </div>
         </div>      

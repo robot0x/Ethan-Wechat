@@ -151,9 +151,9 @@ class SaleLogic extends SaleModel
 	}
 
 	/**
-	 * 获取在指定日期范围内的所有的房间信息
-	 * @param  string $beginTime 2015-12-21
-	 * @param  sting $endTime   2016-2-3
+	 * 获取在指定日期范围内的所有的房间信息,包括剩余间数
+	 * @param  string $beginTime 2015-12-21或时间戳
+	 * @param  sting $endTime   2016-2-3或时间戳
 	 * @return lists            
 	 */
 	public function getReminingListsInRange($beginTime = null, $endTime = null)
@@ -173,8 +173,14 @@ class SaleLogic extends SaleModel
 		$rooms 		= $RoomL->getLists();
 
 		//取预订信息
-		$beginTime 	= date_to_int($beginTime);
-		$endTime	= date_to_int($endTime);
+		if (!(int)$beginTime)
+		{
+			$beginTime 	= date_to_int($beginTime);
+		}
+		if (!(int)$endTime)
+		{
+			$endTime	= date_to_int($endTime);
+		}
 		$OrderL 	= new OrderLogic();
 		$orders 	= group_by_key($OrderL->getAllOrderedListsInDateRange($beginTime, $endTime), "room_id");
 

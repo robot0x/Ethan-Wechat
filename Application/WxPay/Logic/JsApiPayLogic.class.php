@@ -54,8 +54,11 @@ class JsApiPayLogic extends Controller
         //通过code获得openid
         if (!isset($_GET['code'])){
             //触发微信返回code码.由于我们现在是单页面程序,所以,不需要query做为参数
+            //PHP_SELF与REQUEST_URI的区别是。
+            //PHP_SELF返回的是实际执行的index.php
+            //REQUEST_URI返回的是URL中锚点以前的字符串
             // $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
-            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
+            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
             $url = $this->__CreateOauthUrlForCode($baseUrl);
 
             //调用模板进行跳转,目的是为了转存cooker.
