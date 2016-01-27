@@ -94,4 +94,16 @@ class ApiController extends Controller
 		$roomLists = $Room->getRooms();
 		$this->ajaxReturn($roomLists);
 	}
+
+	/**
+	 * 取填写订单的信息
+	 * xulinjie
+	 * @return 
+	 */
+	public function getConfirmOrderAction()
+	{
+		$Room = new RoomController();
+		$roomLists = $Room->getRooms();
+		$this->ajaxReturn($roomLists);
+	}
 }

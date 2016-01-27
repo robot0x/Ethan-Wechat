@@ -500,7 +500,15 @@ app.directive("star", function() {
  
 app.controller('ConfirmOrderCtrl',function($scope,RoomFactory){
   $scope.roomId = RoomFactory.getVal().roomId;
+  var roomId = $scope.roomId;
   console.log($scope.roomId);
+    $http.get('api.php/Api/Api/getConfirmOrder',{params:{roomId:roomId}})
+     .success(function(data,status){
+      
+      })
+     .error(function(data,status){
+        
+     });
 });
 
 <include file="indexRoomFactory.js"  />        //房间信息
