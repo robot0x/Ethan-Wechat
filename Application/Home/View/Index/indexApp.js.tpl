@@ -54,6 +54,7 @@ app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$i
       })
     .state('tabs.home',{
       url: "/home",
+      cache:"false",
       views:{
           //首页
           'home-tab':{
@@ -134,7 +135,7 @@ app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$i
           }
         })
     .state('tabs.confirmOrder',{
-      url: "/confirmOrder/:roomId",
+      url: "/confirmOrder",
       views:{
             //填写订单
             'home-tab':{
@@ -243,6 +244,14 @@ app.run(function($rootScope, $ionicLoading) {
       }
         return service;
     });
+
+    app.factory('RoomFactory', function() {
+      var jsonVal = {roomId:''};
+      return {
+        getVal : function() {return jsonVal;},
+        setVal : function(json) {jsonVal.roomId = json;}
+      }
+  });
   app.controller("EvaluationingCtrl", function($scope,$http){
     $scope.max = 5;
     $scope.ratingVal = 2;
@@ -316,7 +325,7 @@ app.run(function($rootScope, $ionicLoading) {
  };
 });
 
-app.controller('HomeTabCtrl', function($scope,$timeout,Home,Calendar) {
+app.controller('HomeTabCtrl', function($scope,$timeout,Home,Calendar,RoomFactory) {
   $scope.beginDate = Calendar.beginDate;
   $scope.endDate = Calendar.endDate;
   console.log($scope.beginDate);
@@ -339,11 +348,14 @@ app.controller('HomeTabCtrl', function($scope,$timeout,Home,Calendar) {
         alert("房间数据错误");
       }
   });
+  $scope.setRoomId = function(room) {
+   RoomFactory.setVal(room.id);
+  }
   $scope.toggleDetail = function(room){
     room.detail = !room.detail;
     room.order = '';
     $timeout(function(){
-     room.order = '#/tab/confirmOrder'+room.id;
+     room.order = '#/tab/confirmOrder';
     },100);
   }
 });
@@ -485,8 +497,10 @@ app.directive("star", function() {
   };
 });
 
-app.controller('ConfirmOrderCtrl',function($scope,$routeParams){
-  console.log($routeParams.roomId);
+ 
+app.controller('ConfirmOrderCtrl',function($scope,RoomFactory){
+  $scope.roomId = RoomFactory.getVal().roomId;
+  console.log($scope.roomId);
 });
 
 <include file="indexRoomFactory.js"  />        //房间信息
