@@ -50,7 +50,7 @@ class WxPayController extends ApiController
         $totalPrice = $order['price'] * $order['count'];
         
         //商品描述
-        $body   = '房型:' . $order["_room"]["title"] . '*' . $order['count'] . '间。';
+        $body   = '洛克酒店:' . $order["_room"]["title"] . '*' . $order['count'] . '间。';
 
         //商品详情
         $attach = '入住日期:'

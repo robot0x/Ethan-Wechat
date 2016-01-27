@@ -1,6 +1,7 @@
 app.controller('indexPayController',function($http, $scope, $timeout, $ionicPopup, $stateParams){
     var orderId = $stateParams.orderid;
     var params;
+    $scope.isButtonOk   = 0; //确定按钮
     $scope.waitTime = 10;   //等待时间
     $scope.message = "正在支付";
     $scope.paying = 1;
@@ -11,46 +12,44 @@ app.controller('indexPayController',function($http, $scope, $timeout, $ionicPopu
             'getBrandWCPayRequest',
             params,
             function(res){
-                if (res.return_code == "FAIL")
+                console.log(res);
+                if (res.errMsg !== undefined)
                 {
                     $ionicPopup.alert({
-                        title: '系统错误:',
-                        template: res.return_msg,
+                        title: '支付失败',
+                        template: '原因:'+res.errMsg,
+                    });
+                    return;
+                }
+
+                if (res.err_msg === undefined)
+                {
+                    $ionicPopup.alert({
+                        title: '支付失败',
+                        template: '接收到的数据类型未识别',
+                    });
+                    return;
+                }
+
+                alert(res.err_msg);
+                if (res.err_msg !== "get_brand_wcpay_request:ok")
+                {
+                    $ionicPopup.alert({
+                        title: '支付失败',
+                        template: '用户取消支付，或支付未成功完成',
                     });
                     $scope.$apply(function(){
                         $scope.message = "支付失败";
                     });
                 }
-                else if (res.result_code == 'SUCCESS')
+                else
                 {
                     $scope.$apply(function(){
                         $scope.message = "支付成功";
                     });
                 }
-                else
-                {
-                    //用户如果未提义，则返回的将是undeifined
-                    if (res.err_code !== undefined)
-                    {
-                        $ionicPopup.alert({
-                            title: '支付失败:'+res.err_code,
-                            template: '原因:'+res.err_code_des,
-                        });  
-                    }
-                    else
-                    {
-                        $ionicPopup.alert({
-                            title: '支付失败:',
-                            template: '支付被用户取消',
-                        }); 
-                    }
-                      
-                    $scope.$apply(function(){
-                        $scope.message = "支付失败";
-                    });
-                }
 
-                onTimeOut();
+                onTimeOut();//倒计时
             }
         );
     };
@@ -60,7 +59,9 @@ app.controller('indexPayController',function($http, $scope, $timeout, $ionicPopu
         $scope.waitTime--;
         if (!$scope.waitTime)
         {
-            window.location.href = "__ROOT__/index.php";
+            $scope.$apply(function(){
+                $scope.isButtonOk = 1;
+            });
             return;
         }
         else

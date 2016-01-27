@@ -24,6 +24,7 @@ class IndexController extends HomeController {
         //将当前URL缓存，用于API进行签名时调用
         JssdkLogic::sessionUrl();
         
+
         $this->display();
     }
 

@@ -12,6 +12,7 @@ jsapiTicket: "{$M->signPackage['jsapiTicket']}",
       ]
      });
 var app = angular.module('yunzhiclub', ['ionic']);
+var openId = "{$M->openId}";
 var url = "{$M->signPackage['url']}";
 app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
