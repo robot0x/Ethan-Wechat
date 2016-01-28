@@ -14,7 +14,7 @@ jsapiTicket: "{$M->signPackage['jsapiTicket']}",
 var app = angular.module('yunzhiclub', ['ionic']);
 var openId = "{$M->openId}";
 var url = "{$M->signPackage['url']}";
-app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProvider){
+app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
     $ionicConfigProvider.platform.ios.tabs.style('standard');
     $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -33,31 +33,33 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
     
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
-    
 
-    //构建相应的factory
-    $provide.factory('Home', function($http) {
-      var service = {};
-      service.getJosn = function () {
-        return $http.get('api.php/Api/Api/getSlideInit');
+    $httpProvider.interceptors.push(function($rootScope) {
+    return {
+      request: function(config) {
+        $rootScope.$broadcast('loading:show')
+        return config
+      },
+      response: function(response) {
+        $rootScope.$broadcast('loading:hide')
+        return response
       }
-        return service;
-    });
+    }
+  });
 
     $stateProvider
-    .state('tabs',
-    {
+    .state('tabs',{
       url: "/tab",
       abstract: true,
       templateUrl: "templates/indexTabs.html"
-    })
+      })
     .state('tabs.home',{
       url: "/home",
+      cache:"false",
       views:{
           //首页
           'home-tab':{
-            templateUrl: "templates/indexHome.html",
-            controller: "HomeTabCtrl"
+            templateUrl: "templates/indexHome.html"
           }
         }
       })
@@ -212,8 +214,35 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
     $urlRouterProvider.otherwise("/tab/home");
   });
 
+<<<<<<< HEAD
 
+=======
+app.run(function($rootScope, $ionicLoading) {
+  $rootScope.$on('loading:show', function() {
+    $ionicLoading.show({template: 'foo'})
+  })
+>>>>>>> api
 
+  $rootScope.$on('loading:hide', function() {
+    $ionicLoading.hide()
+  })
+})
+   //构建相应的factory
+    app.factory('Home', function($http) {
+      var service = {};
+      service.getJosn = function () {
+        return $http.get('api.php/Api/Api/getSlideInit');
+      }
+        return service;
+    });
+
+    app.factory('RoomFactory', function() {
+      var jsonVal = {roomId:''};
+      return {
+        getVal : function() {return jsonVal;},
+        setVal : function(json) {jsonVal.roomId = json;}
+      }
+  });
   app.controller("EvaluationingCtrl", function($scope,$http){
     $scope.max = 5;
     $scope.ratingVal = 2;
@@ -283,15 +312,14 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
     });  
   })
   .error(function(data,status){
-
    });
  };
 });
 
-
-app.controller('SlideCtrl', function($scope,$timeout,Home,Calendar) {
+app.controller('HomeTabCtrl', function($scope,$timeout,Home,Calendar,RoomFactory) {
   $scope.beginDate = Calendar.beginDate;
   $scope.endDate = Calendar.endDate;
+  console.log($scope.beginDate);
   console.log($scope.endDate);
   $scope.total = Calendar.total;
   Home.getJosn().success(function(data) {
@@ -311,7 +339,9 @@ app.controller('SlideCtrl', function($scope,$timeout,Home,Calendar) {
         alert("房间数据错误");
       }
   });
-  
+  $scope.setRoomId = function(room) {
+   RoomFactory.setVal(room.id);
+  }
   $scope.toggleDetail = function(room){
     room.detail = !room.detail;
     room.order = '';
@@ -319,10 +349,7 @@ app.controller('SlideCtrl', function($scope,$timeout,Home,Calendar) {
      room.order = '#/tab/confirmOrder';
     },100);
   }
-   
- 
 });
-
 
 app.controller('IntroductionCtrl', function($scope,Home) {
   
@@ -460,8 +487,30 @@ app.directive("star", function() {
     }
   };
 });
+<<<<<<< HEAD
 <include file="indexHomeTabController.js" />     //首页
 <include file="indexOrderController.js" />    //订单
+=======
+
+ 
+app.controller('ConfirmOrderCtrl',function($scope,$http,RoomFactory){
+  $scope.roomId = RoomFactory.getVal().roomId;
+  var roomId = $scope.roomId;
+  console.log($scope.roomId);
+    $http.get('api.php/Api/Api/getConfirmOrder',{params:{roomId:roomId}})
+     .success(function(data,status){
+      if (data.status === 'success') {
+        $scope.room = data.data;
+      }
+      else{
+        alert('数据错误');
+      }
+      });
+});
+
+<include file="indexRoomFactory.js"  />        //房间信息
+<include file="customerFactory.js"  />        //用户信息
+>>>>>>> api
 <include file="indexMapController.js" />      //导航
 <include file="indexCalendarController.js" /> //日期选择器
 <include file="indexRimController.js" />      //搜周边
