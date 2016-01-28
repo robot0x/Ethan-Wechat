@@ -37,15 +37,14 @@ return array(
     
     //微信公众号设置 
     'TOKEN'                 => 'yunzhi',                                    // TOKEN
-    'APPID'                 => 'wx67a290d19255a9b6', 
-    'APPID'                 => 'wx53bf06122618f768', 
+    'APPID'                 => 'wxc92a0067c6338cbf', 
      
     'MCHID'                 => '1284542901',// MCHID：商户号（必须配置，开户邮件中可查看）
     'KEY'                   => 'e10adc3949ba59abbe56e057f20f883e',//KEY：商户支付密钥，参考开户邮件设置（必须配置，登录商户平台自行设置） * 设置地址：https://pay.weixin.qq.com/index.php/account/api_cert
      
      // * APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置， 登录公众平台，进入开发者中心可设置），
      // * 获取地址：https://mp.weixin.qq.com/advanced/advanced?action=dev&t=advanced/dev&token=2005451881&lang=zh_CN
-    'APPSECRET'             => 'c1c300ea63649dba1cedd8b400a2f377',
+    'APPSECRET'             => 'bb721eba1ceb506c78f46aa9451e2104',
 
     //=======【证书路径设置】=====================================
     /**

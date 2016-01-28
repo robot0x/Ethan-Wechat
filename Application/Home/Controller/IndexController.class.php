@@ -14,10 +14,10 @@ class IndexController extends HomeController {
      */
     public function indexAction(){
         //①、获取用户openid并seesion
-        $JsApiPayL = new JsApiPayLogic();
-        $JsApiPayL->sessionOpenid();
+        // $JsApiPayL = new JsApiPayLogic();
+        // $JsApiPayL->sessionOpenid();
 
-        JssdkLogic::sessionUrl();
+        // JssdkLogic::sessionUrl();
 
         $this->display();
     }
@@ -29,7 +29,7 @@ class IndexController extends HomeController {
     public function indexAppJsAction()
     {
     	$M = new indexModel();
-        $M->setOpenId(session("openId"));
+        //$M->setOpenId(session("openId"));
     	$this->assign("M", $M);
 
     	$this->display("indexApp.js");
