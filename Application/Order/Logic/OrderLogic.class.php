@@ -158,7 +158,7 @@ class OrderLogic extends OrderModel
 		$RoomL = new RoomLogic();
 		if (!$room = $RoomL->getListById($order['room_id']))
 		{
-			$this->setError("OrderL::checkOrderCanBePayById Error:" . $RoomL->getError());
+			$this->setError("OrderL::checkOrderCanBePayById Error: 相关的房型数据取出错误，该原因可能是房型被冻结或被删除" . $RoomL->getError());
 			return false;
 		}
 		if ($room['status'] == '1')
