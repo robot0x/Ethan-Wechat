@@ -189,4 +189,11 @@ class OrderLogic extends OrderModel
 		return $order;
 	}
 
+	public function setIsPayById($id)
+	{
+		$data['id'] = $id;
+		$data['is_pay'] = 1;
+		$this->saveList($data);
+		return;
+	}
 }

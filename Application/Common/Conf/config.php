@@ -74,7 +74,7 @@ return array(
      * 上报等级，0.关闭上报; 1.仅错误出错上报; 2.全量上报
      * @var int
      */
-    'REPORT_LEVENL'         => 1,
+    'REPORT_LEVENL'         => 0,
 
     
 

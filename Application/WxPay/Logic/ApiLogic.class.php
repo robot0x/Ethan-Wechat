@@ -91,7 +91,7 @@ class ApiLogic
 		
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
-		$result = WxPayResults::Init($response);
+		$result = ResultsLogic::Init($response);
 		self::reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
 		return $result;
@@ -331,6 +331,7 @@ class ApiLogic
 		} if(!$inputObj->IsResult_codeSet()) {
 			E("业务结果，缺少必填参数result_code！");
 		} if(!$inputObj->IsUser_ipSet()) {
+			dump($inputObj);
 			E("访问接口IP，缺少必填参数user_ip！");
 		} if(!$inputObj->IsExecute_time_Set()) {
 			E("接口耗时，缺少必填参数execute_time_！");
@@ -514,8 +515,9 @@ class ApiLogic
 		
 		try{
 			self::report($objInput);
-		} catch (WxPayException $e){
-			//不做任何处理
+		} catch (\Think\Exception $e){
+			echo $e->getMessage();
+			return false;
 		}
 	}
 

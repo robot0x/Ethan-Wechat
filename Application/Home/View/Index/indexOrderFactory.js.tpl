@@ -54,7 +54,18 @@ app.factory('OrderFactory' ,function(){
     };
 
     init(datas);//进行数据的初始化，来将几类订单进行分类.该项操作也可以在PHP中计算好后，传给前台。
-
+    
+    var orderIsPay = function(id){
+        datas.forEach(function(Element, index){
+            if (Element.id == id)
+            {
+                Element.toBeStay = 1;
+                Element.toBePaid = 0;
+                toBePaid.pop(Element);
+                toBeStay.push(Element);
+            }
+        });
+    };
     return {
         title: function(type){
             return titles[type];        //页面标题
@@ -63,5 +74,6 @@ app.factory('OrderFactory' ,function(){
         toBePaid: toBePaid,             //待支付
         toBeEvaluation: toBeEvaluation, //待评论
         toBeStay: toBeStay,             //待入住
+        orderIsPay:orderIsPay,          //改变订单状态为已支付
     };
 });

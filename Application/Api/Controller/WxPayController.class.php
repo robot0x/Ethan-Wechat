@@ -5,6 +5,8 @@ use WxPay\Logic\JsApiPayLogic;             //H5页面调用API接口
 use WxPay\Logic\ApiLogic;               //微支付api统一接口
 use WxPay\Logic\UnifiedOrderLogic;      //统一下单
 use Order\Logic\OrderLogic;             //订单
+use WxPay\Logic\OrderQueryLogic;        //订单查询
+use Trade\Logic\TradeLogic;                 //支付信息
 
 class WxPayController extends ApiController
 {   
@@ -62,6 +64,12 @@ class WxPayController extends ApiController
         //订单编号,用日期+N+订单号的形式，方便接收后进行查找相关订单ID
         $tradeNo = C("MCHID").date("YmdHis").'N'.$order['id'];
 
+        //存新订单号
+        $order['trade_no'] = $tradeNo;
+        $OrderL->saveList($order);
+
+        //TODO:异步通知地址，回头再写
+
         //todo:可支付状态，则锁定房型。需要增加ordering字段
         //取预支付信息
         $UnifiedOrderL = new UnifiedOrderLogic();
@@ -87,5 +95,60 @@ class WxPayController extends ApiController
         $return['data'] = $jsApiParameters;
         // dump($order);
         echo json_encode($return);
+    }  
+
+
+    /**
+     * 查询订单
+     * @param  [type] $transactionId [description]
+     * @return [type]                [description]
+     */
+    public function queryOrderAction()
+    {
+        $return = array();
+        $orderId = I('get.order_id');
+        $OrderL = new OrderLogic();
+        if (!$order = $OrderL->getListById($orderId))
+        {
+            $return['status'] = "error";
+            $return['message'] = "获取订单信息时发生出错";
+            echo json_encode($return);
+            return;
+        }
+        
+        $trade_no = $order['trade_no'];
+
+        //查询订单,设置trade_no
+        $OrderQueryL = new OrderQueryLogic();
+        $OrderQueryL->SetOut_trade_no($trade_no);
+
+        //进行订单查询
+        $result = ApiLogic::orderQuery($OrderQueryL);
+
+        //将支付信息写入数据库
+        $TradeL = new TradeLogic();
+        if (!$TradeL->getListByOutTradeId($result['out_trade_no']))
+        {
+            preg_match('/N(.*)/',$result['out_trade_no'],$matched);
+            $result['order_id'] = $matched[1];
+            $TradeL->saveList($result);
+        }
+
+        //根据返回状态，判断返回值
+        $return = array();
+        if(array_key_exists("return_code", $result)
+            && array_key_exists("result_code", $result)
+            && $result["return_code"] == "SUCCESS"
+            && $result["result_code"] == "SUCCESS")
+        {
+            $return['status'] = "success";
+        }
+        else
+        {
+            $return['status'] = 'error';
+            $return['message'] = $result['err_code_des'];  
+        }
+        echo json_encode($return);
+        return;
     }
 }

@@ -1,4 +1,4 @@
-app.controller('indexPayController',function($http, $scope, $timeout, $ionicPopup, $stateParams){
+app.controller('indexPayController',function($location, $http, $scope, $timeout, $ionicPopup, $stateParams, OrderFactory){
     var orderId = $stateParams.orderid;
     var params;
     $scope.isButtonOk   = 0; //确定按钮
@@ -19,36 +19,57 @@ app.controller('indexPayController',function($http, $scope, $timeout, $ionicPopu
                         title: '支付失败',
                         template: '原因:'+res.errMsg,
                     });
-                    return;
                 }
-
-                if (res.err_msg === undefined)
+                else if (res.err_msg === undefined)
                 {
                     $ionicPopup.alert({
                         title: '支付失败',
                         template: '接收到的数据类型未识别',
                     });
-                    return;
+                    // return;
                 }
-
-                alert(res.err_msg);
-                if (res.err_msg !== "get_brand_wcpay_request:ok")
+                else 
                 {
-                    $ionicPopup.alert({
-                        title: '支付失败',
-                        template: '用户取消支付，或支付未成功完成',
-                    });
-                    $scope.$apply(function(){
-                        $scope.message = "支付失败";
-                    });
-                }
-                else
-                {
-                    $scope.$apply(function(){
-                        $scope.message = "支付成功";
-                    });
-                }
+                    if (res.err_msg !== "get_brand_wcpay_request:ok")
+                    {
+                        $ionicPopup.alert({
+                            title: '支付失败',
+                            template: '用户取消支付，或支付未成功完成',
+                        });
+                        $scope.$apply(function(){
+                            $scope.message = "支付失败";
+                        });
+                    }
+                    else
+                    {
+                        $http.get("__ROOT__/api.php/WxPay/queryOrder", {params:{order_id: orderId}})
+                        .success(function(res, status, header, config){
+                            if (res.status == "success")
+                            {
+                                $scope.$apply(function(){
+                                    $scope.message = "支付成功";
+                                });
 
+                                //更新订单信息
+                                OrderFactory.orderIsPay(orderId);
+                            }
+                            else
+                            {   
+                                $ionicPopup.alert({
+                                    title: '支付失败',
+                                    template: '未能正确接收支付订单信息',
+                                });
+                                $scope.$apply(function(){
+                                    $scope.message = "支付失败";
+                                });
+                            }
+                        })
+                        .error(function(res, status, header, config){
+                            alert("网络错误,请稍后重试");
+                        });
+                        //重写factory
+                    }
+                }   
                 onTimeOut();//倒计时
             }
         );
@@ -62,6 +83,7 @@ app.controller('indexPayController',function($http, $scope, $timeout, $ionicPopu
             $scope.$apply(function(){
                 $scope.isButtonOk = 1;
             });
+            $location.path('/tab/home');
             return;
         }
         else
