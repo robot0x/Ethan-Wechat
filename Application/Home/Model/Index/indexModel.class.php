@@ -5,14 +5,16 @@
  * update:2016-01-24
  */
 namespace Home\Model\Index;
-use Jssdk\Logic\JssdkLogic;	//jssdk
-use Order\Logic\OrderLogic;	//订单
-use Room\Logic\RoomLogic;	//房型
+use Jssdk\Logic\JssdkLogic;		//jssdk
+use Order\Logic\OrderLogic;		//订单
+use Room\Logic\RoomLogic;		//房型
+use Config\Logic\ConfigLogic;	//系统配置
 
 class indexModel
 {
-	public $openId = "";			//用户openid
+	public $openId 		= "";		//用户openid
 	public $signPackage = array();	//JSSDK签名
+	public $orderInfo 	= array();	//订单的附加信息
 
 	public function setOpenId($openId)
 	{
@@ -25,6 +27,7 @@ class indexModel
 		$appSecret = C("APPSECRET");
 		$jssdk = new JssdkLogic($appId, $appSecret);
 		$this->signPackage = $jssdk->getSignPackage();
+		$this->getOrderInfo();
 	}
 	
 	//获取JSSDK
@@ -191,5 +194,44 @@ class indexModel
 		$rooms = $RoomL->getAllListsWithTimeRange($beginDate, $endDate);
 
 		return json_encode($rooms);
+	}
+
+	public function getOrderInfo()
+	{
+		$data = array("customerName"=>"", 	//客户姓名
+			"customerPhone"=>"",			//客户电话
+			"notice"=>"", 					//住店需知
+			"prompt"=>"", 					//温馨提示
+			"credit"=>"100");				//积分兑换
+		$openId = session("openId");
+		// $openId = "oha4Tt4g9_IZ047Q_WxrR4FWQsYA";
+
+		//取最后一条订单信息
+		$OrderL = new OrderLogic();
+		if ($order = $OrderL->getLastListByOpenId($openId))
+		{
+			$data['customer_name'] = $order['customer_name'];
+			$data['customer_phone'] = $order['customer_phone'];
+		}
+
+		//取配置信息
+		$ConfigL = new ConfigLogic();
+		if ($notice = $ConfigL->getValueByName("notice"))
+		{
+			$data['notice'] = $notice['value'];
+		}
+
+		if ($prompt = $ConfigL->getValueByName("prompt"))
+		{
+			$data['prompt'] = $prompt['value'];
+		}
+
+		if ($credit = $ConfigL->getValueByName("credit"))
+		{
+			$data['credit'] = $credit['value'];
+		}
+
+		$this->orderInfo = $data;
+		return $data;
 	}
 }

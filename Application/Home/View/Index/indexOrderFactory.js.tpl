@@ -67,11 +67,11 @@ app.factory('OrderFactory' ,function(){
         });
     };
     var orderInfo = {};
-    orderInfo.customerName  = '测试姓名';
-    orderInfo.customerPhone = '13920618851';
-    orderInfo.notice = '这里是住店需知';
-    orderInfo.prompt = '这里是温馨提示';
-    orderInfo.credit = '100';
+    orderInfo.customerName  = '{:$M->orderInfo["customer_name"]}';
+    orderInfo.customerPhone = '{:$M->orderInfo["customer_phone"]}';
+    orderInfo.notice = '{:$M->orderInfo["notice"]}';
+    orderInfo.prompt = '{:$M->orderInfo["prompt"]}';
+    orderInfo.credit = '{:$M->orderInfo["credit"]}';
     return {
         title: function(type){
             return titles[type];        //页面标题

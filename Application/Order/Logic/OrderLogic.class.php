@@ -189,11 +189,29 @@ class OrderLogic extends OrderModel
 		return $order;
 	}
 
+	/**
+	 * 将订单状态变更为已支付
+	 * panjie
+	 * @param int 订单编号 
+	 */
 	public function setIsPayById($id)
 	{
 		$data['id'] = $id;
 		$data['is_pay'] = 1;
 		$this->saveList($data);
 		return;
+	}
+
+	/**
+	 * 获取用户最后一条支付信息
+	 * @param  string $openId 用户openid
+	 * @return list         
+	 */
+	public function getLastListByOpenId($openId)
+	{
+		$map['customer_id'] = $openId;
+		$orderBy = "id desc";
+		$data = $this->where($map)->order($orderBy)->find();
+		return $data;
 	}
 }
