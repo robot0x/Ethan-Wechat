@@ -15,13 +15,6 @@ var url = "{$M->signPackage['url']}";
         return service;
     });
 
-    app.factory('RoomFactory', function() {
-      var jsonVal = {roomId:''};
-      return {
-        getVal : function() {return jsonVal;},
-        setVal : function(json) {jsonVal.roomId = json;}
-      }
-  });
   app.controller("EvaluationingCtrl", function($scope,$http){
     $scope.max = 5;
     $scope.ratingVal = 2;
