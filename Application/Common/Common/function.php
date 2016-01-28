@@ -1133,3 +1133,13 @@ function union_array($arr1,$arr2){
     $res_array = array_merge($arr2,$intersection);
     return $res_array;
 }
+
+/**
+ * 验证字符串是否日期
+ */
+
+function validateDate($date, $format = 'Y-m-d')
+{
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
+}
