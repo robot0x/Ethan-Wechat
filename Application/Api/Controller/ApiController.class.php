@@ -11,11 +11,16 @@ use Api\Controller\ActivityController;
 
 class ApiController extends Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		session(array('expire'=>360000));//设置过期时间100小时
+	}
 	/*
 	
 	 */
 	public function getJssdkAction(){
-		$jssdk = new JssdkController("wxc92a0067c6338cbf", "bb721eba1ceb506c78f46aa9451e2104");
+		$jssdk = new JssdkController("wxd12416985ed20895", "66c26a7146a9978c59c18dc28147d65b");
 		$signPackage = $jssdk->GetSignPackage();
 		var_dump($signPackage);
 	}	

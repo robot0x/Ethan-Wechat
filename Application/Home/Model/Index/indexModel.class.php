@@ -168,7 +168,7 @@ class indexModel
 	public function getOrders()
 	{
 		$OrderL = new OrderLogic();
-		return json_encode($OrderL->getListsByCustomerId("oha4Tt-t_DrHCdmtvCkHOLO8ygTg")) ;
+		return json_encode($OrderL->getListsByCustomerId(session("openId"))) ;
 	}
 
 	/**

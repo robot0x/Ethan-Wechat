@@ -12,6 +12,7 @@ jsapiTicket: "{$M->signPackage['jsapiTicket']}",
       ]
      });
 var app = angular.module('yunzhiclub', ['ionic']);
+var openId = "{$M->openId}";
 var url = "{$M->signPackage['url']}";
 app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
@@ -105,15 +106,6 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
             }
           }
         })
-    .state('tabs.paySuccess1',{
-      url: "/paySuccess1",
-      views:{
-            //支付成功
-            'home-tab':{
-              templateUrl: "templates/indexPaySuccess.html"
-            }
-          }
-        })
     .state('tabs.date',{
       url: "/date",
       views:{
@@ -177,15 +169,10 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
         }
       }
     })
-    .state('tabs.paySuccess', {
-      url: "/paySuccess",
-      views: {
-        'personal-tab': {
-            //支付成功
-            templateUrl: "templates/indexPaySuccess.html"
-          }
-        }
-      })
+    .state('pay', {
+        url: "/pay/:orderid",
+        templateUrl: "templates/indexPay.html"
+        })
     .state('tabs.evaluationing1', {
       url: "/evaluationing1",
       views: {
@@ -301,7 +288,12 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
  };
 });
 
-app.controller('SlideCtrl', function($scope,$timeout,Home) {
+
+app.controller('SlideCtrl', function($scope,$timeout,Home,Calendar) {
+  $scope.beginDate = Calendar.beginDate;
+  $scope.endDate = Calendar.endDate;
+  console.log($scope.endDate);
+  $scope.total = Calendar.total;
   Home.getJosn().success(function(data) {
     if(data.slideUrls.status==='success'){
         $scope.slideUrls = data.slideUrls.data;
@@ -331,18 +323,22 @@ app.controller('SlideCtrl', function($scope,$timeout,Home) {
  
 });
 
-app.controller('IntroductionCtrl', function($scope,$http) {
-    $http.get('api.php/Api/Api/getHotelIntroduction')
-     .success(function(data,status){
-      if(data.status==='success'){
-        $scope.introduction = data.data;
+
+app.controller('IntroductionCtrl', function($scope,Home) {
+  
+     Home.getJosn().success(function(data){
+      if(data.introduction.status==='success'){
+        $scope.introduction = data.introduction.data;
       }else{
       alert("幻灯片数据错误");
       }
-      })
-     .error(function(data,status){
-      
+      });
      });
+app.filter('trustHtml', function ($sce) {
+  return function (input) {
+      return $sce.trustAsHtml(input);
+  }
+
 });
 
 app.controller('EvaluationCtrl', function($scope,$http,$q) {
@@ -394,11 +390,11 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 //活动列表
-app.controller('ActivityCtrl',function($scope,$http){
-    $http.get('api.php/Api/Api/getActivityLists')
-     .success(function(data,status){
-      if(data.status == 'success'){
-        $scope.activitys = data.data;
+app.controller('ActivityCtrl',function($scope,Home){
+    
+     Home.getJosn().success(function(data){
+      if(data.activitys.status == 'success'){
+        $scope.activitys = data.activitys.data;
       }
       else{
         alert('数据不正确');
@@ -469,6 +465,7 @@ app.directive("star", function() {
 <include file="indexMapController.js" />      //导航
 <include file="indexCalendarController.js" /> //日期选择器
 <include file="indexRimController.js" />      //搜周边
+<include file="indexPayController.js" />      //支付
 <include file="indexPersonalCenter.js" />     //个人中心
 
 <include file="indexOrderFactory.js" />       //近三个月内的订单
