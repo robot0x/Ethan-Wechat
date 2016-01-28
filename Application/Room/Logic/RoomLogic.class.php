@@ -24,6 +24,18 @@ class RoomLogic extends RoomModel
 	}
 
 	/**
+	 * 取一条房间信息
+	 * xulinjie
+	 * @return 
+	 */
+	public function getListById($id)
+	{
+		$map['id'] = $id;
+		$data = $this->where($map)->find();
+		return $data;
+	}
+
+	/**
 	 * 删除记录：执行的实为冻结操作
 	 * @param  int $id 要冻结的ID
 	 * @return 成功 返回操作id 失败:false

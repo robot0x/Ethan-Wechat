@@ -498,17 +498,19 @@ app.directive("star", function() {
 });
 
  
-app.controller('ConfirmOrderCtrl',function($scope,RoomFactory){
+app.controller('ConfirmOrderCtrl',function($scope,$http,RoomFactory){
   $scope.roomId = RoomFactory.getVal().roomId;
   var roomId = $scope.roomId;
   console.log($scope.roomId);
     $http.get('api.php/Api/Api/getConfirmOrder',{params:{roomId:roomId}})
      .success(function(data,status){
-      
-      })
-     .error(function(data,status){
-        
-     });
+      if (data.status === 'success') {
+        $scope.room = data.data;
+      }
+      else{
+        alert('数据错误');
+      }
+      });
 });
 
 <include file="indexRoomFactory.js"  />        //房间信息

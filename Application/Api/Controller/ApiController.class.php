@@ -103,7 +103,7 @@ class ApiController extends Controller
 	public function getConfirmOrderAction()
 	{
 		$Room = new RoomController();
-		$roomLists = $Room->getRooms();
-		$this->ajaxReturn($roomLists);
+		$roomList = $Room->getRoomList();
+		$this->ajaxReturn($roomList);
 	}
 }

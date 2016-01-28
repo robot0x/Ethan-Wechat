@@ -36,4 +36,21 @@ class RoomController extends ApiController
 
 		return $data;
 	}
+
+	/**
+	 * 获取一条房间信息
+	 * xulinjie
+	 * @return list
+	 */
+	public function getRoomList()
+	{
+		$roomId = I('get.roomId');
+		$RoomL = new RoomLogic();
+		$room = $RoomL->getListById($roomId);
+
+		$data = array("status"=>"success");
+		$data['data'] = $room;
+		
+		return $data;
+	}
 }
