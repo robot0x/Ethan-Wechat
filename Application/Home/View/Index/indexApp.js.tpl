@@ -176,7 +176,6 @@ app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$i
         url: "/pay/:orderid",
         templateUrl: "templates/indexPay.html"
         })
-          })
     .state('tabs.paySuccess', {
       url: "/paySuccess",
       views: {
@@ -228,12 +227,12 @@ app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$i
 app.run(function($rootScope, $ionicLoading) {
   $rootScope.$on('loading:show', function() {
     $ionicLoading.show({template: 'foo'})
-  })
+  });
 
   $rootScope.$on('loading:hide', function() {
     $ionicLoading.hide()
   })
-})
+});
    //构建相应的factory
     app.factory('Home', function($http) {
       var service = {};
