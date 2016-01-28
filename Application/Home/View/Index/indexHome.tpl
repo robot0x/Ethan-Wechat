@@ -1,5 +1,5 @@
 <script id="templates/indexHome.html" type="text/ng-template">
-<ion-view view-title="首页" ng-controller="SlideCtrl">
+<ion-view view-title="首页" ng-controller="HomeTabCtrl">
    <ion-content>
 <!-- 图片轮播 -->
       <ion-slide-box class="slides">
@@ -31,15 +31,15 @@
         <i class="ion-feiji2 col"></i>
         <i class="ion-right col"></i>
       </a>
-    <a class="item item-button-right" href="#/tab/date">
+    <a class="item item-button-right" ng-model='beginDate' ng-model='endDate' href="#/tab/date">
     <i class="ion-rili"></i>
-      12月01日-12月02日
+      {{beginDate}}至{{endDate}}
     <button class="button button-clear">
-      <h3 class="positive">共1晚></h3>
+      <h3 class="positive">共{{total}}晚></h3>
     </button>
     </a>
     <div ng-repeat='room in rooms'>
-  <a class="item" href='{{room.order}}'>
+  <a class="item" href='{{room.order}}' ng-click='setRoomId(room)'>
     <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">

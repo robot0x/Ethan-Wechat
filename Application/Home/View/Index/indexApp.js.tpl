@@ -12,8 +12,9 @@ jsapiTicket: "{$M->signPackage['jsapiTicket']}",
       ]
      });
 var app = angular.module('yunzhiclub', ['ionic']);
+var openId = "{$M->openId}";
 var url = "{$M->signPackage['url']}";
-app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProvider){
+app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$ionicConfigProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
     $ionicConfigProvider.platform.ios.tabs.style('standard');
     $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -32,31 +33,33 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
     
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
-    
 
-    //构建相应的factory
-    $provide.factory('Home', function($http) {
-      var service = {};
-      service.getJosn = function () {
-        return $http.get('api.php/Api/Api/getSlideInit');
+    $httpProvider.interceptors.push(function($rootScope) {
+    return {
+      request: function(config) {
+        $rootScope.$broadcast('loading:show')
+        return config
+      },
+      response: function(response) {
+        $rootScope.$broadcast('loading:hide')
+        return response
       }
-        return service;
-    });
+    }
+  });
 
     $stateProvider
-    .state('tabs',
-    {
+    .state('tabs',{
       url: "/tab",
       abstract: true,
       templateUrl: "templates/indexTabs.html"
-    })
+      })
     .state('tabs.home',{
       url: "/home",
+      cache:"false",
       views:{
           //首页
           'home-tab':{
-            templateUrl: "templates/indexHome.html",
-            controller: "HomeTabCtrl"
+            templateUrl: "templates/indexHome.html"
           }
         }
       })
@@ -102,15 +105,6 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
             //我的积分
             'home-tab':{
               templateUrl: "templates/indexIntegral.html"
-            }
-          }
-        })
-    .state('tabs.paySuccess1',{
-      url: "/paySuccess1",
-      views:{
-            //支付成功
-            'home-tab':{
-              templateUrl: "templates/indexPaySuccess.html"
             }
           }
         })
@@ -176,7 +170,12 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
           templateUrl: "templates/indexPersonalCenter.html"
         }
       }
+
     })
+    .state('pay', {
+        url: "/pay/:orderid",
+        templateUrl: "templates/indexPay.html"
+        })
     .state('tabs.paySuccess', {
       url: "/paySuccess",
       views: {
@@ -225,8 +224,31 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
     $urlRouterProvider.otherwise("/tab/home");
   });
 
+app.run(function($rootScope, $ionicLoading) {
+  $rootScope.$on('loading:show', function() {
+    $ionicLoading.show({template: 'foo'})
+  });
 
+  $rootScope.$on('loading:hide', function() {
+    $ionicLoading.hide()
+  })
+});
+   //构建相应的factory
+    app.factory('Home', function($http) {
+      var service = {};
+      service.getJosn = function () {
+        return $http.get('api.php/Api/Api/getSlideInit');
+      }
+        return service;
+    });
 
+    app.factory('RoomFactory', function() {
+      var jsonVal = {roomId:''};
+      return {
+        getVal : function() {return jsonVal;},
+        setVal : function(json) {jsonVal.roomId = json;}
+      }
+  });
   app.controller("EvaluationingCtrl", function($scope,$http){
     $scope.max = 5;
     $scope.ratingVal = 2;
@@ -296,12 +318,16 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
     });  
   })
   .error(function(data,status){
-
    });
  };
 });
 
-app.controller('SlideCtrl', function($scope,$timeout,Home) {
+app.controller('HomeTabCtrl', function($scope,$timeout,Home,Calendar,RoomFactory) {
+  $scope.beginDate = Calendar.beginDate;
+  $scope.endDate = Calendar.endDate;
+  console.log($scope.beginDate);
+  console.log($scope.endDate);
+  $scope.total = Calendar.total;
   Home.getJosn().success(function(data) {
     if(data.slideUrls.status==='success'){
         $scope.slideUrls = data.slideUrls.data;
@@ -319,7 +345,9 @@ app.controller('SlideCtrl', function($scope,$timeout,Home) {
         alert("房间数据错误");
       }
   });
-  
+  $scope.setRoomId = function(room) {
+   RoomFactory.setVal(room.id);
+  }
   $scope.toggleDetail = function(room){
     room.detail = !room.detail;
     room.order = '';
@@ -327,22 +355,23 @@ app.controller('SlideCtrl', function($scope,$timeout,Home) {
      room.order = '#/tab/confirmOrder';
     },100);
   }
-   
- 
 });
 
-app.controller('IntroductionCtrl', function($scope,$http) {
-    $http.get('api.php/Api/Api/getHotelIntroduction')
-     .success(function(data,status){
-      if(data.status==='success'){
-        $scope.introduction = data.data;
+app.controller('IntroductionCtrl', function($scope,Home) {
+  
+     Home.getJosn().success(function(data){
+      if(data.introduction.status==='success'){
+        $scope.introduction = data.introduction.data;
       }else{
       alert("幻灯片数据错误");
       }
-      })
-     .error(function(data,status){
-      
+      });
      });
+app.filter('trustHtml', function ($sce) {
+  return function (input) {
+      return $sce.trustAsHtml(input);
+  }
+
 });
 
 app.controller('EvaluationCtrl', function($scope,$http,$q) {
@@ -394,11 +423,11 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 //活动列表
-app.controller('ActivityCtrl',function($scope,$http){
-    $http.get('api.php/Api/Api/getActivityLists')
-     .success(function(data,status){
-      if(data.status == 'success'){
-        $scope.activitys = data.data;
+app.controller('ActivityCtrl',function($scope,Home){
+    
+     Home.getJosn().success(function(data){
+      if(data.activitys.status == 'success'){
+        $scope.activitys = data.activitys.data;
       }
       else{
         alert('数据不正确');
@@ -464,14 +493,37 @@ app.directive("star", function() {
     }
   };
 });
+
+app.controller('ConfirmOrderCtrl',function($scope,$http,RoomFactory){
+  $scope.roomId = RoomFactory.getVal().roomId;
+  var roomId = $scope.roomId;
+  console.log($scope.roomId);
+    $http.get('api.php/Api/Api/getConfirmOrder',{params:{roomId:roomId}})
+     .success(function(data,status){
+      if (data.status === 'success') {
+        $scope.room = data.data;
+      }
+      else{
+        alert('数据错误');
+      }
+      });
+});
+
 <include file="indexHomeTabController.js" />     //首页
 <include file="indexOrderController.js" />    //订单
+
+<include file="indexRoomFactory.js"  />        //房间信息
+<include file="customerFactory.js"  />        //用户信息
 <include file="indexMapController.js" />      //导航
 <include file="indexCalendarController.js" /> //日期选择器
 <include file="indexRimController.js" />      //搜周边
+<include file="indexPayController.js" />      //支付
 <include file="indexPersonalCenter.js" />     //个人中心
 
 <include file="indexOrderFactory.js" />       //近三个月内的订单
 <include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
-<include file="indexCustomerFactory.js"  />        //用户信息
-<include file="indexRoomFactory.js" />             //房型信息
+<include file="indexCustomerFactory.js"  />   //用户信息
+<include file="indexRoomFactory.js" />        //房型信息
+
+<include file="indexBaseService.js" />           //基础服务
+<include file="function.js" />                //公共函数

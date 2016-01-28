@@ -168,7 +168,13 @@ class indexModel
 	public function getOrders()
 	{
 		$OrderL = new OrderLogic();
-		return json_encode($OrderL->getListsByCustomerId("oha4Tt-t_DrHCdmtvCkHOLO8ygTg")) ;
+		$orders = $OrderL->getListsByCustomerId(session("openId"));
+		foreach ($orders as $key => $value)
+		{
+			$orders["$key"]['begin_time_str'] = date("Y-m-d",$value["begin_time"]);
+			$orders["$key"]['end_time_str'] = date("Y-m-d",$value["end_time"]);
+		}
+		return json_encode($orders) ;
 	}
 
 	/**

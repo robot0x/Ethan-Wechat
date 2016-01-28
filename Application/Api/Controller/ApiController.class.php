@@ -11,11 +11,16 @@ use Api\Controller\ActivityController;
 
 class ApiController extends Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		session(array('expire'=>360000));//设置过期时间100小时
+	}
 	/*
 	
 	 */
 	public function getJssdkAction(){
-		$jssdk = new JssdkController("wxc92a0067c6338cbf", "bb721eba1ceb506c78f46aa9451e2104");
+		$jssdk = new JssdkController("wxd12416985ed20895", "66c26a7146a9978c59c18dc28147d65b");
 		$signPackage = $jssdk->GetSignPackage();
 		var_dump($signPackage);
 	}	
@@ -56,17 +61,7 @@ class ApiController extends Controller
 
 		$this->ajaxReturn($data);
 	}
-	/**
-	 * 取酒店介绍的信息
-	 * xulinjie
-	 * @return ajaxlist
-	 */ 
-	public function getHotelIntroductionAction()
-	{
-		
 
-		$this->ajaxReturn($introduction);
-	}
 	/**
 	 * 取评价信息
 	 * xulinjie
@@ -93,16 +88,27 @@ class ApiController extends Controller
 		$this->ajaxReturn($evaluations);
 	}
 
+	/**
+	 * 获取新的房间信息
+	 * xulinjie
+	 * @return 
+	 */
+	public function getNewRoomsAction()
+	{
+		$Room = new RoomController();
+		$roomLists = $Room->getRooms();
+		$this->ajaxReturn($roomLists);
+	}
 
 	/**
-	 * 取活动的信息
+	 * 取填写订单的信息
 	 * xulinjie
-	 * @return ajaxlist
+	 * @return 
 	 */
-	public function getActivityListsAction()
+	public function getConfirmOrderAction()
 	{
-		
-		$this->ajaxReturn($activitys);
-
+		$Room = new RoomController();
+		$roomList = $Room->getRoomList();
+		$this->ajaxReturn($roomList);
 	}
 }

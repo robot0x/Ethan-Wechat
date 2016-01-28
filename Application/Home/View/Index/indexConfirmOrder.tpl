@@ -1,15 +1,15 @@
 <script id="templates/indexConfirmOrder.html" type="text/ng-template">
-<ion-view view-title="订单填写">
+<ion-view view-title="订单填写" ng-controller='ConfirmOrderCtrl'>
 	<ion-content class="ion-content">
 		<div class="">
       <h4 class="tittle">预付须知：</h4>
     </div>
     <div class="list">
       <a class="item item-thumbnail-left" href="#">
-        <img src="__IMG__/big.jpg">
-            <h2>房型：大床房</h2>
-            <p>价格：365.00</p>
-            <p>介绍：空调/电视/wifi</p>
+        <img ng-src="{{room.url}}">
+            <h2>{{room.title}}</h2>
+            <p>{{room.price}}</p>
+            <p>{{room.description}}</p>
             <p>入住时间：2015.11.25</p>
       </a>
       <label class="item item-input">

@@ -26,5 +26,8 @@
 			<div class="col">共{{total}}晚</div>
 		</div>
 	</div>
+		<div class="padding">
+        <a ui-sref="tabs.home" ng-click="upDateCalendar()"><button class="button button-block button-positive">确定</button></a>
+      </div>
 </ion-view>
 </script>
