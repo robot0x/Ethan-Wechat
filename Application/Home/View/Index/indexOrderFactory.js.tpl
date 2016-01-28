@@ -66,6 +66,12 @@ app.factory('OrderFactory' ,function(){
             }
         });
     };
+    var orderInfo = {};
+    orderInfo.customerName  = '测试姓名';
+    orderInfo.customerPhone = '13920618851';
+    orderInfo.notice = '这里是住店需知';
+    orderInfo.prompt = '这里是温馨提示';
+    orderInfo.credit = '100';
     return {
         title: function(type){
             return titles[type];        //页面标题
@@ -75,5 +81,6 @@ app.factory('OrderFactory' ,function(){
         toBeEvaluation: toBeEvaluation, //待评论
         toBeStay: toBeStay,             //待入住
         orderIsPay:orderIsPay,          //改变订单状态为已支付
+        orderInfo: orderInfo,           //预订时的信息
     };
 });
