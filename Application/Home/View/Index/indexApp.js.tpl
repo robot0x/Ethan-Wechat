@@ -146,19 +146,8 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
 });
 
 //活动列表
-app.controller('ActivityCtrl',function($scope,Home){
-    
-     Home.getJosn().success(function(data){
-      if(data.activitys.status == 'success'){
-        $scope.activitys = data.activitys.data;
-      }
-      else{
-        alert('数据不正确');
-      }
-      })
-     .error(function(data,status){
-        
-     });
+app.controller('ActivityCtrl',function($scope,ActivityFactory){
+  $scope.activities = ActivityFactory.activities;
 });
 
 app.directive("star", function() {
@@ -227,12 +216,14 @@ app.directive("star", function() {
 <include file="indexRimController.js" />      //搜周边
 <include file="indexPayController.js" />      //支付
 <include file="indexPersonalCenter.js" />     //个人中心
-<include file="indexConfirmOrder.js" />     //订单填写
+<include file="indexConfirmOrder.js" />       //订单填写
+<include file="indexActivityDetailCtrl.js" /> //活动详情
 
 <include file="indexOrderFactory.js" />       //近三个月内的订单
 <include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
 <include file="indexCustomerFactory.js"  />   //用户信息
 <include file="indexRoomFactory.js" />        //房型信息
+<include file="indexActivityFactory.js" />    //活动信息
 
-<include file="indexBaseService.js" />           //基础服务
+<include file="indexBaseService.js" />        //基础服务
 <include file="function.js" />                //公共函数

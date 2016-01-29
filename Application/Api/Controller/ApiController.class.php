@@ -84,31 +84,19 @@ class ApiController extends Controller
 			}
 		}
 
-		
 		$this->ajaxReturn($evaluations);
 	}
 
 	/**
-	 * 获取新的房间信息
+	 * 取活动的详细信息
 	 * xulinjie
 	 * @return 
 	 */
-	public function getNewRoomsAction()
+	public function getActivityDetailAction()
 	{
-		$Room = new RoomController();
-		$roomLists = $Room->getRooms();
-		$this->ajaxReturn($roomLists);
-	}
+		$Activity = new ActivityController();
+		$detail = $Activity->getActivityDetail();
 
-	/**
-	 * 取填写订单的信息
-	 * xulinjie
-	 * @return 
-	 */
-	public function getConfirmOrderAction()
-	{
-		$Room = new RoomController();
-		$roomList = $Room->getRoomList();
-		$this->ajaxReturn($roomList);
+		$this->ajaxReturn($detail);
 	}
 }

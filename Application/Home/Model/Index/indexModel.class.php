@@ -9,12 +9,14 @@ use Jssdk\Logic\JssdkLogic;		//jssdk
 use Order\Logic\OrderLogic;		//订单
 use Room\Logic\RoomLogic;		//房型
 use Config\Logic\ConfigLogic;	//系统配置
+use Activity\Logic\ActivityLogic;//活动
 
 class indexModel
 {
 	public $openId 		= "";		//用户openid
 	public $signPackage = array();	//JSSDK签名
 	public $orderInfo 	= array();	//订单的附加信息
+	public $activeties  = array();  //活动列表信息
 
 	public function setOpenId($openId)
 	{
@@ -28,6 +30,7 @@ class indexModel
 		$jssdk = new JssdkLogic($appId, $appSecret);
 		$this->signPackage = $jssdk->getSignPackage();
 		$this->getOrderInfo();
+		$this->getActivityLists();
 	}
 	
 	//获取JSSDK
@@ -233,5 +236,29 @@ class indexModel
 
 		$this->orderInfo = $data;
 		return $data;
+	}
+
+	/**
+	 * 取活动信息列表
+	 * xulinjie
+	 * @return lists
+	 */
+	public function getActivityLists()
+	{
+		$ActivityL = new ActivityLogic();
+
+		//设置查询条件
+		$maps = array("status"=>"0");
+		$ActivityL->setMaps($maps);
+
+		//设置取回字段
+		$fields = array("id","end_time","title","thumbnails_url");
+		$ActivityL->setBackFields($fields);
+
+		//取LISTS
+		$activeties = $ActivityL->getLists(); 
+
+		//返回值
+		return json_encode($activeties) ;
 	}
 }

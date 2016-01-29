@@ -99,15 +99,10 @@
             }
           }
         })
-    .state("tabs.activityDetail",{
-      url: "/activityDetail",
-      views: {
-        "activity-tab":{
-                //活动详情
-                templateUrl: "templates/indexActivityDetails.html"
-              }
-            }
-          })
+    .state("activityDetail",{
+      url: "/activityDetail/:activityId",
+      templateUrl: "templates/indexActivityDetails.html"
+    })
     .state('tabs.personal', {
       url: "/personal",
       views: {
@@ -120,7 +115,7 @@
     .state('pay', {
         url: "/pay/:orderid",
         templateUrl: "templates/indexPay.html"
-        })
+    })
     .state('tabs.evaluationing1', {
       url: "/evaluationing1",
       views: {
