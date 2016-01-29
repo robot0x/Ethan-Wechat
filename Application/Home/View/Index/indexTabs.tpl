@@ -1,5 +1,5 @@
 <script id="templates/indexTabs.html" type="text/ng-template">
-      <ion-tabs class="tabs-icon-top tabs-stable">
+      <ion-tabs class="tabs-icon-top tabs-stable tabs-color-active-positive">
 
         <ion-tab title="首页" icon="ion-shouye" href="#/tab/home">
           <ion-nav-view name="home-tab"></ion-nav-view>
