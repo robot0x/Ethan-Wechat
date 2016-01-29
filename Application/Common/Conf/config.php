@@ -5,9 +5,9 @@ return array(
 
     'TMPL_TEMPLATE_SUFFIX'  => '.tpl',     // 默认模板文件后缀
     'ACTION_SUFFIX'         => 'Action',//设置ACTION前缀为action
-    'TAGLIB_PRE_LOAD'       => 'Yunzhi,Html',   // 需要额外加载的标签库(须指定标签库名称)，多个以逗号分隔 
+    'TAGLIB_PRE_LOAD'       => 'Yunzhi,Html',   // 需要额外加载的标签库(须指定标签库名称)，多个以逗号分隔
     'DEFAULT_PASSWORD'      => 'mengyunzhi',
-    
+
     /* 数据缓存设置 */
     'DATA_CACHE_TYPE'       =>  'File', // 数据缓存类型
 
@@ -19,13 +19,13 @@ return array(
     'DB_PORT'               =>  '3633',             // 端口
     'DB_PREFIX'             =>  'ethan_',           // 数据库表前缀
 
-    'DB_TYPE'               =>  'mysqli',     // 数据库类型
-    'DB_HOST'               =>  'localhost',    // 服务器地址
-    'DB_NAME'               =>  'ethan_wechat',          // 数据库名
-    'DB_USER'               =>  'root',      // 用户名
-    'DB_PWD'                =>  '',          // 密码
-    'DB_PORT'               =>  '3306',             // 端口
-    'DB_PREFIX'             =>  'ethan_',           // 数据库表前缀
+    // 'DB_TYPE'               =>  'mysqli',     // 数据库类型
+    // 'DB_HOST'               =>  'localhost',    // 服务器地址
+    // 'DB_NAME'               =>  'ethan_wechat',          // 数据库名
+    // 'DB_USER'               =>  'root',      // 用户名
+    // 'DB_PWD'                =>  '',          // 密码
+    // 'DB_PORT'               =>  '3306',             // 端口
+    // 'DB_PREFIX'             =>  'ethan_',           // 数据库表前缀
 
     'URL_MODEL'             =>  1, // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
 
@@ -34,15 +34,15 @@ return array(
     'TOKEN_NAME'            =>    '__hash__',       // 令牌验证的表单隐藏字段名称，默认为__hash__
     'TOKEN_TYPE'            =>    'md5',            //令牌哈希验证规则 默认为MD5
     'TOKEN_RESET'           =>    true,             //令牌验证出错后是否重置令牌 默认为true
-    
-    //微信公众号设置 
+
+    //微信公众号设置
     'TOKEN'                 => 'yunzhi',                                    // TOKEN
-    'APPID'                 => 'wx67a290d19255a9b6', 
-    // 'APPID'                 => 'wx53bf06122618f768', 
-     
+    'APPID'                 => 'wx67a290d19255a9b6',
+    // 'APPID'                 => 'wx53bf06122618f768',
+
     'MCHID'                 => '1284542901',// MCHID：商户号（必须配置，开户邮件中可查看）
     'KEY'                   => 'LKlx1717KDgmc607ws2zht0sk1wml5GO',//KEY：商户支付密钥，参考开户邮件设置（必须配置，登录商户平台自行设置） * 设置地址：https://pay.weixin.qq.com/index.php/account/api_cert
-     
+
      // * APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置， 登录公众平台，进入开发者中心可设置），
      // * 获取地址：https://mp.weixin.qq.com/advanced/advanced?action=dev&t=advanced/dev&token=2005451881&lang=zh_CN
     'APPSECRET'             => '98ce68100bb654ca3d4a6310a30bd12a',
@@ -55,7 +55,7 @@ return array(
      */
     // 'SSLCERT_PATH'          => '../cert/apiclient_cert.pem',
     // 'SSLKEY_PATH'           => '../cert/apiclient_key.pem',
-    
+
     //=======【curl代理设置】===================================
     /**
      * TODO：这里设置代理机器，只有需要代理的时候才设置，不需要代理，请设置为0.0.0.0和0
@@ -65,7 +65,7 @@ return array(
      */
     'CURL_PROXY_HOST'       => "0.0.0.0",       //"10.152.18.220";
     'CURL_PROXY_PORT'       => 0,               //8080;
-    
+
     //=======【上报信息配置】===================================
     /**
      * TODO：接口调用上报等级，默认紧错误上报（注意：上报超时间为【1s】，上报无论成败【永不抛出异常】，
@@ -76,6 +76,6 @@ return array(
      */
     'REPORT_LEVENL'         => 0,
 
-    
+
 
 );
