@@ -1,4 +1,4 @@
-app.factory('OrderFactory' ,function(){
+app.factory('OrderFactory' ,function($ionicPopup,$http){
     var titles = {"all":"全部订单", 
                     "toBeStay":"待入住", 
                     "toBeEvaluation":"待评价",
@@ -66,6 +66,36 @@ app.factory('OrderFactory' ,function(){
             }
         });
     };
+
+    //数据初始化
+    var initDatas = function(){
+        $http.get("__ROOT__/api.php/Order/getRecentListsBySessionOpenId")
+        .success(function(data){
+            if(data.status == "success")
+            {
+                datas = data.data;
+                init(datas);
+            }
+            else
+            {
+                $ionicPopup.alert({
+                    title: '系统错误',
+                    template: '网络错误，请稍后重试',
+                });
+                if (data.message !== undefined)
+                {
+                    console.log(data.message);         
+                }
+            }
+        })
+        .error(function(){
+           $ionicPopup.alert({
+                title: '系统错误',
+                template: '网络错误，请稍后重试',
+            }); 
+        });
+    };
+
     var orderInfo = {};
     orderInfo.customerName  = '{:$M->orderInfo["customer_name"]}';
     orderInfo.customerPhone = '{:$M->orderInfo["customer_phone"]}';
@@ -82,5 +112,6 @@ app.factory('OrderFactory' ,function(){
         toBeStay: toBeStay,             //待入住
         orderIsPay:orderIsPay,          //改变订单状态为已支付
         orderInfo: orderInfo,           //预订时的信息
+        initDatas:initDatas,            //订单初始化
     };
 });

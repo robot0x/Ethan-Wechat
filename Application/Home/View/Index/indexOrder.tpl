@@ -2,7 +2,7 @@
 <ion-view view-title="{{title}}" ng-controller="order">
 <ion-content>
         <div class="list">
-            <div class="item item-thumbnail-left" href="#" ng-repeat="order in orders track by $index">
+            <div class="item item-thumbnail-left" href="#" ng-repeat="order in orders | orderBy:'order_time':true">
                 <img ng-src="{{getFirstUrl(rooms[order.room_id].url)}}">
                 <h2>房型：{{rooms[order.room_id].name}}({{order.count}}间)</h2>
                 <p>单价：{{fenToYuan(order.price)}}元</p>

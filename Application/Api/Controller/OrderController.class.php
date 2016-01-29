@@ -94,4 +94,18 @@ class OrderController extends ApiController
         $return['order_id'] = $orderId;
         echo json_encode($return);
     }
+
+    public function getRecentListsBySessionOpenIdAction()
+    {
+        $OrderL = new OrderLogic();
+        $orders = $OrderL->getListsByCustomerId(session("openId"));
+        foreach ($orders as $key => $value)
+        {
+            $orders["$key"]['begin_time_str'] = date("Y-m-d",$value["begin_time"]);
+            $orders["$key"]['end_time_str'] = date("Y-m-d",$value["end_time"]);
+        }
+        $return = array("status"=>"success");
+        $return['data'] = $orders;
+        echo json_encode($return) ;
+    }
 }

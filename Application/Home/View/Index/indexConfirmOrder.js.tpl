@@ -21,7 +21,7 @@ app.controller('ConfirmOrderCtrl',function($scope,$http,$stateParams,RoomFactory
       $scope.totalPay = (parseInt(price)*parseInt(value)*Calendar.total).fenToYuan();
       $scope.credit = parseInt($scope.totalPay)/parseInt(OrderFactory.orderInfo.credit);
    };
-
+   console.log(OrderFactory);
    $scope.changeName = function(value){
       name = value;
    }

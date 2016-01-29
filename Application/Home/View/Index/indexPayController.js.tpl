@@ -1,17 +1,16 @@
-app.controller('indexPayController',function($location, $http, $scope, $timeout, $ionicPopup, $stateParams, OrderFactory){
+app.controller('indexPayController',function($location, $http, $scope, $timeout, $ionicPopup, $stateParams, OrderFactory, $ionicLoading){
     var orderId = $stateParams.orderid;
     var params;
     $scope.isButtonOk   = 0; //确定按钮
-    $scope.waitTime = 10;   //等待时间
+    $scope.waitTime = 3;   //等待时间
     $scope.message = "正在支付";
     $scope.paying = 1;
     $scope.fail = 1;
     $scope.success = 1;
     var jsApiCall = function(){
         $ionicLoading.show({
-            template: 'Loading...'
+            template: '正在发起支付...'
         });
-
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest',
             params,
@@ -74,6 +73,8 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                         //重写factory
                     }
                 }   
+                // //重新请求订单数据
+                // OrderFactory.initDatas();
                 onTimeOut();//倒计时
             }
         );
@@ -87,7 +88,9 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
             $scope.$apply(function(){
                 $scope.isButtonOk = 1;
             });
-            $location.path('/tab/home');
+
+            //强制刷新
+            window.location.href = "__ROOT__/index.php";
             return;
         }
         else
@@ -114,6 +117,13 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                     document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
                     document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
                 }
+                $ionicPopup.alert({
+                    title: '亲，出错啦!',
+                    template: '未获取到WeixinJSBridge，请退出微信后重试',
+                }); 
+                // //重新请求订
+                // OrderFactory.initDatas();
+                window.location.href = "__ROOT__/index.php";
             }else{
                 jsApiCall();
             }
@@ -126,5 +136,6 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
             return;
         });
     };
-    pay();
+    pay(); 
+    
 });
