@@ -31,7 +31,7 @@
         <i class="ion-feiji2 col"></i>
         <i class="ion-right col"></i>
       </a>
-    <a class="item item-button-right" ng-model='beginDate' ng-model='endDate' href="#/tab/date">
+    <a class="item item-button-right" href="#/tab/date">
     <i class="ion-rili"></i>
       {{beginDate}}至{{endDate}}
     <button class="button button-clear">

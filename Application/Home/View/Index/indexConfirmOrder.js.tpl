@@ -13,13 +13,14 @@ app.controller('ConfirmOrderCtrl',function($scope,$http,$stateParams,RoomFactory
    var phone = $scope.phone = OrderFactory.orderInfo.customerPhone;   //入住人姓名
    $scope.beginTime = Calendar.beginDate;                             //住店日期
    $scope.endTime = Calendar.endDate;                                 //离店日期
-   $scope.repeatSelect = 1;
+   var repeatSelect = $scope.repeatSelect = 1;
    $scope.counts = $scope.room.remaining_count.getArray();
    $scope.totalPay = (price * $scope.repeatSelect * Calendar.total).fenToYuan();
    //将房间数量改变时
     $scope.changValue = function(value){
       $scope.totalPay = (parseInt(price)*parseInt(value)*Calendar.total).fenToYuan();
       $scope.credit = parseInt($scope.totalPay)/parseInt(OrderFactory.orderInfo.credit);
+      repeatSelect = value;
    };
    console.log(OrderFactory);
    $scope.changeName = function(value){
@@ -38,7 +39,7 @@ app.controller('ConfirmOrderCtrl',function($scope,$http,$stateParams,RoomFactory
                   totalDay:Calendar.total,
                   customer_name:name,
                   customer_phone:phone,
-                  count:$scope.repeatSelect};
+                  count:repeatSelect};
      $http.get('api.php/Api/Order/addList',{params:params})
       .success(function(data,status){
          if (data.status ==='success') {

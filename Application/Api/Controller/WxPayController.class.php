@@ -48,8 +48,17 @@ class WxPayController extends ApiController
             echo json_encode($return);
             return;
         }
+        if ($order['end_time'] = $order['begin_time'])
+        {
+            $totalDays = 1;
+        }
+        else
+        {
+            $totalDays = (int)ceil((($order['end_time'] - $order['begin_time']) / 24*60*60));
+        }
+
         //总价(单位为分)
-        $totalPrice = $order['price'] * $order['count'];
+        $totalPrice = $order['price'] * $order['count'] * $totalDays;
         
         //商品描述
         $body   = '洛克酒店:' . $order["_room"]["title"] . '*' . $order['count'] . '间。';

@@ -224,6 +224,7 @@ app.directive("star", function() {
 <include file="indexCustomerFactory.js"  />   //用户信息
 <include file="indexRoomFactory.js" />        //房型信息
 <include file="indexActivityFactory.js" />    //活动信息
+<include file="indexHomeFactory.js" />        //首页数据
 
 <include file="indexBaseService.js" />        //基础服务
 <include file="function.js" />                //公共函数
