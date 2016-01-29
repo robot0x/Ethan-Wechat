@@ -8,11 +8,15 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
     $scope.fail = 1;
     $scope.success = 1;
     var jsApiCall = function(){
+        $ionicLoading.show({
+            template: 'Loading...'
+        });
+
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest',
             params,
             function(res){
-                console.log(res);
+                $ionicLoading.hide();
                 if (res.errMsg !== undefined)
                 {
                     $ionicPopup.alert({
