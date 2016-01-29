@@ -218,21 +218,6 @@ app.directive("star", function() {
 });
 
 
- 
-app.controller('ConfirmOrderCtrl',function($scope,$http,RoomFactory){
-  $scope.roomId = RoomFactory.getVal().roomId;
-  var roomId = $scope.roomId;
-  console.log($scope.roomId);
-    $http.get('api.php/Api/Api/getConfirmOrder',{params:{roomId:roomId}})
-     .success(function(data,status){
-      if (data.status === 'success') {
-        $scope.room = data.data;
-      }
-      else{
-        alert('数据错误');
-      }
-      });
-});
 
 <include file="indexHomeTabController.js" />     //首页
 <include file="indexOrderController.js" />    //订单
@@ -242,6 +227,7 @@ app.controller('ConfirmOrderCtrl',function($scope,$http,RoomFactory){
 <include file="indexRimController.js" />      //搜周边
 <include file="indexPayController.js" />      //支付
 <include file="indexPersonalCenter.js" />     //个人中心
+<include file="indexConfirmOrder.js" />     //订单填写
 
 <include file="indexOrderFactory.js" />       //近三个月内的订单
 <include file="indexCalendarFactory.js" />    //用户选择入住日期Factory

@@ -21,14 +21,12 @@ app.controller('HomeTabCtrl', function($scope,$timeout,Home,Calendar,RoomFactory
         alert("房间数据错误");
       }
   });
-  $scope.setRoomId = function(room) {
-   RoomFactory.setVal(room.id);
-  }
   $scope.toggleDetail = function(room){
     room.detail = !room.detail;
+    var order = room.order;
     room.order = '';
     $timeout(function(){
-     room.order = '#/tab/confirmOrder';
+     room.order = order;
     },100);
   }
 });

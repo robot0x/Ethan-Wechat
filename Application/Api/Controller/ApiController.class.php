@@ -41,7 +41,7 @@ class ApiController extends Controller
 		//room增加一个字段detail = false;
 		foreach ($slideRoomLists['data'] as $key => $value) {
 			$slideRoomLists['data'][$key]['detail'] = false;
-			$slideRoomLists['data'][$key]['order'] = '#/tab/confirmOrder';
+			$slideRoomLists['data'][$key]['order'] = '#/confirmOrder/'.$slideRoomLists['data'][$key]['id'];
 		}
 
 		//取酒店详细信息

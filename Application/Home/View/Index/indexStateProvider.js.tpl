@@ -77,15 +77,10 @@
             }
           }
         })
-    .state('tabs.confirmOrder',{
-      url: "/confirmOrder",
-      views:{
-            //填写订单
-            'home-tab':{
-              templateUrl: "templates/indexConfirmOrder.html"
-            }
-          }
-        })
+    .state('confirmOrder',{
+      url: "/confirmOrder/:roomId",
+      templateUrl: "templates/indexConfirmOrder.html"
+    })
     .state("tabs.rim",{
       url: "/rim",
       views: {
