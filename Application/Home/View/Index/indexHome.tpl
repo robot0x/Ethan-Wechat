@@ -33,9 +33,9 @@
       </a>
     <a class="item item-button-right" href="#/tab/date">
     <i class="ion-rili"></i>
-      12月01日-12月02日
+      {{beginDate}}至{{endDate}}
     <button class="button button-clear">
-      <h3 class="positive">共1晚></h3>
+      <h3 class="positive">共{{total}}晚></h3>
     </button>
     </a>
     <div ng-repeat='room in rooms'>

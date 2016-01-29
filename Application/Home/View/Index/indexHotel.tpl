@@ -49,7 +49,7 @@
         </div>
         <div class="padding">
             <h4 class="basetext">酒店介绍</h4>
-            <p>{{introduction.description}}</p>
+            <p ng-bind-html="introduction.description | trustHtml"></p>
         </div>
     </ion-content>
 </ion-view>

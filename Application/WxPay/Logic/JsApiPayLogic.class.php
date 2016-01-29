@@ -43,6 +43,10 @@ class JsApiPayLogic extends Controller
      */
     public function sessionOpenid()
     {
+        //以下代码，用于不同环境下的测试
+        // session("openId", "oNyIBwTDk49ckDmltA2m3bDJ52kQ");
+        // return;
+        
         //如果存在openId,证明该用户已经认证。
         //直接返回seesion,同时再次seesion一次
         if (session("openId") !== null)
@@ -54,8 +58,11 @@ class JsApiPayLogic extends Controller
         //通过code获得openid
         if (!isset($_GET['code'])){
             //触发微信返回code码.由于我们现在是单页面程序,所以,不需要query做为参数
+            //PHP_SELF与REQUEST_URI的区别是。
+            //PHP_SELF返回的是实际执行的index.php
+            //REQUEST_URI返回的是URL中锚点以前的字符串
             // $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING']);
-            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
+            $baseUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
             $url = $this->__CreateOauthUrlForCode($baseUrl);
 
             //调用模板进行跳转,目的是为了转存cooker.
@@ -106,15 +113,16 @@ class JsApiPayLogic extends Controller
         {
             E("参数错误");
         }
-        $jsapi = new WxPayJsApiPay();
+        $jsapi = new WxPayJsApiPayLogic();
         $jsapi->SetAppid($UnifiedOrderResult["appid"]);
         $timeStamp = time();
         $jsapi->SetTimeStamp("$timeStamp");
-        $jsapi->SetNonceStr(WxPayApi::getNonceStr());
+        $jsapi->SetNonceStr(ApiLogic::getNonceStr());
         $jsapi->SetPackage("prepay_id=" . $UnifiedOrderResult['prepay_id']);
         $jsapi->SetSignType("MD5");
         $jsapi->SetPaySign($jsapi->MakeSign());
-        $parameters = json_encode($jsapi->GetValues());
+        // $parameters = json_encode($jsapi->GetValues());
+        $parameters = $jsapi->GetValues();
         return $parameters;
     }
     
