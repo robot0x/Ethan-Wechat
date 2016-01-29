@@ -66,6 +66,12 @@ app.factory('OrderFactory' ,function(){
             }
         });
     };
+    var orderInfo = {};
+    orderInfo.customerName  = '{:$M->orderInfo["customer_name"]}';
+    orderInfo.customerPhone = '{:$M->orderInfo["customer_phone"]}';
+    orderInfo.notice = '{:$M->orderInfo["notice"]}';
+    orderInfo.prompt = '{:$M->orderInfo["prompt"]}';
+    orderInfo.credit = '{:$M->orderInfo["credit"]}';
     return {
         title: function(type){
             return titles[type];        //页面标题
@@ -75,5 +81,6 @@ app.factory('OrderFactory' ,function(){
         toBeEvaluation: toBeEvaluation, //待评论
         toBeStay: toBeStay,             //待入住
         orderIsPay:orderIsPay,          //改变订单状态为已支付
+        orderInfo: orderInfo,           //预订时的信息
     };
 });

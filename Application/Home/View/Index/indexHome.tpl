@@ -1,5 +1,5 @@
 <script id="templates/indexHome.html" type="text/ng-template">
-<ion-view view-title="首页" ng-controller="SlideCtrl">
+<ion-view view-title="首页" ng-controller="HomeTabCtrl">
    <ion-content>
 <!-- 图片轮播 -->
       <ion-slide-box class="slides">
@@ -31,7 +31,7 @@
         <i class="ion-feiji2 col"></i>
         <i class="ion-right col"></i>
       </a>
-    <a class="item item-button-right" href="#/tab/date">
+    <a class="item item-button-right" ng-model='beginDate' ng-model='endDate' href="#/tab/date">
     <i class="ion-rili"></i>
       {{beginDate}}至{{endDate}}
     <button class="button button-clear">
