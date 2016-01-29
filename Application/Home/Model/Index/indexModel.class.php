@@ -10,6 +10,7 @@ use Order\Logic\OrderLogic;		//订单
 use Room\Logic\RoomLogic;		//房型
 use Config\Logic\ConfigLogic;	//系统配置
 use Activity\Logic\ActivityLogic;//活动
+use SlideShow\Logic\SlideShowLogic;	//幻灯片
 
 class indexModel
 {
@@ -31,6 +32,7 @@ class indexModel
 		$this->signPackage = $jssdk->getSignPackage();
 		$this->getOrderInfo();
 		$this->getActivityLists();
+		$this->home();
 	}
 	
 	//获取JSSDK
@@ -260,5 +262,31 @@ class indexModel
 
 		//返回值
 		return json_encode($activeties) ;
+	}
+	/**
+	 * 取幻灯片
+	 * xulinjie
+	 * @return 
+	 */
+	public function home()
+	{
+		//实例化幻灯片
+		$SlideShowL = new SlideShowLogic();
+		$slideshows = $SlideShowL->getNormalLists();
+
+		//抓取出：存在URL值而且不是首页地图信息的信息，并返回
+		foreach($slideshows as $key => $value)
+		{
+			if ($value['url'] !== '' && $value['is_map'] == '0')
+			{
+				$datas['slideUrls'][] = $value['url'];
+			}
+			if ($value['url'] !== '' && $value['is_map'] == '1')
+			{
+				$datas['slideMapUrl'] = $value['url'];
+				break;
+			}
+		}
+		return json_encode($datas) ;
 	}
 }
