@@ -12,8 +12,8 @@
           添加用户
         </div> -->
           <div class="panel-body">
-            <form class="form-horizontal" name="form" action = "{:U('save')}" method = 'post'>
-              <input type="hidden" name="id" value="{$user.id}"></input>
+            <form class="form-horizontal" name="form" action="{:U('save')}" method='post'>
+              <input type="hidden" name="id" value="{$user.id}"/>
 
               <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">用户名：</label>
@@ -27,7 +27,7 @@
               <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">姓名：</label>
                   <div class="col-sm-4">
-                    <input id="name" name = "name" class="form-control" ng-model="name" ng-disabled="{{edit}}" required/>
+                    <input id="name" name="name" class="form-control" ng-model="name" ng-disabled="{{edit}}" required/>
 
                     <p class="text-danger" ng-show="form.name.$dirty && form.name.$invalid"> <span ng-show="form.name.$error.required">姓名不能为空</span></p>
                   </div>
@@ -53,7 +53,7 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type = "submit" class="btn btn-sm btn-success">
+                  <button type="submit" ng-disabled="form.phonenumber.$invalid" class="btn btn-sm btn-success">
                   <i class="fa fa-check"></i>保存</button>
                 </div>
               </div>

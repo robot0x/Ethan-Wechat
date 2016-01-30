@@ -17,13 +17,13 @@ class IndexController extends HomeController {
      */
     public function indexAction(){
 
+
         //获取用户openid并seesion
         $JsApiPayL = new JsApiPayLogic();
         $JsApiPayL->sessionOpenid();
 
         //将当前URL缓存，用于API进行签名时调用
         JssdkLogic::sessionUrl();
-        
 
         $this->display();
     }
@@ -35,7 +35,7 @@ class IndexController extends HomeController {
     public function indexAppJsAction()
     {
     	$M = new indexModel();
-        $M->setOpenId(session("openId"));
+        //$M->setOpenId(session("openId"));
     	$this->assign("M", $M);
 
     	$this->display("indexApp.js");

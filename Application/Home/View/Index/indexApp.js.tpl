@@ -57,9 +57,10 @@ var url = "{$M->signPackage['url']}";
                 if (i < length) {
                   upload();
                 }
-                 $http.get('api.php/Evaluation/uploadImage')
+                 $http.get('api.php/Evaluation/uploadImage',{params:{openid:'oha4Tt-t_DrHCdmtvCkHOLO8ygTg',serverId:'1237378768e7q8e7r8qwesafdasdfasdfaxss111'}})
                  .success(function(data,status){
-                      alert('data');
+                      //这里的data就是返回的文件名
+                      alert(data);
                  })
             },
             fail: function (res) {

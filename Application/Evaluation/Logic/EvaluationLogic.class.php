@@ -75,8 +75,7 @@ class EvaluationLogic extends EvaluationModel
                 fclose($local_file);
             }
         }
-        $attId = "hello";
-        return $attId;
+        return $fileName;
     }
 	/**
 	 * 冻结、解冻某条记录
