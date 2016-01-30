@@ -3,8 +3,8 @@
 	<ion-content>
 	<div class="list">
 		<a class="item item-avatar" href="#">
-			<img src="__IMG__/1024.jpg">
-			<h3>昵称</h3>
+			<img ng-src="{{headimgurl}}">
+			<h3>{{nickname}}</h3>
 			<p>{{phone}}</p>
 			<p>{{credit}}</p>
 		</a>

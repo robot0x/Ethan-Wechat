@@ -13,6 +13,7 @@ use Activity\Logic\ActivityLogic;//活动
 use SlideShow\Logic\SlideShowLogic;	//幻灯片
 use Introduction\Logic\IntroductionLogic;//酒店介绍
 use Credit\Logic\CreditLogic;       //积分
+use Customer\Logic\CustomerLogic;		//客户
 
 class indexModel
 {
@@ -22,6 +23,7 @@ class indexModel
 	public $activeties   = array();  //活动列表信息
 	public $slideUrls	 = array();	//幻灯片URL
 	public $slideMapUrl  = "";		//首页地图图片
+	public $customer     = array();	//客户信息
 	public $introduction = array(); //酒店介绍
 	public $timeRoom     = array(); //小时房信息
 	public $credit       = array(); //个人总积分
@@ -41,6 +43,7 @@ class indexModel
 		$this->getActivityLists();	   //取活动信息
 		$this->homeInit();			   //首页初始化信息(幻灯片，地图URL)
 		$this->getHotalIntroduction(); //取酒店介绍详情
+		$this->getCustomer();			//取客户信息
 		$this->getTimeRoom();          //取config信息
 	}
 	
@@ -313,6 +316,18 @@ class indexModel
 		$this->introduction = $introduction;
 		return json_encode($introduction) ;
 	}
+
+
+	/**
+	 * 通过SEEION的openid，获取用户在微信服务器上的基本信息
+	 * panjie
+	 */
+	public function getCustomer()
+	{
+		$CustomerLogic = new CustomerLogic();
+		$this->customer = $CustomerLogic->updateAndGetListByOpenId("oNyIBwTDk49ckDmltA2m3bDJ52kQ");
+	}
+
 	/**
 	 * 去config表中的信息
 	 * xulinjie
