@@ -147,7 +147,8 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home, Roo
 	};
 
 	$scope.upDateCalendar = function() {
-		RoomFactory.fn.getRooms();
-		return true;
+		RoomFactory.fn.getRooms(function(){
+			return true;
+		});
 	}
  });
