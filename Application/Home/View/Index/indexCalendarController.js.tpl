@@ -84,10 +84,8 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home, Roo
 			}
 
 			Calendar.total = (endIndex - beginIndex) ? endIndex - beginIndex : 1;
-			console.log(Calendar);
 			beginTime = Calendar.beginDate;
 			endTime = Calendar.endDate;
-			console.log(beginTime);
 			//用户点结结束时间，则判断数是否位于两者之间。点亮区间的数据。熄灭其它的
 			//选遍历月，再遍历周，再遍历天
 			$scope.calendar.data.forEach(function(month, monthIndex){

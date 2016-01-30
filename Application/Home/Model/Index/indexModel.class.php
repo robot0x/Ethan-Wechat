@@ -18,6 +18,8 @@ class indexModel
 	public $signPackage = array();	//JSSDK签名
 	public $orderInfo 	= array();	//订单的附加信息
 	public $activeties  = array();  //活动列表信息
+	public $slideUrls	= array();	//幻灯片URL
+	public $slideMapUrl = "";		//首页地图图片
 
 	public function setOpenId($openId)
 	{
@@ -30,9 +32,9 @@ class indexModel
 		$appSecret = C("APPSECRET");
 		$jssdk = new JssdkLogic($appId, $appSecret);
 		$this->signPackage = $jssdk->getSignPackage();
-		$this->getOrderInfo();
-		$this->getActivityLists();
-		$this->home();
+		$this->getOrderInfo();		//取订单信息
+		$this->getActivityLists();	//取活动信息
+		$this->homeInit();			//首页初始化信息(幻灯片，地图URL)
 	}
 	
 	//获取JSSDK
@@ -93,7 +95,7 @@ class indexModel
 			$weeks 	= array();
 
 			//加入空数据
-			for ($j = 0 ; $j < $weekDay; $j++, $index++)
+			for ($j = 0 ; $j < $weekDay; $j++)
 			{
 				$days[$j]["day"] 		= "";		//当前 日
 				$days[$j]["isDisabled"] = true;		//是否可选
@@ -130,7 +132,7 @@ class indexModel
 			}
 
 			//补完不到满周的
-			for( ; $j%7 != 0; $j++, $index++)
+			for( ; $j%7 != 0; $j++)
 			{
 				$days[$j]["index"]	= $index;
 				$days[$j]["day"] = "";
@@ -264,11 +266,11 @@ class indexModel
 		return json_encode($activeties) ;
 	}
 	/**
-	 * 取幻灯片
+	 * 首页初始化取幻灯片
 	 * xulinjie
 	 * @return 
 	 */
-	public function home()
+	public function homeInit()
 	{
 		//实例化幻灯片
 		$SlideShowL = new SlideShowLogic();
@@ -279,14 +281,13 @@ class indexModel
 		{
 			if ($value['url'] !== '' && $value['is_map'] == '0')
 			{
-				$datas['slideUrls'][] = $value['url'];
+				$this->slideUrls[] = $value['url'];
 			}
 			if ($value['url'] !== '' && $value['is_map'] == '1')
 			{
-				$datas['slideMapUrl'] = $value['url'];
+				$this->slideMapUrl = $value['url'];
 				break;
 			}
 		}
-		return json_encode($datas) ;
 	}
 }

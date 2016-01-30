@@ -5,7 +5,7 @@
       <ion-slide-box class="slides">
         <ion-slide class="box" ng-repeat="item in slideUrls">
 
-            <img ng-src="{{ item.url }}">
+            <img ng-src="{{item}}">
 
         </ion-slide>
       </ion-slide-box>
@@ -19,7 +19,7 @@
             <p>84条评论></p>
           </a>
         <a href="#/tab/map" class="col-67">
-            <img class="full-image" ng-src="{{slideMapUrl.url}}">
+            <img class="full-image" ng-src="{{slideMapUrl}}">
         </a>
     </div>
       <a class="item row" href="#/tab/hotel">
@@ -39,7 +39,7 @@
     </button>
     </a>
     <div ng-repeat='room in rooms'>
-  <a class="item" href='{{room.order}}'>
+  <a class="item" ui-sref="confirmOrder({roomId:room.id})">
     <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">
