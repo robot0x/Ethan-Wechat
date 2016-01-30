@@ -88,8 +88,6 @@ var url = "{$M->signPackage['url']}";
  };
 });
 
-<include file="indexIntroductionCtrl.js" />
-
 app.filter('trustHtml', function ($sce) {
   return function (input) {
       return $sce.trustAsHtml(input);
@@ -218,6 +216,7 @@ app.directive("star", function() {
 <include file="indexPersonalCenter.js" />     //个人中心
 <include file="indexConfirmOrder.js" />       //订单填写
 <include file="indexActivityDetailCtrl.js" /> //活动详情
+<include file="indexIntroductionController.js" /> //酒店介绍
 
 <include file="indexOrderFactory.js" />       //近三个月内的订单
 <include file="indexCalendarFactory.js" />    //用户选择入住日期Factory

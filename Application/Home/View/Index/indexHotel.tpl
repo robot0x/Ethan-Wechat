@@ -4,41 +4,41 @@
         <div class="row">
             <div class="col">
               <div class="col-demo">
-                <i class="ion-shineiwifi">房间WiFi</i>
+                <i class="icon ion-shineiwifi">房间WiFi</i>
               </div>
             </div>
             <div class="col">
               <div class="col-demo">
-              <i class="ion-wifi">大堂WiFi</i>
+              <i class="icon ion-wifi">大堂WiFi</i>
               </div>
             </div>
             <div class="col">
               <div class="col-demo">
-                <i class="ion-tingche">免费停车</i>
+                <i class="icon ion-tingche">免费停车</i>
               </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
               <div class="col-demo">
-                <i class="ion-feng">吹风机</i>
+                <i class="icon ion-feng">吹风机</i>
               </div>
             </div>
             <div class="col">
               <div class="col-demo">
-              <i class="ion-24xiaoshireshui">全天热水</i>
+              <i class="icon ion-24xiaoshireshui">全天热水</i>
               </div>
             </div>
             <div class="col">
               <div class="col-demo">
-                <i class="ion-feiji2">免费接机</i>
+                <i class="icon ion-feiji2">免费接机</i>
               </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <div class="col-demo">
-                    <i class="ion-jinzhixiyan">无烟房</i>
+                    <i class="icon ion-jinzhixiyan">无烟房</i>
                 </div>
             </div>
         </div>
