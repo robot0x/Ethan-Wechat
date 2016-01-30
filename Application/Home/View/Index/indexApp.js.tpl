@@ -6,15 +6,6 @@ var url = "{$M->signPackage['url']}";
 <include file="indexStateProvider.js" />
 <include file="indexRun.js" />
 
-   //构建相应的factory
-    app.factory('Home', function($http) {
-      var service = {};
-      service.getJosn = function () {
-        return $http.get('api.php/Api/Api/getSlideInit');
-      }
-        return service;
-    });
-
   app.controller("EvaluationingCtrl", function($scope,$http){
     $scope.max = 5;
     $scope.ratingVal = 2;
@@ -225,6 +216,7 @@ app.directive("star", function() {
 <include file="indexActivityFactory.js" />    //活动信息
 <include file="indexHomeFactory.js" />        //首页数据
 <include file="indexHotelFactory.js" />       //酒店介绍数据
+<include file="indexTimeRoomFactory.js" />    //首页小时房信息
 
 <include file="indexBaseService.js" />        //基础服务
 <include file="function.js" />                //公共函数

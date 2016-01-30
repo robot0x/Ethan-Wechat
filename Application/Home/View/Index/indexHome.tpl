@@ -46,15 +46,14 @@
       ￥{{fenToYuan(room.price)}}<i class="icon ion-down"></i>
     </span>
   </a>
-  <div ng-show='room.detail' class="item">
-      {{room.detail_description}}
+  <div ng-show='room.detail' ng-bind-html="room.detail_description | trustHtml" class="item">
       </div>
   </div>
-<a class="item" href="tel:13920156607">
+<a class="item" href="tel:{{hotelPhone}}">
     <i class="icon ion-zhongdianfangbeijing"></i>
     钟点房
     <span class="item-note energized">
-      3小时/￥91起
+      {{timeRoom}}
     </span>
   </a>
 </div>

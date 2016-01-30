@@ -22,8 +22,9 @@ class indexModel
 	public $activeties   = array();  //活动列表信息
 	public $slideUrls	 = array();	//幻灯片URL
 	public $slideMapUrl  = "";		//首页地图图片
-	public $introduction = array(); //酒店介绍'
 	public $customer     = array();	//客户信息
+	public $introduction = array(); //酒店介绍
+	public $timeRoom     = array();      //小时房信息
 
 	public function setOpenId($openId)
 	{
@@ -41,6 +42,7 @@ class indexModel
 		$this->homeInit();			   //首页初始化信息(幻灯片，地图URL)
 		$this->getHotalIntroduction(); //取酒店介绍详情
 		$this->getCustomer();			//取客户信息
+		$this->getTimeRoom();          //取config信息
 	}
 	
 	//获取JSSDK
@@ -313,13 +315,28 @@ class indexModel
 		return json_encode($introduction) ;
 	}
 
+
 	/**
-	 * 获取用户基本信息
-	 * 
+	 * 通过SEEION的openid，获取用户在微信服务器上的基本信息
+	 * panjie
 	 */
 	public function getCustomer()
 	{
 		$CustomerLogic = new CustomerLogic();
 		$this->customer = $CustomerLogic->updateAndGetListByOpenId("oNyIBwTDk49ckDmltA2m3bDJ52kQ");
+	}
+
+	/**
+	 * 去config表中的信息
+	 * xulinjie
+	 * @return 
+	 */
+	public function getTimeRoom()
+	{
+		$name = "TIMEROOM";
+		$ConfigL = new ConfigLogic();
+		$timeRoom = $ConfigL->getValueByName($name);
+
+		$this->timeRoom = $timeRoom;
 	}
 }
