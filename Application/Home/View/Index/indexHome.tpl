@@ -39,7 +39,7 @@
     </button>
     </a>
     <div ng-repeat='room in rooms'>
-  <a class="item" ui-sref="confirmOrder({roomId:room.id})">
+  <a class="item" ng-href="{{room.order}}">
     <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">

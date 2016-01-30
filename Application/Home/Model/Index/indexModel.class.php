@@ -11,15 +11,17 @@ use Room\Logic\RoomLogic;		//房型
 use Config\Logic\ConfigLogic;	//系统配置
 use Activity\Logic\ActivityLogic;//活动
 use SlideShow\Logic\SlideShowLogic;	//幻灯片
+use Introduction\Logic\IntroductionLogic;//酒店介绍
 
 class indexModel
 {
-	public $openId 		= "";		//用户openid
-	public $signPackage = array();	//JSSDK签名
-	public $orderInfo 	= array();	//订单的附加信息
-	public $activeties  = array();  //活动列表信息
-	public $slideUrls	= array();	//幻灯片URL
-	public $slideMapUrl = "";		//首页地图图片
+	public $openId 		 = "";		//用户openid
+	public $signPackage  = array();	//JSSDK签名
+	public $orderInfo 	 = array();	//订单的附加信息
+	public $activeties   = array();  //活动列表信息
+	public $slideUrls	 = array();	//幻灯片URL
+	public $slideMapUrl  = "";		//首页地图图片
+	public $introduction = array(); //酒店介绍
 
 	public function setOpenId($openId)
 	{
@@ -32,9 +34,10 @@ class indexModel
 		$appSecret = C("APPSECRET");
 		$jssdk = new JssdkLogic($appId, $appSecret);
 		$this->signPackage = $jssdk->getSignPackage();
-		$this->getOrderInfo();		//取订单信息
-		$this->getActivityLists();	//取活动信息
-		$this->homeInit();			//首页初始化信息(幻灯片，地图URL)
+		$this->getOrderInfo();		   //取订单信息
+		$this->getActivityLists();	   //取活动信息
+		$this->homeInit();			   //首页初始化信息(幻灯片，地图URL)
+		$this->getHotalIntroduction(); //取酒店介绍详情
 	}
 	
 	//获取JSSDK
@@ -263,6 +266,7 @@ class indexModel
 		$activeties = $ActivityL->getLists(); 
 
 		//返回值
+		$this->activeties = $activeties;
 		return json_encode($activeties) ;
 	}
 	/**
@@ -289,5 +293,20 @@ class indexModel
 				break;
 			}
 		}
+	}
+
+	/**
+	 * 获取酒店介绍信息
+	 * panjie
+	 * @return 
+	 */
+	public function getHotalIntroduction()
+	{
+		$IntroductionL = new IntroductionLogic();
+		$introduction = $IntroductionL->getList();
+		$introduction['description'] = htmlspecialchars_decode($introduction['description']);
+
+		$this->introduction = $introduction;
+		return json_encode($introduction) ;
 	}
 }
