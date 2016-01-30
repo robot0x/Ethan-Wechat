@@ -9,7 +9,7 @@
                 <p>入住时间：{{order.begin_time_str}}</p>
                 <p>退房时间：{{order.end_time_str}}</p>
                 <a class="" data-ui-sref-opts="{cache: false,reload:true}" data-ui-sref="pay({orderid:order.id})" ng-if="order.toBePaid">立即支付</a>
-                <button ng-if="order.toBeEvaluation">评价赢积分</button>
+                <a ui-sref="tabs.evaluationing(order.id)" ng-if="order.toBeEvaluation">评价赢积分</a>
             </div>
         </div>   
 

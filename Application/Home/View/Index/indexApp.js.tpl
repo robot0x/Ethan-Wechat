@@ -5,24 +5,8 @@ var url = "{$M->signPackage['url']}";
 <include file="indexConfig.js" />
 <include file="indexStateProvider.js" />
 <include file="indexRun.js" />
+<include file="indexEvaluationingController.js" />//评论
 
-  app.controller("EvaluationingCtrl", function($scope,$http){
-    $scope.max = 5;
-    $scope.ratingVal = 2;
-    $scope.readonly = false;
-    $scope.onHover = function(val){
-      $scope.hoverVal = val;
-    };
-    $scope.onLeave = function(){
-      $scope.hoverVal = null;
-    }
-    $scope.onChange = function(val){
-      $scope.ratingVal = val;
-    }
-    $scope.getStarLeave = function() {
-      alert($scope.ratingVal);
-    }
-  console.log('EvaluationingCtrl');
   $scope.upload = function(){
     $http.get('api.php/Index/getJssdk')
     .success(function(data,status){

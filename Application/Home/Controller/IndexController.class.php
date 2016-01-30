@@ -35,7 +35,7 @@ class IndexController extends HomeController {
     public function indexAppJsAction()
     {
     	$M = new indexModel();
-        //$M->setOpenId(session("openId"));
+        $M->setOpenId(session("openId"));
     	$this->assign("M", $M);
 
     	$this->display("indexApp.js");
