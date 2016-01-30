@@ -8,7 +8,7 @@
                 <p>单价：{{fenToYuan(order.price)}}元</p>
                 <p>入住时间：{{order.begin_time_str}}</p>
                 <p>退房时间：{{order.end_time_str}}</p>
-                <a class="" ui-sref="pay({orderid:order.id})" ng-if="order.toBePaid">立即支付</a>
+                <a class="" data-ui-sref-opts="{cache: false,reload:true}" data-ui-sref="pay({orderid:order.id})" ng-if="order.toBePaid">立即支付</a>
                 <button ng-if="order.toBeEvaluation">评价赢积分</button>
             </div>
         </div>   

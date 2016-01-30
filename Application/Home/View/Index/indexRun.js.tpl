@@ -1,6 +1,6 @@
 app.run(function($rootScope, $ionicLoading) {
   $rootScope.$on('loading:show', function() {
-    $ionicLoading.show({template: 'Loading...'})
+    $ionicLoading.show({template: '<ion-spinner></ion-spinner>'})
   });
 
   $rootScope.$on('loading:hide', function() {

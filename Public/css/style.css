@@ -225,6 +225,33 @@ a {
     margin: 5px;
     padding: 5px;
 }
-
-
 /* uploadify end */
+
+/* pay begin */
+.pay{
+    margin: 50px auto 20px;
+    text-align: center;
+}
+
+.pay .payIcon
+{
+  font-size: 100px;
+}
+
+.pay .payIcon .spinner svg
+{
+    height:100px;
+    width:100px;
+    stroke: #10AEFF !important;
+}
+
+.pay .success .payIcon
+{
+    color:#09BB07;
+}
+
+.pay .error .payIcon
+{
+  color: #F76260;
+}
+/* pay end*/

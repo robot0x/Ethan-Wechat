@@ -56,7 +56,6 @@ class WxPayController extends ApiController
         {
             $totalDays = (int)ceil((($order['end_time'] - $order['begin_time']) / 24*60*60));
         }
-
         //总价(单位为分)
         $totalPrice = $order['price'] * $order['count'] * $totalDays;
         
@@ -100,8 +99,10 @@ class WxPayController extends ApiController
         $JsApiPayL = new JsApiPayLogic();
         $jsApiParameters = $JsApiPayL->GetJsApiParameters($unifiedOrder);
     
-        $return['status'] = "success";
-        $return['data'] = $jsApiParameters;
+        $return['status']               = "success";
+        $return['data']['params']       = $jsApiParameters;
+        $return['data']['roomId']      = $order['room_id'];
+        $return['data']['totalPrice']   = $totalPrice;
         // dump($order);
         echo json_encode($return);
     }  

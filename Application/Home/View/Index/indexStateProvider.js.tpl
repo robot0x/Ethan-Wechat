@@ -113,8 +113,10 @@
       }
     })
     .state('pay', {
+        cache: false,
         url: "/pay/:orderid",
-        templateUrl: "templates/indexPay.html"
+        templateUrl: "templates/indexPay.html",
+        controller:'indexPayController',
     })
     .state('tabs.evaluationing1', {
       url: "/evaluationing1",

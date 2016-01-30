@@ -1,28 +1,40 @@
 <script id="templates/indexPay.html" type="text/ng-template">
-<ion-view view-title="支付" ng-controller="indexPayController">
-    <ion-content>
-        <div class="list">
-            <div class="item item-avatar" ng-show="paying">
-              <img src="__IMG__/success.png">
-              <h2 class="success">正在支付</h2>
+    <ion-view view-title="支付" hide-nav-bar="true">
+        <ion-content>
+            <div class="pay">
+                <div class="paying" ng-hide="success || error">
+                    <div class="payIcon">
+                        <ion-spinner icon="ripple"></ion-spinner>
+                    </div>
+                    <h2>请稍候</h2>
+                </div>
+                <div class="success" ng-show="success">
+                    <div class="payIcon">
+                        <i class="icon ion-success"></i>
+                    </div>
+                    <h2>支付成功!</h2>
+                    <h3><b><span class="assertive">￥&nbsp;</span>{{totalPrice}}</b></h3>
+                </div>
+                <div class="error" ng-show="error">
+                    <div class="payIcon">
+                        <i class="icon ion-error"></i>
+                    </div>
+                    <h2>支付失败</h2>
+                    <p>{{message}}</p>
+                </div>
             </div>
-            <div class="item item-avatar" ng-show="fail">
-              <img src="__IMG__/success.png">
-              <h2 class="success">支付失败</h2>
+            <div class="item item-thumbnail-left">
+
+                <img ng-src="{{room.url.split(',')[0]}}">
+                <h2>房型：{{room.name}}</h2>
+                <p>单价：{{order.price}}元</p>
+                <p>介绍：{{room.description}}</p>
+                <p>时间：{{order.begin_time_str}}&nbsp;至&nbsp;{{order.end_time_str}}</p>
             </div>
-            <div class="item item-avatar" ng-show="success">
-              <img src="__IMG__/success.png">
-              <h2 class="success">支付成功</h2>
-            </div>
-            <a class="item item-thumbnail-left" href="#">
-                <img src="__IMG__/big.jpg">
-                <h2>房型：大床房</h2>
-                <p>价格：365.00</p>
-                <p>介绍：空调/电视/wifi</p>
-                <p>入住时间：2015.11.25</p>
-            </a>
-        </div>
-        <a ui-sref="tabs.home" ng-enable="isButtonOk">确定</a>
-    </ion-content>
-</ion-view>
+            <a on-click="reload" ng-show="success || error" ui-sref="tabs.home" ng-enable="isButtonOk">
+                <button class="button button-block button-balanced">
+                    完成
+                </button></a>
+        </ion-content>
+    </ion-view>
 </script>
