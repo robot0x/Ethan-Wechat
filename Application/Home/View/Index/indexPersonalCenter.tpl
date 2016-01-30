@@ -3,9 +3,9 @@
 	<ion-content>
 	<div class="list">
 		<a class="item item-avatar" href="#">
-			<img src="__IMG__/1024.jpg">
-			<h3>昵称</h3>
-			<p>手机号</p>
+			<img ng-src="{{headimgurl}}">
+			<h3>{{nickname}}</h3>
+			<p>{{phone}}</p>
 		</a>
 
 		<div class="button-bar">

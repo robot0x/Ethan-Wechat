@@ -126,6 +126,7 @@ class IndexController extends HomeController {
     public function unitTestAction()
     {
     	$M = new indexModel();
-    	dump($M->slideUrls);
+    	dump($M->getCustomer());
+        dump($M->customer);
     }
 }

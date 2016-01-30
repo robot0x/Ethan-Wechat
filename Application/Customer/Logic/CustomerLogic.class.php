@@ -11,6 +11,18 @@ use WechatInterface\Logic\wechatInterfaceapiLogic;
 class CustomerLogic extends CustomerModel {
 	private $i;
 
+	public function updateAndGetListByOpenId($openId)
+	{
+		//获取用户信息
+		if (!$data = $this->getCustomerInfo($openId))
+		{
+			return array();
+		}
+		$data['id'] = $openId;
+		$this->saveList($data);
+		$data['openId'] = $openId; 
+		return $data;
+	}
 	/**
 	 * 通过用户ID添加记录
 	 * @param  string $id 28位openid

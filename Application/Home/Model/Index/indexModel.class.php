@@ -12,6 +12,7 @@ use Config\Logic\ConfigLogic;	//系统配置
 use Activity\Logic\ActivityLogic;//活动
 use SlideShow\Logic\SlideShowLogic;	//幻灯片
 use Introduction\Logic\IntroductionLogic;//酒店介绍
+use Customer\Logic\CustomerLogic;		//客户
 
 class indexModel
 {
@@ -21,7 +22,8 @@ class indexModel
 	public $activeties   = array();  //活动列表信息
 	public $slideUrls	 = array();	//幻灯片URL
 	public $slideMapUrl  = "";		//首页地图图片
-	public $introduction = array(); //酒店介绍
+	public $introduction = array(); //酒店介绍'
+	public $customer     = array();	//客户信息
 
 	public function setOpenId($openId)
 	{
@@ -38,6 +40,7 @@ class indexModel
 		$this->getActivityLists();	   //取活动信息
 		$this->homeInit();			   //首页初始化信息(幻灯片，地图URL)
 		$this->getHotalIntroduction(); //取酒店介绍详情
+		$this->getCustomer();			//取客户信息
 	}
 	
 	//获取JSSDK
@@ -308,5 +311,15 @@ class indexModel
 
 		$this->introduction = $introduction;
 		return json_encode($introduction) ;
+	}
+
+	/**
+	 * 获取用户基本信息
+	 * 
+	 */
+	public function getCustomer()
+	{
+		$CustomerLogic = new CustomerLogic();
+		$this->customer = $CustomerLogic->updateAndGetListByOpenId("oNyIBwTDk49ckDmltA2m3bDJ52kQ");
 	}
 }
