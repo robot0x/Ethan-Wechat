@@ -216,7 +216,7 @@ app.directive("star", function() {
 <include file="indexPersonalCenter.js" />     //个人中心
 <include file="indexConfirmOrder.js" />       //订单填写
 <include file="indexActivityDetailCtrl.js" /> //活动详情
-<include file="indexIntroductionController.js" /> //酒店介绍
+<include file="indexHotelController.js" /> //酒店介绍
 
 <include file="indexOrderFactory.js" />       //近三个月内的订单
 <include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
@@ -224,6 +224,7 @@ app.directive("star", function() {
 <include file="indexRoomFactory.js" />        //房型信息
 <include file="indexActivityFactory.js" />    //活动信息
 <include file="indexHomeFactory.js" />        //首页数据
+<include file="indexHotelFactory.js" />       //酒店介绍数据
 
 <include file="indexBaseService.js" />        //基础服务
 <include file="function.js" />                //公共函数
