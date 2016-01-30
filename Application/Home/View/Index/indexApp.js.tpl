@@ -7,62 +7,6 @@ var url = "{$M->signPackage['url']}";
 <include file="indexRun.js" />
 <include file="indexEvaluationingController.js" />//评论
 
-  $scope.upload = function(){
-    $http.get('api.php/Index/getJssdk')
-    .success(function(data,status){
-     
-
-     wx.ready(function () {
-      // 在这里调用 API
-
-      //选择图片
-  var images = {
-      localId: [],
-      serverId: []
-   };
-       wx.chooseImage({
-        success: function (res) {
-            images.localId = res.localIds;
-          alert('已选择 ' + res.localIds.length + ' 张图片');
-
-            if (images.localId.length == 0) {
-            alert('请先使用 chooseImage 接口选择图片');
-            return;
-        }
-        var i = 0, length = images.localId.length;
-        images.serverId = [];
-        function upload() {
-          wx.uploadImage({
-            localId: images.localId[i],
-            success: function (res) {
-                i++;
-                alert('已上传：' + i + '/' + length);
-                images.serverId.push(res.serverId);
-                if (i < length) {
-                  upload();
-                }
-                 $http.get('api.php/Evaluation/uploadImage',{params:{openid:'oha4Tt-t_DrHCdmtvCkHOLO8ygTg',serverId:'1237378768e7q8e7r8qwesafdasdfasdfaxss111'}})
-                 .success(function(data,status){
-                      //这里的data就是返回的文件名
-                      alert(data);
-                 })
-            },
-            fail: function (res) {
-                alert(JSON.stringify(res));
-            }
-          });
-      }
-         upload();
-         } 
-     });
-  
-    
-    });  
-  })
-  .error(function(data,status){
-   });
- };
-});
 
 app.filter('trustHtml', function ($sce) {
   return function (input) {

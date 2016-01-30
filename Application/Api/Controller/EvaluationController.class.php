@@ -63,4 +63,13 @@ class EvaluationController extends ApiController
         $result = $EvaluationL->getAndUploadWxImage($serverId);
         $this->ajaxReturn($result);
     }
+
+    /**
+     * 添加新评论
+     * panjie
+     */
+    public function addAction()
+    {
+        dump(I('get.'));
+    }
 }
