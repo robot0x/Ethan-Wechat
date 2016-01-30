@@ -19,7 +19,7 @@
             <p>84条评论></p>
           </a>
         <a href="#/tab/map" class="col-67">
-            <img class="full-image" ng-src="{{slideMapUrl.url}}">
+            <img class="full-image radio-image" ng-src="{{slideMapUrl.url}}">
         </a>
     </div>
       <a class="item row" href="#/tab/hotel">
