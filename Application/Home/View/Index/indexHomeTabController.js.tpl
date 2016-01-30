@@ -19,5 +19,5 @@ app.controller('HomeTabCtrl', function($ionicLoading, $scope,$timeout,Home,Calen
      room.order = order;
     },100);
   };
-  console.log(rooms);
+  // console.log(rooms);
 });
