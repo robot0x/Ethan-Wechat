@@ -43,7 +43,7 @@
     <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">
-      ￥{{room.price}}<i class="ion-down"></i>
+      ￥{{fenToYuan(room.price)}}<i class="ion-down"></i>
     </span>
   </a>
   <div ng-show='room.detail' class="item">

@@ -150,7 +150,11 @@ class WxPayController extends ApiController
             && $result["return_code"] == "SUCCESS"
             && $result["result_code"] == "SUCCESS")
         {
-            $return['status'] = "success";
+            //将订单状态设置为已支付
+            $order['is_pay']    = 1;
+            $order['pay_time']  = time();
+            $OrderL->saveList($order);
+            $return['status']   = "success";
         }
         else
         {

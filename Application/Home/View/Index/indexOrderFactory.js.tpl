@@ -96,6 +96,30 @@ app.factory('OrderFactory' ,function($ionicPopup,$http){
         });
     };
 
+    //添加订单
+    //接收订单信息，进行请求添加，返回订单编号
+    var addOrder = function(order, callBack){
+        $http.get('api.php/Api/Order/addList',{params:order})
+        .success(function(data){
+            if (data.status ==='success') {
+                var order_time = Date.parse(new Date())/1000;
+                order.id                = data.order_id;
+                order.order_time        = order_time;
+                order.begin_time_str    = order.begin_time;
+                order.end_time_str      = order.end_time;
+                datas.push(order);
+                toBePaid.push(order);
+             }
+             callBack(data);
+             return;
+        })
+        .error(function(){
+            $ionicPopup.alert({
+                title: '系统错误',
+                template: '网络不给力，请稍后重试.',
+            });
+        });
+    };
     var orderInfo = {};
     orderInfo.customerName  = '{:$M->orderInfo["customer_name"]}';
     orderInfo.customerPhone = '{:$M->orderInfo["customer_phone"]}';
@@ -113,5 +137,6 @@ app.factory('OrderFactory' ,function($ionicPopup,$http){
         orderIsPay:orderIsPay,          //改变订单状态为已支付
         orderInfo: orderInfo,           //预订时的信息
         initDatas:initDatas,            //订单初始化
+        addOrder: addOrder,             //添加订单
     };
 });

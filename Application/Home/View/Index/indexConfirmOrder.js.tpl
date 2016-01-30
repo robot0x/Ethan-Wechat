@@ -30,33 +30,31 @@ app.controller('ConfirmOrderCtrl',function($scope,$http,$stateParams,RoomFactory
   $scope.changePhone = function(value)
   {
       phone = value;
-  }
+  };
 
    $scope.submitOrder = function() {
-    var params = {room_id:roomId,
+    var order = {room_id:roomId,
                   begin_time:Calendar.beginDate,
                   end_time:Calendar.endDate,
                   totalDay:Calendar.total,
                   customer_name:name,
                   customer_phone:phone,
-                  count:repeatSelect};
-     $http.get('api.php/Api/Order/addList',{params:params})
-      .success(function(data,status){
-         if (data.status ==='success') {
-            console.log(params);
-            console.log(data);
-           $location.path('/pay/'+data.order_id);
-         }
-         else{
-          console.log(data.message);
-           $ionicPopup.alert({
-                title: '系统错误',
-                template: '系统错误，请稍后重试.',
-            });
-         }
-       })
-      .error(function(data,status){
-         alert('没有找到该方法');
+                  count:repeatSelect,
+                  price:price};
+
+      OrderFactory.addOrder(order, function(data){
+        if (data.status ==='success') {
+                // console.log(data);
+               $location.path('/pay/'+data.order_id);
+          }
+          else
+          {
+             $ionicPopup.alert({
+                  title: '系统错误',
+                  template: '系统错误,原因:'+data.message,
+              });
+          }
       });
-   }
+
+   };
  });

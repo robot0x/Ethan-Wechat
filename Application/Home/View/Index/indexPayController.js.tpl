@@ -52,7 +52,7 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                                 $scope.$apply(function(){
                                     $scope.message = "支付成功";
                                 });
-
+                
                                 //更新订单信息
                                 OrderFactory.orderIsPay(orderId);
                             }
@@ -70,12 +70,9 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                         .error(function(res, status, header, config){
                             alert("网络错误,请稍后重试");
                         });
-                        //重写factory
                     }
                 }   
-                // //重新请求订单数据
-                // OrderFactory.initDatas();
-                onTimeOut();//倒计时
+                onTimeOut();//倒计时后跳转
             }
         );
     };
@@ -90,7 +87,8 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
             });
 
             //强制刷新
-            window.location.href = "__ROOT__/index.php";
+            // window.location.href = "__ROOT__/index.php";
+            $location.path("#");
             return;
         }
         else

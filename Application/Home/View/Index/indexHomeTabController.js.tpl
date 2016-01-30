@@ -1,12 +1,11 @@
-app.controller('HomeTabCtrl', function($scope,$timeout,Home,Calendar,RoomFactory,HomeFactory) {
+app.controller('HomeTabCtrl', function($ionicLoading, $scope,$timeout,Home,Calendar,RoomFactory,HomeFactory,BaseService) {
   $scope.beginDate    = Calendar.beginDate;
   $scope.endDate      = Calendar.endDate;
   $scope.rooms        = RoomFactory.rooms;
-  console.log($scope.rooms);
   $scope.total        = Calendar.total;
   $scope.slideUrls    = HomeFactory.slideUrls;
   $scope.slideMapUrl  = HomeFactory.slideMapUrl;
-  
+  $scope.fenToYuan    = BaseService.fenToYuan;
   $scope.toggleDetail = function(room){
     room.detail = !room.detail;
     var order = room.order;
@@ -14,5 +13,5 @@ app.controller('HomeTabCtrl', function($scope,$timeout,Home,Calendar,RoomFactory
     $timeout(function(){
      room.order = order;
     },100);
-  }
+  };
 });
