@@ -23,16 +23,16 @@
         </a>
     </div>
       <a class="item row" href="#/tab/hotel">
-        <i class="ion-shineiwifi col"></i>
-        <i class="ion-wifi col"></i>
-        <i class="ion-tingche col"></i>
-        <i class="ion-feng col"></i>
-        <i class="ion-24xiaoshireshui col"></i>
-        <i class="ion-feiji2 col"></i>
-        <i class="ion-right col"></i>
+        <i class="icon ion-shineiwifi col"></i>
+        <i class="icon ion-wifi col"></i>
+        <i class="icon ion-tingche col"></i>
+        <i class="icon ion-feng col"></i>
+        <i class="icon ion-24xiaoshireshui col"></i>
+        <i class="icon ion-feiji2 col"></i>
+        <i class="icon ion-right col"></i>
       </a>
     <a class="item item-button-right" href="#/tab/date">
-    <i class="ion-rili"></i>
+    <i class="icon ion-rili"></i>
       {{beginDate}}至{{endDate}}
     <button class="button button-clear">
       <h3 class="positive">共{{total}}晚></h3>
@@ -43,7 +43,7 @@
     <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">
-      ￥{{fenToYuan(room.price)}}<i class="ion-down"></i>
+      ￥{{fenToYuan(room.price)}}<i class="icon ion-down"></i>
     </span>
   </a>
   <div ng-show='room.detail' class="item">
@@ -51,7 +51,7 @@
       </div>
   </div>
 <a class="item" href="tel:13920156607">
-    <i class="ion-zhongdianfangbeijing"></i>
+    <i class="icon ion-zhongdianfangbeijing"></i>
     钟点房
     <span class="item-note energized">
       3小时/￥91起
