@@ -22,6 +22,7 @@ class indexModel
 	public $slideUrls	 = array();	//幻灯片URL
 	public $slideMapUrl  = "";		//首页地图图片
 	public $introduction = array(); //酒店介绍
+	public $timeRoom     = array();      //小时房信息
 
 	public function setOpenId($openId)
 	{
@@ -38,6 +39,7 @@ class indexModel
 		$this->getActivityLists();	   //取活动信息
 		$this->homeInit();			   //首页初始化信息(幻灯片，地图URL)
 		$this->getHotalIntroduction(); //取酒店介绍详情
+		$this->getTimeRoom();          //取config信息
 	}
 	
 	//获取JSSDK
@@ -308,5 +310,18 @@ class indexModel
 
 		$this->introduction = $introduction;
 		return json_encode($introduction) ;
+	}
+	/**
+	 * 去config表中的信息
+	 * xulinjie
+	 * @return 
+	 */
+	public function getTimeRoom()
+	{
+		$name = "TIMEROOM";
+		$ConfigL = new ConfigLogic();
+		$timeRoom = $ConfigL->getValueByName($name);
+
+		$this->timeRoom = $timeRoom;
 	}
 }

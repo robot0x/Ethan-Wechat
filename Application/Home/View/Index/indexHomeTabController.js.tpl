@@ -1,10 +1,12 @@
-app.controller('HomeTabCtrl', function($ionicLoading, $scope,$timeout,Home,Calendar,RoomFactory,HomeFactory,BaseService) {
+app.controller('HomeTabCtrl', function($ionicLoading, $scope,$timeout,Calendar,RoomFactory,TimeRoom,HomeFactory,BaseService,IntroductionFactory) {
   $scope.beginDate    = Calendar.beginDate;
   $scope.endDate      = Calendar.endDate;
   $scope.total        = Calendar.total;
   $scope.slideUrls    = HomeFactory.slideUrls;
   $scope.slideMapUrl  = HomeFactory.slideMapUrl;
   $scope.fenToYuan    = BaseService.fenToYuan;
+  $scope.timeRoom     = TimeRoom.timeRoom.value;
+  $scope.hotelPhone   = IntroductionFactory.introduction.hotel_phone;
   var rooms = RoomFactory.rooms;
   for (var k in rooms) {
     rooms[k]['detail'] = false;
