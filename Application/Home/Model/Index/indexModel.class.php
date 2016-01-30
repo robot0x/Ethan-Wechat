@@ -12,6 +12,7 @@ use Config\Logic\ConfigLogic;	//系统配置
 use Activity\Logic\ActivityLogic;//活动
 use SlideShow\Logic\SlideShowLogic;	//幻灯片
 use Introduction\Logic\IntroductionLogic;//酒店介绍
+use Credit\Logic\CreditLogic;       //积分
 
 class indexModel
 {
@@ -22,7 +23,8 @@ class indexModel
 	public $slideUrls	 = array();	//幻灯片URL
 	public $slideMapUrl  = "";		//首页地图图片
 	public $introduction = array(); //酒店介绍
-	public $timeRoom     = array();      //小时房信息
+	public $timeRoom     = array(); //小时房信息
+	public $credit       = array(); //个人总积分
 
 	public function setOpenId($openId)
 	{
@@ -323,5 +325,20 @@ class indexModel
 		$timeRoom = $ConfigL->getValueByName($name);
 
 		$this->timeRoom = $timeRoom;
+	}
+
+	/**
+	 * 取当前客户的总积分
+	 * xulinjie
+	 * @return 
+	 */
+	public function getCredit()
+	{
+		$openId = session("openId");
+
+		$CreditL = new CreditLogic();
+		$credit = $CreditL->getListbyCustomerId($openId);
+
+		$this->credit = $credit;
 	}
 }
