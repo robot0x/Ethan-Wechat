@@ -29,8 +29,10 @@
                 <h2>房型：{{room.name}}</h2>
                 <p>单价：{{order.price}}元</p>
                 <p>介绍：{{room.description}}</p>
-                <p>时间：{{order.begin_time_str}}&nbsp;至&nbsp;{{order.end_time_str}}</p>
+                <p>入住时间：{{order.begin_time_str}}</p>
+                <p>退房时间：{{order.end_time_str}}</p>
             </div>
+
             <a on-click="reload" ng-show="success || error" ui-sref="tabs.home" ng-enable="isButtonOk">
                 <button class="button button-block button-balanced">
                     完成

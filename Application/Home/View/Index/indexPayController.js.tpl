@@ -108,6 +108,10 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
                     title: '亲，出错啦!',
                     template: data.message,
                 });
+                $scope.$apply(function(){
+                    $scope.message = data.message;
+                    $scope.error = 1;
+                });
                 return;
             }
             params = data.data.params;
@@ -126,6 +130,10 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
                     title: '亲，出错啦!',
                     template: '未获取到WeixinJSBridge，请退出微信后重试',
                 });
+                $scope.$apply(function(){
+                    $scope.message = "未获取到WeixinJSBridge，请退出微信后重试";
+                    $scope.error = 1;
+                });
             }else{
                 jsApiCall();
             }
@@ -133,11 +141,14 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
         .error(function(data, status, header, config){
             $ionicPopup.alert({
                 title: '亲，出错啦!',
-                template: '系统错误:indexOrderController.js:pay.http.error',
+                template: '您的网络好像不给力',
+            });
+            $scope.$apply(function(){
+                $scope.message = "网络或系统异常";
+                $scope.error = 1;
             });
             return;
         });
     };
     pay();   
-    console.log("pay");
 });
