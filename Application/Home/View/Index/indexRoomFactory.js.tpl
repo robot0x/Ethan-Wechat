@@ -6,7 +6,7 @@ app.factory('RoomFactory' ,function($http, Calendar){
         var params = {"begin_time":Calendar.beginDate, "end_time":Calendar.endDate};
         $http.get("__ROOT__/api.php/Room/getRooms",{params:params})
         .success(function(data){
-            console.log(data);
+            console.log("getRooms");
             rooms = data.data;
         })
         .error();

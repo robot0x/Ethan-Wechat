@@ -10,7 +10,6 @@ app.controller('HomeTabCtrl', function($ionicLoading, $scope,$timeout,Home,Calen
     rooms[k]['detail'] = false;
     rooms[k]['order'] = '#/confirmOrder/'+ rooms[k].id;
   }
-  console.log(rooms);
   $scope.rooms = rooms;
   $scope.toggleDetail = function(room){
     room.detail = !room.detail;
@@ -20,4 +19,5 @@ app.controller('HomeTabCtrl', function($ionicLoading, $scope,$timeout,Home,Calen
      room.order = order;
     },100);
   };
+  console.log(rooms);
 });

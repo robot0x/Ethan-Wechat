@@ -9,7 +9,7 @@
                     <a class="item item-thumbnail-left" href="#">
                         <img ng-src="{{room.url}}">
                         <h2>房型：{{room.name}}</h2>
-                        <p>价格：{{room.price}}</p>
+                        <p>价格：{{fenToYuan(room.price)}}</p>
                         <p>描述：{{room.description}}</p>
                         <p>入住时间：{{beginTime}}至{{endTime}}</p>
                     </a>

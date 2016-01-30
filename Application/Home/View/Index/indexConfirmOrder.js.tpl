@@ -1,10 +1,10 @@
-app.controller('ConfirmOrderCtrl',function($scope,$http,$stateParams,RoomFactory,Calendar,OrderFactory,$ionicPopup,$location){
+app.controller('ConfirmOrderCtrl',function($scope,$http,$stateParams,RoomFactory,Calendar,OrderFactory,$ionicPopup,$location, BaseService){
   var roomId = $stateParams.roomId;
-  $scope.rooms = RoomFactory.rooms.toObjectByKey();
-  var room = {};
-  $scope.room = room = $scope.rooms[roomId];
-  var price = $scope.room.price;
-  $scope.room.price = parseInt($scope.room.price).fenToYuan();
+  var rooms = RoomFactory.rooms.toObjectByKey();
+  $scope.fenToYuan    = BaseService.fenToYuan;
+  $scope.room = room = rooms[roomId];
+  var price = room.price;
+  // $scope.room.price = parseInt(room.price);
   
    $scope.notice = OrderFactory.orderInfo.notice;                     //住店须知
    $scope.prompt = OrderFactory.orderInfo.prompt;                     //温馨提示
@@ -16,13 +16,14 @@ app.controller('ConfirmOrderCtrl',function($scope,$http,$stateParams,RoomFactory
    var repeatSelect = $scope.repeatSelect = 1;
    $scope.counts = $scope.room.remaining_count.getArray();
    $scope.totalPay = (price * $scope.repeatSelect * Calendar.total).fenToYuan();
+   // console.log(RoomFactory.rooms);
    //将房间数量改变时
     $scope.changValue = function(value){
       $scope.totalPay = (parseInt(price)*parseInt(value)*Calendar.total).fenToYuan();
       $scope.credit = parseInt($scope.totalPay)/parseInt(OrderFactory.orderInfo.credit);
       repeatSelect = value;
    };
-   console.log(OrderFactory);
+   // console.log(RoomFactory.rooms);
    $scope.changeName = function(value){
       name = value;
    }
@@ -57,4 +58,5 @@ app.controller('ConfirmOrderCtrl',function($scope,$http,$stateParams,RoomFactory
       });
 
    };
+   // console.log(RoomFactory.rooms);
  });
