@@ -1138,8 +1138,16 @@ function union_array($arr1,$arr2){
  * 验证字符串是否日期
  */
 
-function validateDate($date, $format = 'Y-m-d')
+function validateDate($date, $formats = array('Y-m-d', "Y-m-j"))
 {
-    $d = DateTime::createFromFormat($format, $date);
-    return $d && $d->format($format) == $date;
+    foreach($formats as $format)
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        if ($d && $d->format($format) == $date)
+        {
+            return true;
+        }
+    }
+    return false;
+    
 }
