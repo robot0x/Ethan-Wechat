@@ -1,6 +1,13 @@
 <script id="templates/indexEvaluation.html" type="text/ng-template">
-  <ion-view view-title="查看评论" ng-controller='EvaluationCtrl'>
-  <ion-content>
+  <ion-view view-title="洛克高级酒店公寓" ng-controller='EvaluationCtrl'>
+ <div class="bar bar-header">
+  <a ng-href='#/tab/home'><button class="button button-icon icon ion-ios-arrow-back"></button></a>
+  <div class="h1 title">查看评论</div>
+</div>
+    <ion-content class='has-header'>
+      <div class="padding">
+        <a class="button button-block button-positive" href="#/tab/evaluationing">我要评论</a>
+     </div>
     <div class="list">
     {/*<div ng-bind="evaluations | json"></div>*/}
       <div class="item item-avatar" href="#" ng-repeat='evaluation in evaluations'>

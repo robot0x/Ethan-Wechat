@@ -1,7 +1,11 @@
 <script id="templates/indexOrder.html" type="text/ng-template">
-<ion-view view-title="{{title}}" ng-controller="order">
+<ion-view view-title="洛克高级酒店公寓" ng-controller="order">
+<div class="bar bar-header">
+  <a ng-href='#/tab/personal'><button class="button button-icon icon ion-ios-arrow-back"></button></a>
+  <div class="h1 title">{{title}}</div>
+</div>
 <ion-content>
-        <div class="list">
+        <div class="list has-header">
             <div class="item item-thumbnail-left" href="#" ng-repeat="order in orders | orderBy:'order_time':true">
                 <img ng-src="{{getFirstUrl(rooms[order.room_id].url)}}">
                 <h2>房型：{{rooms[order.room_id].name}}({{order.count}}间)</h2>

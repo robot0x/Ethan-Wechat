@@ -1,3 +1,3 @@
-app.controller('IntroductionCtrl', function($scope,IntroductionFactory) {
-	$scope.introduction = IntroductionFactory.introduction;
+app.controller('IntroductionCtrl', function($rootScope,$ionicPlatform,$scope,IntroductionFactory) {
+$scope.introduction = IntroductionFactory.introduction;
 });
