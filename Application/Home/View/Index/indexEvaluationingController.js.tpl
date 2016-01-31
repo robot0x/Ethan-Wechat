@@ -26,6 +26,14 @@
       starLevel = $scope.ratingVal;
     }
 
+    $scope.nameDefault = function(nickname)
+    {
+        if (nickname == undefined)
+        {
+            return "非关注用户";
+        }
+        return nickname;
+    }
     //上传图片至微信服务器
     var upload = function(localIds){
         var length = localIds.length;
