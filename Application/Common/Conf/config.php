@@ -1,6 +1,6 @@
 <?php
 return array(
-
+    'YNNZHI_UPLOAD_DIR'     => '/uploads',  //上传的文件目录
     'YUNZHI_PAGE_SIZE'      => 10,          //默认分页大小
 
     'TMPL_TEMPLATE_SUFFIX'  => '.tpl',     // 默认模板文件后缀
