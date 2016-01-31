@@ -1,4 +1,4 @@
-app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home, RoomFactory){
+app.controller('DateCtrl',function($scope ,$http,$location , Calendar, RoomFactory){
 	//初始化
 	$scope.calendar		= {:$M::getCalendarAjax()};	//由M层中取得初始值
 	$scope.showLeft 	= 0;						//是否显示左侧菜单

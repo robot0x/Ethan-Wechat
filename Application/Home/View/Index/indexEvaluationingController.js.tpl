@@ -1,9 +1,11 @@
-  app.controller("EvaluationingCtrl", function($scope,$http, $ionicLoading){
-    $scope.max = 5;                   //最大?
-    $scope.ratingVal = 2;             //??
+  app.controller("EvaluationingCtrl", function($scope,$http, $ionicLoading,$stateParams){
+    var orderid = $stateParams.orderid;
+    $scope.evaluation = '';
+    $scope.max = 5;                   //星星个数
+    var starLevel = $scope.ratingVal = 4;             //??
     $scope.readonly = false;          //只读属性
     $scope.localIds = new Array();    //用户上传后的图片本地URL
-    var serverIds = new Array();           //用于服务器取微信服务器暂存的图片
+    var serverIds = new Array();      //用于服务器取微信服务器暂存的图片
     var maxCount = 5;                 //最多上传照片数
     $scope.showUpload = 1;            //是否显示上传按钮
     $scope.onHover = function(val){
@@ -16,7 +18,8 @@
       $scope.ratingVal = val;
     }
     $scope.getStarLeave = function() {
-      alert($scope.ratingVal);
+      console.log($scope.ratingVal);
+      starLevel = $scope.ratingVal;
     }
 
     //上传图片至微信服务器
@@ -68,14 +71,19 @@
 
     //提交评论
     $scope.submit = function(){
-        var params = {serverIds:serverIds.join(",")};
+        var evaluation = $scope.evaluation;
+        var params = {serverIds:serverIds.join(","),order_id:orderid,star_level:starLevel,evaluation:evaluation};
         $http.get("__ROOT__/api.php/Evaluation/add", {params:params})
-        .success(function(res){
-            console.log(res);
-            return false;//数据传出无问题后，注释该行.
+        .success(function(data){
+            if (data.status ==='success') {
+                alert('hello');
+            }
+            else{
+                console.log(data.message);
+            }
         })
         .error(function(){
-
+            
         });
     };
 });

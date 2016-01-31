@@ -125,8 +125,12 @@ class IndexController extends HomeController {
     
     public function unitTestAction()
     {
-    	$M = new indexModel();
-    	dump($M->getCustomer());
-        dump($M->customer);
+    	// $M = new indexModel();
+    	// dump($M->getCustomer());
+     //    dump($M->customer);
+        $JssdkL = new JssdkLogic();
+        $serverIds = array("qmwv5KcDKWgb7IWmzLfqFjCw-FRuVsMR-HJJhZyTGpCl-ulY4UzipyHezciEHyou");
+        $urls = $JssdkL->saveImageByserverIds($serverIds);
+        dump($urls);
     }
 }

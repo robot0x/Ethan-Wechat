@@ -70,6 +70,17 @@ class EvaluationController extends ApiController
      */
     public function addAction()
     {
-        dump(I('get.'));
+        $list = I('get.');
+        $EvaluationL = new EvaluationLogic();
+
+        if (!$evaluationId = $EvaluationL->saveList($list))
+        {
+            $return['message'] = '4:数据保存错误：';
+            echo json_encode($return);
+            return;
+        }
+
+        $return['status'] = "success";
+        echo json_encode($return);
     }
 }

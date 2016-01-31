@@ -44,7 +44,6 @@
     <include file="indexActivity" />
     <include file="indexActivityDetails" />
     <include file="indexPersonalCenter" />
-    <include file="indexIntegral" />
     <!--支付-->
     <include file="indexPay" />
     <!--订单-->

@@ -105,9 +105,13 @@ class EvaluationLogic extends EvaluationModel
 		$starLevel = (int)$list['star_level'] > 0 ? ((int)$list['star_level'] < 6 ? (int)$list['star_level'] : 5) : 1 ;
 		
 		$data = array();
-		$data['id'] 		= (int)$list["id"];
+        if (isset($list['id'])) {
+            $data['id'] = (int)$list['id'];
+        }
+        $data['order_id']   = (int)$list['order_id'];
 		$data['star_level'] = $starLevel;
-		$data['url'] 		= $list['url'];
+		//$data['url'] 		= $list['url'];
+        $data['url']        = "url";//显示上一行
 		$data['evaluation'] = $list['evaluation'];
 
 		//加入更新时间
@@ -120,11 +124,10 @@ class EvaluationLogic extends EvaluationModel
 			$data['update_time'] = time();
 		}
 
-		if (isset($list['user_id']))
+		if (isset($list['update_user_id']))
 		{
-			$data['user_id'] = $list['user_id'];
+			$data['update_user_id'] = $list['update_user_id'];
 		}
-
 		return parent::saveList($data);
 	}
 }

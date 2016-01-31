@@ -33,7 +33,7 @@
         }
       })
     .state('tabs.evaluationing',{
-      url: "/evaluationing/:id",
+      url: "/evaluationing/:orderid",
       views:{
           //评论界面
           'home-tab':{
@@ -47,15 +47,6 @@
             //评论成功
             'home-tab':{
               templateUrl: "templates/indexSuccess.html"
-            }
-          }
-        })
-    .state('tabs.integral1',{
-      url: "/integral1",
-      views:{
-            //我的积分
-            'home-tab':{
-              templateUrl: "templates/indexIntegral.html"
             }
           }
         })
@@ -142,15 +133,6 @@
         'personal-tab': {
             //我的订单
             templateUrl: "templates/indexOrder.html"
-          }
-        }
-      })
-    .state('tabs.integral2', {
-      url: "/integral2",
-      views: {
-        'personal-tab': {
-            //我的积分
-            templateUrl: "templates/indexIntegral.html"
           }
         }
       });
