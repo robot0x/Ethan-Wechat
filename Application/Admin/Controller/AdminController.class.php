@@ -12,21 +12,21 @@ class AdminController extends Controller
 		parent::__construct();
 
 		//取当前ACTION，判断是否存在于菜单表中，不存在，开发模式时，直接跳转到菜单管理的添加
-		//非开发模式时，直接跳转到报错界面
-		$MenuL = new MenuLogic();
-		if (!$menu = $MenuL->getCurrentMenu())
-		{
-			if (APP_DEBUG)
-			{
-				$this->redirect('Menu/add', array("module" => MODULE_NAME, "controller" => CONTROLLER_NAME, "action" => ACTION_NAME), 3, 'Plase add the action in Menu Management');
-				exit();
-			}
-			else
-			{
-				$this->error("你访问的界面不存在");
-				exit();
-			}
-		}
+		// //非开发模式时，直接跳转到报错界面
+		// $MenuL = new MenuLogic();
+		// if (!$menu = $MenuL->getCurrentMenu())
+		// {
+		// 	if (APP_DEBUG)
+		// 	{
+		// 		$this->redirect('Menu/add', array("module" => MODULE_NAME, "controller" => CONTROLLER_NAME, "action" => ACTION_NAME), 3, 'Plase add the action in Menu Management');
+		// 		exit();
+		// 	}
+		// 	else
+		// 	{
+		// 		$this->error("你访问的界面不存在");
+		// 		exit();
+		// 	}
+		// }
 		
 
 		//取左侧菜单数据	
