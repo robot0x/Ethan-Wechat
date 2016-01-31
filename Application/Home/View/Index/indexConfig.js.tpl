@@ -17,7 +17,7 @@ app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$i
     
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
-    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(wxlocalresource):/);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(wxlocalresource|http):/);
 
     $httpProvider.interceptors.push(function($rootScope) {
     return {

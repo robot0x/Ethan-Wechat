@@ -2,9 +2,6 @@
   <ion-view view-title="查看评论" ng-controller='EvaluationCtrl'>
  
   <ion-content>
-      <div class="padding">
-        <a class="button button-block button-positive" href="#/tab/evaluationing">我要评论</a>
-     </div>
     <div class="list">
     {/*<div ng-bind="evaluations | json"></div>*/}
       <div class="item item-avatar" href="#" ng-repeat='evaluation in evaluations'>

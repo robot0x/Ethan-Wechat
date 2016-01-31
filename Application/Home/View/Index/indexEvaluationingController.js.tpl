@@ -1,5 +1,9 @@
-  app.controller("EvaluationingCtrl", function($scope,$http, $ionicLoading,$stateParams){
+  app.controller("EvaluationingCtrl", function($scope,$http, $ionicLoading,$stateParams, $state, $ionicPopup, RoomFactory, OrderFactory){
     var orderid = $stateParams.orderid;
+    var orders = OrderFactory.datas.toObjectByKey();
+    var rooms = RoomFactory.rooms.toObjectByKey();
+    var order = orders[orderid];
+    $scope.room = rooms[order.room_id];
     $scope.evaluation = '';
     $scope.max = 5;                   //星星个数
     var starLevel = $scope.ratingVal = 4;             //??
@@ -25,27 +29,29 @@
     //上传图片至微信服务器
     var upload = function(localIds){
         var length = localIds.length;
-        localIds.forEach(function(localId, index){
-            wx.uploadImage({
-                localId: localId,       // 需要上传的图片的本地ID，由chooseImage接口获得
-                isShowProgressTips: 1,  // 默认为1，显示进度提示
-                success: function (res) {
-                    serverIds.push(res.serverId); // 返回图片的服务器端ID
-                    console.log(serverIds)
-                    maxCount--;
-                    if (maxCount <= 0)
-                    {
-                        $scope.showUpload = 0;
-                    }
-                    if (index == length-1)
-                    {
-                        $ionicLoading.hide();
-                    }
-                },
-                error:function(res){
-                    $ionicLoading.hide();   
-                },
-            });
+        if(length == 0)
+        {
+            $ionicLoading.hide();
+            return;
+        }
+        var localId = localIds[0];
+        wx.uploadImage({
+            localId: localId,       // 需要上传的图片的本地ID，由chooseImage接口获得
+            isShowProgressTips: 1,  // 默认为1，显示进度提示
+            success: function (res) {
+                serverIds.push(res.serverId); // 返回图片的服务器端ID
+                alert(serverIds.length);
+                maxCount--;
+                if (maxCount <= 0)
+                {
+                    $scope.showUpload = 0;
+                }
+                localIds.pop(localId);
+                upload(localIds);
+            },
+            error:function(res){
+                $ionicLoading.hide();   
+            },
         });
     };
 
@@ -70,20 +76,30 @@
     }; 
 
     //提交评论
-    $scope.submit = function(){
+    $scope.submit = function(event){
         var evaluation = $scope.evaluation;
-        var params = {serverIds:serverIds.join(","),order_id:orderid,star_level:starLevel,evaluation:evaluation};
+        var params = {server_ids:serverIds.join(","),order_id:orderid,star_level:starLevel,evaluation:evaluation};
+        console.log(params);
         $http.get("__ROOT__/api.php/Evaluation/add", {params:params})
         .success(function(data){
+            console.log(data);
             if (data.status ==='success') {
-                alert('hello');
+                //将订单变为已评论
+                OrderFactory.orderIsEvaluationed(orderid);
+                $state.go('tabs.success');
             }
             else{
-                console.log(data.message);
+                $ionicPopup.alert({
+                    title: '系统错误',
+                    template: data.message,
+                });
             }
         })
-        .error(function(){
-            
+        .error(function(res){
+            $ionicPopup.alert({
+                title: '网络错误',
+                template: "网络状态不佳，请您稍后重试",
+            });
         });
     };
 });

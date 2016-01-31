@@ -157,11 +157,6 @@ class JssdkLogic
             return false;
         }
         foreach ($serverIds as $key => $mediaId) {
-            if (!is_string($mediaId))
-            {
-                $this->setError("JssdkL:saveImageByserverIds.The value of item type is not string.数组变量类型必须为字符串.");
-                return false;
-            }
             if (!$url = $this->getAndUploadWxImage($mediaId))
             {
                 return false;
@@ -171,7 +166,9 @@ class JssdkLogic
         return $urls;
     }
 
-/*
+    /**
+     * @param  array $mediaId 微信图片暂存服务器的标识
+     * @return array 存在本地服务器的URL信息
      * 获取微信服务器上传的图片
      * 1.取得当前access_token()
      * 2.下载图片

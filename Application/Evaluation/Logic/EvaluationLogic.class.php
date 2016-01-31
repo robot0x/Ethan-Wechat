@@ -110,8 +110,7 @@ class EvaluationLogic extends EvaluationModel
         }
         $data['order_id']   = (int)$list['order_id'];
 		$data['star_level'] = $starLevel;
-		//$data['url'] 		= $list['url'];
-        $data['url']        = "url";//显示上一行
+		$data['url'] 		= $list['url'];
 		$data['evaluation'] = $list['evaluation'];
 
 		//加入更新时间

@@ -129,8 +129,10 @@ class IndexController extends HomeController {
     	// dump($M->getCustomer());
      //    dump($M->customer);
         $JssdkL = new JssdkLogic();
-        $serverIds = array("qmwv5KcDKWgb7IWmzLfqFjCw-FRuVsMR-HJJhZyTGpCl-ulY4UzipyHezciEHyou");
+        $serverIds = array("qmwv5KcDKWgb7IWmzLfqFjCw-FRuVsMR-HJJhZyTGpCl-ulY4UzipyHezciEHyou","qmwv5KcDKWgb7IWmzLfqFjCw-FRuVsMR-HJJhZyTGpCl-ulY4UzipyHezciEHyou");
         $urls = $JssdkL->saveImageByserverIds($serverIds);
+        $url = implode(',', $urls); 
         dump($urls);
+        echo $url;
     }
 }

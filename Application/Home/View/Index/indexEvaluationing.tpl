@@ -2,9 +2,9 @@
     <ion-view view-title="评论">
         <ion-content ng-controller='EvaluationingCtrl'>
             <div class="item item-thumbnail-left">
-                <img src="__IMG__/rujia.jpg">
-                <h2><i class="icon ion-social-yen"></i>120</h2>
-                <p>介绍</p>
+                <img ng-src="{{room.url}}">
+                <h2><i class="icon ion-social-yen"></i>{{room.name}}</h2>
+                <p>{{room.description}}</p>
             </div>
             <div class="list">
                 <div class="item item-body">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <a ui-serf="#/tab/success" ng-click="submit()">
+                <a ng-click="submit($event)">
                     <div class="padding">
                         <button class="button button-full button-positive">
                             提交评论
