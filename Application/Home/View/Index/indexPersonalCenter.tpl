@@ -6,6 +6,7 @@
 			<img ng-src="{{headimgurl}}">
 			<h3>{{nickname}}</h3>
 			<p>{{phone}}</p>
+			<p>{{credit}}</p>
 		</a>
 
 		<div class="button-bar">
@@ -28,14 +29,9 @@
 		全部订单
 		<i class="icon ion-iconfontunie61f"></i>
 	</a>
-	<a href="#/tab/integral" class="item item-icon-left item-icon-right">
-		<i class="icon ion-jifen"></i>
-		查看积分
-		<i class="icon ion-iconfontunie61f"></i>
-	</a>
-	<a href="tel:13920156607" class="item item-icon-left">
+	<a href="tel:{{hotelPhone}}" class="item item-icon-left">
 		<i class="icon ion-kefu"></i>
-		客服  13920156607
+		客服  {{hotelPhone}}
 	</a>
 </div>
 </ion-content>

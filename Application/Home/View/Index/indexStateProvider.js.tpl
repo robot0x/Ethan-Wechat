@@ -50,15 +50,6 @@
             }
           }
         })
-    .state('tabs.integral1',{
-      url: "/integral1",
-      views:{
-            //我的积分
-            'home-tab':{
-              templateUrl: "templates/indexIntegral.html"
-            }
-          }
-        })
     .state('tabs.date',{
       url: "/date",
       views:{
@@ -142,15 +133,6 @@
         'personal-tab': {
             //我的订单
             templateUrl: "templates/indexOrder.html"
-          }
-        }
-      })
-    .state('tabs.integral2', {
-      url: "/integral2",
-      views: {
-        'personal-tab': {
-            //我的积分
-            templateUrl: "templates/indexIntegral.html"
           }
         }
       });

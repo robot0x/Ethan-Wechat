@@ -146,6 +146,8 @@ app.directive("star", function() {
 <include file="indexHomeFactory.js" />        //首页数据
 <include file="indexHotelFactory.js" />       //酒店介绍数据
 <include file="indexTimeRoomFactory.js" />    //首页小时房信息
+<include file="indexCreditFactory.js" />    //客户总积分信息
+
 
 <include file="indexBaseService.js" />        //基础服务
 <include file="function.js" />                //公共函数

@@ -1,4 +1,4 @@
-app.controller("personalCenter", function($scope, OrderFactory, CustomerFactory){
+app.controller("personalCenter", function($scope, OrderFactory, CustomerFactory,CreditFactory,IntroductionFactory){
     $scope.test = function(type){
         OrderFactory.type = type;
     };
@@ -17,5 +17,13 @@ app.controller("personalCenter", function($scope, OrderFactory, CustomerFactory)
     if (CustomerFactory.nickname !== undefined)
     {
         $scope.nickname = CustomerFactory.nickname;
-    }   
+    }
+    if (CreditFactory.credit.total !== undefined)
+    {
+        $scope.credit = CreditFactory.credit.total;
+    }
+    if (IntroductionFactory.introduction.hotel_phone !== undefined)
+    {
+        $scope.hotelPhone = IntroductionFactory.introduction.hotel_phone;
+    }
 });
