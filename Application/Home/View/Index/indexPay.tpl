@@ -1,6 +1,10 @@
 <script id="templates/indexPay.html" type="text/ng-template">
-    <ion-view view-title="支付" hide-nav-bar="true">
-        <ion-content>
+    <ion-view view-title="洛克高级酒店公寓" hide-nav-bar="true">
+    <div class="bar bar-header">
+        <a ng-href='#/tab/personal'><button class="button button-icon icon ion-ios-arrow-back"></button></a>
+        <div class="h1 title">支付</div>
+    </div>
+        <ion-content class='has-header'>
             <div class="pay">
                 <div class="paying" ng-hide="success || error">
                     <div class="payIcon">

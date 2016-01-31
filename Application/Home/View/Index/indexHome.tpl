@@ -1,5 +1,5 @@
 <script id="templates/indexHome.html" type="text/ng-template">
-<ion-view view-title="首页" ng-controller="HomeTabCtrl">
+<ion-view view-title="洛克高级酒店公寓" ng-controller="HomeTabCtrl">
    <ion-content>
 <!-- 图片轮播 -->
       <ion-slide-box class="slides">

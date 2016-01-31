@@ -10,10 +10,6 @@
 </head>
 
 <body>
-    <ion-nav-bar class="bar-stable">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
-    </ion-nav-bar>
     <ion-nav-view>
         <div class="backdrop visible backdrop-loading active" ng-hide="1"></div>
         <div class="loading-container visible active" ng-hide="1">

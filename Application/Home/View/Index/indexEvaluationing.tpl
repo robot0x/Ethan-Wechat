@@ -1,6 +1,10 @@
 <script id="templates/indexEvaluationing.html" type="text/ng-template">
-    <ion-view view-title="评论">
-        <ion-content ng-controller='EvaluationingCtrl'>
+<ion-view view-title='洛克高级酒店公寓'>
+    <div class="bar bar-header">
+        <a ng-href='#/tab/personal'><button class="button button-icon icon ion-ios-arrow-back"></button></a>
+        <div class="h1 title">评价赢积分</div>
+    </div>
+        <ion-content class='has-header' ng-controller='EvaluationingCtrl'>
             <div class="item item-thumbnail-left">
                 <img src="__IMG__/rujia.jpg">
                 <h2><i class="icon ion-social-yen"></i>120</h2>
