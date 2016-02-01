@@ -75,12 +75,12 @@ class RoomLogic extends RoomModel
 		$rooms = $this->getAllLists();
 		
 		//日期格式化，不成功，则进行当日及次日初始化
-		if (!$beginTime = date_to_int($beginTime))
+		if (!validateDate($beginTime))
 		{
 			$beginTime = date_to_int(date("Y-m-d"));
 		}
 
-		if (!$endTime = date_to_int($endTime))
+		if (!validateDate($endTime))
 		{
 			$endTime = $beginTime+24*60*60;
 		}

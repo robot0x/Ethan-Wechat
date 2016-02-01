@@ -158,7 +158,7 @@ class OrderLogic extends OrderModel
 		$RoomL = new RoomLogic();
 		if (!$room = $RoomL->getListById($order['room_id']))
 		{
-			$this->setError("OrderL::checkOrderCanBePayById Error:" . $RoomL->getError());
+			$this->setError("OrderL::checkOrderCanBePayById Error: 相关的房型数据取出错误，该原因可能是房型被冻结或被删除" . $RoomL->getError());
 			return false;
 		}
 		if ($room['status'] == '1')
@@ -189,11 +189,29 @@ class OrderLogic extends OrderModel
 		return $order;
 	}
 
+	/**
+	 * 将订单状态变更为已支付
+	 * panjie
+	 * @param int 订单编号 
+	 */
 	public function setIsPayById($id)
 	{
 		$data['id'] = $id;
 		$data['is_pay'] = 1;
 		$this->saveList($data);
 		return;
+	}
+
+	/**
+	 * 获取用户最后一条支付信息
+	 * @param  string $openId 用户openid
+	 * @return list         
+	 */
+	public function getLastListByOpenId($openId)
+	{
+		$map['customer_id'] = $openId;
+		$orderBy = "id desc";
+		$data = $this->where($map)->order($orderBy)->find();
+		return $data;
 	}
 }

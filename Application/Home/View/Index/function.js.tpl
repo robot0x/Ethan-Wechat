@@ -1,3 +1,16 @@
+//获取不大于该数字的数组
+Number.prototype.getArray = function(){
+    var maxArray = [];
+    for (var i = this - 1; i >= 0; i--) {
+        maxArray.push(i+1);
+    };
+    return maxArray;
+};
+
+Number.prototype.fenToYuan = function(){
+    return formatMoney(parseFloat(this).div(100),2);
+};
+//将数组转化为以关键字对应的对象
 Array.prototype.toObjectByKey = function(key){
     if (key === undefined)
     {

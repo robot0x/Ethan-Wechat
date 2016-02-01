@@ -1,9 +1,13 @@
 <script id="templates/indexDate.html" type="text/ng-template">
-<ion-view view-title="选择日期" ng-controller='DateCtrl'>
+<ion-view view-title="洛克高级酒店公寓" ng-controller='DateCtrl'>
+<div class="bar bar-header">
+  <a ng-href='#/tab/home'><button class="button button-icon icon ion-ios-arrow-back"></button></a>
+  <div class="h1 title">选择日期</div>
+</div>
 	<div class="bar bar-subheader bar-stable">
-  <span ng-show="!currentCalendar.isFirstMonth" ng-click="preMonth()" class="button button-icon ion-back"></span>
+  <span ng-show="!currentCalendar.isFirstMonth" ng-click="preMonth()" class="button button-icon icon ion-back"></span>
   <h6 class="title">{{currentCalendar.year}}年{{currentCalendar.month}}月</h6>
-  <span ng-show="!currentCalendar.isLastMonth" ng-click="nextMonth()" class="button button-icon ion-right"></span>
+  <span ng-show="!currentCalendar.isLastMonth" ng-click="nextMonth()" class="button button-icon icon ion-right"></span>
   </div>
 <ion-content>
 

@@ -36,7 +36,6 @@ class RoomController extends ApiController
 
 		return $data;
 	}
-
 	/**
 	 * 获取一条房间信息
 	 * xulinjie

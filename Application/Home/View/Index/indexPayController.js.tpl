@@ -1,23 +1,34 @@
-app.controller('indexPayController',function($location, $http, $scope, $timeout, $ionicPopup, $stateParams, OrderFactory){
+app.controller('indexPayController',function( $location, $http, $scope, $timeout, $ionicPopup, $stateParams, OrderFactory, $ionicLoading, RoomFactory){
     var orderId = $stateParams.orderid;
     var params;
+    var orders = OrderFactory.datas.toObjectByKey();
+    $scope.order = orders[orderId];      //订单
+    $scope.order['price'] = fToy($scope.order['price']);
     $scope.isButtonOk   = 0; //确定按钮
-    $scope.waitTime = 10;   //等待时间
-    $scope.message = "正在支付";
-    $scope.paying = 1;
-    $scope.fail = 1;
-    $scope.success = 1;
+    $scope.waitTime = 3;   //等待时间
+    $scope.message = "";    //消息
+    $scope.error = 0;       //是否出错
+    $scope.success = 0;     //是否成功
+    $scope.room = {};       //房型信息
+    $scope.totalPrice = 0.00;  //总价格
     var jsApiCall = function(){
+        $ionicLoading.show({
+            template: '正在发起支付...'
+        });
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest',
             params,
             function(res){
-                console.log(res);
+                $ionicLoading.hide();
                 if (res.errMsg !== undefined)
                 {
                     $ionicPopup.alert({
                         title: '支付失败',
                         template: '原因:'+res.errMsg,
+                    });
+                    $scope.$apply(function(){
+                        $scope.message = res.errMsg;
+                        $scope.error = 1;
                     });
                 }
                 else if (res.err_msg === undefined)
@@ -25,6 +36,10 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                     $ionicPopup.alert({
                         title: '支付失败',
                         template: '接收到的数据类型未识别',
+                    });
+                    $scope.$apply(function(){
+                        $scope.message = '接收到的数据类型未识别';
+                        $scope.error = 1;
                     });
                     // return;
                 }
@@ -37,7 +52,8 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                             template: '用户取消支付，或支付未成功完成',
                         });
                         $scope.$apply(function(){
-                            $scope.message = "支付失败";
+                            $scope.message = "用户取消支付，或支付未成功完成";
+                            $scope.error = 1;
                         });
                     }
                     else
@@ -48,8 +64,9 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                             {
                                 $scope.$apply(function(){
                                     $scope.message = "支付成功";
+                                    $scope.success = 1;
                                 });
-
+                
                                 //更新订单信息
                                 OrderFactory.orderIsPay(orderId);
                             }
@@ -60,37 +77,28 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                                     template: '未能正确接收支付订单信息',
                                 });
                                 $scope.$apply(function(){
-                                    $scope.message = "支付失败";
+                                    $scope.message = "未能正确接收支付订单信息";
+                                    $scope.error = 1;
                                 });
                             }
                         })
                         .error(function(res, status, header, config){
-                            alert("网络错误,请稍后重试");
+                            $ionicPopup.alert({
+                                    title: '网络错误',
+                                    template: '网络错误,请稍后重试',
+                                });
+                                $scope.$apply(function(){
+                                    $scope.message = "网络错误,请稍后重试";
+                                    $scope.error = 1;
+                                });
                         });
-                        //重写factory
                     }
                 }   
-                onTimeOut();//倒计时
+                
             }
         );
     };
 
-    //倒计时，并进行页面的跳转
-    var onTimeOut = function(){
-        $scope.waitTime--;
-        if (!$scope.waitTime)
-        {
-            $scope.$apply(function(){
-                $scope.isButtonOk = 1;
-            });
-            $location.path('/tab/home');
-            return;
-        }
-        else
-        {
-            $timeout(onTimeOut,1000);
-        }
-    };
     var pay = function(){
         $http.get('__ROOT__/api.php/WxPay/orderPay',{params:{id: orderId}})
         .success(function(data, status, header, config){
@@ -100,9 +108,17 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                     title: '亲，出错啦!',
                     template: data.message,
                 });
+                $scope.$apply(function(){
+                    $scope.message = data.message;
+                    $scope.error = 1;
+                });
                 return;
             }
-            params = data.data;
+            params = data.data.params;
+            var roomId = data.data.roomId;
+            var rooms = RoomFactory.rooms.toObjectByKey();
+            $scope.totalPrice = fToy(data.data.totalPrice);
+            $scope.room = rooms[roomId];
             if (typeof WeixinJSBridge == "undefined"){
                 if( document.addEventListener ){
                     document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
@@ -110,6 +126,14 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
                     document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
                     document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
                 }
+                $ionicPopup.alert({
+                    title: '亲，出错啦!',
+                    template: '未获取到WeixinJSBridge，请退出微信后重试',
+                });
+                $scope.$apply(function(){
+                    $scope.message = "未获取到WeixinJSBridge，请退出微信后重试";
+                    $scope.error = 1;
+                });
             }else{
                 jsApiCall();
             }
@@ -117,10 +141,14 @@ app.controller('indexPayController',function($location, $http, $scope, $timeout,
         .error(function(data, status, header, config){
             $ionicPopup.alert({
                 title: '亲，出错啦!',
-                template: '系统错误:indexOrderController.js:pay.http.error',
+                template: '您的网络好像不给力',
+            });
+            $scope.$apply(function(){
+                $scope.message = "网络或系统异常";
+                $scope.error = 1;
             });
             return;
         });
     };
-    pay();
+    pay();   
 });

@@ -24,4 +24,5 @@ app.controller("order", function($scope, $location, $ionicPopup, $http, $statePa
             $scope.orders = OrderFactory.datas;
             break;
     };
+    console.log(OrderFactory.datas);
 });

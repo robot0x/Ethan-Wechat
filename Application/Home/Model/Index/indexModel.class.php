@@ -5,14 +5,28 @@
  * update:2016-01-24
  */
 namespace Home\Model\Index;
-use Jssdk\Logic\JssdkLogic;	//jssdk
-use Order\Logic\OrderLogic;	//订单
-use Room\Logic\RoomLogic;	//房型
+use Jssdk\Logic\JssdkLogic;		//jssdk
+use Order\Logic\OrderLogic;		//订单
+use Room\Logic\RoomLogic;		//房型
+use Config\Logic\ConfigLogic;	//系统配置
+use Activity\Logic\ActivityLogic;//活动
+use SlideShow\Logic\SlideShowLogic;	//幻灯片
+use Introduction\Logic\IntroductionLogic;//酒店介绍
+use Credit\Logic\CreditLogic;       //积分
+use Customer\Logic\CustomerLogic;		//客户
 
 class indexModel
 {
-	public $openId = "";			//用户openid
-	public $signPackage = array();	//JSSDK签名
+	public $openId 		 = "";		//用户openid
+	public $signPackage  = array();	//JSSDK签名
+	public $orderInfo 	 = array();	//订单的附加信息
+	public $activeties   = array();  //活动列表信息
+	public $slideUrls	 = array();	//幻灯片URL
+	public $slideMapUrl  = "";		//首页地图图片
+	public $customer     = array();	//客户信息
+	public $introduction = array(); //酒店介绍
+	public $timeRoom     = array(); //小时房信息
+	public $credit       = array(); //个人总积分
 
 	public function setOpenId($openId)
 	{
@@ -25,6 +39,12 @@ class indexModel
 		$appSecret = C("APPSECRET");
 		$jssdk = new JssdkLogic($appId, $appSecret);
 		$this->signPackage = $jssdk->getSignPackage();
+		$this->getOrderInfo();		   //取订单信息
+		$this->getActivityLists();	   //取活动信息
+		$this->homeInit();			   //首页初始化信息(幻灯片，地图URL)
+		$this->getHotalIntroduction(); //取酒店介绍详情
+		$this->getCustomer();			//取客户信息
+		$this->getTimeRoom();          //取config信息
 	}
 	
 	//获取JSSDK
@@ -85,7 +105,7 @@ class indexModel
 			$weeks 	= array();
 
 			//加入空数据
-			for ($j = 0 ; $j < $weekDay; $j++, $index++)
+			for ($j = 0 ; $j < $weekDay; $j++)
 			{
 				$days[$j]["day"] 		= "";		//当前 日
 				$days[$j]["isDisabled"] = true;		//是否可选
@@ -122,7 +142,7 @@ class indexModel
 			}
 
 			//补完不到满周的
-			for( ; $j%7 != 0; $j++, $index++)
+			for( ; $j%7 != 0; $j++)
 			{
 				$days[$j]["index"]	= $index;
 				$days[$j]["day"] = "";
@@ -191,5 +211,149 @@ class indexModel
 		$rooms = $RoomL->getAllListsWithTimeRange($beginDate, $endDate);
 
 		return json_encode($rooms);
+	}
+
+	public function getOrderInfo()
+	{
+		$data = array("customerName"=>"", 	//客户姓名
+			"customerPhone"=>"",			//客户电话
+			"notice"=>"", 					//住店需知
+			"prompt"=>"", 					//温馨提示
+			"credit"=>"100");				//积分兑换
+		$openId = session("openId");
+		// $openId = "oha4Tt4g9_IZ047Q_WxrR4FWQsYA";
+
+		//取最后一条订单信息
+		$OrderL = new OrderLogic();
+		if ($order = $OrderL->getLastListByOpenId($openId))
+		{
+			$data['customer_name'] = $order['customer_name'];
+			$data['customer_phone'] = $order['customer_phone'];
+		}
+
+		//取配置信息
+		$ConfigL = new ConfigLogic();
+		if ($notice = $ConfigL->getValueByName("notice"))
+		{
+			$data['notice'] = $notice['value'];
+		}
+
+		if ($prompt = $ConfigL->getValueByName("prompt"))
+		{
+			$data['prompt'] = $prompt['value'];
+		}
+
+		if ($credit = $ConfigL->getValueByName("credit"))
+		{
+			$data['credit'] = $credit['value'];
+		}
+
+		$this->orderInfo = $data;
+		return $data;
+	}
+
+	/**
+	 * 取活动信息列表
+	 * xulinjie
+	 * @return lists
+	 */
+	public function getActivityLists()
+	{
+		$ActivityL = new ActivityLogic();
+
+		//设置查询条件
+		$maps = array("status"=>"0");
+		$ActivityL->setMaps($maps);
+
+		//设置取回字段
+		$fields = array("id","end_time","title","thumbnails_url");
+		$ActivityL->setBackFields($fields);
+
+		//取LISTS
+		$activeties = $ActivityL->getLists(); 
+
+		//返回值
+		$this->activeties = $activeties;
+		return json_encode($activeties) ;
+	}
+	/**
+	 * 首页初始化取幻灯片
+	 * xulinjie
+	 * @return 
+	 */
+	public function homeInit()
+	{
+		//实例化幻灯片
+		$SlideShowL = new SlideShowLogic();
+		$slideshows = $SlideShowL->getNormalLists();
+
+		//抓取出：存在URL值而且不是首页地图信息的信息，并返回
+		foreach($slideshows as $key => $value)
+		{
+			if ($value['url'] !== '' && $value['is_map'] == '0')
+			{
+				$this->slideUrls[] = $value['url'];
+			}
+			if ($value['url'] !== '' && $value['is_map'] == '1')
+			{
+				$this->slideMapUrl = $value['url'];
+				break;
+			}
+		}
+	}
+
+	/**
+	 * 获取酒店介绍信息
+	 * panjie
+	 * @return 
+	 */
+	public function getHotalIntroduction()
+	{
+		$IntroductionL = new IntroductionLogic();
+		$introduction = $IntroductionL->getList();
+		$introduction['description'] = htmlspecialchars_decode($introduction['description']);
+
+		$this->introduction = $introduction;
+		return json_encode($introduction) ;
+	}
+
+
+	/**
+	 * 通过SEEION的openid，获取用户在微信服务器上的基本信息
+	 * panjie
+	 */
+	public function getCustomer()
+	{
+		$CustomerLogic = new CustomerLogic();
+		$this->customer = $CustomerLogic->updateAndGetListByOpenId(session("openId"));
+	}
+
+	/**
+	 * 去config表中的信息
+	 * xulinjie
+	 * @return 
+	 */
+	public function getTimeRoom()
+	{
+		$name = "TIMEROOM";
+		$ConfigL = new ConfigLogic();
+		$timeRoom = $ConfigL->getValueByName($name);
+
+		$this->timeRoom = $timeRoom;
+	}
+
+	/**
+	 * 取当前客户的总积分
+	 * xulinjie
+	 * @return 
+	 */
+	public function getCredit()
+	{
+		$openId = session("openId");
+
+		$CreditL = new CreditLogic();
+		$credit = $CreditL->getListbyCustomerId($openId);
+
+		$this->credit = $credit;
 	}
 }

@@ -48,8 +48,16 @@ class WxPayController extends ApiController
             echo json_encode($return);
             return;
         }
+        if ($order['end_time'] = $order['begin_time'])
+        {
+            $totalDays = 1;
+        }
+        else
+        {
+            $totalDays = (int)ceil((($order['end_time'] - $order['begin_time']) / 24*60*60));
+        }
         //总价(单位为分)
-        $totalPrice = $order['price'] * $order['count'];
+        $totalPrice = $order['price'] * $order['count'] * $totalDays;
         
         //商品描述
         $body   = '洛克酒店:' . $order["_room"]["title"] . '*' . $order['count'] . '间。';
@@ -91,8 +99,10 @@ class WxPayController extends ApiController
         $JsApiPayL = new JsApiPayLogic();
         $jsApiParameters = $JsApiPayL->GetJsApiParameters($unifiedOrder);
     
-        $return['status'] = "success";
-        $return['data'] = $jsApiParameters;
+        $return['status']               = "success";
+        $return['data']['params']       = $jsApiParameters;
+        $return['data']['roomId']      = $order['room_id'];
+        $return['data']['totalPrice']   = $totalPrice;
         // dump($order);
         echo json_encode($return);
     }  
@@ -141,7 +151,11 @@ class WxPayController extends ApiController
             && $result["return_code"] == "SUCCESS"
             && $result["result_code"] == "SUCCESS")
         {
-            $return['status'] = "success";
+            //将订单状态设置为已支付
+            $order['is_pay']    = 1;
+            $order['pay_time']  = time();
+            $OrderL->saveList($order);
+            $return['status']   = "success";
         }
         else
         {

@@ -2,12 +2,6 @@
 namespace Api\Controller;
 
 use Think\Controller;
-use Api\Controller\JssdkController;
-use Api\Controller\SlideShowController;
-use Api\Controller\IntroductionController;
-use Api\Controller\RoomController;
-use Api\Controller\EvaluationController;
-use Api\Controller\ActivityController;
 
 class ApiController extends Controller
 {
@@ -24,44 +18,7 @@ class ApiController extends Controller
 		$signPackage = $jssdk->GetSignPackage();
 		var_dump($signPackage);
 	}	
-	/**取首页的信息
-	 * xulinjie
-	 * @return ajaxlist
-	 */
-	public function getSlideInitAction()
-	{
-		$SlideShow = new SlideShowController();
-		//获取首页幻灯片和首页地图的url
-		$slideUrls = $SlideShow->getSlideUrls();
-		$slideMapUrl = $SlideShow->getSlideMapUrl();
-
-		//取房间信息
-		$SlideRoom = new RoomController();
-		$slideRoomLists = $SlideRoom->getRooms();
-		//room增加一个字段detail = false;
-		foreach ($slideRoomLists['data'] as $key => $value) {
-			$slideRoomLists['data'][$key]['detail'] = false;
-			$slideRoomLists['data'][$key]['order'] = '#/tab/confirmOrder';
-		}
-
-		//取酒店详细信息
-		$Introduction = new IntroductionController();
-		$introduction = $Introduction->getHotalIntroduction();
-
-		//取活动信息
-		$Activity = new ActivityController();
-		$activitys = $Activity->getActivitys();
-
-		//拼接数组
-		$data['slideUrls'] = $slideUrls;
-		$data['slideMapUrl'] = $slideMapUrl;
-		$data['rooms'] = $slideRoomLists;
-		$data['introduction'] = $introduction;
-		$data['activitys'] = $activitys;
-
-		$this->ajaxReturn($data);
-	}
-
+	
 	/**
 	 * 取评价信息
 	 * xulinjie
@@ -84,31 +41,19 @@ class ApiController extends Controller
 			}
 		}
 
-		
 		$this->ajaxReturn($evaluations);
 	}
 
 	/**
-	 * 获取新的房间信息
+	 * 取活动的详细信息
 	 * xulinjie
 	 * @return 
 	 */
-	public function getNewRoomsAction()
+	public function getActivityDetailAction()
 	{
-		$Room = new RoomController();
-		$roomLists = $Room->getRooms();
-		$this->ajaxReturn($roomLists);
-	}
+		$Activity = new ActivityController();
+		$detail = $Activity->getActivityDetail();
 
-	/**
-	 * 取填写订单的信息
-	 * xulinjie
-	 * @return 
-	 */
-	public function getConfirmOrderAction()
-	{
-		$Room = new RoomController();
-		$roomList = $Room->getRoomList();
-		$this->ajaxReturn($roomList);
+		$this->ajaxReturn($detail);
 	}
 }

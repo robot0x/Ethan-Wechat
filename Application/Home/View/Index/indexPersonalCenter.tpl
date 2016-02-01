@@ -1,11 +1,12 @@
 <script id="templates/indexPersonalCenter.html" type="text/ng-template">
-	<ion-view view-title="个人中心" ng-controller="personalCenter">
+	<ion-view view-title="洛克高级酒店公寓" ng-controller="personalCenter">
 	<ion-content>
 	<div class="list">
 		<a class="item item-avatar" href="#">
-			<img src="__IMG__/1024.jpg">
-			<h3>昵称</h3>
-			<p>手机号</p>
+			<img ng-src="{{headimgurl}}">
+			<h3>{{nickname}}</h3>
+			<p>{{phone}}</p>
+			<p>{{credit}}</p>
 		</a>
 
 		<div class="button-bar">
@@ -28,14 +29,9 @@
 		全部订单
 		<i class="icon ion-iconfontunie61f"></i>
 	</a>
-	<a href="#/tab/integral" class="item item-icon-left item-icon-right">
-		<i class="icon ion-jifen"></i>
-		查看积分
-		<i class="icon ion-iconfontunie61f"></i>
-	</a>
-	<a href="tel:13920156607" class="item item-icon-left">
+	<a href="tel:{{hotelPhone}}" class="item item-icon-left">
 		<i class="icon ion-kefu"></i>
-		客服  13920156607
+		客服  {{hotelPhone}}
 	</a>
 </div>
 </ion-content>

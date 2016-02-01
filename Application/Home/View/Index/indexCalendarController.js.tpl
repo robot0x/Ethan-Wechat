@@ -1,4 +1,4 @@
-app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home){
+app.controller('DateCtrl',function($scope ,$http,$location , Calendar, RoomFactory){
 	//初始化
 	$scope.calendar		= {:$M::getCalendarAjax()};	//由M层中取得初始值
 	$scope.showLeft 	= 0;						//是否显示左侧菜单
@@ -84,10 +84,8 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home){
 			}
 
 			Calendar.total = (endIndex - beginIndex) ? endIndex - beginIndex : 1;
-			console.log(Calendar);
 			beginTime = Calendar.beginDate;
 			endTime = Calendar.endDate;
-			console.log(beginTime);
 			//用户点结结束时间，则判断数是否位于两者之间。点亮区间的数据。熄灭其它的
 			//选遍历月，再遍历周，再遍历天
 			$scope.calendar.data.forEach(function(month, monthIndex){
@@ -149,19 +147,8 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, Home){
 	};
 
 	$scope.upDateCalendar = function() {
-
-		$http.get('api.php/Api/Api/getNewRooms',{params:{begin_time:beginTime,end_time:endTime,total:total}})
-	   .success(function(data){
-			if (data.status ==='success') {
-				Home.getJosn().success(function(oldData) {
-			  		if(oldData.rooms.status==='success'){
-			    		oldData.rooms.data = data.data;
-			  		}else{
-			    		alert("房间数据错误");
-			  		}
-				});
-			}
-	    });
-	   // $location.path('/tab/home');
+		RoomFactory.fn.getRooms(function(){
+			return true;
+		});
 	}
  });

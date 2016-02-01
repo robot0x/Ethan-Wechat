@@ -17,13 +17,13 @@ class IndexController extends HomeController {
      */
     public function indexAction(){
 
+
         //获取用户openid并seesion
         $JsApiPayL = new JsApiPayLogic();
         $JsApiPayL->sessionOpenid();
 
         //将当前URL缓存，用于API进行签名时调用
         JssdkLogic::sessionUrl();
-        
 
         $this->display();
     }
@@ -125,7 +125,14 @@ class IndexController extends HomeController {
     
     public function unitTestAction()
     {
-    	$M = new indexModel();
-    	dump($M->getJssdk());
+    	// $M = new indexModel();
+    	// dump($M->getCustomer());
+     //    dump($M->customer);
+        $JssdkL = new JssdkLogic();
+        $serverIds = array("qmwv5KcDKWgb7IWmzLfqFjCw-FRuVsMR-HJJhZyTGpCl-ulY4UzipyHezciEHyou","qmwv5KcDKWgb7IWmzLfqFjCw-FRuVsMR-HJJhZyTGpCl-ulY4UzipyHezciEHyou");
+        $urls = $JssdkL->saveImageByserverIds($serverIds);
+        $url = implode(',', $urls); 
+        dump($urls);
+        echo $url;
     }
 }
