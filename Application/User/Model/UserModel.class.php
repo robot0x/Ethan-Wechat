@@ -10,6 +10,11 @@ class UserModel extends YunzhiModel
     protected $keywords     = "I('get.keywords')"; //查询关键字
     protected $field        = "name"; //查询字段
 
+
+    protected $_auto = array(
+        array('password','password',1,'function'),
+        );
+
  //    //自动验证
 	// protected $_validate = array(
  //    array('username', 'require', 'username cannot be empty', 0, 'regex', 1),
@@ -48,7 +53,7 @@ class UserModel extends YunzhiModel
         else
         {
             $data['id'] = $userId;
-            $data['password'] = sha1(C(DEFAULT_PASSWORD));
+            $data['password'] = password();
             $this->save($data);
             return true;
         }
@@ -61,7 +66,7 @@ class UserModel extends YunzhiModel
         $user = $this->getUserInfoByName($username);
         if($user == null){
             return 2;//代表无此用户名
-        }else if($user['password'] == sha1($password)){
+        }else if($user['password'] == password($password)){
             return 1;//代表验证成功
         }else{
             return 0;//代表验证失败

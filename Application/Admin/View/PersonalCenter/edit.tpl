@@ -23,7 +23,7 @@
                                   	<span class="text-danger" ng-show="form.password.$error.required">*请输入原密码</span>
                                 </div>
 								<div class="form-group row">
-                                  	<label for="repassword" class="col-xs-2 text-right">新密码:</label><input name="repassword">
+                                  	<label type="password" for="repassword" class="col-xs-2 text-right">新密码:</label><input name="repassword">
                                 </div>
                                 <div class="form-group row">
                                 	<div class="col-xs-6 text-center">

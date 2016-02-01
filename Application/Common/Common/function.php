@@ -1,4 +1,9 @@
 <?php
+
+function password($password = 'mengyunzhi')
+{
+    return md5(sha1($password));
+}
 /*
  * 微信不接收\u***格式的json内容需要对json字符串处理
  * 仅支持发送text消息，其他类型消息自己添加代码

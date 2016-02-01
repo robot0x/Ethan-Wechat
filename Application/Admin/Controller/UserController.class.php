@@ -11,7 +11,6 @@ class UserController extends AdminController
         //获取列表
         $UserL = new UserLogic();
         $users = $UserL->getLists();
-        //dump($users);
 
         //传入列表
         $this -> assign('users',$users);

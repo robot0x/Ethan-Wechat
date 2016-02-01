@@ -31,7 +31,7 @@ class UserLogic extends UserModel
         $user = $this->getListById($id);
 
         //判断原密码是否正确
-        $password = sha1($list['password']);
+        $password = password($list['password']);
         if ($password !== $user['password'])
         {
             $this->setError("UserLogic->updateList:The old password is incorrect.(原密码输入错误)");
@@ -42,7 +42,7 @@ class UserLogic extends UserModel
         $repassword = isset($list['repassword']) ? trim($list['repassword']) : '';
         if ($repassword !== "")
         {
-            $user['password'] = sha1($repassword);
+            $user['password'] = password($repassword);
         }
 
         //取其它更新的数据
