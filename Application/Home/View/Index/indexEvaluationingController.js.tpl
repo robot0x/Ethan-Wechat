@@ -48,7 +48,7 @@
             isShowProgressTips: 1,  // 默认为1，显示进度提示
             success: function (res) {
                 serverIds.push(res.serverId); // 返回图片的服务器端ID
-                alert(serverIds.length);
+                // alert(serverIds.length);
                 maxCount--;
                 if (maxCount <= 0)
                 {

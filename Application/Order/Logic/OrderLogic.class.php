@@ -203,6 +203,18 @@ class OrderLogic extends OrderModel
 	}
 
 	/**
+	 * 将订单状态变更为已评价
+	 * @param int $id 
+	 */
+	public function setIsEvalutionedById($id)
+	{
+		$data['id'] = $id;
+		$data['is_evaluation'] = 1;
+		$this->saveList($data);
+		return;
+	}
+	
+	/**
 	 * 获取用户最后一条支付信息
 	 * @param  string $openId 用户openid
 	 * @return list         

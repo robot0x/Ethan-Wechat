@@ -8,6 +8,7 @@
 namespace Evaluation\Logic;
 
 use Evaluation\Model\EvaluationModel;
+use Order\Logic\OrderLogic;             //订单
 
 class EvaluationLogic extends EvaluationModel
 {
@@ -127,6 +128,11 @@ class EvaluationLogic extends EvaluationModel
 		{
 			$data['update_user_id'] = $list['update_user_id'];
 		}
+
+        //置订单为已评价
+        $OrderL = new OrderLogic();
+        $OrderL->setIsEvalutionedById($data['order_id']);
+        
 		return parent::saveList($data);
 	}
 }
