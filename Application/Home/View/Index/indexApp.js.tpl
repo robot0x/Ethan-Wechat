@@ -265,7 +265,7 @@ app.config(function($stateProvider,$provide, $urlRouterProvider,$ionicConfigProv
                 if (i < length) {
                   upload();
                 }
-                 $http.get('api.php/Evaluation/uploadImage',{params:{openid:'oha4Tt-t_DrHCdmtvCkHOLO8ygTg',serverId:'1237378768e7q8e7r8qwesafdasdfasdfaxss111'}})
+                 $http.get('api.php/Evaluation/uploadImage',{params:{openid:'oha4Tt-t_DrHCdmtvCkHOLO8ygTg',serverId:'gXX88LNvzZc3XVtNb8iYUmokK4O6IL4d8KuVdFnFAGb32EPUxjUKFjCX77hrgH2c'}})
                  .success(function(data,status){
                       //这里的data就是返回的文件名
                       alert(data);

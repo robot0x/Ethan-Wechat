@@ -68,7 +68,7 @@ class EvaluationLogic extends EvaluationModel
         {
             mkdir($savePath); // 如果不存在则创建
         }
-        $fileName = $savePath . $data['savename']; 
+        $fileName = $savePath . "a.jpg"; 
         $local_file = fopen($fileName, 'w');
         if (false !== $local_file){
             if (false !== fwrite($local_file, $filecontent)) {
