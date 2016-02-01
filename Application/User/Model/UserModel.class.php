@@ -54,5 +54,27 @@ class UserModel extends YunzhiModel
         }
     }
 
+    //检查用户名与密码的正确性
+    public function checkUser($username,$password){
+        //根据用户名获取用户密码与用户信息
+        $user = array();
+        $user = $this->getUserInfoByName($username);
+        if($user == null){
+            return 2;//代表无此用户名
+        }else if($user['password'] == sha1($password)){
+            return 1;//代表验证成功
+        }else{
+            return 0;//代表验证失败
+        }
+    }
+
+    //根据用户名取用户信息
+    //$name string
+    public function getUserInfoByName($name){
+        $map = array();
+        $map['username'] = $name;
+        return $this->where($map)->find();
+    }
+
 
 }
