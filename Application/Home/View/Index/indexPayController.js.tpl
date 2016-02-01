@@ -21,25 +21,23 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
                 $ionicLoading.hide();
                 if (res.errMsg !== undefined)
                 {
+                    $scope.message = res.errMsg;
+                    $scope.error = 1;
                     $ionicPopup.alert({
                         title: '支付失败',
                         template: '原因:'+res.errMsg,
                     });
-                    $scope.$apply(function(){
-                        $scope.message = res.errMsg;
-                        $scope.error = 1;
-                    });
+                    
                 }
                 else if (res.err_msg === undefined)
                 {
+                    $scope.message = '接收到的数据类型未识别';
+                    $scope.error = 1;
                     $ionicPopup.alert({
                         title: '支付失败',
                         template: '接收到的数据类型未识别',
                     });
-                    $scope.$apply(function(){
-                        $scope.message = '接收到的数据类型未识别';
-                        $scope.error = 1;
-                    });
+                    
                     // return;
                 }
                 else 
@@ -47,14 +45,13 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
 
                     if (res.err_msg !== "get_brand_wcpay_request:ok")
                     {
+                        $scope.message = "用户取消支付，或支付未成功完成";
+                        $scope.error = 1;
                         $ionicPopup.alert({
                             title: '支付失败',
                             template: '用户取消支付，或支付未成功完成。错误代码:'+res.err_msg,
                         });
-                        $scope.$apply(function(){
-                            $scope.message = "用户取消支付，或支付未成功完成";
-                            $scope.error = 1;
-                        });
+                        
                     }
                     else
                     {
@@ -62,35 +59,31 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
                         .success(function(res, status, header, config){
                             if (res.status == "success")
                             {
-                                $scope.$apply(function(){
-                                    $scope.message = "支付成功";
-                                    $scope.success = 1;
-                                });
+                                $scope.message = "支付成功";
+                                $scope.success = 1;
                 
                                 //更新订单信息
                                 OrderFactory.orderIsPay(orderId);
                             }
                             else
                             {   
+                                $scope.message = "未能正确接收支付订单信息";
+                                $scope.error = 1;
                                 $ionicPopup.alert({
                                     title: '支付失败',
                                     template: '未能正确接收支付订单信息',
                                 });
-                                $scope.$apply(function(){
-                                    $scope.message = "未能正确接收支付订单信息";
-                                    $scope.error = 1;
-                                });
+                                
                             }
                         })
                         .error(function(res, status, header, config){
+                            $scope.message = "网络错误,请稍后重试";
+                            $scope.error = 1;
                             $ionicPopup.alert({
                                     title: '网络错误',
                                     template: '网络错误,请稍后重试',
                                 });
-                                $scope.$apply(function(){
-                                    $scope.message = "网络错误,请稍后重试";
-                                    $scope.error = 1;
-                                });
+                            
                         });
                     }
                 }   
@@ -104,13 +97,11 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
         .success(function(data, status, header, config){
             if (data.status == "error")
             {
-               $ionicPopup.alert({
+                $scope.message = data.message;
+                $scope.error = 1;
+                $ionicPopup.alert({
                     title: '亲，出错啦!',
                     template: data.message,
-                });
-                $scope.$apply(function(){
-                    $scope.message = data.message;
-                    $scope.error = 1;
                 });
                 return;
             }
@@ -126,27 +117,25 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
                     document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
                     document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
                 }
+                $scope.message = "未获取到WeixinJSBridge，请退出微信后重试";
+                $scope.error = 1;
                 $ionicPopup.alert({
                     title: '亲，出错啦!',
                     template: '未获取到WeixinJSBridge，请退出微信后重试',
                 });
-                $scope.$apply(function(){
-                    $scope.message = "未获取到WeixinJSBridge，请退出微信后重试";
-                    $scope.error = 1;
-                });
+                    
             }else{
                 jsApiCall();
             }
         })
         .error(function(data, status, header, config){
+            $scope.message = "网络或系统异常";
+            $scope.error = 1;
             $ionicPopup.alert({
                 title: '亲，出错啦!',
                 template: '您的网络好像不给力',
             });
-            $scope.$apply(function(){
-                $scope.message = "网络或系统异常";
-                $scope.error = 1;
-            });
+                
             return;
         });
     };
