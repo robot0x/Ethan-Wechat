@@ -2,12 +2,6 @@
 namespace Api\Controller;
 
 use Think\Controller;
-use Api\Controller\JssdkController;
-use Api\Controller\SlideShowController;
-use Api\Controller\IntroductionController;
-use Api\Controller\RoomController;
-use Api\Controller\EvaluationController;
-use Api\Controller\ActivityController;
 
 class ApiController extends Controller
 {
