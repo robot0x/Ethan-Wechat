@@ -128,6 +128,7 @@
           }
         })
     .state('tabs.allOrder', {
+      cache:false,
       url: "/allOrder/:type",
       views: {
         'personal-tab': {
