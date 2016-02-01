@@ -45,6 +45,7 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
                 }
                 else 
                 {
+                    alert("err_msg:"+res.err_msg);
                     if (res.err_msg !== "get_brand_wcpay_request:ok")
                     {
                         $ionicPopup.alert({

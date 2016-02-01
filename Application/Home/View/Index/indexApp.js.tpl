@@ -8,13 +8,9 @@ var url = "{$M->signPackage['url']}";
 <include file="indexEvaluationingController.js" />//评论
 
 
+<include file="indexFilter.js" />//fileter
 
-app.filter('trustHtml', function ($sce) {
-  return function (input) {
-      return $sce.trustAsHtml(input);
-  }
 
-});
 
 app.controller('EvaluationCtrl', function($scope,$http,$q) {
   
