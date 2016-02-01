@@ -1,14 +1,10 @@
 <script id="templates/indexConfirmOrder.html" type="text/ng-template">
-    <ion-view view-title="洛克高级酒店公寓" ng-controller='ConfirmOrderCtrl'>
-        <div class="bar bar-header">
-            <a ng-href='#/tab/home'><button class="button button-icon icon ion-ios-arrow-back"></button></a>
-            <div class="h1 title">订单填写</div>
-        </div>
+    <ion-view view-title="订单填写" ng-controller='ConfirmOrderCtrl'>
         <form name='myForm'>
-            <ion-content class='has-header' class="ion-content">
+            <ion-content class="ion-content">
                 <div class="list">
-                    <div class='item'>
-                        <span>预付须知：{{notice}}</span>
+                    <div>
+                        <h4 class="tittle">预付须知：{{notice}}</h4>
                     </div>
                     <a class="item item-thumbnail-left" href="#">
                         <img ng-src="{{room.url}}">

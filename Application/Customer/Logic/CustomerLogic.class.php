@@ -18,28 +18,11 @@ class CustomerLogic extends CustomerModel {
 		{
 			return array();
 		}
-		try
-		{
-			$data['id'] = $openId;
-			$map['id'] = $openId;
-			if ($this->where($map)->find())
-			{
-				$this->save($data);
-			}
-			else
-			{
-				$this->add($data);
-			}
-		}
-		catch(\Think\Exception $e)
-		{
-			$this->setError("数据更新或添加错误." . $e->getMessage());
-			return array();
-		}
+		$data['id'] = $openId;
+		$this->saveList($data);
 		$data['openId'] = $openId; 
 		return $data;
 	}
-
 	/**
 	 * 通过用户ID添加记录
 	 * @param  string $id 28位openid

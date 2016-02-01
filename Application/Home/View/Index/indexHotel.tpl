@@ -1,10 +1,6 @@
 <script id="templates/indexHotel.html" type="text/ng-template">
-<ion-view ng-controller="IntroductionCtrl">
-<div class="bar bar-header">
-  <a ng-href='#/tab/home'><button class="button button-icon icon ion-ios-arrow-back"></button></a>
-  <div class="h1 title">酒店介绍</div>
-</div>
-    <ion-content class='has-header'>
+<ion-view view-title="酒店介绍" ng-controller="IntroductionCtrl">
+    <ion-content>
         <div class="row">
             <div class="col">
               <div class="col-demo">

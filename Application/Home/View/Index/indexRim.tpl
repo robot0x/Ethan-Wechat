@@ -1,5 +1,5 @@
 <script id="templates/indexRim.html" type="text/ng-template">
-<ion-view view-title="洛克高级酒店公寓" ng-controller="rimCtrl">
+<ion-view view-title="搜周边" ng-controller="rimCtrl">
    <ion-content>
         <div class="row rimmap">
             <div id="rimMap" class="col col-100" style="min-height:100%"></div>

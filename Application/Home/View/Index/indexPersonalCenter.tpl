@@ -1,5 +1,5 @@
 <script id="templates/indexPersonalCenter.html" type="text/ng-template">
-	<ion-view view-title="洛克高级酒店公寓" ng-controller="personalCenter">
+	<ion-view view-title="个人中心" ng-controller="personalCenter">
 	<ion-content>
 	<div class="list">
 		<a class="item item-avatar" href="#">

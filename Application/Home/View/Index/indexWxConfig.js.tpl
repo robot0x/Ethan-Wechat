@@ -1,6 +1,6 @@
 wx.config({
 jsapiTicket: "{$M->signPackage['jsapiTicket']}",
-      debug: true,
+      debug: false,
       appId:  "{$M->signPackage['appId']}",
       timestamp: "{$M->signPackage['timestamp']}",
       nonceStr: "{$M->signPackage['nonceStr']}",

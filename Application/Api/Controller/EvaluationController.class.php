@@ -5,10 +5,8 @@
  */
 namespace Api\Controller;
 
-use EvaluationCustom\Logic\EvaluationCustomLogic;   //评论--客户
-use Evaluation\Logic\EvaluationLogic;               //评论
-use EvaluationView\Logic\EvaluationViewLogic;       //评价视图
-use Jssdk\Logic\JssdkLogic;                         //微信JSSDK
+use EvaluationCustom\Logic\EvaluationCustomLogic;
+use Evaluation\Logic\EvaluationLogic;
 
 class EvaluationController extends ApiController
 {
@@ -30,8 +28,8 @@ class EvaluationController extends ApiController
 	public function getEvaluations()
 	{
 		//实例化
-		$EvaluationViewL = new EvaluationViewLogic();
-		$evaluationCustoms = $EvaluationViewL->getLists();
+		$EvaluationCustomL = new EvaluationCustomLogic();
+		$evaluationCustoms = $EvaluationCustomL->getLists();
 
 		//将url信息转换为数组信息
 		foreach($evaluationCustoms as $key => $value)
@@ -46,38 +44,23 @@ class EvaluationController extends ApiController
 		return $data;
 	}
 
-    /**
-     * 添加新评论
-     * panjie
+	/*
+     * 上传微信服务器图片至本地服务器
+     * 返回图片ID
      */
-    public function addAction()
-    {   
-        $return['status']   = "error";
-        $url                = "";
-        
-        //取值
-        $list = I('get.');
-        $serverIds = explode(",", $list['server_ids']); 
-
-        //抓取图片并上传到服务器
-        $JssdkL = new JssdkLogic();
-        $urls = $JssdkL->saveImageByserverIds($serverIds);
-        if ($urls !== false)
-        {            //转换为字符串并加入list
-            $url = implode(',', $urls); 
-        }
-        
-        $list['url'] = $url;
-        //存评论信息
-        $EvaluationL = new EvaluationLogic();
-        if (!$evaluationId = $EvaluationL->saveList($list))
+    public function uploadImageAction()
+    {
+        $serverId = I('get.serverId','');
+        $openid = I('get.openid','');
+        if($serverId == '' || $openid == '')
         {
-            $return['message'] = '4:数据保存错误：';
-            echo json_encode($return);
-            return;
+            return false;
         }
-
-        $return['status'] = "success";
-        echo json_encode($return);
+        
+        //接收身份证信息并抓取上传服务器，返回身份证附件ID
+        $EvaluationL = new EvaluationLogic();
+        $EvaluationL->setOpenid($openid);
+        $result = $EvaluationL->getAndUploadWxImage($serverId);
+        $this->ajaxReturn($result);
     }
 }

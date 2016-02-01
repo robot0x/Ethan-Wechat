@@ -33,7 +33,7 @@
         }
       })
     .state('tabs.evaluationing',{
-      url: "/evaluationing/:orderid",
+      url: "/evaluationing",
       views:{
           //评论界面
           'home-tab':{

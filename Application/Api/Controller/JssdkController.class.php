@@ -111,6 +111,5 @@ class JssdkController extends Controller {
     fwrite($fp, "<?php exit();?>" . $content);
     fclose($fp);
   }
-  
 }
 

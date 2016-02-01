@@ -27,10 +27,10 @@ class UserController extends AdminController
         // exit();
         //取用户信息
         $user = I('post.');
-
         //添加add()
         $UserL = new UserLogic();
         $UserL -> saveList($user);
+
         //echo $this->getlastsql();
 
         //判断异常
@@ -54,14 +54,11 @@ class UserController extends AdminController
     {
         //获取用户ID
         $userId = I('get.id');
-
         //取用户信息getListById()
         $UserL = new UserLogic();
         $user = $UserL->getListById($userId);
-
         //传给前台
         $this -> assign('user',$user);
-
         //显示display('add')
         $this -> display('add');
     }
@@ -70,11 +67,9 @@ class UserController extends AdminController
     {
         //取id
         $userId= I('get.id');
-
         //删除deleteInfo($Id)
         $UserL = new UserLogic();
         $status = $UserL->deleteInfo($userId);
-
         //判断是否删除成功
         if($status!==false)
         {

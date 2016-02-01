@@ -2,25 +2,14 @@
 /**
  * 微信JSSDK
  * panjie
- * 2016.01.31
  */
 namespace Jssdk\Logic;
-use WechatInterface\Logic\wechatInterfaceapiLogic;   //微信接口
-use Think\Upload\Driver\Local;                          //Thinkphp内置检测文件夹类
+
 class JssdkLogic
 {
     private $appId;
     private $appSecret;
-    private $error = "";
 
-    public function setError($error)
-    {
-        $this->error = $error;
-    }
-    public function getError()
-    {
-        return $this->error;
-    }
     static public function sessionUrl()
     {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -141,117 +130,5 @@ class JssdkLogic
         $fp = fopen($filename, "w");
         fwrite($fp, "<?php exit();?>" . $content);
         fclose($fp);
-    }
-
-    /**
-     * 通过微信上传图片返回的serverId，进行图片的抓取，并存在服务器
-     * @param  array $serverIds 
-     * @return array 图片在服务器存的URL信息（不包含域名的根路径）
-     */
-    public function saveImageByserverIds($serverIds)
-    {
-        $urls = array();        //返回的图片地址
-        if (!is_array($serverIds))
-        {
-            $this->setError("JssdkL:saveImageByserverIds.The input type is not array.传入的变量类型不是数组");
-            return false;
-        }
-        foreach ($serverIds as $key => $mediaId) {
-            if (!$url = $this->getAndUploadWxImage($mediaId))
-            {
-                return false;
-            }
-            $urls[] = $url;
-        }
-        return $urls;
-    }
-
-    /**
-     * @param  array $mediaId 微信图片暂存服务器的标识
-     * @return array 存在本地服务器的URL信息
-     * 获取微信服务器上传的图片
-     * 1.取得当前access_token()
-     * 2.下载图片
-     * 3.将图片信息存入附件表(todo)
-     * 4.上传图片
-     * 5.返回图片根目录
-     */
-    public function getAndUploadWxImage($mediaId)
-    {
-        //获取accessToken
-        $wechatInterfaceapiL = new wechatInterfaceapiLogic;
-        $access_token = $wechatInterfaceapiL->getAccessToken(); 
-        
-        //下载图片,并抓取图片
-        $url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$access_token&media_id=$mediaId";
-        $fileInfo = $this->downloadWeixinFile($url);
-        $filecontent = $fileInfo["body"];
-        $header = $fileInfo["header"];
-        if ($header['content_type'] == 'text/plain')
-        {
-            $this->setError("JssdkL,gAU:fetch image from weixin error.获取图片出错。msg:" . $filecontent);        
-            return false;
-        }
-
-        //未设置路径给默认值
-        if (C("YNNZHI_UPLOAD_DIR") == "")
-        {
-            C("YNNZHI_UPLOAD_DIR", "/uploads");
-        }
-
-        //设置上传文件路径
-        $rootPath = I('server.DOCUMENT_ROOT') . C("YNNZHI_UPLOAD_DIR");
-        $savePath = "/winxin/images/" . date("Ymd");
-
-        //较验上传文夹
-        $Local = new Local();
-        if (!$Local->checkRootPath($rootPath) || !$Local->checkSavePath($savePath))
-        {
-            $this->setError("JssdkL,gAU:" . $Local->getError());
-            return false;
-        }
-
-        //拼接文件上传路径
-        $url = $savePath . '/' . uniqid() . '.jpeg';
-        $fileName = $rootPath . $url ;
-        
-        //存文件
-        $local_file = fopen($fileName, 'w');
-        if (false !== $local_file){
-            if (false !== fwrite($local_file, $filecontent)) {
-                fclose($local_file);
-            }
-            else
-            {
-                $this->setError("JssdkL,gAU:Write file failed(文件写入失败)");
-                return false;
-            }
-        }
-        else
-        {
-            $this->setError("JssdkL,gAU:Open file failed(文件打开失败)");
-            return false;
-        }
-        return C("YNNZHI_UPLOAD_DIR") . $url;
-    }
-    
-    /**
-     * 下载微信服务器的资源
-     * @param  string $url 微信图片暂存服务器API地址
-     * @return array  带有头信息与文件主体的数组
-     */
-    function downloadWeixinFile($url)
-    {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);    
-        curl_setopt($ch, CURLOPT_NOBODY, 0);    //只取body头
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $package = curl_exec($ch);
-        $httpinfo = curl_getinfo($ch);
-        curl_close($ch);
-        $imageAll = array_merge(array('header' => $httpinfo), array('body' => $package)); 
-        return $imageAll;
     }
 }

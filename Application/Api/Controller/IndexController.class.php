@@ -14,9 +14,4 @@ class IndexController extends Controller {
 		$data['slideUrls'] = $slideUrls;
 		$this->ajaxReturn($data);
 	}
-
-	public function unitTestAction()
-	{
-		dump(S('serverIds'));
-	}
 }
