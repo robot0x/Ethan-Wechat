@@ -5,9 +5,6 @@
   <div class="h1 title">查看评论</div>
 </div>
     <ion-content class='has-header'>
-      <div class="padding">
-        <a class="button button-block button-positive" href="#/tab/evaluationing">我要评论</a>
-     </div>
     <div class="list">
     {/*<div ng-bind="evaluations | json"></div>*/}
       <div class="item item-avatar" href="#" ng-repeat='evaluation in evaluations'>
