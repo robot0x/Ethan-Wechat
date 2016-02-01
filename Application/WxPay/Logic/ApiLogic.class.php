@@ -11,6 +11,7 @@ namespace WxPay\Logic;
 // class WxPayApi
 class ApiLogic
 {
+	private $error;	//报错信息
 	/**
 	 * 
 	 * 统一下单，WxPayUnifiedOrder中out_trade_no、body、total_fee、trade_type必填
@@ -528,9 +529,10 @@ class ApiLogic
 	 * @param string $url  url
 	 * @param bool $useCert 是否需要证书，默认不需要
 	 * @param int $second   url执行超时时间，默认30s
+	 * @param int $maxCurl 最大请求次数
 	 * @throws WxPayException
 	 */
-	private static function postXmlCurl($xml, $url, $useCert = false, $second = 30)
+	private static function postXmlCurl($xml, $url, $useCert = false, $second = 30, $maxCurl = 5)
 	{		
 		$ch = curl_init();
 		//设置超时
@@ -573,7 +575,15 @@ class ApiLogic
 		} else { 
 			$error = curl_errno($ch);
 			curl_close($ch);
-			E("curl出错，错误码:$error");
+			if ($maxCurl > 0)
+			{
+				$this->postXmlCurl($xml, $url, $useCert = false, $second = 30, --$maxCurl);
+			}
+			else
+			{
+				$this->setError("curl出错，出错代码" . $error);
+				return false;
+			}
 		}
 	}
 	
@@ -588,6 +598,15 @@ class ApiLogic
 		$time2 = explode( ".", $time );
 		$time = $time2[0];
 		return $time;
+	}
+	public function setError($error)
+	{
+		$this->error = $error;
+	}
+
+	public function getError()
+	{
+		return $this->error;
 	}
 }
 
