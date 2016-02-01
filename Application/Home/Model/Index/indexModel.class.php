@@ -325,7 +325,7 @@ class indexModel
 	public function getCustomer()
 	{
 		$CustomerLogic = new CustomerLogic();
-		$this->customer = $CustomerLogic->updateAndGetListByOpenId("oNyIBwTDk49ckDmltA2m3bDJ52kQ");
+		$this->customer = $CustomerLogic->updateAndGetListByOpenId(session("openId"));
 	}
 
 	/**

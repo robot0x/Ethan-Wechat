@@ -1,6 +1,6 @@
 <?php
 return array(
-
+    'YNNZHI_UPLOAD_DIR'     => '/uploads',  //上传的文件目录
     'YUNZHI_PAGE_SIZE'      => 10,          //默认分页大小
 
     'TMPL_TEMPLATE_SUFFIX'  => '.tpl',     // 默认模板文件后缀
@@ -19,13 +19,13 @@ return array(
     'DB_PORT'               =>  '3633',             // 端口
     'DB_PREFIX'             =>  'ethan_',           // 数据库表前缀
 
-    'DB_TYPE'               =>  'mysqli',     // 数据库类型
-    'DB_HOST'               =>  'localhost',    // 服务器地址
-    'DB_NAME'               =>  'ethan_wechat',          // 数据库名
-    'DB_USER'               =>  'root',      // 用户名
-    'DB_PWD'                =>  '',          // 密码
-    'DB_PORT'               =>  '3306',             // 端口
-    'DB_PREFIX'             =>  'ethan_',           // 数据库表前缀
+    // 'DB_TYPE'               =>  'mysqli',     // 数据库类型
+    // 'DB_HOST'               =>  'localhost',    // 服务器地址
+    // 'DB_NAME'               =>  'ethan_wechat',          // 数据库名
+    // 'DB_USER'               =>  'root',      // 用户名
+    // 'DB_PWD'                =>  '',          // 密码
+    // 'DB_PORT'               =>  '3306',             // 端口
+    // 'DB_PREFIX'             =>  'ethan_',           // 数据库表前缀
 
     'URL_MODEL'             =>  1, // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
 
@@ -37,6 +37,7 @@ return array(
     
     //微信公众号设置 
     'TOKEN'                 => 'yunzhi',                                    // TOKEN
+
     'APPID'                 => 'wx67a290d19255a9b6', 
     // 'APPID'                 => 'wx53bf06122618f768', 
      
@@ -45,6 +46,7 @@ return array(
      
      // * APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置， 登录公众平台，进入开发者中心可设置），
      // * 获取地址：https://mp.weixin.qq.com/advanced/advanced?action=dev&t=advanced/dev&token=2005451881&lang=zh_CN
+
     'APPSECRET'             => '98ce68100bb654ca3d4a6310a30bd12a',
 
     //=======【证书路径设置】=====================================

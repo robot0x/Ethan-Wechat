@@ -1,5 +1,6 @@
 <script id="templates/indexPay.html" type="text/ng-template">
     <ion-view view-title="支付" hide-nav-bar="true">
+    </div>
         <ion-content>
             <div class="pay">
                 <div class="paying" ng-hide="success || error">

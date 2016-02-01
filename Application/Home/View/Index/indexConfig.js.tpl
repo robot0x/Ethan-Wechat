@@ -1,4 +1,4 @@
-app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$ionicConfigProvider){
+app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$ionicConfigProvider, $compileProvider){
     //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
     $ionicConfigProvider.platform.ios.tabs.style('standard');
     $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -17,6 +17,7 @@ app.config(function($stateProvider,$provide,$httpProvider, $urlRouterProvider,$i
     
     $ionicConfigProvider.platform.ios.views.transition('ios');
     $ionicConfigProvider.platform.android.views.transition('android');
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(wxlocalresource|http):/);
 
     $httpProvider.interceptors.push(function($rootScope) {
     return {

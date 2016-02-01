@@ -61,12 +61,22 @@ app.factory('OrderFactory' ,function($ionicPopup,$http){
             {
                 Element.toBeStay = 1;
                 Element.toBePaid = 0;
+                toBeEvaluation.pop(Element);
+            }
+        });
+    };
+
+    var orderIsEvaluationed = function(id){
+        datas.forEach(function(Element, index){
+            if (Element.id == id)
+            {
+                Element.toBeEvaluation = 0;
+                Element.toBePaid = 0;
                 toBePaid.pop(Element);
                 toBeStay.push(Element);
             }
         });
     };
-
     //数据初始化
     var initDatas = function(){
         $http.get("__ROOT__/api.php/Order/getRecentListsBySessionOpenId")
@@ -138,5 +148,6 @@ app.factory('OrderFactory' ,function($ionicPopup,$http){
         orderInfo: orderInfo,           //预订时的信息
         initDatas:initDatas,            //订单初始化
         addOrder: addOrder,             //添加订单
+        orderIsEvaluationed: orderIsEvaluationed,//订单变为已评价
     };
 });
