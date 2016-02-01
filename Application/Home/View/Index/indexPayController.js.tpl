@@ -45,12 +45,12 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
                 }
                 else 
                 {
-                    alert("err_msg:"+res.err_msg);
+
                     if (res.err_msg !== "get_brand_wcpay_request:ok")
                     {
                         $ionicPopup.alert({
                             title: '支付失败',
-                            template: '用户取消支付，或支付未成功完成',
+                            template: '用户取消支付，或支付未成功完成。错误代码:'+res.err_msg,
                         });
                         $scope.$apply(function(){
                             $scope.message = "用户取消支付，或支付未成功完成";
