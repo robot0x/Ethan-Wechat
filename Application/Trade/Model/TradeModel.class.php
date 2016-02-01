@@ -12,8 +12,9 @@ class TradeModel extends YunzhiModel
 {
     public function getListByOutTradeId($outTradeId)
     {
-        $map['out_trade_id'] = $outTradeId;
-        return $this->where($map)->find();
+        $map['out_trade_no'] = $outTradeId;
+        $list = $this->where($map)->find();
+        return $list;
     }
 
     public function saveList($data)
