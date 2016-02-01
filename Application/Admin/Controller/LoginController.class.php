@@ -48,13 +48,13 @@ class LoginController extends AdminController
                 session('user_id',$list['id']);
                 session('user_name',$list['username']);
                 //登录成功后跳转
-                redirect_url(U('Admin/Index/index'));
+                redirect_url(U('Index/index'));
                 break;
             case '0':
-                $this->error('用户名密码错误',U('Admin/Login/index'));
+                $this->error('用户名密码错误',U('Login/index'));
                 break;
             case '2':
-                $this->error('无此用户名',U('Admin/Login/index'));
+                $this->error('无此用户名',U('Login/index'));
         }       
     }
 
@@ -63,7 +63,7 @@ class LoginController extends AdminController
     {
         session('user_id',null);
         session('user_name',null);
-        $this->success('注销成功',U('Admin/Login/index'));
+        $this->success('注销成功',U('Login/index'));
     }
 
     //点击回车登录
