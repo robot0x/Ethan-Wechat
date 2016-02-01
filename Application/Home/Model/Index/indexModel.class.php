@@ -193,6 +193,14 @@ class indexModel
 		{
 			$orders["$key"]['begin_time_str'] = date("Y-m-d",$value["begin_time"]);
 			$orders["$key"]['end_time_str'] = date("Y-m-d",$value["end_time"]);
+			if ($value['end_time'] = $value['begin_time'])
+		        {
+		            $orders['totalDays'] = 1;
+		        }
+	        else
+		        {
+		            $orders['totalDays'] = (int)ceil((($value['end_time'] - $value['begin_time']) / 24*60*60));
+		        }
 		}
 		return json_encode($orders) ;
 	}

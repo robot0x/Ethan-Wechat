@@ -69,6 +69,7 @@
           }
         })
     .state('confirmOrder',{
+      cache: false,
       url: "/confirmOrder/:roomId",
       templateUrl: "templates/indexConfirmOrder.html"
     })
