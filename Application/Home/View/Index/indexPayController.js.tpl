@@ -3,7 +3,6 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
     var params;
     var orders = OrderFactory.datas.toObjectByKey();
     $scope.order = orders[orderId];      //订单
-    $scope.order['price'] = fToy($scope.order['price']);
     $scope.isButtonOk   = 0; //确定按钮
     $scope.waitTime = 3;   //等待时间
     $scope.message = "";    //消息

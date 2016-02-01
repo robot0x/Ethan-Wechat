@@ -28,7 +28,7 @@
 
                 <img ng-src="{{room.url.split(',')[0]}}">
                 <h2>房型：{{room.name}}</h2>
-                <p>单价：{{order.price}}元</p>
+                <p>单价：{{order.price | fenToYuan}}元</p>
                 <p>介绍：{{room.description}}</p>
                 <p>入住时间：{{order.begin_time_str}}</p>
                 <p>退房时间：{{order.end_time_str}}</p>
