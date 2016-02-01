@@ -1,11 +1,11 @@
 <?php
 namespace Admin\Controller;
 
-use Admin\Controller\AdminController;
+use Think\Controller;
 
 use User\Logic\UserLogic;
 
-class LoginController extends AdminController
+class LoginController extends Controller
 {
 	public function indexAction()
 	{
@@ -38,17 +38,19 @@ class LoginController extends AdminController
                 cookie('remember',null);
             }
         }
+        $username = I('post.username');
+        $password = I('post.password');
         //验证用户名密码
     	$UserL = new UserLogic;
-    	switch ($UserL->checkUser())
+    	switch ($UserL->checkUser($username, $password))
     	{
             case '1':
                 //根据post的用户名取出用户信息，再将id与name存入session
                 $list = $UserL->getUserInfoByName(I('post.username'));
-                session('user_id',$list['id']);
-                session('user_name',$list['username']);
+                session('userId',$list['id']);
+                session('userName',$list['username']);
                 //登录成功后跳转
-                redirect_url(U('Index/index'));
+                redirect_url(U('Sale/index'));
                 break;
             case '0':
                 $this->error('用户名密码错误',U('Login/index'));
@@ -59,10 +61,10 @@ class LoginController extends AdminController
     }
 
     //注销功能
-    public function cancelAction()
+    public function logoutAction()
     {
-        session('user_id',null);
-        session('user_name',null);
+        session('userId',null);
+        session('userName',null);
         $this->success('注销成功',U('Login/index'));
     }
 
@@ -88,8 +90,8 @@ class LoginController extends AdminController
             case '1':
                 //根据post的用户名取出用户信息，再将id与name存入session
                 $list = $UserL->getUserInfoByName($username);
-                session('user_id',$list['id']);
-                session('user_name',$list['username']);
+                session('userId',$list['id']);
+                session('userName',$list['username']);
 
                 //登录成功后跳转
                 $return['state'] = "success";

@@ -8,7 +8,7 @@
                         <h3 class="panel-title">请登录</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" id="loginform" method='post' action="{:U('Admin/Login/login')}" ng-submit="submit()">
+                        <form role="form" id="loginform" method='post' action="{:U('Login/login')}" ng-submit="submit()">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="用户名" name="username" id="username" value="{:cookie('username')}">
