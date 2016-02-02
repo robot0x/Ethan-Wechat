@@ -14,6 +14,7 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
     //订单完成后，重新加载整体页面。
     //初始化房间剩余数。初始化订单信息等
     $scope.reload = function(){
+        console.log("button click");
         window.location.href = "#tabs/home";
     };
 
@@ -72,6 +73,9 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
                 
                                 //更新订单信息
                                 OrderFactory.orderIsPay(orderId);
+
+                                //更新剩余房型信息
+                                RoomFactory.fn.getRooms();
                             }
                             else
                             {   
