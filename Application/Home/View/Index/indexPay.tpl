@@ -34,8 +34,7 @@
                 <p>退房时间：{{order.end_time_str}}</p>
             </div>
 
-            <di
-            <button on-click="reload" ng-show="success || error" class="button button-block button-balanced">
+            <button ng-click="reload()" ng-show="success || error" class="button button-block button-balanced">
                 完成
             </button>
         </ion-content>
