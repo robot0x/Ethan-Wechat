@@ -10,6 +10,14 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
     $scope.success = 0;     //是否成功
     $scope.room = {};       //房型信息
     $scope.totalPrice = 0.00;  //总价格
+
+    //订单完成后，重新加载整体页面。
+    //初始化房间剩余数。初始化订单信息等
+    $scope.reload = function(){
+        window.location.href = "#tabs/home";
+    };
+
+    //调用微信内置JS，发起支付请求
     var jsApiCall = function(){
         $ionicLoading.show({
             template: '正在发起支付...'
@@ -92,6 +100,9 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
         );
     };
 
+    //发起支付请求。
+    //先判断订单的可支付状态
+    //为真，则调用微信内置支付接口
     var pay = function(){
         $http.get('__ROOT__/api.php/WxPay/orderPay',{params:{id: orderId}})
         .success(function(data, status, header, config){
@@ -139,5 +150,7 @@ app.controller('indexPayController',function( $location, $http, $scope, $timeout
             return;
         });
     };
+
+    //页面加载完毕后，发起支付 
     pay();   
 });
