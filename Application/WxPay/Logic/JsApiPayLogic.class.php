@@ -45,7 +45,7 @@ class JsApiPayLogic extends Controller
     {
 
         //以下代码，用于不同环境下的测试
-        // session("openId", "oNyIBwTDk49ckDmltA2m3bDJ52kQ");
+        // session("openId", "oNyIBwW8unmLf24RrOtg4QsBwny8");
         // return;
         
         //如果存在openId,证明该用户已经认证。
