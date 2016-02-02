@@ -6,4 +6,10 @@ Application/Common/Conf/config.php
 Public/uploads/
 nbproject/
 
+*.sublime-project
+
 *.sublime-workspace
+
+*.p12
+
+*.pem

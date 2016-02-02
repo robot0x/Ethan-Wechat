@@ -1,4 +1,9 @@
 <?php
+
+function password($password = 'mengyunzhi')
+{
+    return md5(sha1($password));
+}
 /*
  * 微信不接收\u***格式的json内容需要对json字符串处理
  * 仅支持发送text消息，其他类型消息自己添加代码
@@ -25,6 +30,74 @@ function my_json_encode($type, $p)
     return $str;
 }
 
+/**
+ * 获取当月的最后一天
+ * panjie
+ * 2016-01-19
+ * @param   string $yearMonth 2016-01
+ * @return  string            31
+ */
+function get_last_day($yearMonth)
+{
+    $firstday   = date('Y-m-01', strtotime($yearMonth));
+    $lastday    = date('d', strtotime("$firstday +1 month -1 day"));
+    return $lastday;
+}
+
+/**
+ * 获取下一个月份的值
+ * @param  string $yearMonth 2016-12
+ * @return string            01
+ */
+function get_next_month($yearMonth)
+{
+    $firstday   = date('Y-m-01', strtotime($yearMonth));
+    $nextMonth  = date('m', strtotime("$firstday +1 month"));
+    return $nextMonth;
+}
+
+/**
+ * 通过正则表达式对传入的angularjs自动加入的变量类型进行过滤
+ * panjie
+ * 2016-01-05
+ * 
+ * 例输入：
+ * array (size=2)
+ * 'room_id' => string 'string:9' (length=8)
+ * 'count' => string 'number:1' (length=8)
+ * 返回：
+ * array (size=2)
+ * 'room_id' => string '9' (length=8)
+ * 'count' => string '1' (length=8)
+ */
+
+function remove_json_formart($array)
+{
+    foreach($array as $key => $value)
+    {
+        $array["$key"] = preg_replace('/([a-z]{0,}|[A-Z]{0,}):/', "", $value);
+    }
+    return $array;
+}
+
+/**
+ * 判断是否大于0
+ * @param  intt $num 
+ * @return 是true 否false
+ * panjie
+ */
+function moreThanZero($num)
+{
+    $num = (int)$num;
+    if(!preg_match('^[1-9]\d', $num))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 //根程序文件
 // 判断是否是在微信浏览器里
 //author:panjie 3792535@qq.com
@@ -71,11 +144,11 @@ function get_default($value ,$type = "int")
  */
 function get_user_id()
 {   
-    $userId = session('user_id');
+    $userId = session("userId");
     if(isset($userId)){
         return $userId;
     }else{
-        redirect_url(U('Login/Index/index'));
+        redirect_url(U('Admin/Login/index'));
         exit();
     }
 }
@@ -566,7 +639,7 @@ function get_user_token($code)
 
 // 获取当前用户的OpenId
 function get_openid($openid = NULL) {
-//        return 'oZuoxt8tnEUUf6YPBG-mNPYjoKQA';
+        return 'oZuoxt8tnEUUf6YPBG-mNPYjoKQA';
     $openid = session ('openid');
         $openidTime = session('openidTime');
         if($openid != false && $openidTime!=false && (time()-$openidTime < 60))
@@ -858,14 +931,15 @@ function change_key_by_key1_key2($arr,$key1,$key2)
 /*
  * 改变数据组KEY的值
  */
-function change_key($arr,$key)
+function change_key(&$arr,$key = "id")
 {
     $arrRes = array();
     foreach($arr as $k => $v)
     {
         $arrRes[$v[$key]] = $v;
     }
-    return $arrRes;
+    $arr = $arrRes;
+    unset($arrRes);
 }
 
 /**
@@ -957,7 +1031,11 @@ function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=true) {
         preg_match_all($re[$charset], $str, $match);
         $slice = join("",array_slice($match[0], $start, $length));
     }
-    return $suffix ? $slice.'...' : $slice;
+    if ($slice == $str)
+    {
+        return $slice;
+    }
+    return ($slice === $str) ? $slice : ($suffix ? $slice.'...' : $slice);
 }
 
 /**
@@ -1059,4 +1137,22 @@ function union_array($arr1,$arr2){
     //取并集
     $res_array = array_merge($arr2,$intersection);
     return $res_array;
+}
+
+/**
+ * 验证字符串是否日期
+ */
+
+function validateDate($date, $formats = array('Y-m-d', "Y-m-j"))
+{
+    foreach($formats as $format)
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        if ($d && $d->format($format) == $date)
+        {
+            return true;
+        }
+    }
+    return false;
+    
 }

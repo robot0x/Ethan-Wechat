@@ -1,295 +1,151 @@
+<include file="indexWxConfig.js" /><!--微信JSSDK-->
 var app = angular.module('yunzhiclub', ['ionic']);
+var openId = "{$M->openId}";
+var url = "{$M->signPackage['url']}";
+<include file="indexConfig.js" />
+<include file="indexStateProvider.js" />
+<include file="indexRun.js" />
+<include file="indexEvaluationingController.js" />//评论
 
-app.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider){
-    //用$ionicConfigProvider解决了安卓手机上的导航在顶部的bug
-    $ionicConfigProvider.platform.ios.tabs.style('standard');
-    $ionicConfigProvider.platform.ios.tabs.position('bottom');
-    $ionicConfigProvider.platform.android.tabs.style('standard');
-    $ionicConfigProvider.platform.android.tabs.position('standard');
 
-    $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
-    $ionicConfigProvider.platform.android.navBar.alignTitle('left');
+<include file="indexFilter.js" />//fileter
 
-    $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
-    $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');
 
-    $ionicConfigProvider.platform.ios.views.transition('ios');
-    $ionicConfigProvider.platform.android.views.transition('android');
-    $stateProvider
-    .state('tabs',
-    {
-      url: "/tab",
-      abstract: true,
-      templateUrl: "templates/indexTabs.html"
-    })
-    .state('tabs.home',{
-      url: "/home",
-      views:{
-        	//首页
-          'home-tab':{
-            templateUrl: "templates/indexHome.html",
-            controller: "HomeTabCtrl"
-          }
-        }
-      })
-    .state('tabs.evaluation',{
-      url: "/evaluation",
-      views:{
-        	//首页的查看评论
-          'home-tab':{
-            templateUrl: "templates/indexEvaluation.html"
-          }
-        }
-      })
-    .state('tabs.evaluationing',{
-      url: "/evaluationing",
-      views:{
-        	//评论界面
-          'home-tab':{
-            templateUrl: "templates/indexEvaluationing.html"
-          }
-        }
-      })
-    .state('tabs.success',{
-      url: "/success",
-      views:{
-            //评论成功
-            'home-tab':{
-              templateUrl: "templates/indexSuccess.html"
-            }
-          }
-        })
-    .state('tabs.integral1',{
-      url: "/integral1",
-      views:{
-            //我的积分
-            'home-tab':{
-              templateUrl: "templates/indexIntegral.html"
-            }
-          }
-        })
-    .state('tabs.paySuccess1',{
-      url: "/paySuccess1",
-      views:{
-            //支付成功
-            'home-tab':{
-              templateUrl: "templates/indexPaySuccess.html"
-            }
-          }
-        })
-    .state('tabs.date',{
-      url: "/date",
-      views:{
-            //选择日期
-            'home-tab':{
-              templateUrl: "templates/indexDate.html"
-            }
-          }
-        })
-    .state('tabs.hotel',{
-      url: "/hotel",
-      views:{
-            //酒店介绍
-            'home-tab':{
-              templateUrl: "templates/indexHotel.html"
-            }
-          }
-        })
-    .state('tabs.confirmOrder',{
-      url: "/confirmOrder",
-      views:{
-            //填写订单
-            'home-tab':{
-              templateUrl: "templates/indexConfirmOrder.html"
-            }
-          }
-        })
-    .state("tabs.rim",{
-      url: "/rim",
-      views: {
-        "rim-tab":{
-            	//搜周边
-              templateUrl: "templates/indexRim.html"
-            }
-          }
-        })
-    .state("tabs.activity",{
-      url: "/activity",
-      views: {
-        "activity-tab":{
-            	//活动
-              templateUrl: "templates/indexActivity.html"
-            }
-          }
-        })
-    .state("tabs.activityDetail",{
-      url: "/activityDetail",
-      views: {
-        "activity-tab":{
-                //活动详情
-                templateUrl: "templates/indexActivityDetails.html"
+
+app.controller('EvaluationCtrl', function($scope,$http,$q) {
+  
+  var page = 1;
+  var moreData = [];
+  $scope.evaluations = [];
+  $scope.moreDataCanBeLoaded = true;
+  var canBeLoaded = function (moreData) {
+    if (moreData.length == 0) {
+      $scope.moreDataCanBeLoaded = false;
+    }else{
+      $scope.moreDataCanBeLoaded = true;
+    }
+  }
+  var getJosn = function (page){
+      var deferred = $q.defer();
+        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page,pagesize:'2'}})
+          .success(function(data,status){
+            if(data.status==='success'){
+              moreData = data.data;
+              console.log(moreData);
+              deferred.resolve(data.data);
+              if ($scope.evaluations.length == 0) {
+                $scope.evaluations = data.data;
+                console.log($scope.evaluations);
+              }else{
+                for (var i = 0; i < data.data.length; i++) {
+                  $scope.evaluations.push(data.data[i]);
+                }
+                console.log($scope.evaluations);
               }
+            }else{
+              alert('评论数据不正确');
             }
-          })
-    .state('tabs.personal', {
-      url: "/personal",
-      views: {
-        'personal-tab': {
-        	//个人中心
-          templateUrl: "templates/indexPersonalCenter.html"
+          });
+          return deferred.promise;
+      };
+    $scope.loadMoreData = function () {
+      getJosn(page++).then(function () {
+      canBeLoaded(moreData);
+      return $scope.moreDataCanBeLoaded;
+      console.log($scope.moreDataCanBeLoaded);
+      }).then(function (data) {
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
+    };
+   
+});
+
+//活动列表
+app.controller('ActivityCtrl',function($scope,ActivityFactory){
+  $scope.activities = ActivityFactory.activities;
+});
+
+app.directive("star", function() {
+   return {
+    template: '<h1><ul class="rating" ng-mouseleave="leave()">' +
+        '<li ng-repeat="star in stars" ng-class="star" ng-click="click($index + 1)" ng-mouseover="over($index + 1)">' +
+        '\u2605' +
+        '</li>' +
+        '</ul></h1>',
+    scope: {
+      ratingValue: '=',
+      max: '=',
+      readonly: '@',
+      onHover: '=',
+      onLeave: '='
+    },
+    controller: function($scope){
+      $scope.ratingValue = $scope.ratingValue || 0;
+      $scope.max = $scope.max || 5;
+      $scope.click = function(val){
+        if ($scope.readonly && $scope.readonly === 'true') {
+          return;
         }
+        $scope.ratingValue = val;
+      };
+      $scope.over = function(val){
+        $scope.onHover(val);
+      };
+      $scope.leave = function(){
+        $scope.onLeave();
       }
-    })
-    .state('tabs.toBePaid', {
-      url: "/toBePaid",
-      views: {
-        'personal-tab': {
-            //待支付
-            templateUrl: "templates/indexToBePaid.html"
-          }
+    },
+    link: function (scope, elem, attrs) {
+      elem.css("text-align", "center");
+      var updateStars = function () {
+        scope.stars = [];
+        for (var i = 0; i < scope.max; i++) {
+          scope.stars.push({
+            filled: i < scope.ratingValue
+          });
         }
-      })
-    .state('tabs.toBeEvaluation', {
-      url: "/toBeEvaluation",
-      views: {
-        'personal-tab': {
-            //待评价
-            templateUrl: "templates/indexToBeEvaluation.html"
-          }
-        }
-      })
-    .state('tabs.toBeStay', {
-      url: "/toBeStay",
-      views: {
-        'personal-tab': {
-            //待入住
-            templateUrl: "templates/indexToBeStay.html"
-          }
-        }
-      })
-    .state('tabs.paySuccess', {
-      url: "/paySuccess",
-      views: {
-        'personal-tab': {
-            //支付成功
-            templateUrl: "templates/indexPaySuccess.html"
-          }
-        }
-      })
-    .state('tabs.evaluationing1', {
-      url: "/evaluationing1",
-      views: {
-        'personal-tab': {
-            //个人中心待评价的评价界面
-            templateUrl: "templates/indexEvaluationing.html"
-          }
-        }
-      })
-    .state('tabs.success1',{
-      url: "/success",
-      views:{
-            //个人中心待评价的评论成功
-            'home-tab':{
-              templateUrl: "templates/indexSuccess.html"
-            }
-          }
-        })
-    .state('tabs.allOrder', {
-      url: "/allOrder",
-      views: {
-        'personal-tab': {
-            //我的订单
-            templateUrl: "templates/indexAllOrder.html"
-          }
-        }
-      })
-    .state('tabs.integral2', {
-      url: "/integral2",
-      views: {
-        'personal-tab': {
-            //我的积分
-            templateUrl: "templates/indexIntegral.html"
-          }
+      };
+      updateStars();
+ 
+      scope.$watch('ratingValue', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
         }
       });
-    $urlRouterProvider.otherwise("/tab/home");
-  });
-
-app.controller("HomeTabCtrl", ['$scope', function(){
-  console.log('HomeTabCtrl');
-}]);
-
-app.controller("EvaluationingCtrl", function($scope,$http){
-  console.log('EvaluationingCtrl');
-  $scope.upload = function(){
-    $http.get('api.php/Index/getJssdk')
-    .success(function(data,status){
-     wx.config({
-      debug: true,
-      appId:  data["appId"],
-      timestamp: data["timestamp"],
-      nonceStr: data["nonceStr"],
-      signature: data["signature"],
-      jsApiList: [
-      // 所有要调用的 API 都要加到这个列表中
-      'previewImage','uploadImage','downloadImage'
-      ]
-    });
-     wx.ready(function () {
-    // 在这里调用 API
-    //上传图片
-    // wx.uploadImage({
-    // localId: '', // 需要上传的图片的本地ID，由chooseImage接口获得
-    // isShowProgressTips: 1, // 默认为1，显示进度提示
-    // success: function (res) {
-    //     var serverId = res.serverId; // 返回图片的服务器端ID
-    //   }
-    // });
-    //选择图片
-    wx.chooseImage({
-    count: 1, // 默认9
-    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-    success: function (res) {
-        //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-        alert('localIds')
-      }
-    });
-  });
-   }).error(function(data,status){
-
-   });
- };
-});
-
-app.controller('SlideCtrl', function($scope) {
-  $scope.detail = false;
-  $scope.toggleDetail = function(){
-    $scope.detail = !$scope.detail;
-  }
-  $scope.countEm = [
-  '__IMG__/jiudian.jpg',
-  '__IMG__/big.jpg',
-  '__IMG__/rujia.jpg',
-  '__IMG__/tupian.png',
-  ];
-});
-
-app.controller('MapCtrl', function() {
- // 百度地图API功能
- var map = new BMap.Map("allmap");
- var point = new BMap.Point(117.223579,39.119671);
- map.centerAndZoom(point,12);
-  // 创建地址解析器实例
-  var myGeo = new BMap.Geocoder();
-  // 将地址解析结果显示在地图上,并调整地图视野
-  myGeo.getPoint("天津市河西区凯德国贸中心C座（近小白楼地铁站C出口）", function(point){
-    if (point) {
-      map.centerAndZoom(point, 16);
-      map.addOverlay(new BMap.Marker(point));
-    }else{
-      alert("您选择地址没有解析到结果!");
+      scope.$watch('max', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
     }
-  }, "天津市");
+  };
 });
 
+
+
+
+<include file="indexHomeTabController.js" />     //首页
+<include file="indexOrderController.js" />    //订单
+<include file="customerFactory.js"  />        //用户信息
+<include file="indexMapController.js" />      //导航
+<include file="indexCalendarController.js" /> //日期选择器
+<include file="indexRimController.js" />      //搜周边
+<include file="indexPayController.js" />      //支付
+<include file="indexPersonalCenter.js" />     //个人中心
+<include file="indexConfirmOrder.js" />       //订单填写
+<include file="indexActivityDetailCtrl.js" /> //活动详情
+<include file="indexHotelController.js" /> //酒店介绍
+
+<include file="indexOrderFactory.js" />       //近三个月内的订单
+<include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
+<include file="indexCustomerFactory.js"  />   //用户信息
+<include file="indexRoomFactory.js" />        //房型信息
+<include file="indexActivityFactory.js" />    //活动信息
+<include file="indexHomeFactory.js" />        //首页数据
+<include file="indexHotelFactory.js" />       //酒店介绍数据
+<include file="indexTimeRoomFactory.js" />    //首页小时房信息
+<include file="indexCreditFactory.js" />    //客户总积分信息
+
+
+<include file="indexBaseService.js" />        //基础服务
+<include file="function.js" />                //公共函数

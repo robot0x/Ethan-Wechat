@@ -1,18 +1,12 @@
 <script id="templates/indexActivityDetails.html" type="text/ng-template">
-	<ion-view view-title="住店送牛奶">
-	<ion-content>
-			<div class="list card">
-				<div class="item item-avatar">
-					<img src="__IMG__/niunai.jpg">
-					<h2>活动</h2>
-					<p>住店送牛奶</p>
-				</div>
-				<div class="item item-body">
-					<img class="full-image" src ="__IMG__/niunai.jpg">
-					<p>
-						2015年11月24日之前，凡到本店住宿者，均可在晚七点以后在前台领取热牛奶一杯。
-					</p>
-				</div>
+	<ion-view view-title="洛克高级酒店公寓" ng-controller='ActivityDetailCtrl'>
+	<div class="bar bar-header">
+  <a ng-href='#/tab/activity'><button class="button button-icon icon ion-ios-arrow-back"></button></a>
+  <div class="h1 title">活动详情</div>
+</div>
+	<ion-content class='has-header'>
+			<div ng-bind-html="activity.detail | trustHtml" class="list">
+				
 			</div>
 </ion-content>
 </ion-view>

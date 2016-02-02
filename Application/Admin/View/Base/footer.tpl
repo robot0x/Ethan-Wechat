@@ -13,7 +13,20 @@
     <!--webuploader-->
     <js href="__ROOT__/lib/webuploader/webuploader.min.js" />
     <js href="__ROOT__/yunzhi.php/Webuploader/config.html" />
+    
+    <!--ueditor-->
+    <js href="__ROOT__/lib/ueditor/ueditor.config.js" />
+    <js href="__ROOT__/lib/ueditor/ueditor.all.min.js" />
+    <js href="__ROOT__/lib/ueditor/lang/zh-cn/zh-cn.js" />
 
+    <!--uploadify-->
+    <js href="__ROOT__/lib/uploadify/jquery.uploadify.min.js" />
+    <js href="__ROOT__/js/js.js" />
+
+    <!--datapickir-->
+    <js href="__BOW__/datatimepicker/bootstrap-datetimepicker.js" />
+    <js href="__BOW__/datatimepicker/bootstrap-datetimepicker.zh-CN.js" />
+    <link href="__BOW__/datatimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <block name="footerCssJs">
     </block>
 

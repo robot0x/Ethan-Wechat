@@ -11,9 +11,10 @@ use Yunzhi\Model\YunzhiModel;
 
 class MenuModel extends YunzhiModel{
 
-    public function getMenuList(){
-        $menuTree = $this -> getMenuTree(null, $where, 0, 3);
+    public function getMenuList($keywords = ""){
+        $menuTree = $this -> getMenuTree(null, $where, 0, 3, $keywords);
         $menuList = tree_to_list($menuTree,0,'_son','_level','order');
+
         //设置总条数
         $this -> totalCount = count($menuList);
         //截取该页的信息
@@ -28,7 +29,7 @@ class MenuModel extends YunzhiModel{
      * @param  [int]  $layer     [树的等级]
      * @return [array]             [菜单树]
      */
-    public function getMenuTree($parentId,$where,$isShow = 1,$layer){
+    public function getMenuTree($parentId,$where,$isShow = 1,$layer, $keywords = ""){
         $map = array();
         $level = isset($layer)?$layer:1;
         $map = $where;
@@ -44,6 +45,11 @@ class MenuModel extends YunzhiModel{
             $map['show'] = $isShow;
         }
 
+        if($keywords !== "")
+        {
+            $map['title'] = array("like", "%" . $keywords . "%");
+        }
+        
         $data = $this->_getMenuList($map, $level);
         return $data;
     }

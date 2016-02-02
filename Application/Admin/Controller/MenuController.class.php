@@ -22,9 +22,12 @@ class MenuController extends AdminController
      */
     public function indexAction()
     {
+        //获取查询关键字
+        $keywords = trim(I('get.keywords'));
+
         //获取菜单列表，并转化为数组
         $menuModel = new MenuModel();
-        $menuList = $menuModel->getMenuList();
+        $menuList = $menuModel->getMenuList($keywords);
         foreach ($menuList as $key => $value) {
             $menuList[$key]['_url'] = array(
                 'add'=>U('addSon?id=' . $value['id'],I('get.')),
