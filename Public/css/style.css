@@ -289,3 +289,8 @@ a {
   color: #F76260;
 }
 /* pay end*/
+
+.hidden
+{
+    display: none;
+}
