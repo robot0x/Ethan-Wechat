@@ -9,14 +9,14 @@
                     </div>
                     <h2>请稍候</h2>
                 </div>
-                <div class="success hidden" ng-show="success">
+                <div class="success" ng-show="success">
                     <div class="payIcon">
                         <i class="icon ion-success"></i>
                     </div>
                     <h2>支付成功!</h2>
                     <h3><b><span class="assertive">￥&nbsp;</span>{{totalPrice}}</b></h3>
                 </div>
-                <div class="error hidden" ng-show="error">
+                <div class="error" ng-show="error">
                     <div class="payIcon">
                         <i class="icon ion-error"></i>
                     </div>
