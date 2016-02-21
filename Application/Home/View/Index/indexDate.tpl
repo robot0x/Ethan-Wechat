@@ -22,7 +22,7 @@
 			<div class="col">六</div>
 		</div>
 		<div class="item row" ng-repeat="weeks in currentCalendar.weeks">
-			<div class="col {{day.class}}" ng-repeat="day in weeks" ng-click="chooseDay(day)">
+			<div class="col {{day.class}}" style="{{day.background}}" ng-repeat="day in weeks" ng-click="chooseDay(day)">
 				{{day.day}}
 			</div>
 		</div>

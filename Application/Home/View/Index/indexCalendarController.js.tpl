@@ -45,11 +45,13 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, RoomFacto
 					week.forEach(function(day, dayIndex){
 						if (currentday == day)
 						{
-							day.class = "positive";
+							day.class = "light";
+							day.background = "background-color: #1399EF";
 						}
 						else if(day.isDisabled != true)
 						{
 							day.class = "";
+							day.background = "";
 						}
 					})
 				});
@@ -93,11 +95,13 @@ app.controller('DateCtrl',function($scope ,$http,$location , Calendar, RoomFacto
 					week.forEach(function(day, dayIndex){
 						if ((day.index >= beginIndex) && (day.index <= endIndex))
 						{
-							day.class = "positive";
+							day.class = "light";
+							day.background = "background-color: #1399EF";
 						}
 						else if(day.isDisabled != true)
 						{
 							day.class = "";
+							day.background = "";
 						}
 					})
 				});
