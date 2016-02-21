@@ -29,7 +29,7 @@
                                 </div>
                             <eq name="Think.ACTION_NAME" value="edit">
                                   <div class="col-xs-1">
-                                 <img class="img-responsive" src="{$slideshow[url]}" />
+                                 <img class="img-responsive" src="{$slideshows[url]}" />
                                   </div>
                              
                         </div>
@@ -66,6 +66,22 @@
                                     <else/>
                                     <option value="1">冻结</option>
                                     <option value="0">正常</option>
+                                </eq>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                        <div class="col-xs-3">
+                            <label for="is_map">是否为首页地图：</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <select class="form-control"  name="is_map" >
+                                <eq name="slideshow.is_map" value="0">
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                    <else/>
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
                                 </eq>
                                 </select>
                             </div>

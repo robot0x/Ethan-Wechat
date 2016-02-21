@@ -15,6 +15,7 @@ class SlideShowController extends AdminController
         $SlideShowL = new SlideShowLogic();
         $slideshows = $SlideShowL->getLists();
         //echo $SlideShowL->getLastSql();
+        // dump($slideshows);
 
 		$this->assign('slideshows',$slideshows);
         $this->display();
@@ -29,10 +30,11 @@ class SlideShowController extends AdminController
 
         //取用户信息
         $slideshow = I('post.');
-       //dump(I('get.'));
+       // dump(I('post.'));
+       // exit();
         //添加 add()
         $SlideShowL = new SlideShowLogic();
-        $SlideShowL->addList($slideshow);
+        $SlideShowL->saveList($slideshow);
 
         //判断异常
         if(count($errors=$SlideShowL->getErrors())!==0)
