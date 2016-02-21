@@ -23,13 +23,13 @@
         </a>
     </div>
       <a class="item row" href="#/tab/hotel">
-        <i class="icon ion-shineiwifi col"></i>
-        <i class="icon ion-wifi col"></i>
-        <i class="icon ion-tingche col"></i>
-        <i class="icon ion-feng col"></i>
-        <i class="icon ion-24xiaoshireshui col"></i>
-        <i class="icon ion-feiji2 col"></i>
-        <i class="icon ion-right col"></i>
+        <div class="col"><i class="icon ion-shineiwifi"></i></div>
+        <div class="col"><i class="icon ion-wifi"></i></div>
+        <div class="col"><i class="icon ion-tingche"></i></div>
+        <div class="col"><i class="icon ion-feng"></i></div>
+        <div class="col"><i class="icon ion-24xiaoshireshui"></i></div>
+        <div class="col"><i class="icon ion-feiji2"></i></div>
+        <div class="col"><i class="icon ion-right"></i></div>
       </a>
     <a class="item item-button-right" href="#/tab/date">
     <i class="icon ion-rili"></i>
