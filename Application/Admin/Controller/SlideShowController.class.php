@@ -22,7 +22,7 @@ class SlideShowController extends AdminController
 
     public function addAction(){
         //显示 display
-        $this->display('edit');
+        $this->display('add');
     }
 
     public function saveAction(){
@@ -57,7 +57,7 @@ class SlideShowController extends AdminController
         //传给前台
         $this->assign('slideshow',$slideshow);
         
-        $this->display('edit'); 
+        $this->display('add'); 
     }
 
     public function updateAction(){
@@ -98,17 +98,17 @@ class SlideShowController extends AdminController
         }
     }
 
-    public function detailAction(){
-    	//取用户ID
-    	$slideshowId = I('get.id');
+    // public function detailAction(){
+    // 	//取用户ID
+    // 	$slideshowId = I('get.id');
 
-    	//抓取用户信息
-    	$SlideShowL = new SlideShowLogic();
-    	$SlideShow = $SlideShowL->getListById($slideshowId);
+    // 	//抓取用户信息
+    // 	$SlideShowL = new SlideShowLogic();
+    // 	$SlideShow = $SlideShowL->getListById($slideshowId);
 
-        //传值
-        $this->assign('SlideShow',$SlideShow);
+    //     //传值
+    //     $this->assign('SlideShow',$SlideShow);
 
-    	$this->display();
-    }
+    // 	$this->display();
+    // }
 }
