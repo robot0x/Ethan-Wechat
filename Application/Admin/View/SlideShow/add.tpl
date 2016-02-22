@@ -26,21 +26,11 @@
                         <div class="form-group row">
                             <div class="col-xs-3">
                                 <label for="url">缩略图:</label>
-                                </div>
-                            <eq name="Think.ACTION_NAME" value="edit">
-                                  <div class="col-xs-1">
-                                 <img class="img-responsive" src="{$slideshows[url]}" />
-                                  </div>
-                             
-                        </div>
-                             <div class="form-group row">
-                             <div class="col-xs-3">
-                                <label for="url">上传新图片：</label>
                             </div>
                                   
                               </eq>
                               <div class="col-xs-6">
-                                <html:uploader value="value" name="url">
+                                <html:uploader value="slideshow['url']" name="url">
                                 请选择图片
                                 </html:uploader>
                               </div>
