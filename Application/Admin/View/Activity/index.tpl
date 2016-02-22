@@ -18,7 +18,7 @@
 						<div class="col-md-3">
 							<a class="button btn btn-info"  href="{:U('add')}" ><i class="glyphicon glyphicon-plus"></i>添加活动</a>
 						</div>
-				
+
 						<div class="panel-body">
                     	</div>
 						<table class="table table-bordered table-striped table-hover">
@@ -29,7 +29,7 @@
 								<th>缩略图</th>
 								<th>活动详情</th>
 								<th>活动截止时间</th>
-								<th>状态</th>	
+								<th>状态</th>
 								<th>操作</th>
 							</tr>
 							</thead>
@@ -58,12 +58,12 @@
 					<Html:page />
                 	</nav>
                 </div>
-            
+
        </div>
 <style type="text/css">
 .thumbnails{
 	height: 110px;
-	
+
 }
 </style>
 </block>
