@@ -31,14 +31,14 @@
                             <thead>
                                 <tr>
                                     <th>序号</th>
-            <?php $order = I('get.order') ?>
-            <th><a href="<eq name='order' value="desc"> {:U('index?by=title&order=asc', I('get.'))}  
-            <else/> {:U('index?by=title&order=desc', I('get.'))} </eq>">标题</a></th> 
-            <th>缩略图</th>
-            <th><a href="<eq name='order' value="desc"> {:U('index?by=weight&order=asc', I('get.'))}  
-            <else/> {:U('index?by=weight&order=desc', I('get.'))} </eq>">权重</a></th>    
-            <th>状态</th>
-            <th>操作</th>
+                                    <?php $order = I('get.order') ?>
+                                    <th><a href="<eq name='order' value="desc"> {:U('index?by=title&order=asc', I('get.'))}  
+                                    <else/> {:U('index?by=title&order=desc', I('get.'))} </eq>">标题</a></th> 
+                                    <th>缩略图</th>
+                                    <th><a href="<eq name='order' value="desc"> {:U('index?by=weight&order=asc', I('get.'))}  
+                                    <else/> {:U('index?by=weight&order=desc', I('get.'))} </eq>">权重</a></th>    
+                                    <th>状态</th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
