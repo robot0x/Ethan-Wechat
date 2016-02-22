@@ -25,10 +25,11 @@
           
 		<div class="form-group">
 			<label for="detail" class="col-xs-2 control-label">活动详情：</label>
-			<div class="col-xs-8">
-			<html:editor id="detail" type="Ueditor" name="detail">
-	            {$activity["detail"] | htmlspecialchars_decode}
-	        </html:editor>
+			<div class="col-xs-4">
+			<textarea id="detail" type="text" placeholder="请输入本活动的详情" name="detail" cols="100" rows="5" ng-model="detail" required></textarea>
+			<span style="color:red" ng-show="myForm.detail.$dirty && myForm.detail.$invalid">
+					<span ng-show="myForm.detail.$error.required">活动详情是必须的。</span>
+				</span></br>
 			</div>
 		</div>
 		<div class="form-group">
