@@ -39,7 +39,8 @@
     </button>
     </a>
     <div ng-repeat='room in rooms'>
-  <a class="item" ng-href="{{room.order}}">
+  <a class="item item-thumbnail-left" ng-href="{{room.order}}">
+    <img src="{{room.url}}">
     <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">
