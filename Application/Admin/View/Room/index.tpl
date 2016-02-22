@@ -30,6 +30,7 @@
                             <tr>
                                 <th>序号</th>
                                 <th>房型</th>
+                                <th>缩略图</th>
                                 <th>单价</th>
                                 <th>描述</th>
                                 <th>总间数</th>
@@ -41,6 +42,7 @@
                                 <tr>
                                     <td>{$key+1}</td>
                                     <td>{$value["title"]}</td>
+                                    <td><div class="col-xs-2"><img class="img-responsive" src="{$value[url]}" /></div></td>
                                     <td class="text-right">{$value["price"] | format_money}</td>
                                     <td>{$value["description"]}</td>
                                     <td>{$value["total_rooms"]}</td>
