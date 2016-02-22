@@ -2,9 +2,9 @@ app.controller('rimCtrl', function($scope) {
     //查询列表
     $scope.keywords = [
         {"title":"美食", "classTitle":"active"},
-        {"title":"景点", "classTitle":""},
+        {"title":"娱乐", "classTitle":""},
         {"title":"公交", "classTitle":""},
-        {"title":"地铁", "classTitle":""},
+        {"title":"景点", "classTitle":""},
     ];
     var keywordTitle    = $scope.keywords[0].title;                 //初始化查询关键字
     var map             = new BMap.Map("rimMap");                   //实例化
