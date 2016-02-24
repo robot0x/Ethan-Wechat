@@ -27,7 +27,7 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
   }
   var getJosn = function (page){
       var deferred = $q.defer();
-        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page,pagesize:'2'}})
+        $http.get('api.php/Api/Api/getEvaluation',{params:{p:page,pagesize:'10'}})
           .success(function(data,status){
             if(data.status==='success'){
               moreData = data.data;
