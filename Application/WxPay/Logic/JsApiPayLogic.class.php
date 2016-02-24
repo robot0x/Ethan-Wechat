@@ -2,20 +2,20 @@
 namespace WxPay\Logic;
 use Think\Controller;
 /**
- * 
+ *
  * JSAPI支付实现类
  * 该类实现了从微信公众平台获取code、通过code获取openid和access_token、
  * 生成jsapi支付js接口所需的参数、生成获取共享收货地址所需的参数
- * 
+ *
  * 该类是微信支付提供的样例程序，商户可根据自己的需求修改，或者使用lib中的api自行开发
- * 
+ *
  * @author widy
  *
  */
 class JsApiPayLogic extends Controller
 {
     /**
-     * 
+     *
      * 网页授权接口微信服务器返回的数据，返回样例如下
      * {
      *  "access_token":"ACCESS_TOKEN",
@@ -30,11 +30,11 @@ class JsApiPayLogic extends Controller
      * @var array
      */
     public $data = null;
-    
+
     /**
      * update:2016.1.26
      * 对单页面的锚点问题进行了处理
-     * 
+     *
      * 通过跳转获取用户的openid，跳转流程如下：
      * 1、设置自己需要调回的url及其其他参数，跳转到微信服务器https://open.weixin.qq.com/connect/oauth2/authorize
      * 2、微信服务处理完成之后会跳转回用户redirect_uri地址，此时会带上一些参数，如：code
@@ -45,9 +45,9 @@ class JsApiPayLogic extends Controller
     {
 
         //以下代码，用于不同环境下的测试
-        // session("openId", "oNyIBwW8unmLf24RrOtg4QsBwny8");
-        // return;
-        
+        session("openId", "oNyIBwW8unmLf24RrOtg4QsBwny8");
+        return;
+
         //如果存在openId,证明该用户已经认证。
         //直接返回seesion,同时再次seesion一次
         if (session("openId") !== null)
@@ -97,13 +97,13 @@ class JsApiPayLogic extends Controller
             Header("Location: $url");
         }
     }
-    
+
     /**
-     * 
+     *
      * 获取jsapi支付的参数
      * @param array $UnifiedOrderResult 统一支付接口返回的数据
      * @throws WxPayException
-     * 
+     *
      * @return json数据，可直接填入js函数作为参数
      */
     public function GetJsApiParameters($UnifiedOrderResult)
@@ -126,12 +126,12 @@ class JsApiPayLogic extends Controller
         $parameters = $jsapi->GetValues();
         return $parameters;
     }
-    
+
     /**
-     * 
+     *
      * 通过code从工作平台获取openid机器access_token
      * @param string $code 微信跳转回来带上的code
-     * 
+     *
      * @return openid
      */
     public function GetOpenidFromMp($code)
@@ -146,7 +146,7 @@ class JsApiPayLogic extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if(C("CURL_PROXY_HOST") != "0.0.0.0" 
+        if(C("CURL_PROXY_HOST") != "0.0.0.0"
             && C("CURL_PROXY_PORT") != 0){
             curl_setopt($ch,CURLOPT_PROXY, C("CURL_PROXY_HOST"));
             curl_setopt($ch,CURLOPT_PROXYPORT, C("CURL_PROXY_PORT"));
@@ -164,12 +164,12 @@ class JsApiPayLogic extends Controller
         $openid = $data['openid'];
         return $openid;
     }
-    
+
     /**
-     * 
+     *
      * 拼接签名字符串
      * @param array $urlObj
-     * 
+     *
      * @return 返回已经拼接好的字符串
      */
     private function ToUrlParams($urlObj)
@@ -181,19 +181,19 @@ class JsApiPayLogic extends Controller
                 $buff .= $k . "=" . $v . "&";
             }
         }
-        
+
         $buff = trim($buff, "&");
         return $buff;
     }
-    
+
     /**
-     * 
+     *
      * 获取地址js参数
-     * 
+     *
      * @return 获取共享收货地址js函数需要的参数，json格式可以直接做参数使用
      */
     public function GetEditAddressParameters()
-    {   
+    {
         $getData = $this->data;
         $data = array();
         $data["appid"] = C("APPID");
@@ -205,7 +205,7 @@ class JsApiPayLogic extends Controller
         ksort($data);
         $params = $this->ToUrlParams($data);
         $addrSign = sha1($params);
-        
+
         $afterData = array(
             "addrSign" => $addrSign,
             "signType" => "sha1",
@@ -217,12 +217,12 @@ class JsApiPayLogic extends Controller
         $parameters = json_encode($afterData);
         return $parameters;
     }
-    
+
     /**
-     * 
+     *
      * 构造获取code的url连接
      * @param string $redirectUrl 微信服务器回跳的url，需要url编码
-     * 
+     *
      * @return 返回构造好的url
      */
     private function __CreateOauthUrlForCode($redirectUrl)
@@ -235,12 +235,12 @@ class JsApiPayLogic extends Controller
         $bizString = $this->ToUrlParams($urlObj);
         return "https://open.weixin.qq.com/connect/oauth2/authorize?".$bizString;
     }
-    
+
     /**
-     * 
+     *
      * 构造获取open和access_toke的url地址
      * @param string $code，微信跳转带回的code
-     * 
+     *
      * @return 请求的url
      */
     private function __CreateOauthUrlForOpenid($code)
