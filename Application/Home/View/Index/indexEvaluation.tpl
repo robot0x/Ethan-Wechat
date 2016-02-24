@@ -14,11 +14,11 @@
               <h2>{{evaluation.customer__nickname}}</h2>
             </div>
             <div class="col">
-            <i class="icon {{evaluation.icon[0]}}" style="color:#FFFF00;"></i>
-            <i class="icon {{evaluation.icon[1]}}" style="color:#FFFF00;"></i>
-            <i class="icon {{evaluation.icon[2]}}" style="color:#FFFF00;"></i>
-            <i class="icon {{evaluation.icon[3]}}" style="color:#FFFF00;"></i>
-            <i class="icon {{evaluation.icon[4]}}" style="color:#FFFF00;"></i>
+            <i class="icon {{evaluation.icon[0]}}" style="color:#FF9900;"></i>
+            <i class="icon {{evaluation.icon[1]}}" style="color:#FF9900;"></i>
+            <i class="icon {{evaluation.icon[2]}}" style="color:#FF9900;"></i>
+            <i class="icon {{evaluation.icon[3]}}" style="color:#FF9900;"></i>
+            <i class="icon {{evaluation.icon[4]}}" style="color:#FF9900;"></i>
             </div>
           </div>
           <div class="row stable">
