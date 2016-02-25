@@ -18,7 +18,8 @@
             <p>84条评论></p>
           </a>
         <a href="#/tab/map" class="col-67">
-            <div id="map" style="height:100%;width: 450px;"></div>
+           <!--  <div id="map" style="height:100%;width: 450px;"></div> -->
+           <img class="full-image map-image" ng-src="{{slideMapUrl}}">
         </a>
     </div>
       <a class="item row" href="#/tab/hotel">
@@ -57,7 +58,7 @@
     </span>
   </a>
 </div>
-<include file="indexHome.css" />
+
 </ion-content>
 </ion-view>
 
