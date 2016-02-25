@@ -4,9 +4,7 @@
 <!-- 图片轮播 -->
       <ion-slide-box class="slides">
         <ion-slide class="box" ng-repeat="item in slideUrls">
-          <ion-content>
-            <img ng-src="{{item}}">
-          </ion-content>
+            <img src="{{item}}">
         </ion-slide>
       </ion-slide-box>
 
@@ -20,7 +18,7 @@
             <p>84条评论></p>
           </a>
         <a href="#/tab/map" class="col-67">
-            <img class="full-image map-image" ng-src="{{slideMapUrl}}">
+            <div id="map" style="height:100%"></div>
         </a>
     </div>
       <a class="item row" href="#/tab/hotel">
