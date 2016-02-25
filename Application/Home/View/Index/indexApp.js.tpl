@@ -135,7 +135,6 @@ app.directive("star", function() {
 <include file="indexConfirmOrder.js" />       //订单填写
 <include file="indexActivityDetailCtrl.js" /> //活动详情
 <include file="indexHotelController.js" /> //酒店介绍
-<include file="indexMapController.js" />           //酒店定位
 
 <include file="indexOrderFactory.js" />       //近三个月内的订单
 <include file="indexCalendarFactory.js" />    //用户选择入住日期Factory
