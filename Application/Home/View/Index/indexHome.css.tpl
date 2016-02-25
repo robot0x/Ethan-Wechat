@@ -6,7 +6,7 @@
     overflow: inherit;
 }
 
-.box {
+.box img {
     height: auto;
     width: 100%;
 }
