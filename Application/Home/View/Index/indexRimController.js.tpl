@@ -1,4 +1,4 @@
-app.controller('rimCtrl', function($scope) {   
+app.controller('rimCtrl', function($scope) {
     //查询列表
     $scope.keywords = [
         {"title":"美食", "classTitle":"active"},
@@ -15,14 +15,14 @@ app.controller('rimCtrl', function($scope) {
     });                                                         //实始化地图查询对象
 
     //设置洛克图标
-    var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/fox.gif", new BMap.Size(300,157));
+    var myIcon = new BMap.Icon("__IMG__/post.png", new BMap.Size(300,157));
     var marker = new BMap.Marker(point,{icon:myIcon});          // 创建标注
     map.addOverlay(marker);                                     // 将标注添加到地图中
 
     local.search(keywordTitle);                                  //初始化查询
 
     $scope.keyworkChang = function(keyword){
-        
+
         //如果关键字没有变化，直接返回
         if (keyword.title == keywordTitle)
         {
@@ -45,6 +45,6 @@ app.controller('rimCtrl', function($scope) {
         });
 
         //重新加载search
-        local.search(keywordTitle); 
+        local.search(keywordTitle);
     };
 });
