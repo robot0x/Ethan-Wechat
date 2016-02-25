@@ -18,7 +18,7 @@
             <p>84条评论></p>
           </a>
         <a href="#/tab/map" class="col-67">
-            <div id="map" style="height:100%"></div>
+            <div id="map" style="height:100%;width: 450px;"></div>
         </a>
     </div>
       <a class="item row" href="#/tab/hotel">
