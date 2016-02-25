@@ -3,7 +3,7 @@ app.controller('HomeTabCtrl', function($ionicLoading, $scope,$timeout,Calendar,R
   $scope.endDate      = Calendar.endDate;
   $scope.total        = Calendar.total;
   $scope.slideUrls    = HomeFactory.slideUrls;
-  // $scope.slideMapUrl  = HomeFactory.slideMapUrl;
+  $scope.slideMapUrl  = HomeFactory.slideMapUrl;
   $scope.fenToYuan    = BaseService.fenToYuan;
   $scope.timeRoom     = TimeRoom.timeRoom.value;
   $scope.hotelPhone   = IntroductionFactory.introduction.hotel_phone;
