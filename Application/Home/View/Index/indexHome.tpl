@@ -4,7 +4,9 @@
 <!-- 图片轮播 -->
       <ion-slide-box class="slides">
         <ion-slide class="box" ng-repeat="item in slideUrls">
-          <img ng-src="{{item}}">
+          <ion-content>
+            <img ng-src="{{item}}">
+          </ion-content>
         </ion-slide>
       </ion-slide-box>
 
