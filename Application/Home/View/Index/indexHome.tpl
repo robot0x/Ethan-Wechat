@@ -4,11 +4,10 @@
 <!-- 图片轮播 -->
       <ion-slide-box class="slides">
         <ion-slide class="box" ng-repeat="item in slideUrls">
-
-            <img ng-src="{{item}}">
-
+          <img ng-src="{{item}}">
         </ion-slide>
       </ion-slide-box>
+
 <!-- 酒店介绍 -->
 <div class="list">
     <div class="item item-thumbnail row">
@@ -58,6 +57,7 @@
     </span>
   </a>
 </div>
+<include file="indexHome.css" />
 </ion-content>
 </ion-view>
 
