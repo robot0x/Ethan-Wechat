@@ -31,6 +31,8 @@ class EvaluationController extends ApiController
 	{
 		//实例化
 		$EvaluationViewL = new EvaluationViewLogic();
+        $maps['status'] = 0;
+        $EvaluationViewL->setMaps($maps);
 		$evaluationCustoms = $EvaluationViewL->getLists();
 
 		//将url信息转换为数组信息

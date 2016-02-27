@@ -173,13 +173,13 @@ class SaleLogic extends SaleModel
 		$rooms 		= $RoomL->getLists();
 
 		//取预订信息
-		if (!(int)$beginTime)
+		if ( strtotime($beginTime) )
 		{
-			$beginTime 	= date_to_int($beginTime);
+			$beginTime 	= strtotime($beginTime);
 		}
-		if (!(int)$endTime)
+		if ( strtotime($endTime) )
 		{
-			$endTime	= date_to_int($endTime);
+			$endTime	= strtotime($endTime);
 		}
 		$OrderL 	= new OrderLogic();
 		$orders 	= group_by_key($OrderL->getAllOrderedListsInDateRange($beginTime, $endTime), "room_id");

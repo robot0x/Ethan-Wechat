@@ -5,10 +5,11 @@
       <ion-slide-box class="slides">
         <ion-slide class="box" ng-repeat="item in slideUrls">
 
-            <img class="scroll" ng-src="{{item}}">
+            <img src="{{item}}">
 
         </ion-slide>
       </ion-slide-box>
+
 <!-- 酒店介绍 -->
 <div class="list">
     <div class="item item-thumbnail row">
@@ -19,7 +20,8 @@
             <p>84条评论></p>
           </a>
         <a href="#/tab/map" class="col-67">
-            <img class="full-image map-image" ng-src="{{slideMapUrl}}">
+           <!--  <div id="map" style="height:100%;width: 450px;"></div> -->
+           <img class="full-image map-image" ng-src="{{slideMapUrl}}">
         </a>
     </div>
       <a class="item row" href="#/tab/hotel">
@@ -39,7 +41,8 @@
     </button>
     </a>
     <div ng-repeat='room in rooms'>
-  <a class="item" ng-href="{{room.order}}">
+  <a class="item item-thumbnail-left" ng-href="{{room.order}}">
+    <img src="{{room.url}}">
     <h2>{{room.name}}</h2>
     <p>{{room.description}}</p>
     <span ng-click='toggleDetail(room);' class="item-note energized">
@@ -57,7 +60,11 @@
     </span>
   </a>
 </div>
+<<<<<<< HEAD
 <include file="indexHome.css" />
+=======
+
+>>>>>>> refs/remotes/origin/wxpay
 </ion-content>
 </ion-view>
 

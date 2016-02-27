@@ -295,6 +295,13 @@ class indexModel
 		$SlideShowL = new SlideShowLogic();
 		$slideshows = $SlideShowL->getNormalLists();
 
+		//对二维数组slideshows按照weight排序
+		foreach($slideshows as $key => $value)
+		{
+			$weight[$key] = $value['weight'];
+		}
+		array_multisort($weight,SORT_DESC,$slideshows);
+
 		//抓取出：存在URL值而且不是首页地图信息的信息，并返回
 		foreach($slideshows as $key => $value)
 		{

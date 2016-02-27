@@ -1,6 +1,13 @@
 <style type="text/css">
-    .scroll{
-        height: 30%;
-        width:100%;
-    }
+.slides {
+    max-height: 200px;
+    margin: 0 auto;
+    width: 100%;
+    overflow: inherit;
+}
+
+.box img {
+    height: auto;
+    width: 100%;
+}
 </style>

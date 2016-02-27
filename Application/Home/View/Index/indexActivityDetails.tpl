@@ -5,9 +5,7 @@
   <div class="h1 title">活动详情</div>
 </div>
 	<ion-content class='has-header'>
-			<div ng-bind-html="activity.detail | trustHtml" class="list">
-				
-			</div>
+		<p ng-bind-html="activity.detail | trustHtml"></p>
 </ion-content>
 </ion-view>
 </script>

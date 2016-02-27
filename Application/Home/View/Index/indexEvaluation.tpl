@@ -21,7 +21,14 @@
             <i class="icon {{evaluation.icon[4]}}" style="color:#FF9900;"></i>
             </div>
           </div>
+          <div class="row stable">
+            <h5><p>{{evaluation.room__title}}&nbsp;&nbsp;价格:￥{{evaluation.price | fenToYuan}}</p></h5>
+          </div>
+          <div class="row stable">
+          <h5><p>{{evaluation.order__begin_time | date:'yyyy-MM-dd'}}至{{evaluation.end_time | date:'yyyy-MM-dd'}}</p></h5>
+          </div>
           <p>{{evaluation.evaluation}}</p>
+          
           <div class="row" ng-repeat='url in evaluation.url'>
             <div class="list">
               <div class="item-thumbnail-left">

@@ -53,7 +53,7 @@ class ApiController extends Controller
 	{
 		$Activity = new ActivityController();
 		$detail = $Activity->getActivityDetail();
-
+		$detail['data']['detail'] = htmlspecialchars_decode($detail['data']['detail']);
 		$this->ajaxReturn($detail);
 	}
 }
