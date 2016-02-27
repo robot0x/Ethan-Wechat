@@ -1,6 +1,6 @@
 <style type="text/css">
 .slides {
-    max-height: 200px;
+    max-height: 30%;
     margin: 0 auto;
     width: 100%;
     overflow: inherit;
