@@ -5,7 +5,7 @@
       <ion-slide-box class="slides">
         <ion-slide class="box" ng-repeat="item in slideUrls">
 
-            <img ng-src="{{item}}">
+            <img class="scroll" ng-src="{{item}}">
 
         </ion-slide>
       </ion-slide-box>
@@ -57,6 +57,7 @@
     </span>
   </a>
 </div>
+<include file="indexHome.css" />
 </ion-content>
 </ion-view>
 
