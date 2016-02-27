@@ -6,7 +6,6 @@
   <h3>获得积分+5</h3>
 
   <div class="padding">
-  <a href="#/tab/integral1"><button class="button button-positive button-block">我的积分</button></a>
   <a href="#/tab/evaluation"><button class="button button-positive button-block">确定</button></a>
   </div>
 </div>
