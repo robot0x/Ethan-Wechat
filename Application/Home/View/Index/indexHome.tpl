@@ -2,9 +2,9 @@
 <ion-view view-title="洛克高级酒店公寓" ng-controller="HomeTabCtrl">
    <ion-content>
 <!-- 图片轮播 -->
-      <ion-slide-box class="slides">
-        <ion-slide class="box" ng-repeat="item in slideUrls">
-            <img src="{{item}}">
+      <ion-slide-box>
+        <ion-slide ng-repeat="item in slideUrls">
+            <img class="slides" src="{{item}}">
         </ion-slide>
       </ion-slide-box>
 
@@ -58,7 +58,7 @@
     </span>
   </a>
 </div>
-
+<include file="indexHome.css" />    
 </ion-content>
 </ion-view>
 
