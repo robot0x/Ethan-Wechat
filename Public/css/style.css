@@ -126,6 +126,10 @@
 .ion-iconfontunie657:before { content: "\e620"; }
 .ion-zhongdianfangbeijing:before { content: "\e648"; }
 
+td img{
+  height:100px;
+  width: 100px;
+}
 .map-image {
   max-width: 100%;
   max-height: 150px;

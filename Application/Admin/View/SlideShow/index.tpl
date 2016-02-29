@@ -46,7 +46,7 @@
             <tr>
                 <td>{$k+1}</td>
                 <td>{$slideshow[title]}</td>
-                <td><div class="col-xs-2"><img class="img-responsive" src="{$slideshow[url]}" /></div></td>
+                <td><img class="img-responsive" src="{$slideshow[url]}" /></td>
                 <td>{$slideshow[weight]}</td>
                 <td><eq name="slideshow.status" value="0">正常<else/><span class="badge">冻结</span></eq></td>
                 <td>

@@ -42,7 +42,7 @@
                                 <tr>
                                     <td>{$key+1}</td>
                                     <td>{$value["title"]}</td>
-                                    <td><div class="col-xs-2"><img class="img-responsive" src="{$value[url]}" /></div></td>
+                                    <td><img class="img-responsive" src="{$value[url]}" /></td>
                                     <td class="text-right">{$value["price"] | format_money}</td>
                                     <td>{$value["description"]}</td>
                                     <td>{$value["total_rooms"]}</td>
