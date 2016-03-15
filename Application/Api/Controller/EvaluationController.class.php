@@ -53,23 +53,12 @@ class EvaluationController extends ApiController
      * panjie
      */
     public function addAction()
-    {   
+    {
         $return['status']   = "error";
-        $url                = "";
-        
+
         //取值
         $list = I('get.');
-        $serverIds = explode(",", $list['server_ids']); 
 
-        //抓取图片并上传到服务器
-        $JssdkL = new JssdkLogic();
-        $urls = $JssdkL->saveImageByserverIds($serverIds);
-        if ($urls !== false)
-        {            //转换为字符串并加入list
-            $url = implode(',', $urls); 
-        }
-        
-        $list['url'] = $url;
         //存评论信息
         $EvaluationL = new EvaluationLogic();
         if (!$evaluationId = $EvaluationL->saveList($list))
@@ -80,6 +69,33 @@ class EvaluationController extends ApiController
         }
 
         $return['status'] = "success";
+        echo json_encode($return);
+    }
+    /**
+     * 通过微信上传图片返回的serverId，进行图片的抓取，并存在服务器
+     * xulinjie
+     * @return 
+     */
+    public function saveImageByserverIdAction($serverId)
+    {
+        $return['status']   = "error";
+        $return['url']      = "";      //返回的图片地址
+        if ($serverId == "")
+        {
+            $return['message'] = 'JssdkL:saveImageByserverId.The input type is null string.传入的变量类型是空字符串';
+            echo json_encode($return);
+            return;
+        }
+         //抓取图片并上传到服务器
+        $JssdkL = new JssdkLogic();
+        if (!$url = $JssdkL->getAndUploadWxImage($serverId))
+        {
+            $return['message'] = '4:图片信息下载保存错误：';
+            echo json_encode($return);
+            return;
+        }
+        $return['status'] = "success";
+        $return['url'] = $url;
         echo json_encode($return);
     }
 }
