@@ -12,8 +12,17 @@ var url = "{$M->signPackage['url']}";
 
 
 
-app.controller('EvaluationCtrl', function($scope,$http,$q) {
-  
+app.controller('EvaluationCtrl', function($scope,$http,$q,$ionicModal) {
+  var modalInt = function(){
+        $ionicModal.fromTemplateUrl('my-modal.html',{
+            scope: $scope,
+            animation: 'slide-in-up'
+        })
+        .then(function(modal){
+            $scope.modal = modal;
+        });
+    };
+    modalInt();
   var page = 1;
   var moreData = [];
   $scope.evaluations = [];
@@ -57,7 +66,12 @@ app.controller('EvaluationCtrl', function($scope,$http,$q) {
         $scope.$broadcast('scroll.infiniteScrollComplete');
       });
     };
-   
+
+     //显示 modal
+    $scope.openModal = function(imageName){
+        $scope.imageName = imageName; 
+        $scope.modal.show();
+    };
 });
 
 //活动列表

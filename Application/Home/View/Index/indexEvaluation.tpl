@@ -29,20 +29,28 @@
           </div>
           <p>{{evaluation.evaluation}}</p>
           
-          <div class="row" ng-repeat='url in evaluation.url'>
-          <div class="list">
-            <div class="item-thumbnail-left">
-              <img ng-src="{{url}}">
+          <div class="row">
+          <div class="col col-xs-6" ng-repeat="url in evaluation.url track by $index" ng-click="openModal(url)">
+            <div class="item item-thumbnail-left" >
+                <img ng-src="{{url}}" />
             </div>
           </div>
-          </div>
+        </div>
       </div>
     </div>
     <ion-infinite-scroll ng-if="moreDataCanBeLoaded" on-infinite="loadMoreData()">
 </ion-infinite-scroll>
-    
- 
-
+<script id="my-modal.html" type="text/ng-template">
+      <ion-modal-view  ng-click="modal.hide()">
+        <ion-content>
+        <div class="list">
+        <div class="item item-image">
+                <img ng-src="{{imageName}}" />
+            </div>
+            </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
 </ion-content>
 </ion-view>
 </script>

@@ -15,7 +15,7 @@ app.controller('rimCtrl', function($scope) {
     });                                                         //实始化地图查询对象
 
     //设置洛克图标
-    var myIcon = new BMap.Icon("__IMG__/post.png", new BMap.Size(300,157));
+    var myIcon = new BMap.Icon("__IMG__/post1.png", new BMap.Size(100,57));
     var marker = new BMap.Marker(point,{icon:myIcon});          // 创建标注
     map.addOverlay(marker);                                     // 将标注添加到地图中
 
